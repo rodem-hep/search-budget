@@ -1,0 +1,47 @@
+observable,r,floor_GeV,scan_window_GeV,ns_scan,ns_envelope,n_models_public,n_event_selections,ns_with_selections,scan_source
+m(gammagamma),0.01,40,60-110+150-5000,411.3,582.9,5,2,822.5,low-mass diphoton 66-110; spin-0/2 high-mass 150 GeV-5 TeV (incl. X->aa->4gamma)
+m(mumu) (Zd),0.02,0.3,0.3-400,359.8,536.1,2,1,359.8,prompt dark-photon muon LJ 0.3-10 + H->ZdZd->4mu 1-60 + grid to 400
+m(ee) SS,0.015,15,200-1300,124.8,454.0,2,1,124.8,H++ same-sign ee pair scan
+m(ee) (Zd),0.025,1,1-400,239.7,380.7,1,1,239.7,e-LJ 1-10 + H->ZdZd->4e 1-60 + heavy ZdZd grid to 400
+m(egamma),0.015,100,200-5000,214.6,327.5,1,1,214.6,"excited electron e* -> e gamma (7/8 TeV only, 1201.3293/1308.1364; no 13 TeV search)"
+m(ee),0.015,110,150-8000,265.1,321.2,7,1,265.1,high-mass Drell-Yan dielectron scan (grid prepared to 8 TeV)
+m(emu) SS,0.025,15,200-1300,74.9,272.4,2,1,74.9,H++ same-sign e-mu pair scan
+m(emu) LFV,0.03,12,100-8000,146.1,234.4,4,1,146.1,Z'->emu LFV dilepton (grid 100 GeV-8 TeV)
+m(ej),0.03,12,200-5000,107.3,234.4,3,4,429.2,leptoquark pair -> eq (2006.05872) + QBH jet-electron; grid to 5 TeV
+m(muj),0.04,12,200-5000,80.5,175.8,3,4,321.9,leptoquark pair -> muq (2006.05872) + QBH jet-muon; grid to 5 TeV
+m(mumu) SS,0.04,15,200-1300,46.8,170.2,2,1,46.8,H++ same-sign mumu pair scan
+m(eb),0.04,15,200-2000,57.6,170.2,3,2,115.1,RPV stop -> b e (2406.18367) + b/c-tagged LQ pair (2006.05872)
+m(eZ),0.03,100,100-1100,79.9,163.8,1,1,79.9,RPV chargino/neutralino trilepton resonance e+Z (2011.10543)
+m(mugamma),0.03,100,200-5000,107.3,163.8,1,1,107.3,"excited muon mu* -> mu gamma (7/8 TeV only, 1201.3293/1308.1364; no 13 TeV search)"
+m(Vgamma),0.03,200,220-6000,110.2,140.7,3,2,220.4,X -> Z gamma / W gamma (ll/qq + photon)
+m(cb) dijet,0.05,15,20-1000,78.2,136.2,1,2,156.5,t->H+(cb)b 60-160 + tb-associated heavy H+->cb grid to 1 TeV
+m(mub),0.05,15,200-2000,46.1,136.2,3,2,92.1,RPV stop -> b mu (2406.18367) + b/c-tagged LQ pair (2006.05872)
+m(muZ),0.04,100,100-1100,59.9,122.8,1,1,59.9,RPV chargino/neutralino trilepton resonance mu+Z (2011.10543)
+m(jgamma),0.04,150,500-7000,66.0,112.7,2,1,66.0,q* -> q gamma (grid 500 GeV-7 TeV)
+m(mumu),0.05,110,150-8000,79.5,96.3,7,1,79.5,high-mass Drell-Yan dimuon scan (grid prepared to 8 TeV)
+m(jj),0.05,200,200-8000,73.8,84.4,8,2,147.6,"dijet: TLA+ISR 200-450, TLA 450-1800, high-mass to 8 TeV"
+m(3j),0.05,200,200-1800,43.9,84.4,2,1,43.9,RPV gluino -> 3-jet paired resonance scan
+m(eejj),0.05,300,400-7000,57.2,76.3,2,1,57.2,"W_R -> eejj (Keung-Senjanovic), published scan 0.4-7 TeV"
+m(VV),0.06,160,200-6000,56.7,74.0,12,9,510.2,WW/WZ/ZZ diboson family (ggF+VBF; grid 200 GeV-6 TeV)
+m(Vh),0.06,200,200-5000,53.6,70.3,2,6,321.9,W/Z + h(bb) resonance
+m(bj),0.06,200,200-6000,56.7,70.3,1,2,113.4,"b-tagged + light jet: b* -> b g, b-tagged dijet resonance (two-body ML anomaly scan 2307.01612)"
+m(bb),0.1,15,15-62+450-6000,40.1,68.1,4,3,120.3,h->aa->4b low-mass 15-62; b-tagged dijet resonance 450 GeV-6 TeV
+m(multi),0.06,300,3000-10500,20.9,63.6,2,1,20.9,QBH / sphaleron multi-object threshold scan
+multilepton,0.12,8,50-10000,44.2,62.0,3,4,176.6,type-III seesaw / VLL / prompt heavy-N mass hypotheses (grid to 10 TeV)
+m(Wb),0.08,100,800-3000,16.5,61.4,1,1,16.5,single VLQ T/Y -> Wb
+mT(ev),0.1,35,150-7000,38.4,59.6,2,1,38.4,W' -> e nu transverse mass
+m(tauj),0.1,50,200-5000,32.2,56.1,3,2,64.4,leptoquark pair -> tau q mass scan (LQ3; grid to 5 TeV)
+m(mumujj),0.07,300,400-7000,40.9,54.5,2,1,40.9,"W_R -> mumujj (Keung-Senjanovic), published scan 0.4-7 TeV"
+m(tb),0.08,175,180-6000,43.8,54.4,3,3,131.5,W'->tb / heavy H+->tb (grid from 180 GeV)
+m(tt)/m(jj),0.08,200,400-2000,20.1,52.7,2,2,40.2,"pair-produced coloron/sgluon, per-particle tt/jj legs"
+m(HH),0.08,250,250-6000,39.7,50.0,4,6,238.4,X->HH bbbb/bbtautau/bbyy incl. boosted 4b
+m(tautau),0.12,35,35-6000,42.9,49.7,4,3,128.6,a/H/A/Z' -> tautau (low-mass a/H grid from 35 GeV)
+m(etau) LFV,0.12,35,100-3000,28.3,49.7,4,1,28.3,"Z'->etau LFV (hadronic-tau channel, grid 100 GeV-3 TeV)"
+m(mutau) LFV,0.12,35,100-3000,28.3,49.7,4,1,28.3,"Z'->mutau LFV (hadronic-tau channel, grid 100 GeV-3 TeV)"
+m(tW),0.08,260,500-3000,22.4,49.5,1,2,44.8,excited b* -> tW
+m(Ht),0.08,300,1000-3000,13.7,47.7,1,1,13.7,single VLQ T -> Ht
+m(taub),0.12,50,200-2000,19.2,46.7,3,2,38.4,3rd-generation LQ -> tau b
+mT(taunu),0.12,50,200-5000,26.8,46.7,1,1,26.8,W' -> tau nu
+m(tt),0.08,350,350-6000,35.5,45.7,9,4,142.1,"ttbar resonance (resolved+boosted), from the 2*m_t threshold"
+m(ttZ)/m(Zt),0.08,450,1000-4000,17.3,42.6,1,2,34.7,VLQ T->Zt single/pair + W'->Vlt cascade
+mT(muv),0.15,35,150-7000,25.6,39.7,2,1,25.6,W' -> mu nu transverse mass

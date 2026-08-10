@@ -1,0 +1,16 @@
+distinct reachable compositions : 82
+  with a published ATLAS bump hunt: 25
+  with NONE                       : 57
+
+K : uncovered / total
+  K=2 :   0 /  14
+  K=3 :  21 /  28
+  K=4 :  36 /  40
+
+=== K=2 compositions with NO published ATLAS bump hunt ===
+
+=== K=3 uncovered (first 30) ===
+   mbb, mjb, mjj, ebb, ejb, ejj, emb, emj, jbZ, mbZ, mjZ, ebZ, ejZ, mmb, mmj, emm, eeb, eej, eem, bbb, jbb
+
+=== K=4 uncovered ===
+   bbbZ, jbbZ, jjjZ, mbbZ, mbbb, mjbZ, mjbb, mjjZ, mjjb, mjjj, mmbZ, mmbb, mmjZ, mmjb, ebbZ, ebbb, ejbZ, ejbb, ejjZ, ejjb, ejjj, embZ, embb, emjZ, emjb, emmZ, emmb, emmj, eebZ, eebb, eejZ, eejb, eemZ, eemb, eemj, eemm

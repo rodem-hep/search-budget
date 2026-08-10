@@ -1,0 +1,285 @@
+\section{Selecting candidates from a scan}
+\label{sec:selection}
+
+Sections~\ref{sec:budget} and~\ref{sec:combinatorial} priced the scan. This section asks what to
+do with its output. A broad scan produces a large number of local significances, one per bin per
+spectrum, and something has to decide which of them is worth following up. Three rules are
+compared here on identical footing: take the largest (\emph{argmax}), take everything above a
+fixed threshold, or let the data set the cut through a false-discovery-rate criterion.
+
+The setting is deliberately minimal: $n = 30\,000$ bins, of which $n-1$ are background with $z_i
+\sim \mathcal{N}(0,1)$, and at most one contains a signal with $z \sim \mathcal{N}(\mu, 1)$.
+Whatever passes stage 1 is unblinded in an independent sample B and confirmed if $z_B > 3$. This
+is the two-stage structure of Section~\ref{sec:ab} stripped to its statistical core.
+
+\subsection{The background maximum is not Gaussian}
+
+The first thing to get right is the null distribution of $\max_i z_i$. Two limits are routinely
+confused. Running more pseudo-experiments makes the histogram converge to the \emph{exact} density
+\begin{equation}
+  f_M(x) \;=\; n\,\phi(x)\,\Phi(x)^{n-1},
+  \qquad
+  F_M(x) = \Phi(x)^n,
+  \qquad
+  x_q = \Phi^{-1}\!\left(q^{1/n}\right),
+  \label{eq:maxexact}
+\end{equation}
+which is exact for every $n$. Increasing $n$ makes the \emph{rescaled} $f_M$ converge to a Gumbel
+law~\cite{fishertippett,gumbel}, and that convergence is only logarithmic, with relative error
+$\mathcal{O}(1/2\ln n)$.
+
+At $n = 30\,000$ the difference is measurable, and $10^4$ pseudo-experiments are enough to resolve
+it (Table~\ref{tab:maxvalidation}). The exact form is confirmed; the asymptotic Gumbel is rejected
+at $p = 2\times10^{-15}$ and a best-fit Gaussian at $p = 6\times10^{-30}$.
+
+\begin{table}[htbp]
+\centering
+\caption{Distribution of the maximum of $n=30\,000$ standard normals, from $10^4$
+pseudo-experiments, against the exact law and its Gumbel limit
+($a_n = 4.005$, $b_n = 0.220$).}
+\label{tab:maxvalidation}
+\begin{tabular}{lrr}
+\toprule
+ & simulated & Gumbel asymptotic \\
+\midrule
+mean & 4.110 & 4.132 \\
+standard deviation & 0.284 & 0.282 \\
+median & 4.072 & 4.086 \\
+skewness & 0.89 & 1.14 \\
+\midrule
+KS vs exact $\Phi(x)^n$ & \multicolumn{2}{r}{$D = 0.0077$, $p = 0.59$ \quad\checkmark} \\
+KS vs Gumbel$(a_n,b_n)$ & \multicolumn{2}{r}{$D = 0.041$, $p = 2\times10^{-15}$} \\
+KS vs best-fit Gaussian & \multicolumn{2}{r}{$D = 0.058$, $p = 6\times10^{-30}$} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{max_of_gaussians_light.png}
+\caption{Left: one pseudo-experiment of $30\,000$ Gaussian draws, with its maximum marked. Right: the
+distribution of $10^4$ such maxima, with the exact density of Eq.~\eqref{eq:maxexact} and the
+asymptotic Gumbel overlaid. The distribution is strongly right-skewed, so a symmetric error bar on
+a maximum is never appropriate.}
+\label{fig:maxgauss}
+\end{figure}
+
+The practical rules that follow are short. Gumbel is fine for intuition. For any actual number,
+whether a threshold, a $p$-value or a quantile, use $F_M = \Phi^n$, which costs nothing and is
+right. Never model a maximum as Gaussian. This also connects back to Section~\ref{sec:budget}: the
+familiar trials factor is the leading term of $1 - \Phi(z)^{N_{\mathrm{eff}}}$, and in the far
+tail, where global $p$-values live, a few-percent Gumbel error is not something one wants between
+oneself and a discovery claim.
+
+\subsection{A real signal often loses the scan}
+
+The probability that the signal bin \emph{is} the maximum, $p(\mu) = \int
+\phi(s-\mu)\,\Phi(s)^{n-1}\,\mathrm{d}s$, is sobering. A genuine $4\sigma$ signal wins the scan
+only 46\,\% of the time, because it is racing a distribution centred at $4.11$ with a spread of
+$0.28$. The two-stage confirmation probability follows as
+$p_{\mathrm{conf}} = p(\mu)\,\Phi(\mu - 3) + [1-p(\mu)]\,\Phi(-3)$ (Table~\ref{tab:rules}).
+
+The second stage is nearly free. For $\mu \ge 5\sigma$ the loss between ``wins the scan'' and
+``confirmed'' is under two percentage points, because a signal strong enough to win stage 1 almost
+always exceeds $3\sigma$ in stage 2. \textbf{Stage 2 also carries no trials factor}, since the bin
+was chosen by stage 1. The false-alarm rate per opening is $1-\Phi(3) = 1.35\times10^{-3}$, or
+$3.0\sigma$ \emph{global}, whatever the size of the scan that selected it.
+
+\subsection{A threshold dominates the argmax}
+
+Taking the maximum throws information away: it ranks bins and then discards everything about their
+absolute size. The alternative is to select every bin above a fixed threshold $t$. Under
+background-only the number selected is Poisson with mean $\lambda(t) = (n-1)\,[1-\Phi(t)]$, so the
+natural operating point is $t^\star = \Phi^{-1}(1 - 1/(n-1)) = 3.99$, where $\lambda = 1$. That is
+exactly the argmax's fake budget of one candidate per experiment, and at that matched budget the
+threshold rule wins at every signal strength (Table~\ref{tab:rules}).
+
+\begin{table}[htbp]
+\centering
+\caption{Probability that a signal of strength $\mu$ is confirmed in sample B, for the three
+stage-1 rules, all at the same background-only budget of one candidate per experiment
+($3.0\sigma$ global false-alarm rate). The threshold operating point is $t^\star = 3.99$ and the
+matched false-discovery rate is $q^\star = 0.381$.}
+\label{tab:rules}
+\begin{tabular}{lrrrr}
+\toprule
+$\mu$ & wins the scan & argmax confirmed & BH at $q^\star$ & threshold at $t^\star$ \\
+\midrule
+$3\sigma$ & 14.2\,\% & 7.2\,\% & 7.5\,\% & \textbf{8.1\,\%} \\
+$4\sigma$ & 45.8\,\% & 38.6\,\% & 40.3\,\% & \textbf{42.5\,\%} \\
+$5\sigma$ & 80.3\,\% & 78.5\,\% & 80.6\,\% & \textbf{82.5\,\%} \\
+$6\sigma$ & 96.4\,\% & 96.3\,\% & 97.2\,\% & \textbf{97.7\,\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Putting both rules on a common ROC, with the average number of false confirmations on one axis and
+the signal confirmation probability on the other, makes the structure clear
+(Figure~\ref{fig:roc}). The threshold rule traces a curve as $t$ varies. The argmax is a
+\emph{single point}, because it always selects exactly one bin, and that point lies strictly
+inside the curve at every $\mu$. It is dominated, not merely different.
+
+One caveat took some care to get right. The bare ratio of power to false positives has no interior
+maximum; it increases monotonically with $t$ and simply says ``cut harder''. The well-posed
+question is where the ROC tangent has a given slope, which amounts to saying what a false positive
+costs relative to a discovery. Once that cost is specified, the optimum has a closed form.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{roc_threshold_vs_argmax.png}
+\caption{Left: the ROC of the threshold rule (one curve per signal strength) with the argmax rule as a
+single point (diamonds), at $\mu = 3, 4, 5, 6\sigma$. The argmax point lies inside the curve at
+every $\mu$, so at the same false-positive budget a threshold confirms more signal. Right: the
+bare power-per-false-positive ratio, which never turns over. An objective has to specify what a
+false positive costs.}
+\label{fig:roc}
+\end{figure}
+
+\subsection{Letting the data set the cut: Benjamini--Hochberg}
+
+The third rule replaces a fixed bar with a false-discovery-rate
+criterion~\cite{benjaminihochberg}. Convert each bin to a one-sided $p$-value, sort, and reject
+the $K(q)$ smallest, where $K(q) = \max\{k : p_{(k)} \le kq/n\}$. The dial is now $q$, the nominal
+FDR. Since $K$ is a random variable depending on the whole $p$-vector, this has to be evaluated by
+Monte Carlo.
+
+Two properties matter here. First, under the global null the probability that BH makes at least one rejection is exactly $q$.
+This follows from the identity $P(\sup_t F_n(t)/t \ge 1/q) = q$ for the uniform empirical
+distribution, usually attributed to Daniels~\cite{daniels}, and our Monte Carlo reproduces it ($q
+= 0.05 \to 0.0505$, $0.2 \to 0.1990$, $0.5 \to 0.5008$). The \emph{number} of rejections is not $q$: BH is
+bursty, and past $q^\star$ multi-rejection events dominate. Second, the realised cut is not fixed.
+In a pseudo-experiment where BH rejects $K$ bins the weakest accepted bin sits at
+$z_{\mathrm{cut}} = \Phi^{-1}(1-p_{(K)})$, which fluctuates from experiment to experiment.
+
+Matching BH to the same fake budget as the other two rules, $E[K \mid H_0] = 1$, gives $q^\star =
+0.381$, and it then agrees on both false-alarm measures ($1.34\times10^{-3}$ expected false
+confirmations and $P(\ge1) = 1.336\times10^{-3}$, which is $3.0\sigma$ global). Its effective
+single-bin bar is $z_1(q^\star) = 4.21$, \emph{stricter} than $t^\star = 3.99$.
+
+BH lands strictly between the other two rules (Table~\ref{tab:rules}, Figure~\ref{fig:rocbh}). It
+beats the argmax for the same reason the threshold does: it never discards the signal candidate
+merely because some background bin happened to be larger, and the step-up lets a signal ride along
+at rank 2 or below. It loses to the fixed threshold because keeping $E[K\mid H_0] = 1$ while
+spending part of that budget on rank-$2+$ clumps forces the single-bin bar up to $4.21$, and those
+extra selections are pure waste. They are background bins, and the signal, normally rank 1, gains
+nothing from them. The effect is specific to large $q$; at small $q$ BH is essentially the rank-1
+bar and the three rules converge.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{roc_bh_vs_threshold.png}
+\caption{Left: all three stage-1 rules on the ROC of Figure~\ref{fig:roc}. BH runs just inside the
+fixed-threshold curve and outside the argmax point. Right: the realised false discovery rate
+before and after the stage-B confirmation. The confirmation step drives it to near zero regardless
+of the nominal $q$.}
+\label{fig:rocbh}
+\end{figure}
+
+\subsection{The same three rules with an imperfect estimator}
+\label{sec:selnoise}
+
+Everything above assumes the estimator returns $z \sim \mathcal{N}(0,1)$ for every background bin.
+Section~\ref{sec:abnoise} argues that a network-driven scan does not have that estimator, and the
+comparison is worth redoing with the same defect model, because the three rules are not equally
+exposed to it. The exposure is structural rather than numerical: argmax and BH are
+\textbf{rank-based}, so an artefact anywhere in the scan changes the decision about every other
+bin, while a fixed threshold is \textbf{absolute} and an artefact at 1\,TeV says nothing about the
+bin at 3\,TeV.
+
+Table~\ref{tab:selnoise} redoes Table~\ref{tab:rules} at $\mu = 5\sigma$, with every rule tuned to
+the \emph{same} $3.0\sigma$-global false-alarm budget under each contamination. The
+$\epsilon = 0$ row reproduces the perfect-estimator result, which fixes the comparison.
+
+\begin{table}[htbp]
+\centering
+\caption{Probability that a $5\sigma$ signal is confirmed, for the three stage-1 rules, all held
+at $1.35\times10^{-3}$ expected false confirmations. \textsc{glitch} and \textsc{bias} are the
+incoherent and coherent defect classes of Section~\ref{sec:abnoise}. ``n/a'' means the rule cannot
+be tuned to that budget at all. Monte-Carlo error on the BH column is $\pm0.35$ points; the other
+two are analytic.}
+\label{tab:selnoise}
+\begin{tabular}{lrrrrr}
+\toprule
+estimator & argmax & threshold & BH & thr $-$ argmax & thr $-$ BH \\
+\midrule
+perfect (Table~\ref{tab:rules}) & 78.5\,\% & \textbf{82.5\,\%} & 80.9\,\% & $+4.0$ & $+1.6$ \\
+\textsc{glitch} $\epsilon = 10^{-4}$ & 73.2\,\% & \textbf{81.2\,\%} & 80.1\,\% & $+8.0$ & $+1.1$ \\
+\textsc{glitch} $\epsilon = 10^{-3}$ & 43.8\,\% & \textbf{57.3\,\%} & 57.2\,\% & $+13.6$ & $+0.1$ \\
+\textsc{glitch} $\epsilon = 10^{-2}$ & 6.2\,\% & 5.8\,\% & 6.0\,\% & $-0.4$ & $-0.2$ \\
+\textsc{bias}, any $\epsilon$ & \emph{untunable} & $\sim 0\,\%$ & \emph{unreachable} & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The threshold's margin over the argmax widens, from $+4$ to $+13.6$ points.} The cause
+is visible in a single diagnostic: the probability that the argmax \emph{is} the signal falls from
+$80.3\,\%$ to $74.9\,\%$ to $44.8\,\%$ as $\epsilon$ runs from $0$ to $10^{-3}$. At $\epsilon =
+10^{-3}$ some thirty artefact bins are scattered through a $30\,000$-bin scan, and any one of them
+outranking the signal removes it completely. A rank-1 rule has no graceful degradation, whereas a
+threshold pays only through the extra candidates it forwards.
+
+\paragraph{Contamination strips BH of the adaptivity that made it attractive.} BH converges onto
+the fixed threshold ($+1.6 \to +1.1 \to +0.1$), and the reason is mechanical: to hold the
+false-alarm budget it has to be run at ever smaller $q$, and BH at small $q$ simply \emph{is} a
+threshold at $\Phi^{-1}(1-q/n)$. One keeps the threshold's performance while losing the ability to
+interpret the dial.
+
+\paragraph{And that dial becomes actively misleading.} The nominal $q$ needed to buy the same
+$3.0\sigma$-global rate runs $0.38 \to 0.32 \to 1.4\times10^{-2} \to 4.2\times10^{-7}$ across the
+rows of Table~\ref{tab:selnoise} (Fig.~\ref{fig:selnoise}, middle). Under coherent defects it
+cannot be bought at all: even $q = 10^{-9}$ leaves $2.5\times10^{-3}$ expected false confirmations
+at $\epsilon = 10^{-4}$, rising to $0.25$ at $\epsilon = 10^{-2}$, because a coherent artefact
+carries a $p$-value small enough to be rejected at essentially any $q$ and then confirms in stage
+2. Nothing here contradicts the FDR guarantee --- BH controls the false discovery rate under the
+null it is handed, and a contaminated scan does not hand it that null.
+
+\paragraph{The argmax should be dropped rather than deprioritised.} It has no tuning parameter, so
+its false-alarm rate is whatever the contamination makes it: $1.35\times10^{-3} \to 0.137 \to
+0.687 \to 0.957$ under coherent defects (Fig.~\ref{fig:selnoise}, right). At $\epsilon = 10^{-2}$
+the argmax rule produces a false confirmation in $96\,\%$ of scans and there is no way to dial it
+back. Under incoherent defects it stays at $1.35\times10^{-3}$, since a glitch dies in stage 2, and
+only the power collapses.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{bh_outliers.png}
+\caption{\textbf{Left:} confirmation probability for a $5\sigma$ signal as the estimator degrades,
+all three rules held at the same false-alarm budget; dotted lines are the perfect-estimator
+values. \textbf{Middle:} the nominal FDR that buys that budget, against the conventional $q=0.05$.
+\textbf{Right:} the argmax's achieved false-alarm rate, which it has no parameter to control.}
+\label{fig:selnoise}
+\end{figure}
+
+The last row of Table~\ref{tab:selnoise} is the same result as Section~\ref{sec:abnoise} seen from
+a different direction: a coherent defect is indistinguishable from a signal, so no selection rule
+can help against it. The threshold remains formally calibratable --- it can always be raised, and
+its reachable floor is $10^{-9}$ against BH's $2.5\times10^{-3}$ --- but only at essentially zero
+power. That is a background-modelling problem, not a selection-rule problem.
+
+Two caveats. The bins here are independent, where a real scan has correlated neighbouring mass
+bins; and the defect magnitude is fixed at $2\sigma$, so the size of the gaps scales with it while
+the ordering does not. At the heaviest incoherent contamination all three rules are equally dead
+and the argmax nominally edges ahead by a few tenths of a point, which is not a meaningful
+ranking.
+
+\subsection{What this implies for a data-directed scan}
+
+\begin{enumerate}[leftmargin=1.6em,itemsep=3pt]
+  \item \textbf{Do not select by rank alone.} ``Take the most significant bin'' is a dominated
+strategy. Selecting on absolute significance recovers the information the ranking throws away, at
+identical false-alarm cost, and gains a few percentage points of power at every signal strength.
+With an imperfect estimator the argument gets stronger rather than weaker
+(Section~\ref{sec:selnoise}): the margin grows to more than ten points, and the argmax loses
+control of its false-alarm rate entirely.
+  \item \textbf{Fix the fake budget, not the threshold.} The natural, scan-size-independent
+        statement of an operating point is ``one expected background candidate per experiment'',
+        which determines $t^\star$ from $n$. Quoting a bare $z$ threshold hides the scan size.
+  \item \textbf{An FDR rule is a defensible middle ground, but never quote the nominal $q$ as a
+false-alarm specification.} BH costs a little power relative to the matched threshold, and it
+comes with a guarantee that is easy to state to a reviewer. What that guarantee does not survive
+is a miscalibrated tail: the $q$ needed to buy a given false-alarm rate moves by six orders of
+magnitude across the contamination range of Section~\ref{sec:selnoise}, and under coherent defects
+no $q$ buys it. Whichever rule is adopted, calibrate and quote the \emph{achieved} rate.
+  \item \textbf{The confirmation stage is cheap and carries no trials factor.} That is the
+        structural fact the next section is built on.
+\end{enumerate}

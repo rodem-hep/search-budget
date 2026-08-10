@@ -1,0 +1,107 @@
+\section{Does the arithmetic reproduce the excesses we have seen?}
+\label{sec:excess}
+
+A trials-factor calculation is easy to get wrong in a way that is invisible. Nothing in
+Section~\ref{sec:budget} would look different if $\Nsig$ were off by an order of magnitude. There
+is one external check available, though, and it is a strong one. If the number of independent
+looks across the ATLAS search program is known even approximately, background-only statistics
+predicts how many $3\sigma$ and $5\sigma$ local excesses should have appeared. That prediction can
+be compared to the historical record.
+
+\subsection{The prediction}
+
+The relevant count is quasi-independent statistical tests, meaning mass-resolution elements plus
+signal-region bins, across all ATLAS searches rather than bump hunts alone.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Trials-factor anchors for the full ATLAS search program.}
+\label{tab:excess_N}
+\begin{tabular}{@{}l r >{\raggedright\arraybackslash}p{6.0cm}@{}}
+\toprule
+level & looks $N$ & basis \\
+\midrule
+bump-hunt budget (public channels) & $\sim3.7\times10^3$ & this study, Section~\ref{sec:budget} \\
+two-body invariant-mass searches & $\sim2$--$3\times10^4$ & $>50\,000$ LHC-wide~\cite{statinterp}, ATLAS $\sim$ half \\
+full ATLAS BSM program (incl.\ SRs) & $\sim5\times10^4$ & $300$--$500$ searches $\times\,\mathcal{O}(100)$ regions~\cite{diggingdeeper} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+With a one-sided Gaussian tail, $p(\ge3\sigma) = 1.35\times10^{-3}$ and $p(\ge5\sigma) =
+2.87\times10^{-7}$, the expected counts are $N \cdot p$:
+
+\begin{table}[htbp]
+\centering
+\caption{Expected upward fluctuations under background-only.}
+\label{tab:excess_expected}
+\begin{tabular}{lrr}
+\toprule
+$N$ & expected $\ge3\sigma$ & expected $\ge5\sigma$ (spurious) \\
+\midrule
+$10^4$ & 14 & 0.003 \\
+$5\times10^4$ (central) & \textbf{67} & \textbf{0.014} \\
+$10^5$ & 135 & 0.029 \\
+resonance subset, $3.7\times10^3$ & 5.0 & $1.1\times10^{-3}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{excess_counting.png}
+\caption{Expected number of upward fluctuations above $Z$ as a function of the number of
+independent looks, with the anchors of Table~\ref{tab:excess_N} marked. The $\ge5\sigma$ curve
+stays below unity across the entire defensible range of $N$, which is the quantitative content of
+the $5\sigma$ convention~\cite{lyons2008}.}
+\label{fig:excess}
+\end{figure}
+
+\subsection{The record}
+
+\textbf{At $3\sigma$: order tens, essentially all faded.} The $750\GeV$ diphoton excess
+($3.9\sigma$ local in 2015, $2.1\sigma$ global, gone with more data), the $2\TeV$ diboson $WZ$
+excess at $8\TeV$, the $95\GeV$ and $151\GeV$ diphoton hints, the multilepton anomalies, a
+$400\GeV$ $t\bar t$ excess, and the surviving $\sim3\sigma$ excesses found hiding inside published
+SUSY signal regions~\cite{diggingdeeper}. That is the expected population, not a mystery.
+
+\textbf{At $5\sigma$: every one is a genuine Standard-Model process.} The Higgs boson, four-top
+production, $t\bar tZ$/$t\bar tW$/$t\bar tH$, vector-boson scattering, single top; the public
+summary of ATLAS search results~\cite{atlas_public_searches} contains no BSM counterexample.
+\textbf{Spurious BSM $\ge5\sigma$: exactly zero.} Four-top production is instructive rather than a
+counterexample: it evolved from $3\sigma$ to $5\sigma$ and turned out to be real.
+
+\subsection{Verdict}
+
+\begin{table}[htbp]
+\centering
+\caption{Expected versus observed, for $N \sim 5\times10^4$.}
+\label{tab:excess_verdict}
+\begin{tabular}{lrl}
+\toprule
+ & expected & observed \\
+\midrule
+$\ge3\sigma$ local & $\sim15$--$135$ & order tens, all faded \\
+$\ge5\sigma$ spurious & $\sim0.01$ & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two agree. This matters for the note's central claim in a specific way: the same
+look-elsewhere arithmetic that produces $\Zloc \approx 6.4$ in Section~\ref{sec:budget} also
+post-dicts the observed excess population without adjustment. The framework is at least
+self-consistent, and the parade of $3\sigma$ hints that come and go needs no explanation beyond $N
+\times p$.
+
+The corollary is uncomfortable. With more than $50\,000$ looks LHC-wide, a local $5\sigma$ in a
+fully agnostic scan is worth only $1.5$ to $2.5\sigma$ globally, which is the basis of the
+argument~\cite{statinterp} for raising the agnostic-scan threshold towards $7\sigma$. This note
+reaches essentially the same number from the opposite direction for a combinatorial scan
+(Section~\ref{sec:combinatorial}, $\Zloc = 6.98$).
+
+Three caveats. $N$ spans a factor ten and is the dominant uncertainty here, although the
+conclusion survives the whole range. The counts mix ATLAS-only and ATLAS$+$CMS excesses. And
+``order tens observed'' counts \emph{notable} excesses; the raw number of individual $\ge3\sigma$
+bins is much larger and goes unremarked, which is also consistent, since those are the expected
+noise.

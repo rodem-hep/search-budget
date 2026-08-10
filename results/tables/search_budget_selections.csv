@@ -1,0 +1,47 @@
+observable,n_event_selections,ns_inclusive,ns_with_selections,channels
+m(gammagamma),2,411.3,822.5,spin-0 (ggF) + spin-2/VBF (converted/unconverted categories)
+m(mumu) (Zd),1,359.8,359.8,prompt muon LJ / 4mu scan
+m(ee) SS,1,124.8,124.8,H++ same-sign ee
+m(ee) (Zd),1,239.7,239.7,prompt e-LJ / 4e scan
+m(egamma),1,214.6,214.6,excited electron e*
+m(ee),1,265.1,265.1,"single dielectron scan (barrel/endcap are fit categories, combined)"
+m(emu) SS,1,74.9,74.9,H++ same-sign e-mu
+m(emu) LFV,1,146.1,146.1,LFV e-mu
+m(ej),4,107.3,429.2,LQ pair -> eq: all four lepton-jet pairings scanned (2006.05872)
+m(muj),4,80.5,321.9,LQ pair -> muq: all four lepton-jet pairings scanned (2006.05872)
+m(mumu) SS,1,46.8,46.8,H++ same-sign mu-mu
+m(eb),2,57.6,115.1,RPV stop -> b e + b-tagged LQ leg (both pairings)
+m(eZ),1,79.9,79.9,trilepton e+Z resonance
+m(mugamma),1,107.3,107.3,excited muon mu*
+m(Vgamma),2,110.2,220.4,X->Zgamma: Z->ll and boosted Z->qq (+Wgamma)
+m(cb) dijet,2,78.2,156.5,light H+->cb in tt: hadronic + semileptonic tag
+m(mub),2,46.1,92.1,RPV stop -> b mu + b-tagged LQ leg (both pairings)
+m(muZ),1,59.9,59.9,trilepton mu+Z resonance
+m(jgamma),1,66.0,66.0,q*->q gamma (single photon+jet SR)
+m(mumu),1,79.5,79.5,single dimuon scan (combined charge/eta categories)
+m(jj),2,73.8,147.6,low-mass (TLA/ISR) + high-mass inclusive dijet
+m(3j),1,43.9,43.9,RPV/sgluon three-jet resonance (single SR)
+m(eejj),1,57.2,57.2,W_R->eejj
+m(VV),9,56.7,510.2,"WW/WZ/ZZ x qqqq / lvqq / llqq / vvqq / lvlv, ggF+VBF"
+m(Vh),6,53.6,321.9,Wh/Zh x 0/1/2-lepton x h->bb resolved/boosted
+m(bj),2,56.7,113.4,b* -> b g: b-tagged leading + subleading jet pairing
+m(bb),3,40.1,120.3,h->aa->4b low-mass + A/Y->bb resolved + boosted
+m(multi),1,20.9,20.9,QBH / multijet (single high-multiplicity SR)
+multilepton,4,44.2,176.6,3L / 4L signal regions by flavour & charge (axis deliberately unsplit)
+m(Wb),1,16.5,16.5,single VLQ T/Y->Wb (1-lepton SR)
+mT(ev),1,38.4,38.4,W'->e nu
+m(tauj),2,32.2,64.4,LQ->tau q: tau_had + tau_lep selections
+m(mumujj),1,40.9,40.9,W_R->mumujj
+m(tb),3,43.8,131.5,"W'/H+->tb: 0-lepton, 1-lepton x b-tag"
+m(tt)/m(jj),2,20.1,40.2,coloron pair -> tt or jj decay legs
+m(HH),6,39.7,238.4,"bbbb resolved + boosted, bbtautau, bbgammagamma, bbVV, multilepton"
+m(tautau),3,42.9,128.6,"H/Z'->tautau: tau_e tau_h, tau_mu tau_h, tau_h tau_h"
+m(etau) LFV,1,28.3,28.3,LFV e-tau (hadronic tau)
+m(mutau) LFV,1,28.3,28.3,LFV mu-tau (hadronic tau)
+m(tW),2,22.4,44.8,b*->tW: leptonic + hadronic top
+m(Ht),1,13.7,13.7,single VLQ T->Ht (h->bb tagged)
+m(taub),2,19.2,38.4,LQ3 -> tau b: tau_had + tau_lep
+mT(taunu),1,26.8,26.8,W'->tau nu (single hadronic-tau channel)
+m(tt),4,35.5,142.1,"ttbar res: l+jets resolved, l+jets boosted, all-had, dilepton"
+m(ttZ)/m(Zt),2,17.3,34.7,VLQ single/pair T->tZ selections
+mT(muv),1,25.6,25.6,W'->mu nu

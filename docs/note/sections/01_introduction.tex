@@ -1,0 +1,80 @@
+\section{Introduction and scope}
+\label{sec:intro}
+
+\subsection{The question}
+
+A conventional search fixes a model, a final state and a mass window before looking at data. The
+look-elsewhere effect is then a modest correction applied at the end, and nobody worries much
+about it. A growing fraction of the resonance program does not work that way. Model-independent
+and data-directed scans~\cite{ddp}, machine-learning anomaly searches~\cite{atlas_ml_anomaly} and
+general searches over many event classes~\cite{atlas_general_search} all sweep large parts of the
+mass space at once, and for those the trials factor is not a footnote. It is the leading term in
+what a discovery has to clear.
+
+A prior question therefore needs a careful answer: how many independent looks does the BSM
+resonance program actually contain? The number is usually quoted per analysis, if at all, and
+never for the field as a whole. This note works it out from the ground up.
+
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt]
+  \item How many independent bump hunts does covering the public BSM model space imply, and what
+        local significance does a $5\sigma$ global discovery therefore cost
+        (Section~\ref{sec:budget})?
+  \item What does the same arithmetic say about a fully combinatorial scan, and which object
+        combinations has ATLAS in fact never scanned (Section~\ref{sec:combinatorial})?
+  \item Is the resulting trials factor consistent with the excesses ATLAS has actually reported
+        (Section~\ref{sec:excess})?
+  \item Given a scan, how should candidates be selected: the largest bin, a threshold, or a
+        false-discovery-rate rule (Section~\ref{sec:selection})?
+  \item Does a two-stage A/B unblinding scheme make the trials factor cheaper, or only more
+        defensible (Section~\ref{sec:ab})?
+\end{enumerate}
+
+\subsection{The one-paragraph answer}
+
+The BSM resonance space looks unbounded at the level of models, with dozens of theories and
+thousands of signal samples across them, and it collapses to \textbf{46 distinct invariant- or
+transverse-mass spectra} once organised by where the bump appears, with lepton flavour and
+$b$-tag content counted as part of the mass axis. Counting Gross--Vitells
+resolution elements~\cite{grossvitells} over each spectrum's published scan window, the whole
+program amounts to $\Nsig \approx 3.7\times10^{3}$ independent looks, rising to $6.6\times10^{3}$
+when searches are sliced at realistic event-selection granularity. Because the penalty enters as
+$\ln \Nsig$, that program costs a local bar of $\Zloc \approx 6.4$ to $6.5$ for a $5\sigma$ global
+discovery, and the figure barely moves under any counting choice we varied. \textbf{Breadth is
+cheap.} What is expensive is anything that makes $\Nsig$ uncountable, which is the situation a
+neural-network-driven scan naturally creates, and the reason the two-stage unblinding discussion
+in Section~\ref{sec:ab} matters even though splitting the data cannot reduce the look-elsewhere
+effect.
+
+\subsection{What this note does and does not use}
+
+Every number here derives from two data-free ingredients: a curated list of bump observables with
+their published scan windows, floors and resolutions (Appendix~\ref{app:windows}), and a map from
+public BSM model classes to the spectra they populate. Both live in one module each in the
+accompanying repository (Section~\ref{sec:software}), and neither reads a single experiment-internal
+input --- no dataset identifiers, no signal-sample inventory, no unpublished analysis
+configuration. Whether a given spectrum happens to have centrally produced Monte-Carlo samples
+behind it is a question about a collaboration's production program rather than about the search
+budget, and it is deliberately outside the scope of this note; a companion ATLAS-internal note
+treats it.
+
+One consequence is worth stating early, because it is what keeps the exercise
+non-circular. Every spectrum is counted over the mass range a \emph{published} search family
+scans, never over a range inferred from which signal samples exist. A search does not become
+cheaper because few samples were generated for it.
+
+\subsection{Conventions}
+
+Throughout, one \emph{search} means one scanned mass spectrum, $n_s$ is the number of effective
+independent resolution elements it contains, and $\Nsig = \sum_s n_s$. The local significance
+required for a $5\sigma$ global discovery follows from
+\begin{equation}
+  \Zglob^2 \;=\; \Zloc^2 - 2\ln \Nsig
+  \qquad\Longrightarrow\qquad
+  \Zloc \;=\; \sqrt{25 + 2\ln \Nsig}\,,
+  \label{eq:lee}
+\end{equation}
+the asymptotic Gross--Vitells relation~\cite{grossvitells} in the fixed-resolution-element
+approximation. Masses are in GeV unless stated otherwise, and $\sqrt{s} = 13.6\TeV$.
+
+Bibliographic details for the external searches quoted throughout were checked against the arXiv
+metadata records and INSPIRE in August 2026.

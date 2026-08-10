@@ -1,0 +1,411 @@
+\section{Two-stage A/B unblinding}
+\label{sec:ab}
+
+\subsection{The proposal}
+
+Split the dataset into a fraction $f$ (sample A, exploration) and $1-f$ (sample B, confirmation).
+Scan \emph{everything} in A with \emph{no} global correction, since what happens in A is selection
+rather than inference. Pre-register every window with local $Z_A \ge Z_{\mathrm{cut}}$. Unblind
+only those windows in B, and make the discovery claim on the B-only $p$-value, corrected for the
+$k$ pre-registered windows.
+
+The attraction is immediate. The trials factor in B is not modelled but \emph{counted}: it is the
+number of lines in a frozen document. For a classical fixed-window search that is a modest
+convenience. For a neural-network-driven scan, where ``how many independent looks did the network
+take'' has no crisp answer, it is the difference between a defensible number and an argument.
+
+\subsection{The cost}
+
+Nothing is free, and here the trade is explicit. One avoids a logarithmic penalty by giving up
+luminosity, which costs $\sqrt{f}$ on the significance. For a signal whose full-dataset
+local significance would be $Z_{\mathrm{full}}$, the two stages fluctuate independently, so the
+joint discovery probability is
+\begin{equation}
+  P_{\mathrm{disc}}
+  \;=\;
+  \Phi\!\left(\sqrt{f}\,Z_{\mathrm{full}} - Z_{\mathrm{cut}}\right)
+  \cdot
+  \Phi\!\left(\sqrt{1-f}\,Z_{\mathrm{full}} - Z_{B}^{\mathrm{req}}\right),
+  \qquad
+  Z_B^{\mathrm{req}} = \sqrt{25 + 2\ln k_{\mathrm{eff}}},
+  \label{eq:abpower}
+\end{equation}
+with $k_{\mathrm{eff}} = N\,p_1(Z_{\mathrm{cut}}) + 1$ the expected number of pre-registered
+windows. The reach is the $Z_{\mathrm{full}}$ at which $P_{\mathrm{disc}} = 50\,\%$.
+
+The distinction between joint power and the naive median arithmetic matters. Requiring each stage
+to succeed at its median gives $Z_{\mathrm{med}} = \max(Z_{\mathrm{cut}}/\sqrt{f},\,
+Z_B^{\mathrm{req}}/\sqrt{1-f})$, which \emph{underestimates} the required signal wherever both
+constraints bind, since two independent coin flips at 50\,\% each give 25\,\% jointly.
+Equation~\eqref{eq:abpower} is the honest figure of merit, and toy Monte Carlo reproduces it to
+$0.03\sigma$.
+
+At this study's budget ($N = 6616$, single-stage reach $6.53\sigma$):
+
+\begin{table}[htbp]
+\centering
+\caption{Signal strength required for a 50\,\% probability of discovery, as a function of the
+splitting scheme, at $N = 6616$ independent looks.}
+\label{tab:abcost}
+\begin{tabular}{lrr}
+\toprule
+procedure & reach $Z_{\mathrm{full}}$ & cost \\
+\midrule
+single-stage full scan, exactly corrected & 6.53 & --- \\
+optimised split ($f \approx 0.2$--$0.3$, $Z_{\mathrm{cut}} \approx 2$--$3$) & $\sim7.0$ & $+0.5\sigma$ \\
+naive 50/50 split, $Z_{\mathrm{cut}} = 3$ & $\sim8.0$ & $+1.4\sigma$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{ab_split_reach.png}
+\caption{Discovery reach versus exploration fraction $f$, for several stage-1 selection thresholds.
+Solid curves are 50\,\% joint power (Eq.~\eqref{eq:abpower}), thin dashed the naive median
+arithmetic. The red line is the exactly corrected single-stage scan. The optimum is markedly asymmetric, with a small exploration sample and a large confirmation
+sample, and the naive 50/50 split is a poor choice.}
+\label{fig:abreach}
+\end{figure}
+
+\subsection{The look-elsewhere effect is conserved, not reduced}
+\label{sec:abcons}
+
+It is tempting to expect a trials count large enough to make splitting pay. There is none, and the
+reason is an identity rather than a numerical accident. The cost $2\ln N$ factorises:
+\begin{equation*}
+  2\ln N \;=\; 2\ln\!\frac{N}{k} \;+\; 2\ln k,
+\end{equation*}
+where the first term is paid implicitly, as the stage-1 selection cut that reduces $N$ looks to
+$k$ pre-registered windows, and the second explicitly in B. Splitting \emph{relocates} the penalty
+rather than removing it. What remains is the two-coin penalty, the requirement that both
+independent halves succeed, which runs from $+0.3$ to $+0.5\sigma$ between $N = 10$ and $N =
+10^{10}$ and never crosses zero.
+
+The number of unblinded windows barely matters: moving $k$ from 1 to 1000 changes the reach by
+$0.15\sigma$, so $k$ can be chosen on practical grounds ($k \approx 10$).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{ab_toys_power.png}
+\caption{Toy Monte-Carlo validation: discovery power versus injected signal strength for the three
+procedures, with the analytic median-reach values as vertical lines. The toys treat the budget's
+$N$ effective looks as independent standard normals under background-only and recover the
+full-dataset scan exactly as $z_{\mathrm{full}} = \sqrt{f}z_A + \sqrt{1-f}z_B$.}
+\label{fig:abtoys}
+\end{figure}
+
+\subsection{Would swapping the halves recover it?}
+\label{sec:abswap}
+
+The natural objection to that identity is that half the luminosity sits idle at each stage. Why
+not run \emph{both} directions --- explore in A and confirm in B, \emph{and} explore in B and
+confirm in A --- and claim if either confirms? This is two-fold cross-validation of the
+\emph{claim}, and it is a genuinely different procedure rather than a relabelling.
+
+The trade is explicit. Both directions pre-register, so the confirmation windows double,
+$k \to 2k$, costing $2\ln 2$ on the B bar: at $Z_{\mathrm{cut}} = 3$ and $N = 6616$,
+$Z_B^{\mathrm{req}}$ moves from $5.64$ to $5.75$. What is bought is a second chance at the same
+signal. Since $Z_B^{\mathrm{req}} > Z_{\mathrm{cut}}$, the two directions coincide only where
+\emph{both} halves clear the claim bar, so the union power is
+\begin{equation}
+  P^{\mathrm{sym}}_{\mathrm{disc}}
+  \;=\;
+  \Phi^{A}_{\mathrm{cut}}\Phi^{B}_{\mathrm{req}}
+  \;+\;
+  \Phi^{B}_{\mathrm{cut}}\Phi^{A}_{\mathrm{req}}
+  \;-\;
+  \Phi^{A}_{\mathrm{req}}\Phi^{B}_{\mathrm{req}},
+  \qquad
+  \Phi^{A}_{x} = \Phi\!\left(\sqrt{f}\,Z_{\mathrm{full}} - Z_{x}\right),
+  \label{eq:abswap}
+\end{equation}
+and $\Phi^{B}_{x}$ the same with $f \to 1-f$; toys reproduce it to $0.01\sigma$. At fixed
+thresholds the gain over one direction is a factor
+$2 - \Phi_{\mathrm{req}}/\Phi_{\mathrm{cut}}$, that is, at most two.
+
+That gain is collected only when both directions have comparable power, which means $f = 1/2$ ---
+and $f = 1/2$ is precisely the split the one-way analysis rejects, because confirmation is the
+luminosity-hungry stage. The swap therefore does not beat the asymmetric scheme; it
+\emph{rescues the symmetric one}.
+
+\begin{table}[htbp]
+\centering
+\caption{One-way splitting against the symmetrised swap at $N = 6616$ (single-stage reach
+$6.53$). The first two rows re-optimise $f$ at fixed $Z_{\mathrm{cut}}$; the last optimises
+$(f, Z_{\mathrm{cut}})$ inside the practical design box $Z_{\mathrm{cut}} = 2$--$4.5$.}
+\label{tab:abswap}
+\begin{tabular}{lrrrr}
+\toprule
+ & \multicolumn{2}{c}{one-way} & \multicolumn{2}{c}{swapped} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+design & reach & cost & reach & cost \\
+\midrule
+$50/50$, $Z_{\mathrm{cut}} = 3$ & 7.98 & $+1.45$ & \textbf{7.38} & $\mathbf{+0.86}$ \\
+$f = 0.30$, $Z_{\mathrm{cut}} = 3$ (recommended) & \textbf{7.09} & $\mathbf{+0.56}$ & 7.15 & $+0.63$ \\
+best design in the practical box & \textbf{7.01} & $\mathbf{+0.49}$ & 7.03 & $+0.51$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Applied on top of the recommended working point the swap is actively harmful: the second
+direction would have to confirm a $5\sigma$-global result on $30\%$ of the data, so it almost
+never fires, and one pays the $2\ln 2$ for a dead direction. Optimised freely inside the
+practical box the two schemes are a wash, $+0.49\sigma$ against $+0.51\sigma$, and the gap stays
+within $0.11\sigma$ over nine decades of $N$, changing sign with the design box rather than
+crossing over at any particular trials count.
+
+Why neither can win is clearest geometrically. In the $(z_A, z_B)$ plane the Neyman--Pearson
+acceptance region for a mean shift is the half-plane
+$\sqrt{f}\,z_A + \sqrt{1-f}\,z_B > \sqrt{25 + 2\ln N}$ --- which is exactly the single-stage scan
+on the recombined dataset. One-way splitting approximates that half-plane with an $L$-shaped
+corner, the swap with a two-step staircase. More steps track the line more closely, which is why
+the swap repairs the $50/50$ split, but every step multiplies the pre-registered windows.
+Conservation of the look-elsewhere effect is that staircase-versus-half-plane inefficiency, and no
+number of folds removes it.
+
+The decisive objection, though, is not statistical. Of the three things the split buys
+(Section~\ref{sec:abwhy}) the swap keeps two and destroys the third. The trials factor is still
+counted and still auditable --- $2k$ is as countable as $k$ --- but procedural blindness is gone:
+after the first direction the analyst has seen B, so the second direction's ``confirmation'' on A
+is made by someone who already knows both halves. It is valid only if the entire two-directional
+procedure is frozen and executed in a single automated pass, and a review committee is entitled to
+discount it even then. The swap also does nothing about the correlated-systematics mode of
+Section~\ref{sec:abblind}, which for a data-directed analysis is the leading one.
+
+None of this argues against symmetrising the \emph{training}, which is a separate question taken
+up in Section~\ref{sec:abnoise}: holding the background model out of the sample it scores is nearly
+free and attacks the sculpting mode directly. Symmetrising the \emph{claim} is the thing that
+costs, and on this budget it buys nothing.
+
+\subsection{When the split is nonetheless the right choice}
+\label{sec:abwhy}
+
+The split wins if and only if the single-stage trials factor one would have to \emph{defend}
+exceeds $R^\star \approx 13$ times the true $N$. For a classical fixed-window scan that is
+implausible, and the corrected single stage wins outright. For a network-driven hunt a factor of
+13 in forced conservatism is entirely imaginable, and that, rather than the logarithm, is the
+quantitative case for two-stage unblinding. It buys three things:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item an \textbf{exactly countable} trials factor in B,
+  \item \textbf{auditability}: the correction is the number of lines in a document frozen before
+        unblinding, and
+  \item \textbf{procedural blindness}: the analysis cannot be tuned on the confirmation sample.
+\end{itemize}
+
+\subsection{The failure mode splitting does \emph{not} address}
+\label{sec:abblind}
+
+A/B splitting attacks the \emph{statistical} look-elsewhere effect only. A spurious bump caused by
+correlated systematics, such as background mis-modelling or a network that has learnt to sculpt a
+peak, appears identically in both halves and will happily ``confirm''. For a data-directed
+analysis this is not a corner case but the leading failure mode. The split protects against
+fluctuations, not against the analysis fooling itself. That statement is exact but incomplete:
+between a pure fluctuation and a fully correlated systematic lies everything an imperfect
+estimator does, and Section~\ref{sec:abnoise} prices the split over that range.
+
+\subsection{What changes if the significance estimator is imperfect}
+\label{sec:abnoise}
+
+Everything above assumes a perfectly calibrated estimator: every look returns $Z \sim N(0,1)$
+under background, so the only thing to control is the look-elsewhere effect, and splitting can
+only lose. A network-driven scan does not have that estimator. It has one that occasionally
+returns an outlier --- a fit that failed to converge on this subsample, a background model that
+has absorbed a fluctuation, a window where the shape is simply wrong. Repricing the split against
+that estimator changes the verdict, and the reason it changes is worth more than the number.
+
+The only property of an outlier that an A/B split can see is whether it \emph{repeats in the other
+half}. That suggests three classes, distinguished by nothing but their correlation across the
+split:
+
+\begin{table}[htbp]
+\centering
+\caption{Classes of estimator defect, by how they correlate between the two halves. Only the last
+column matters to a split.}
+\label{tab:abdefect}
+\begin{tabular}{lp{4.5cm}p{5.4cm}}
+\toprule
+class & physical origin & behaviour across the split \\
+\midrule
+\textsc{bias} & mismodelled background or detector artefact in that window &
+  the pull is $\delta B/\sqrt{B} = \delta\sqrt{wB}$, so it grows with luminosity exactly like a
+  signal and is \textbf{identical} in both halves \\
+\textsc{var} & the look's uncertainty is underestimated by a factor $s$ &
+  the miscalibration is shared, but what it amplifies is each half's \emph{independent}
+  fluctuation \\
+\textsc{glitch} & a per-\emph{run} failure: non-convergence on this subsample, a network
+  artefact, a corrupted input &
+  redrawn \textbf{independently} every time the estimator is run \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The mechanism is a one-line geometric statement, and Fig.~\ref{fig:abmech} is the whole section in
+a picture. In the $(Z_A, Z_B)$ plane a coherent pull $b$ places a look at
+$(\sqrt{f}\,b,\,\sqrt{1-f}\,b)$ --- on the locus $Z_B = \sqrt{(1-f)/f}\,Z_A$, which is precisely
+where a real signal of the same strength sits. An incoherent one places it near the $Z_B \approx 0$
+axis. The split is a cut that separates the axis from the locus, and by construction cannot
+separate the locus from itself. It follows immediately that a coherent defect is not merely hard
+for the split to reject: it is \emph{exactly as confirmable as a signal}, which is the content of
+Section~\ref{sec:abblind} restated.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{ab_outliers_mechanism.png}
+\caption{\textbf{Left:} looks that pass the stage-1 cut, in the plane of the two half-dataset
+significances. Real signals and coherent mismodellings populate the same locus; per-run artefacts
+sit on the $Z_B \approx 0$ axis and die at the claim bar. \textbf{Right:} the resulting
+spurious-claim rate. The two defects are \emph{identical} to a single-stage scan --- one curve, by
+construction --- and the split separates them by changing the scaling from $\epsilon$ to
+$\epsilon^{2}$ for the incoherent one alone.}
+\label{fig:abmech}
+\end{figure}
+
+The same two failure modes on an actual falling spectrum are shown in Fig.~\ref{fig:abspec}: a
+background fit that undershoots by $\sim10\,\%$ in the A half alone produces a $4.1\sigma$
+excess that is duly pre-registered and then collapses to $2.6\sigma$ in B, while a background
+genuinely mismodelled by $8.8\,\%$ gives $4.2\sigma$ in A and $6.9\sigma$ in B and clears the claim
+bar.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{ab_outliers_spectrum.png}
+\caption{Toy spectra scored the way an analysis would score them, at the recommended working point.
+\textbf{Left:} the A-half background model is locally wrong, so the excess exists only in the
+estimator and stage B removes it. \textbf{Right:} the background model is wrong for both halves, so
+the excess is real in the data and confirms. Only the first of these is a fluctuation in the sense
+the split can act on.}
+\label{fig:abspec}
+\end{figure}
+
+The comparison cannot be made on raw false-alarm rates, because the single stage can always buy
+robustness by raising its bar. The honest figure of merit is therefore \emph{matched}: raise the
+single-stage threshold until it is equally likely to make a spurious claim, and only then compare
+reach. Table~\ref{tab:abnoise} does this at the recommended working point, with each defect
+occurring at rate $\epsilon = 10^{-3}$ and magnitude $\sim2\sigma$.
+
+\begin{table}[htbp]
+\centering
+\caption{Matched-robustness comparison at $f = 0.30$, $Z_{\mathrm{cut}} = 3$, $N = 6616$, for a
+defect rate $\epsilon = 10^{-3}$ ($\approx 1$ artefact above $3\sigma$ per scan). A positive gain
+means the split reaches a \emph{weaker} signal than a single-stage scan that is equally safe.}
+\label{tab:abnoise}
+\begin{tabular}{lrrrr}
+\toprule
+estimator & suppression & split reach & matched bar & gain \\
+\midrule
+perfect (the assumption above) & --- & 7.09 & 6.53 & $-0.56\sigma$ \\
+\textsc{bias} & $1.9\times$ & 7.08 & 6.95 & $-0.14\sigma$ \\
+\textsc{var} ($s = 2$) & $3.5\times$ & 7.10 & 7.20 & $+0.10\sigma$ \\
+\textsc{glitch} & $199\times$ & 7.11 & \textbf{9.61} & $\mathbf{+2.50\sigma}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Against a per-run glitch the split suppresses the spurious-claim rate by two orders of magnitude,
+because the artefact must recur \emph{independently} in B above $5.6$: the rate goes as
+$\epsilon^2$ rather than $\epsilon$. A single-stage scan would have to demand $Z \ge 9.6$ to be as
+safe. Against a coherent bias the split suppresses by $1.9\times$, but that is not discrimination
+--- it is merely the split's own worse reach hurting fakes along with signal --- and the single
+stage buys the same factor for $+0.42\sigma$, which is cheaper than the split costs. Section
+\ref{sec:abblind} is the $\rho = 1$ limit of this table.
+
+\subsubsection*{Coherence is the deciding variable}
+
+Interpolating between the two extremes with a coherent fraction $\rho$ (Fig.~\ref{fig:abnoise}),
+the break-even sits at $\rho^\star \approx 0.80$ and moves by less than $0.02$ over two decades in
+the overall defect rate. The rule is therefore unusually portable:
+
+\begin{quote}
+\textbf{If fewer than about four in five of the estimator's outliers repeat in the other half, the
+split pays for itself.}
+\end{quote}
+
+Under a plausible cocktail --- coherent bias, bad fits and glitches each at $10^{-3}$, together
+$\approx 3$ artefacts above $3\sigma$ per scan --- the net is $+0.29\sigma$ in the split's favour,
+against $-0.56\sigma$ for a perfect estimator. And $\rho$ is measurable \emph{before} unblinding:
+split the sidebands or MC-only pseudo-data, and count what fraction of the $3\sigma$ excesses
+recurs.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{ab_split_outliers.png}
+\caption{Matched-robustness advantage of the split as a function of the coherent fraction $\rho$
+of the estimator's outliers, at three defect rates. The dotted line is the pure cost of splitting
+with a perfect estimator. The break-even is essentially rate-independent, so the criterion is a
+property of the estimator's failure modes rather than of how often they occur.}
+\label{fig:abnoise}
+\end{figure}
+
+\subsubsection*{Where the training arrangement enters}
+
+The sharpest case is a background model \emph{fit to data}, which is the data-directed situation.
+Fitting it on the same events one then tests for excesses is overfitting, and overfitting is a
+\textsc{glitch}-type defect tied to the specific events in that half. A single pass cannot escape
+it: there is no held-out half. Three arrangements are available to a split, and they are not
+equivalent:
+
+\begin{enumerate}[leftmargin=1.6em,itemsep=3pt]
+  \item \textbf{self-contained} --- train on A and score A, train on B and score B. Both stages
+        overfit, but independently, so the claim is $\epsilon^2$-suppressed. Bookkeeping exact.
+        Worth $+2.50\sigma$.
+  \item \textbf{full cross} --- train on B and score A, train on A and score B. No overfitting
+        anywhere, worth $+5.67\sigma$, \emph{but} the stage-A selection is now a function of B
+        through the trained model, so the pre-registration is no longer independent of the
+        confirmation sample and the $k$-coin $p$-value is no longer exact.
+  \item \textbf{A-trained throughout} --- train on A, score A to select, then apply that same
+        frozen model to B. The confirmation $Z$ is produced by an estimator that has never seen a
+        single B event, so overfitting is removed \emph{by construction} rather than beaten down
+        statistically; and nothing about B enters the pre-registration, so the bookkeeping stays
+        exact. Worth $+5.64\sigma$.
+\end{enumerate}
+
+Arrangement 3 dominates: it recovers all but $0.03\sigma$ of the full-cross gain while keeping the
+blindness that made the scheme worth adopting. The reason it can is that the overfitting it leaves
+in place --- in stage A --- only inflates the candidate list ($k$: $8.9 \to 10.1$), and $k$ enters
+the bar as $2\ln k$. \textbf{Contaminating the exploration stage is logarithmically cheap;
+contaminating the confirmation stage is what costs.}
+
+\subsubsection*{Two caveats on this result}
+
+Part of the \textsc{glitch} gain is available without splitting. If the artefact is purely
+seed- or initialisation-dependent, re-running the estimator with different seeds on the
+\emph{same} data catches it at no cost in reach. What a seed jackknife cannot decorrelate is a
+defect tied to a specific \emph{data} fluctuation --- overfitting, or a fit driven by the actual
+events in that window. Only a data split touches those, which is exactly the data-directed failure
+mode, so the claim is narrower than the raw $+2.5\sigma$ but lands on the case at hand.
+
+Second, and more important: after the split the residual spurious rate is essentially
+\emph{entirely} coherent. The glitch and variance components contribute $0.9\,\%$ and $0.1\,\%$ of
+what still gets through. The split does not make the analysis safe --- it changes what one has to
+worry about, from ``is my estimator glitchy?'' to ``is my background model wrong in that window?''.
+That residual has to be controlled by other means (validation regions, spurious-signal tests,
+alternative background parameterisations), because the confirmation stage will endorse a
+mismodelled background as enthusiastically as a real signal.
+
+The overall repricing is then a change of argument rather than of arithmetic.
+Section~\ref{sec:abcons} stands exactly as written: with a perfect estimator, splitting relocates
+the look-elsewhere effect and cannot reduce it. But that was answering the wrong question for a
+data-directed search. The split is not a look-elsewhere device --- it is an
+\textbf{estimator-robustness device}, and priced as one, $0.5\sigma$ is cheap.
+
+\subsection{Recommended working point}
+
+If the scheme is adopted, the design that follows from the above is:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item exploration fraction $f \approx 0.25$--$0.35$, stage-1 threshold $Z_{\mathrm{cut}} = 3$
+        (giving $\approx 9$ pre-registered windows at this budget);
+  \item pre-registered $\pm2\sigma_M$ windows, with the outcome ladder written down before
+        unblinding;
+  \item the background model \textbf{trained on A alone} and applied frozen to B
+        (arrangement 3 of Section~\ref{sec:abnoise}), so that the confirmation significance comes
+        from an estimator that has never seen a B event, without leaking B into the
+        pre-registration;
+  \item the claim quoted as a \textbf{global} significance over the pre-registered windows:
+        evidence at $Z_B^{\mathrm{global}} \ge 3$ (local $Z_B \ge 4.0$), discovery at
+        $Z_B^{\mathrm{global}} \ge 5$ (local $5.6$). The false-evidence rate per opening is then
+        $1.35\times10^{-3}$ by construction, whatever number of windows A flags;
+  \item B alone for the claim $p$-value, A$+$B for the measurement.
+\end{itemize}
