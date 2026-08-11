@@ -69,7 +69,7 @@ fig, (a0, a1) = panels(figsize=(13.4, 5.0), wspace=0.20)
 
 a0.hist(one_pe, bins=90, color="#c9c8c4", lw=0)
 a0.axvline(one_pe.max(), color=BLUE[5], lw=2.4)
-a0.annotate(f"max of this\nexperiment = {one_pe.max():.2f}",
+a0.annotate(f"maximum = {one_pe.max():.2f}",
             xy=(one_pe.max(), a0.get_ylim()[1] * 0.42), xytext=(-4.6, a0.get_ylim()[1] * 0.66),
             color=BLUE[5], fontsize=11.5, ha="left", linespacing=1.45,
             arrowprops=dict(arrowstyle="->", color=BLUE[5], lw=1.6,
@@ -87,7 +87,7 @@ a1.text(0.60, 0.68, f"mean {mu_f:.2f}    std {sd_f:.2f}    skew {skew(maxima):.2
         transform=a1.transAxes, color=INK2, fontsize=11)
 a1.legend(frameon=False, fontsize=11, labelcolor=INK2, loc="upper left")
 labels(a1, f"maximum of {n:,} draws", "probability density")
-title(a1, "Distribution of the maxima  —  right-skewed, not Gaussian")
+title(a1, "Distribution of the maxima")
 fig.savefig(os.path.join(PLOTS, "max_of_gaussians_light.png"), dpi=170, facecolor=SURF,
             bbox_inches="tight")
 
@@ -101,11 +101,11 @@ for m in MUS:
     b0.plot(xs, pdf(xs - m), color=BLUE[m], lw=2.2)
     b0.text(m, pdf(0) * 1.14, f"${m}\\sigma$", color=BLUE[m], fontsize=11.5, ha="center",
             fontweight="medium")
-b0.text(4.45, 1.30, "background max\nof the other 29,999 bins", color=INK2, fontsize=10.5,
+b0.text(4.45, 1.30, "background maximum\nof the other bins", color=INK2, fontsize=10.5,
         linespacing=1.45)
 b0.set_ylim(0, 1.72)
 labels(b0, "$z$", "probability density")
-title(b0, "The race: signal bin vs the background maximum")
+title(b0, "Signal bin against the background")
 
 mus = np.linspace(1.5, 8.0, 90)
 pw = np.array([p_win(m) for m in mus])
@@ -115,9 +115,6 @@ for m in MUS:
     v = p_win(m) * 100
     b1.plot([m], [v], "o", ms=8, color=BLUE[m], mec=SURF, mew=1.8, zorder=5)
     b1.text(m + 0.12, v - 4.5, f"{v:.0f}%", color=BLUE[m], fontsize=11.5, fontweight="medium")
-b1.text(4.35, 14, "a $4\\sigma$ signal wins the scan less than\nhalf the time: it is racing a distribution\n"
-        "centred at 4.11 with spread 0.28",
-        color=INK2, fontsize=10.5, linespacing=1.5)
 b1.set_ylim(0, 104)
 labels(b1, "signal strength  $\\mu$   [$\\sigma$]", "signal bin is the maximum   [%]")
 title(b1, "$p(\\mu) = P(\\,$signal wins the scan$\\,)$")
@@ -151,15 +148,13 @@ for m in MUS:
     c1.plot([m], [v], "o", ms=8, color=BLUE[5], mec=SURF, mew=1.8, zorder=5)
     c1.text(m - 0.15, v + 4, f"{v:.0f}%", color=BLUE[5], fontsize=12, ha="right")
 c1.axhline(sf(tB) * 100, color=C_ARG, lw=1.8)
-c1.text(8.4, 26, "false-alarm rate = 0.135%  =  $3.0\\sigma$ GLOBAL", color=C_ARG, fontsize=12,
-        ha="right")
-c1.text(8.4, 17, "(no trials factor — B's bin was chosen by A)", color=C_ARG, fontsize=10.5,
-        ha="right")
+c1.text(8.4, 22, r"false-alarm rate 0.135%  =  $3.0\sigma$ global", color=C_ARG,
+        fontsize=11.5, ha="right")
 c1.text(6.15, 84, "wins stage 1", color=BLUE[3], fontsize=12)
-c1.text(6.15, 66, "CONFIRMED\n(both stages)", color=BLUE[5], fontsize=12, linespacing=1.5)
+c1.text(6.15, 66, "confirmed in both stages", color=BLUE[5], fontsize=12)
 c1.set_ylim(-4, 112)
 labels(c1, "signal strength  $\\mu$   [$\\sigma$]", "probability  [%]")
-title(c1, "Confirmation power vs. signal strength")
+title(c1, "Confirmation power")
 fig.savefig(os.path.join(PLOTS, "ab_confirmation.png"), dpi=170, facecolor=SURF,
             bbox_inches="tight")
 
@@ -175,7 +170,7 @@ d0.text(tstar + 0.07, 3.0, f"$t^\\star = {tstar:.3f}$\n$\\lambda(t^\\star) = 1$"
         fontsize=12, linespacing=1.45)
 d0.text(3.05, 2.5e-2, "$\\lambda(t) = (n-1)\\,[1-\\Phi(t)]$", color=C_THR, fontsize=12.5)
 labels(d0, "selection threshold  $t$", "expected background bins above $t$")
-title(d0, "Stage 1 fake rate: $\\lambda(t)$, and the $\\lambda = 1$ point")
+title(d0, "Expected background bins above $t$")
 
 for m in MUS:
     d1.plot(ts, cdf(m - ts) * 100, color=BLUE[m], lw=2.4)
@@ -185,11 +180,9 @@ for m in MUS:
 d1.axhline(50, color=INK2, lw=1, ls=(0, (4, 3)), alpha=0.8)
 d1.axvline(tstar, color=INK2, lw=1, ls=(0, (2, 3)))
 d1.text(tstar + 0.06, 25, "$t^\\star$", color=INK, fontsize=12, fontweight="medium")
-d1.text(3.03, 110, "efficiency $\\Phi(\\mu - t)$ crosses 50% exactly at $t = \\mu$",
-        color=INK2, fontsize=10.5)
 d1.set_ylim(0, 119)
 labels(d1, "selection threshold  $t$", "signal bin passes stage 1   [%]")
-title(d1, "Stage 1 efficiency: $\\Phi(\\mu - t)$")
+title(d1, "Chance the signal bin passes")
 fig.savefig(os.path.join(PLOTS, "threshold_scan.png"), dpi=170, facecolor=SURF,
             bbox_inches="tight")
 
@@ -204,26 +197,24 @@ for m in MUS:
             fontweight="medium")
 e0.axvline(tstar, color=INK2, lw=1, ls=(0, (2, 3)))
 e0.text(tstar + 0.06, 14, "$t^\\star$", color=INK, fontsize=12, fontweight="medium")
-e0.text(3.05, 112, "solid  =  threshold at $t$        dashed  =  argmax rule",
+e0.text(3.05, 112, "solid: threshold at $t$        dashed: argmax rule",
         color=INK2, fontsize=10.5)
 e0.set_xlim(3.0, 6.35)
 e0.set_ylim(0, 124)
 labels(e0, "selection threshold  $t$", "signal confirmed in B   [%]")
-title(e0, "Power: the threshold rule dominates the argmax at every $\\mu$")
+title(e0, "Confirmation power")
 
 e1.semilogy(ts, p_fake(ts), color=C_ARG, lw=2.6)
 e1.axhline(sf(tB), color=INK2, lw=1.2, ls=(0, (4, 3)))
 e1.axvline(tstar, color=INK2, lw=1, ls=(0, (2, 3)))
 e1.plot([tstar], [p_fake(tstar)], "o", ms=9, color=C_ARG, mec=SURF, mew=2, zorder=6)
-e1.text(3.05, 2.1e-3, "argmax rule:  $1.35\\times10^{-3}$   ($3.0\\sigma$ global)", color=INK2,
-        fontsize=10.5)
-e1.text(4.22, 8e-3, f"$t^\\star = {tstar:.2f}$ — the two rules meet here", color=INK,
-        fontsize=11)
+e1.text(3.05, 2.1e-3, r"argmax rule:  $1.35\times10^{-3}$", color=INK2, fontsize=10.5)
+e1.text(4.32, 8e-3, f"$t^\\star = {tstar:.2f}$", color=INK, fontsize=11)
 e1.text(3.05, 3e-6, "$P_{\\rm fake} = 1 - e^{-\\lambda(t)\\,[1-\\Phi(3)]}$", color=C_ARG,
         fontsize=12.5)
 e1.set_ylim(1e-6, 8e-2)
 labels(e1, "selection threshold  $t$", "P(at least one false confirmation)")
-title(e1, "Cost: the global false-alarm rate a threshold buys")
+title(e1, "Global false-alarm rate it buys")
 fig.savefig(os.path.join(PLOTS, "threshold_vs_argmax.png"), dpi=170, facecolor=SURF,
             bbox_inches="tight")
 
@@ -246,13 +237,12 @@ for tt in (3, 5, 6):
 f0.text(2.2e-8, 122, "◆  argmax rule", color=C_ARG, fontsize=11, fontweight="medium")
 f0.text(2.2e-8, 112, "—  threshold at $t$    ●  $t^\\star$", color=BLUE[5], fontsize=11,
         fontweight="medium")
-f0.text(x_arg * 0.75, 4, "argmax fake budget\n$1.35\\times10^{-3}$", color=C_ARG, fontsize=9.5,
-        ha="right", linespacing=1.4)
+f0.text(x_arg * 0.75, 4, "argmax budget", color=C_ARG, fontsize=9.5, ha="right")
 f0.set_xlim(1.5e-8, 1.0)
 f0.set_ylim(0, 132)
 labels(f0, "average number of false positives   $E[K_{\\rm fake}] = \\lambda(t)\\,[1-\\Phi(3)]$",
        "signal confirmed in B   [%]")
-title(f0, "ROC: the threshold curve passes above the argmax point at every $\\mu$", 12.8)
+title(f0, "Power against false positives", 12.8)
 
 for m in MUS:
     f1.semilogy(ts, y_thr(m, ts) / x_thr(ts), color=BLUE[m], lw=2.4)
@@ -263,13 +253,12 @@ for m in MUS:
             va="center", fontweight="medium")
 f1.axvline(tstar, color=INK2, lw=1, ls=(0, (2, 3)))
 f1.text(tstar + 0.06, 2.2, "$t^\\star$", color=INK, fontsize=12, fontweight="medium")
-f1.text(3.05, 8e6, "the ratio never turns over —\nit just says “cut harder”", color=INK,
-        fontsize=12, linespacing=1.5)
-f1.text(6.4, 5.0, "dashed  =  argmax", color=INK2, fontsize=10.5, ha="right")
+
+f1.text(6.4, 5.0, "dashed: argmax", color=INK2, fontsize=10.5, ha="right")
 f1.set_xlim(3.0, 6.5)
 f1.set_ylim(3.5, 7e7)
 labels(f1, "selection threshold  $t$", "power per false positive   $y/x$")
-title(f1, "Why the bare ratio is not an objective", 12.8)
+title(f1, "Power per false positive", 12.8)
 fig.savefig(os.path.join(PLOTS, "roc_threshold_vs_argmax.png"), dpi=170, facecolor=SURF,
             bbox_inches="tight")
 

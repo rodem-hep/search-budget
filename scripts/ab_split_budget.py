@@ -299,23 +299,20 @@ axr.plot(Nx, [c[2] for c in cross], "-o", color="#9ecae9", lw=2, ms=4,
 axr.plot(Nx, [c[3] for c in cross], "-o", color="#2f4b6e", lw=2, ms=4,
          label=r"two-stage, optimized, $\pm2\sigma_M$ window freedom (w=3)")
 axr.axvline(N, color="#888888", lw=1, ls=":")
-axr.text(N * 1.25, 5.6, f"this program\nN = {N:,.0f}", fontsize=8.5, color="#555555")
+axr.text(N * 1.25, 5.6, "this program", fontsize=9.5, color="#52514e")
 axr.set_xscale("log")
 axr.set_ylabel(r"discovery reach: $Z_{local}^{full}$ at 50% power")
 axr.grid(ls=":", alpha=0.35)
-axr.legend(fontsize=9, loc="upper left")
-axr.set_title("Is there an N where splitting wins? No — the LEE factorizes ($N = \\frac{N}{k}\\cdot k$),\n"
-              "the gap is the two-coin penalty (both halves must succeed) and it never closes")
+axr.legend(fontsize=9, loc="upper left", frameon=False)
+axr.set_title("Single-stage against two-stage reach, over four decades of N",
+              fontsize=12.5, loc="left")
 axg.plot(Nx, [c[4] for c in cross], "-o", color="#5f9e6e", lw=2, ms=4)
 axg.axvline(N, color="#888888", lw=1, ls=":")
 axg.set_xscale("log")
 axg.set_ylim(0, 22)
-axg.set_xlabel("number of independent looks N (trials) — exactly known in the single-stage column")
+axg.set_xlabel("number of independent looks  N")
 axg.set_ylabel(r"$R^{*}$: trials inflation for" "\n" r"the split to win")
 axg.grid(ls=":", alpha=0.35, which="both")
-axg.text(0.02, 0.83, r"split more sensitive iff defendable single-stage trials $> R^{*}\times N$"
-         "\n(uncountable analyst/ML freedom); below the curve the corrected scan wins",
-         transform=axg.transAxes, fontsize=8.5, color="#3a6b46")
 figc.tight_layout()
 outc = os.path.join(ROOT, "results", "plots", "ab_split_crossover.png")
 os.makedirs(os.path.dirname(outc), exist_ok=True)
@@ -328,30 +325,23 @@ fig, ax = plt.subplots(figsize=(9.5, 6.2))
 colors = {2.0: "#c6dbeF", 2.5: "#9ecae9", 3.0: "#4c78a8", 3.5: "#2f4b6e", 4.0: "#17324d"}
 for zcut in (2.0, 2.5, 3.0, 3.5, 4.0):
     ax.plot(fs, [reach(f, N, zcut) for f in fs], lw=2,
-            color=colors[zcut], label=f"$Z_{{cut}}$ = {zcut:g}  "
-            f"(k$_{{bkg}}$ = {N*p1(zcut):.1f})")
-    ax.plot(fs, [reach_median(f, N, zcut) for f in fs], lw=0.9, ls="--",
-            color=colors[zcut], alpha=0.55)
+            color=colors[zcut], label=f"$Z_{{cut}}$ = {zcut:g}")
 ax.axhline(Z_single, color="#d1495b", ls="--", lw=1.8)
-ax.text(0.96, Z_single - 0.09, f"single-stage full-dataset scan: Z = {Z_single:.2f} "
-        f"(N = {N:,.0f})", color="#a02735", fontsize=9, ha="right", va="top")
-ax.plot([opt[1]], [opt[2]], "o", ms=9, color="#2f4b6e", zorder=5)
-ax.annotate(f"optimum: f = {opt[1]:.2f}, $Z_{{cut}}$ = {opt[0]:g}\n"
-            f"reach {opt[2]:.2f} ({opt[2]-Z_single:+.2f} vs single-stage:\n"
-            "the price of countable trials)",
-            (opt[1], opt[2]), textcoords="offset points", xytext=(-30, 55), ha="center",
-            fontsize=9, arrowprops=dict(arrowstyle="-", color="#888888", lw=0.8))
-ax.plot([0.5], [reach(0.5, N, 3.0)], "s", ms=8, color="#d9a441", zorder=5)
-ax.annotate(f"naive 50/50, $Z_{{cut}}$=3:\nreach {reach(0.5, N, 3.0):.2f}",
-            (0.5, reach(0.5, N, 3.0)), textcoords="offset points", xytext=(12, 16), fontsize=9,
-            arrowprops=dict(arrowstyle="-", color="#888888", lw=0.8))
+ax.text(0.96, Z_single - 0.08, f"single-stage scan: Z = {Z_single:.2f}", color="#a02735",
+        fontsize=9.5, ha="right", va="top")
+ax.plot([opt[1]], [opt[2]], "o", ms=9, color="#2f4b6e", mec="white", mew=2, zorder=5)
+ax.annotate(f"best split: f = {opt[1]:.2f}, reach {opt[2]:.2f}",
+            (opt[1], opt[2]), textcoords="offset points", xytext=(26, -34), ha="left",
+            fontsize=9.5, color="#52514e",
+            arrowprops=dict(arrowstyle="-", color="#b9b9b4", lw=0.8))
 ax.set_xlabel("exploration fraction  f  (dataset A);  confirmation uses 1$-$f (dataset B)")
 ax.set_ylabel(r"discovery reach: full-dataset $Z_{local}$ at 50% power")
 ax.set_ylim(5.6, 10)
 ax.grid(ls=":", alpha=0.35)
-ax.set_title("Two-stage A/B unblinding: discovery reach vs split fraction\n"
-             "solid = 50% joint power (validated by toys);  thin dashed = naive median arithmetic")
-ax.legend(loc="upper center", fontsize=9, title="selection threshold in A")
+ax.set_title("Discovery reach of a two-stage A/B split against the exploration fraction",
+             fontsize=12.5, loc="left")
+ax.legend(loc="upper center", ncol=2, fontsize=9.5, frameon=False,
+          title="selection threshold in A")
 fig.tight_layout()
 out = os.path.join(ROOT, "results", "plots", "ab_split_reach.png")
 os.makedirs(os.path.dirname(out), exist_ok=True)

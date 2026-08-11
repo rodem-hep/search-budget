@@ -136,13 +136,9 @@ ax.semilogx(qq, tm, color=c_thr, lw=1.5, ls=(0, (2, 2.5)),
             label="fixed threshold at the same fake budget")
 ax.axvline(0.381, color=ink2, lw=1, ls=(0, (2, 3)))
 ax.text(0.381 * 1.06, 3.15, "$q^\\star$", color=ink, fontsize=12, fontweight="medium")
-ax.text(1.2e-3, 3.35, "at small $q$ almost every rejection is a lone rank-1 one, so the\n"
-        "realized cut sits just above $\\Phi^{-1}(1-q/n)$; past $q^\\star$ multiple\n"
-        "rejections take over and the bar drops below it",
-        color=ink2, fontsize=10.5, linespacing=1.5)
 ax.set_xlabel("nominal false discovery rate  $q$", color=ink2, fontsize=10.5)
 ax.set_ylabel("$z$ of the weakest bin BH accepts", color=ink2, fontsize=10.5)
-ax.set_title("The z-cut BH applies, per pseudo-experiment (under $H_0$)",
+ax.set_title("The $z$-cut BH applies, per pseudo-experiment under $H_0$",
              color=ink, fontsize=13, pad=12, loc="left")
 ax.legend(frameon=False, fontsize=10, loc="upper right", labelcolor=ink2)
 ax.set_ylim(2.95, 6.3)

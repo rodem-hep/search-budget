@@ -126,8 +126,8 @@ to N ≈ 6,400 costs less than 1σ — while halving luminosity costs a factor �
 (A just large enough to flag candidates, B keeping the luminosity for the expensive
 confirmation) reduces the damage from +1.4σ to ~+0.5σ; it cannot eliminate it, because the
 selection stage always burns some luminosity and some efficiency. The optimum is broad in both
-f and Z_cut (see `ab_split_reach.png`: solid = 50%-power, thin dashed = the misleading median
-arithmetic). One more subtlety visible in the toy power curves: with small f the *plateau* of
+f and Z_cut (see `ab_split_reach.png`; the misleading median arithmetic is the third column of
+the table `ab_split_budget.py` prints). One more subtlety visible in the toy power curves: with small f the *plateau* of
 the power curve sits below 1 (even a huge signal fails the A-selection with probability
 1−Φ(√f·Z_full−Z_cut)) — another reason to keep Z_cut moderate (2.5–3) rather than tight.
 

@@ -263,47 +263,44 @@ rng = np.random.default_rng(20260810)
 p0 = analytic(Defect("glitch", 0.0)); b0 = bh(Defect("glitch", 0.0))
 ref = dict(arg=p0[3][MU_S] * 100, thr=at_budget(p0[0], p0[1][MU_S], XREF) * 100,
            bh=at_budget(b0[0], b0[1][MU_S], XREF) * 100)
-for y, col, lbl in ((pw_thr, c_thr, "fixed threshold"), (pw_bh, c_bh, "Benjamini--Hochberg"),
-                    (pw_arg, c_arg, "argmax")):
-    a0.plot(EPS, y, lw=2.3, color=col, label=lbl)
+for y, col, lbl, dash in ((pw_thr, c_thr, "fixed threshold", "-"),
+                          (pw_bh, c_bh, "Benjamini--Hochberg", (0, (5, 2))),
+                          (pw_arg, c_arg, "argmax", (0, (5, 1.5, 1.2, 1.5)))):
+    a0.plot(EPS, y, lw=2.3, color=col, ls=dash, label=lbl)
     a0.axhline(ref["thr" if col is c_thr else "bh" if col is c_bh else "arg"],
                color=col, lw=1.0, ls=(0, (2, 3)), alpha=0.7)
 a0.fill_between(EPS, pw_arg, pw_thr, color=c_thr, alpha=0.10)
-a0.text(1.15e-5, 5, "dotted = perfect estimator", color=ink2, fontsize=9.5)
-a0.annotate("the threshold's margin over argmax\nWIDENS as the estimator degrades",
-            xy=(6.0e-4, 66), xytext=(2.8e-2, 52), fontsize=9.5, color=ink2, ha="right",
-            arrowprops=dict(arrowstyle="->", color=ink2, lw=1.0))
+a0.text(1.15e-5, 5, "thin dotted: perfect estimator", color=ink2, fontsize=9.5)
 a0.set_ylim(0, 95)
 a0.set_xlabel(r"incoherent defect rate  $\epsilon$", color=ink2, fontsize=10.5)
 a0.set_ylabel(r"signal confirmed, $\mu=5\sigma$   [%]", color=ink2, fontsize=10.5)
 a0.legend(frameon=False, fontsize=9.5, loc="upper right", labelcolor=ink2)
-a0.set_title("Power at a common $3.0\\sigma$-global budget", color=ink, fontsize=12.5,
+a0.set_title("Power at a common false-alarm budget", color=ink, fontsize=12.5,
              pad=11, loc="left")
 
 # (b) the nominal FDR stops meaning anything
 a1.loglog(EPS, q_need, lw=2.3, color=c_bh)
 a1.axhline(0.05, color=ink2, lw=1.2, ls=(0, (4, 3)))
-a1.text(2.8e-2, 0.085, "the conventional $q = 0.05$", color=ink2, fontsize=9.5,
-        ha="right")
+a1.text(2.8e-2, 0.085, "$q = 0.05$", color=ink2, fontsize=9.5, ha="right")
 a1.axhline(ref_q := at_budget(b0[0], QGRID, XREF), color=ink2, lw=1.0, ls=(0, (2, 3)))
-a1.text(2.8e-2, ref_q * 1.3, f"perfect estimator: $q^\\star$ = {ref_q:.2f}",
+a1.text(2.8e-2, ref_q * 1.3, f"perfect estimator: {ref_q:.2f}",
         color=ink2, fontsize=9.5, ha="right")
 a1.set_xlabel(r"incoherent defect rate  $\epsilon$", color=ink2, fontsize=10.5)
-a1.set_ylabel("nominal $q$ that buys the SAME false-alarm rate", color=ink2, fontsize=10.5)
-a1.set_title("The FDR dial stops meaning anything", color=ink, fontsize=12.5, pad=11, loc="left")
+a1.set_ylabel("nominal $q$ at the same false-alarm rate", color=ink2, fontsize=10.5)
+a1.set_title("The FDR dial that buys it", color=ink, fontsize=12.5, pad=11, loc="left")
 
 # (c) the argmax has no dial at all
 a2.loglog(EPS, x_arg_b, lw=2.3, color=c_arg, label="coherent defects (BIAS)")
 a2.loglog(EPS, x_arg_g, lw=2.3, ls=(0, (5, 2)), color=c_arg, alpha=0.65,
           label="incoherent defects (GLITCH)")
 a2.axhline(XREF, color=ink2, lw=1.2, ls=(0, (4, 3)))
-a2.text(1.15e-5, XREF * 1.5, "target $1.35\\times10^{-3}$: GLITCH sits on it",
-        color=ink2, fontsize=9.5)
+a2.text(1.15e-5, XREF * 1.5, r"target $1.35\times10^{-3}$", color=ink2, fontsize=9.5)
 a2.set_ylim(3e-4, 3.0)
 a2.set_xlabel(r"defect rate  $\epsilon$", color=ink2, fontsize=10.5)
-a2.set_ylabel("argmax's ACHIEVED false-confirmation rate", color=ink2, fontsize=10.5)
+a2.set_ylabel("achieved false-confirmation rate", color=ink2, fontsize=10.5)
 a2.legend(frameon=False, fontsize=9.5, loc="center right", labelcolor=ink2)
-a2.set_title("The argmax has no dial at all", color=ink, fontsize=12.5, pad=11, loc="left")
+a2.set_title("What the argmax achieves instead", color=ink, fontsize=12.5,
+             pad=11, loc="left")
 
 fig.savefig(os.path.join(OUT, "bh_outliers.png"), dpi=170, facecolor=surf, bbox_inches="tight")
 print("\nwrote max_of_gaussians/bh_outliers.png")

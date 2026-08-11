@@ -5,6 +5,9 @@ SURF, INK, INK2, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e0e0dc"
 BLUE = {3: "#a5c9ec", 4: "#5f9ae0", 5: "#2a78d6", 6: "#1a4f8f"}
 C_BKG, C_ARG, C_THR, C_ALT = "#4a3aa7", "#d03b3b", "#5f9e6e", "#e06a2a"
 
+# single-series mark, and its pale partner for an "absent" cell
+MARK, MARK_PALE = "#4c78a8", "#eef1f4"
+
 
 def style(ax, grid=True):
     ax.set_facecolor(SURF)

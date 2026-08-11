@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Does an IMPERFECT significance estimator change the A/B verdict?
 
-The two-stage study (scripts/ab_split_{budget,toys}.py, note section 9) assumes a perfectly
+The two-stage study (scripts/ab_split_{budget,toys}.py) assumes a perfectly
 calibrated estimator: every look returns Z ~ N(0,1) under background. Then splitting can only
 lose, because the look-elsewhere effect is conserved. This script relaxes that assumption and
 adds three physically distinct classes of estimator defect, each with its own rate, and asks
@@ -25,8 +25,8 @@ Everything is exact quadrature over the defect magnitude (per-look independence 
 probability 1-(1-p)^N); a toy MC at the end validates the mean-field k used for the stage-B bar.
 
 Public inputs only (bump_observables + public_obs_map). Writes
-results/plots/ab_split_outliers.png and prints the tables quoted in section 9.7 of the
-note and in results/overviews/TWO_STAGE_UNBLINDING.md. Needs numpy/scipy.
+results/plots/ab_split_outliers.png and prints the tables quoted in
+results/overviews/TWO_STAGE_UNBLINDING.md. Needs numpy/scipy.
 """
 import os, math, sys
 import numpy as np
@@ -353,24 +353,17 @@ for e, col in ((1e-4, "#4c78a8"), (1e-3, "#d9a441"), (1e-2, "#d1495b")):
             label=f"defect rate $\\epsilon$ = {e:.0e}  ({n3:.1f} artefacts $>3\\sigma$ per scan)")
 ax.axhline(0.0, color="#444444", lw=1.2)
 ax.axhline(-(reach_split(clean) - Z_SINGLE), color="#888888", ls=":", lw=1.4)
-ax.text(0.012, -(reach_split(clean) - Z_SINGLE) + 0.03,
-        f"perfect estimator: split costs {reach_split(clean) - Z_SINGLE:.2f}$\\sigma$",
-        fontsize=9, color="#555555")
+ax.text(0.012, -(reach_split(clean) - Z_SINGLE) + 0.03, "perfect estimator",
+        fontsize=9.5, color="#52514e")
 ax.fill_between([0, 1], 0, 3, color="#4c78a8", alpha=0.07)
-ax.text(0.42, 1.75, "SPLIT WINS\nreaches a weaker signal at equal\nspurious-claim probability",
-        fontsize=10.5, color="#2f4b6e")
-ax.text(0.60, -0.45, "single stage wins\n(just raise the bar)", fontsize=10.5, color="#8a5a2b")
-ax.annotate("break-even $\\rho \\approx 0.80$, essentially independent of the rate",
-            xy=(0.80, 0.0), xytext=(0.30, 0.52), fontsize=9.5, color="#444444",
-            arrowprops=dict(arrowstyle="->", color="#444444", lw=1.1))
+ax.text(0.36, 1.9, "split ahead", fontsize=11, color="#2f4b6e")
+ax.text(0.62, -0.45, "single stage ahead", fontsize=11, color="#8a5a2b")
 ax.set_xlim(0, 1); ax.set_ylim(-0.75, 2.6)
-ax.set_xlabel(r"coherent fraction $\rho$: outliers that repeat in BOTH halves"
-              "\n" r"($\rho=0$ per-run glitches   $\to$   $\rho=1$ mismodelled background)")
-ax.set_ylabel(r"matched-robustness advantage of the split  [$\sigma$ of reach]")
-ax.set_title("An imperfect significance estimator flips the A/B verdict --\n"
-             "but only for outliers that do not repeat in the confirmation half",
-             fontsize=12)
-ax.grid(ls=":", alpha=0.35); ax.legend(loc="upper right", fontsize=9)
+ax.set_xlabel(r"coherent fraction $\rho$: outliers that repeat in both halves")
+ax.set_ylabel(r"advantage of the split  [$\sigma$ of reach]")
+ax.set_title("Advantage of the A/B split against how often an outlier repeats",
+             fontsize=12.5, loc="left")
+ax.grid(ls=":", alpha=0.35); ax.legend(loc="upper right", fontsize=9.5, frameon=False)
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, "ab_split_outliers.png"), dpi=130)
 print("\nwrote ab_split_outliers.png")
@@ -419,43 +412,38 @@ for kind, col, lbl, ms in (("bkg", "#b0b0b0", "background", 7),
     axL.scatter(a, b, s=ms, alpha=0.45 if kind == "bkg" else 0.55, color=col, lw=0, label=lbl)
 xs = np.linspace(0, 12, 10)
 axL.plot(xs, SB / SF * xs, ls="--", lw=1.6, color="#2f6f4e")
-axL.text(7.6, 8.6, "coherent locus\n$Z_B=\\sqrt{(1-f)/f}\\,Z_A$\n(where a real signal lives)",
-         fontsize=9, color="#2f6f4e")
+axL.text(7.9, 9.2, "signal locus", fontsize=9.5, color="#2f6f4e")
 axL.axvline(Z_CUT, color="#333333", lw=1.2)
 axL.axhline(zr_c, color="#333333", lw=1.2)
 axL.text(3.15, -1.6, f"$Z_{{cut}}$ = {Z_CUT:g}", fontsize=9)
 axL.text(8.4, zr_c + 0.2, f"claim bar $Z_B$ = {zr_c:.2f}", fontsize=9)
-axL.text(4.6, 2.0, "pre-registered\nbut DIES in B", fontsize=9.5, color="#a02735")
-axL.text(4.2, 7.6, "CLAIM", fontsize=12, color="#2f4b6e", weight="bold")
+axL.text(4.2, 7.6, "claim region", fontsize=10.5, color="#2f4b6e")
 axL.set_xlim(2.4, 12); axL.set_ylim(-2.5, 12)
 axL.set_xlabel("$Z_A$  (exploration half, 30% of the data)")
 axL.set_ylabel("$Z_B$  (confirmation half, 70%)")
-axL.set_title("Only looks passing $Z_A \\geq Z_{cut}$ are shown.\n"
-              "A coherent defect is on the signal locus; an incoherent one is not.", fontsize=10.5)
-axL.legend(loc="lower right", fontsize=8.5, framealpha=0.9)
+axL.set_title("Confirmation against exploration significance", fontsize=11, loc="left")
+axL.legend(loc="lower right", fontsize=9, frameon=False)
 axL.grid(ls=":", alpha=0.3)
 
 eps_grid = np.logspace(-6, -1, 40)
 # the two defects have IDENTICAL single-stage tails by construction -- one curve, and that is
 # precisely the point: a single pass cannot tell them apart, the split is what separates them.
 axR.plot(eps_grid, [claim_single(Glitch(e), Z_SINGLE) for e in eps_grid], lw=2.4, color="#333333",
-         label=f"single stage @ {Z_SINGLE:.2f}: BIAS and GLITCH\nare indistinguishable")
+         label=f"single stage @ {Z_SINGLE:.2f}: either defect")
 axR.plot(eps_grid, [claim_split(Bias(e)) for e in eps_grid], lw=2.4, ls="--", color="#e08a1e",
          label="two-stage split, BIAS")
 axR.plot(eps_grid, [claim_split(Glitch(e)) for e in eps_grid], lw=2.4, ls="--", color="#d1495b",
          label="two-stage split, GLITCH")
 axR.plot(eps_grid, 6e-2 * (eps_grid / 1e-3), color="#999999", lw=1.0, ls=":")
 axR.plot(eps_grid, 3e-4 * (eps_grid / 1e-3) ** 2, color="#999999", lw=1.0, ls=":")
-axR.text(2.2e-6, 4e-4, "slope 1 ($\\propto\\epsilon$)", fontsize=9, color="#777777", rotation=17)
-axR.text(1.1e-4, 2e-7, "slope 2 ($\\propto\\epsilon^2$):\nthe artefact must RECUR",
-         fontsize=9, color="#777777")
+axR.text(2.2e-6, 4e-4, r"$\propto\epsilon$", fontsize=10, color="#777777", rotation=17)
+axR.text(1.1e-4, 2e-7, r"$\propto\epsilon^2$", fontsize=10, color="#777777")
 axR.set_xscale("log"); axR.set_yscale("log")
 axR.set_ylim(1e-9, 30.0)
 axR.set_xlabel(r"defect rate $\epsilon$ per look")
 axR.set_ylabel("P(spurious $5\\sigma$ claim) per scan")
-axR.set_title("The split changes the SCALING, not just the rate --\n"
-              "but only for defects that do not repeat", fontsize=10.5)
-axR.legend(loc="upper left", fontsize=8.5, framealpha=0.92)
+axR.set_title("Spurious-claim probability", fontsize=11, loc="left")
+axR.legend(loc="upper left", fontsize=9, frameon=False)
 axR.grid(ls=":", alpha=0.35, which="both")
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, "ab_outliers_mechanism.png"), dpi=130)
@@ -539,8 +527,8 @@ for ax, (za, zb), title, verdict, vcol in [
     ax.grid(ls=":", alpha=0.3)
 axs[0].set_ylabel("local significance in a $\\pm\\sigma_M$ window")
 axs[0].legend(fontsize=8.5, loc="upper left")
-fig2.suptitle("The split can only reject what does not repeat: a bad fit in A versus a genuinely "
-              "wrong background", fontsize=12)
+fig2.suptitle("Two toy spectra: a defect that does not repeat in B, and one that does",
+              fontsize=12.5)
 fig2.tight_layout(rect=[0, 0, 1, 0.93])
 fig2.savefig(os.path.join(OUT, "ab_outliers_spectrum.png"), dpi=130)
 print(f"wrote ab_outliers_spectrum.png  (glitch: Z_A = {zA_g.max():.2f} -> "

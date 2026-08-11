@@ -60,8 +60,7 @@ axs[0].plot(kk, pois, "o-", ms=4, lw=1.2, color="#d1495b",
             label=f"Poisson($N\\,p_1(Z_{{cut}})$ = {K_BKG:.1f})")
 axs[0].set_xlabel(f"# windows selected in A  ($Z_A \\geq$ {Z_CUT:g})")
 axs[0].set_ylabel("fraction of toys")
-axs[0].set_title(f"Stage A under background-only\nN = {N:,} looks -> "
-                 f"mean {k_obs.mean():.1f} selections (predicted {K_BKG:.1f})", fontsize=10)
+axs[0].set_title("Windows selected in A", fontsize=11, loc="left")
 axs[0].legend(fontsize=8.5)
 # (b) best z_B among selected windows
 v = zB_sel_max[np.isfinite(zB_sel_max)]
@@ -71,8 +70,7 @@ med_thr = float(np.median(zthr(k_obs[k_obs > 0])))
 axs[1].axvline(med_thr, color="#d1495b", ls="--", lw=1.8,
                label=f"claim threshold $\\sqrt{{25+2\\ln k}}$ (median {med_thr:.2f})")
 axs[1].set_xlabel("best confirmation significance $Z_B$")
-axs[1].set_title(f"Stage B kills the fluctuations\nmax over {NTOY:,} toys: "
-                 f"$Z_B$ = {np.nanmax(v):.2f}  (0 false claims)", fontsize=10)
+axs[1].set_title("Best confirmation significance in B", fontsize=11, loc="left")
 axs[1].legend(fontsize=8.5, loc="upper right")
 # (c) uniformity of the corrected global p
 for p, lbl, col in [(p_two, "two-stage: $k\\,p_1(Z_B^{best})$", "#4c78a8"),
@@ -81,11 +79,10 @@ for p, lbl, col in [(p_two, "two-stage: $k\\,p_1(Z_B^{best})$", "#4c78a8"),
     axs[2].plot(np.linspace(0, 1, len(q)), q, lw=1.8, color=col, label=lbl)
 axs[2].plot([0, 1], [0, 1], color="#888888", ls=":", lw=1.2, label="exact Uniform(0,1)")
 axs[2].set_xlabel("expected quantile"); axs[2].set_ylabel("corrected global p-value")
-axs[2].set_title("The countable trials factor is CORRECT\n(corrected p ~ uniform under bkg-only)",
-                 fontsize=10)
+axs[2].set_title("Corrected global $p$ vs Uniform(0,1)", fontsize=11, loc="left")
 axs[2].legend(fontsize=8.5)
-fig.suptitle("Two-stage A/B unblinding, background-only toys "
-             f"(f = {F_OPT:g}, $Z_{{cut}}$ = {Z_CUT:g})", fontsize=12)
+fig.suptitle(f"Two-stage A/B unblinding on background-only toys  "
+             f"(f = {F_OPT:g}, $Z_{{cut}}$ = {Z_CUT:g})", fontsize=12.5)
 fig.tight_layout(rect=[0, 0, 1, 0.94])
 fig.savefig(os.path.join(OUT, "ab_toys_background.png"), dpi=130)
 print(f"wrote ab_toys_background.png   (mean k = {k_obs.mean():.2f}, "
@@ -139,10 +136,9 @@ ax2.set_xlabel(r"injected signal strength: full-dataset local significance  $Z_{
 ax2.set_ylabel(r"discovery power  P(claim $5\sigma$ global)")
 ax2.set_ylim(0, 1.02)
 ax2.grid(ls=":", alpha=0.35)
-ax2.set_title("Toy power of the three procedures  "
-              f"(N = {N:,} looks, {1500:,} toys/point)\n"
-              "dotted verticals = analytic 50%-joint-power reach (Phi-product formula)")
-ax2.legend(loc="upper left", fontsize=9)
+ax2.set_title(f"Discovery power of the three procedures  (N = {N:,} looks)",
+              fontsize=12.5, loc="left")
+ax2.legend(loc="upper left", fontsize=9.5, frameon=False)
 fig2.tight_layout()
 fig2.savefig(os.path.join(OUT, "ab_toys_power.png"), dpi=130)
 z50 = {lbl: float(np.interp(0.5, y, mus)) for lbl, y in
@@ -244,13 +240,13 @@ for ax, (za, zb), title in [
     thr = float(zthr(max(int(sel.any()), np.count_nonzero(np.diff(np.where(sel)[0]) > 1) + 1
                          if sel.any() else 1)))
     ax.axhline(thr, color="#d1495b", ls="--", lw=1.1)
-    ax.text(210, thr + 0.12, f"B claim threshold $\\sqrt{{25+2\\ln k}}$ = {thr:.1f}",
+    ax.text(210, thr + 0.12, f"claim bar = {thr:.1f}",
             color="#a02735", fontsize=8.5)
     ax.set_xscale("log"); ax.set_xlabel("mass [GeV]"); ax.set_title(title, fontsize=10.5)
     ax.grid(ls=":", alpha=0.3)
 axs3[0].set_ylabel("local significance in a $\\pm\\sigma_M$ window")
 axs3[0].legend(fontsize=8.5, loc="upper right")
-fig3.suptitle("Two-stage unblinding on a toy spectrum: only A-selected windows are opened in B",
+fig3.suptitle("Two-stage unblinding on one toy spectrum",
               fontsize=12)
 fig3.tight_layout(rect=[0, 0, 1, 0.94])
 fig3.savefig(os.path.join(OUT, "ab_toys_spectrum.png"), dpi=130)
