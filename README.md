@@ -1,21 +1,25 @@
 # The search budget of the BSM resonance program
 
-How many **independent bump hunts** does the BSM resonance model space imply, what local
-significance does a 5σ *global* discovery in that program therefore cost, and how should such a
-scan be run? Everything here derives from **published searches and public model databases** — no
-experiment-internal input of any kind, so a clone reproduces every number.
+A bump hunt scans many mass points, and every additional spectrum anyone scans is another place
+where a fluctuation can turn up. This repository works out how large that penalty really is for the
+BSM resonance program taken as a whole: how many independent bump hunts the published model space
+implies, what local significance a discovery therefore needs before it deserves to be called a
+global 5σ, and how a scan of that size is best run.
+
+Every number comes from published searches and public model databases, so a clone reproduces all of
+it: the tables, the reports and the figures.
 
 | | |
 |---|---|
-| bump spectra in the public model space | **46** (lepton flavour and b-jet content are part of the mass axis) |
+| bump spectra in the public model space | **46** |
 | trials factor | `N ≈ 3.7k` inclusive, `6.6k` at published event-selection granularity |
 | the discovery bar | `Z_local(5σ global) ≈ 6.44 → 6.53`, stable to ±0.1σ under every counting choice |
-| fully combinatorial scan | 150 object categories, 1094 mass groups → `N ≈ 143k`, `Z_local ≈ 6.98` |
+| fully combinatorial scan | 1502 mass spectra across 204 object categories, giving `N ≈ 143k` and `Z_local ≈ 6.98` |
 | never scanned | **57 of 82** reachable ≤4-object mass compositions have no published ATLAS bump hunt |
-| two-stage A/B unblinding | costs ~0.5σ in reach, buys an exactly countable trials factor |
+| two-stage A/B unblinding | costs about 0.5σ in reach, buys a trials factor you can count exactly |
 
-**Start here:** [`docs/note/main.pdf`](docs/note/main.pdf) — the note, which brings the studies
-together for a reader who wants the physics rather than the code.
+If you would rather read the physics than the code, start with the note:
+[`docs/note/main.pdf`](docs/note/main.pdf).
 
 ## Quick start
 
@@ -27,23 +31,50 @@ make help                              # the individual stages
 
 The budget itself (`search_budget.py`, `combinatorial_budget.py`, `composition_gap.py`) is pure
 standard library and runs under any `python3`; only the figures and the Monte Carlo need the
-dependencies. Targets are file-level, so a rerun redoes only what is stale.
+dependencies. Targets are file-level, so a rerun redoes just what has gone stale.
 
-## Layout
+## How the counting works
+
+One bump hunt means one invariant-mass spectrum. Every model that peaks in the same spectrum is
+tested by the same search, so the number of searches is the number of distinct mass axes rather than
+the number of models.
+
+Within one spectrum, a resonance is resolvable if it sits at least a width away from its neighbour.
+Taking the fractional resolution `σ_M/M = r` as constant gives
+
+```
+n_s = (1/r) · ln(M_hi / M_lo)          independent looks in a window [M_lo, M_hi]
+N   = Σ n_s                            summed over spectra
+Z_local = sqrt(25 + 2 ln N)            the local bar for a 5σ global discovery
+```
+
+Two conventions matter more than anything else in the arithmetic.
+
+The window is always the one a published search family actually scanned, recorded per spectrum with
+a source note. Counting over the mass range covered by whatever signal samples happen to exist
+instead would understate thinly sampled channels and make the whole exercise circular.
+
+The resolution `r` is the one genuine physics input, and it is only known to a factor of a few. So
+no result is quoted as a single number: each is given with the band that follows from scaling `r` by
+two in either direction, which moves `N` by a factor of two and `Z_local` by about 0.1σ. That the
+answer barely moves is the point. Because `N` enters through `ln N`, breadth is cheap, and the
+budget is remarkably insensitive to how finely you choose to slice the program.
+
+## What is here
 
 ```
 ├── Makefile                 one entry point for every step  (make help)
 ├── scripts/
 │   ├── bump_observables.py  ** the observables: resolutions, floors, published scan windows **
-│   ├── public_obs_map.py    ** public model → spectrum map, published event-selection counts **
+│   ├── public_obs_map.py    ** public model to spectrum map, published event-selection counts **
 │   └── ...                  one concern per file
 ├── results/
-│   ├── tables/              machine-readable tables + the cached Monte Carlo (.npz)
+│   ├── tables/              machine-readable tables and the cached Monte Carlo (.npz)
 │   ├── plots/               figures; plots/max_of_gaussians/ is the selection-rule study
 │   └── overviews/           the written reports
 └── docs/
     ├── METHOD_NOTES.md      the counting conventions and why each one is what it is
-    ├── OUTPUTS.md           every output file → the script that writes it
+    ├── OUTPUTS.md           every output file and the script that writes it
     └── note/                the LaTeX note (main.pdf is committed)
 ```
 
@@ -51,40 +82,34 @@ dependencies. Targets are file-level, so a rerun redoes only what is stale.
 
 | file | what |
 |---|---|
-| [`results/overviews/SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) | **the number**: 46 spectra, `N ≈ 3.7k`, `Z_local ≈ 6.44` |
-| [`results/plots/budget_waterfall.png`](results/plots/budget_waterfall.png) | one-figure summary: `Z_local` vs `N` across granularity levels |
-| [`results/overviews/EXCESS_COUNTING.md`](results/overviews/EXCESS_COUNTING.md) | expected vs observed 3σ/5σ excesses across ATLAS — the external check on `N` |
-| [`results/overviews/MAX_OF_GAUSSIANS.md`](results/overviews/MAX_OF_GAUSSIANS.md) | selection rules: argmax vs threshold vs Benjamini-Hochberg, with and without a perfect estimator |
-| [`results/overviews/TWO_STAGE_UNBLINDING.md`](results/overviews/TWO_STAGE_UNBLINDING.md) | A/B split unblinding: logic, reach vs split fraction, caveats |
+| [`results/overviews/SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) | the headline: 46 spectra, `N ≈ 3.7k`, `Z_local ≈ 6.44` |
+| [`results/plots/budget_waterfall.png`](results/plots/budget_waterfall.png) | one figure for the whole story: `Z_local` against `N` across granularity levels |
+| [`results/overviews/EXCESS_COUNTING.md`](results/overviews/EXCESS_COUNTING.md) | expected against observed 3σ and 5σ excesses across ATLAS, the external check on `N` |
+| [`results/overviews/MAX_OF_GAUSSIANS.md`](results/overviews/MAX_OF_GAUSSIANS.md) | selection rules: argmax against a fixed threshold against Benjamini-Hochberg, with and without a perfect estimator |
+| [`results/overviews/TWO_STAGE_UNBLINDING.md`](results/overviews/TWO_STAGE_UNBLINDING.md) | A/B split unblinding: the logic, reach against split fraction, and the caveats |
 | [`results/tables/composition_gap.txt`](results/tables/composition_gap.txt) | which reachable mass compositions no published ATLAS search has ever scanned |
 
-A complete index of outputs is in [`docs/OUTPUTS.md`](docs/OUTPUTS.md).
+[`docs/OUTPUTS.md`](docs/OUTPUTS.md) indexes all of them.
 
-## The two modules everything rests on
+## Where the definitions live
 
-`scripts/bump_observables.py` and `scripts/public_obs_map.py` are the **single source of truth**.
-Import them; never redefine a floor, a window or a resolution in a consumer. Between them they own
-every choice that decides what counts as one search:
+`scripts/bump_observables.py` and `scripts/public_obs_map.py` hold every definition the numbers rest
+on: the fractional resolution and analysable mass floor of each spectrum, its published scan window
+together with the source that window came from, the map from public model classes to the spectra they
+populate, and how many event selections each published search family scans on a given axis. They
+also settle the cases where two labels describe the same mass axis, so `m(HH) 4b` counts as one more
+event selection of `m(HH)` rather than as a second spectrum.
 
-- the published scan window per spectrum, each with a source note (the budget is counted over
-  **published** windows, never over the range some set of signal samples happens to cover — that
-  would understate sparsely sampled channels and make the exercise circular);
-- the same-axis merges (`m(HH) 4b` is an event selection of `m(HH)`, not a second spectrum);
-- the lepton-flavour split (`m(ll)` → `m(ee)`, `m(mumu)`), which is a mass axis and therefore
-  deliberately **not** also a multiplier in `NSEL`. The invariant that catches a double count: the
-  selections-level channel count stays at 94.
-
-Both carry import-time assertions keeping the flavour layer complete: every leaf channel has a
-window and a floor, and no flavour-inclusive parent keeps one.
+Everything else imports them. If you need a window or a resolution, take it from there rather than
+writing it down again locally, because a second copy of a number will eventually disagree with the
+first. Both modules check themselves when imported, so an incomplete channel fails loudly instead of
+quietly dropping out of a table.
 
 ## Scope
 
-Invariant- and transverse-mass bump hunts only. The dedicated non-bump programs (displaced
-HNL/Zd/RPV/ALP, MET+jet, dE/dx monopole, off-shell EFT) carry their own look-elsewhere effect and
-are excluded rather than summed.
-
-One question is deliberately out of scope: which of these 46 spectra a given collaboration has
-actually produced signal samples for. That is a statement about a production program, it cannot be
-made from public information, and it changes no number here — the windows are published-search
-windows either way. It is treated in a companion ATLAS-internal note and repository, which vendors
-the two modules above unchanged so the two cannot drift apart on what a spectrum is.
+Invariant-mass and transverse-mass bump hunts only. Several dedicated programs are deliberately left
+out rather than added in: displaced-vertex searches for heavy neutral leptons, dark photons, RPV
+decays and axion-like particles, missing energy plus jet, `dE/dx` monopole searches, and off-shell
+EFT interpretations. Each carries a look-elsewhere effect of its own, computed over a space that is
+not a mass spectrum, and summing them into a single trials count would mix search strategies that
+are not comparable.
