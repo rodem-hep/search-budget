@@ -45,10 +45,10 @@ Expected number of background selections (pure statistics, one-sided):
 
     k_bkg = N · p1(Z_cut),   p1(Z) = ½ erfc(Z/√2)
 
-| Z_cut | k_bkg (N = 6,616) |
+| Z_cut | k_bkg (N = 6,597) |
 |---:|---:|
-| 2.0 | 150.5 |
-| 2.5 | 41.1 |
+| 2.0 | 150.1 |
+| 2.5 | 41.0 |
 | 3.0 | **8.9** |
 | 3.5 | 1.5 |
 | 4.0 | 0.2 |
@@ -93,9 +93,9 @@ formula below reproduces the toys to 0.03σ.)
 
 | strategy | Z_full at 50% power (analytic) | toys | vs single-stage |
 |---|---:|---:|---:|
-| single-stage full-dataset scan (N = 6,616) | **6.53** | 6.52 | — |
-| A/B **50/50**, Z_cut = 3, B-only claim | **7.97** | 7.71* | **+1.45** |
-| A/B optimized: **f ≈ 0.2–0.3**, Z_cut = 2–3 | **7.01–7.08** | 7.06* | **+0.5** |
+| single-stage full-dataset scan (N = 6,597) | **6.53** | 6.52 | — |
+| A/B **50/50**, Z_cut = 3, B-only claim | **7.98** | 7.71* | **+1.45** |
+| A/B optimized: **f ≈ 0.2–0.3**, Z_cut = 2–3 | **7.01–7.09** | 7.06* | **+0.5** |
 
 *toy numbers use exact one-look windows (no ±2σ_M widening), worth ~0.1–0.3σ less than the
 analytic column which includes the factor-3 window freedom.
@@ -109,10 +109,10 @@ after re-optimizing f the two nearly cancel:
 
 | k unblinded | eff. Z_cut | Z_B bar | best f | reach | vs single-stage |
 |--:|--:|--:|--:|--:|--:|
-| 1 | 3.61 | 5.22 | 0.37 | 7.08 | +0.56 |
-| 10 | 2.96 | 5.64 | 0.28 | 7.06 | +0.54 |
-| 100 | 2.15 | 6.03 | 0.19 | 7.02 | +0.50 |
-| 1000 | 1.01 | 6.40 | 0.10 | 6.93 | +0.41 |
+| 1 | 3.61 | 5.22 | 0.37 | 7.09 | +0.56 |
+| 10 | 2.96 | 5.64 | 0.28 | 7.07 | +0.54 |
+| 100 | 2.17 | 6.03 | 0.19 | 7.02 | +0.50 |
+| 1000 | 1.03 | 6.40 | 0.10 | 6.94 | +0.41 |
 
 Three orders of magnitude in k move the reach by ~0.15σ (and as k → N the procedure smoothly
 degenerates into the single-stage scan: cut → −∞, f → 0, bar → √(25+2 ln 3N)). So k should be
@@ -219,7 +219,7 @@ Z_cut = 3, toys give **7.11** against **7.12** analytic (`ab_split_toys.py`, exa
 when both directions have comparable power. But confirmation is the luminosity-hungry stage, so
 the one-way optimum is strongly asymmetric — and there the second direction is dead.
 
-| design (N = 6,616) | one-way | swapped | swap gain |
+| design (N = 6,597) | one-way | swapped | swap gain |
 |---|--:|--:|--:|
 | 50/50, Z_cut = 3 | 7.98 (+1.45) | **7.38 (+0.86)** | **+0.60** |
 | Z_cut = 2, f re-optimised (0.18) | 7.01 (+0.49) | 7.12 (+0.59) | −0.10 |
@@ -373,7 +373,7 @@ the B correction (`2·ln(3·k)` moves by ~0.1 in Z per doubling of k).
 
 ## 5. Toy validation (`scripts/ab_split_toys.py`)
 
-The whole search program is modelled as its N = 6,616 effective independent looks (iid standard
+The whole search program is modelled as its N = 6,597 effective independent looks (iid standard
 normals under background-only), split per look into independent halves
 `z_A = √f·μ + g_A`, `z_B = √(1−f)·μ + g_B`, so the full-dataset scan is recovered exactly as
 `z_full = √f·z_A + √(1−f)·z_B`. 20,000 background-only toys and 1,500 signal toys per strength
