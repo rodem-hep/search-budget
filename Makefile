@@ -22,7 +22,8 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(P)/search_budget.png $(P)/budget_waterfall.png $(P)/excess_counting.png \
           $(T)/combinatorial_budget.csv $(T)/composition_gap.txt \
           $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md \
-          $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md
+          $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md \
+          $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md
 
 AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png
 
@@ -60,6 +61,12 @@ $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md &: $(S)/published_census.py d
 $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md &: $(S)/export_census_bib.py \
                                                  data/published_spectra.csv data/census_papers.csv
 	$(PY) $(S)/export_census_bib.py
+# The observed excesses, mined from the census abstracts. fetch_census_abstracts.py refreshes
+# data/census_abstracts.csv from the arXiv API and, like the metadata fetch, is NOT a prerequisite.
+$(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md &: $(S)/reported_excesses.py $(MOD) \
+                        data/census_abstracts.csv data/census_papers.csv \
+                        data/published_spectra.csv $(T)/search_budget.csv
+	$(PY) $(S)/reported_excesses.py
 
 $(T)/combinatorial_budget.csv: $(S)/combinatorial_budget.py $(S)/bump_observables.py
 	$(PY) $(S)/combinatorial_budget.py

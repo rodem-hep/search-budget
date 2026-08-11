@@ -3,10 +3,11 @@
 Every file under `results/`, with the script that writes it. "hand-written" means a report authored
 against the generated tables, not a program output — edit it directly; nothing regenerates it.
 
-Two files under `data/` are inputs rather than outputs, and are committed: `published_spectra.csv`
-(the census, curated by hand) and `census_papers.csv` (its bibliographic details, refreshed from the
-arXiv API by `fetch_census_meta.py`, the one script that needs the network and the one that is not
-part of `make all`).
+Three files under `data/` are inputs rather than outputs, and are committed: `published_spectra.csv`
+(the census, curated by hand), `census_papers.csv` (its bibliographic details) and
+`census_abstracts.csv` (the paper abstracts). The latter two are refreshed from the arXiv API by
+`fetch_census_meta.py` and `fetch_census_abstracts.py`, the only scripts that need the network and
+the only ones that are not part of `make all`.
 
 ## Reports — `results/overviews/`
 
@@ -16,6 +17,7 @@ part of `make all`).
 | `PUBLISHED_CENSUS.md` | `published_census.py` | the ATLAS resonance-search publication record: 84 spectra, 288 papers, recency and Run-3 coverage |
 | `CENSUS_REFERENCES.md` | `export_census_bib.py` | all 288 census papers written out in full, numbered, under the spectrum each is counted against |
 | `EXCESS_COUNTING.md` | hand-written | expected vs observed 3σ/5σ excesses — the external check on `N` |
+| `REPORTED_EXCESSES.md` | `reported_excesses.py` | the observed side made concrete: every excess ≥3σ reported in the 288 census abstracts |
 | `MAX_OF_GAUSSIANS.md` | hand-written | the statistics: argmax vs threshold vs Benjamini-Hochberg |
 | `TWO_STAGE_UNBLINDING.md` | hand-written | the A/B split strategy, reach and caveats |
 
@@ -27,6 +29,7 @@ part of `make all`).
 | `search_budget_selections.csv` | `search_budget.py` — the event-selection multiplicity per spectrum |
 | `combinatorial_budget.csv` | `combinatorial_budget.py` — 1094 (category, mass-group) rows |
 | `published_census.csv` | `published_census.py` |
+| `reported_excesses.csv` | `reported_excesses.py` — per paper: largest quoted local/global significance and the abstract sentence behind it |
 | `composition_gap.txt` | `composition_gap.py` |
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh_fdr_ab.py` (the `.npz` is the Monte Carlo cache) |
 | `bh_zcut_per_pe.csv` | `bh_zcut.py` |

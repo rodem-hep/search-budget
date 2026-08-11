@@ -36,7 +36,12 @@ Expected count = `N * p`:
 **Prediction: tens (~15-135) of >=3-sigma local excesses, and ~0.01 (i.e. none) spurious >=5-sigma.**
 
 ## 3. Observed
-**>=3-sigma local excesses -- order tens, and essentially all faded with more data:**
+**For the resonance subset the observed side is now measured rather than anecdotal:**
+`REPORTED_EXCESSES.md` mines the abstracts of the 288 census papers and finds **6 reported local
+excesses >= 3 sigma** (every quoted global <= 2.1s), against 5.0 expected per background-only
+sweep of the 46-spectrum budget (8.9 at selection granularity).
+
+**Program-wide, >=3-sigma local excesses -- order tens, and essentially all faded with more data:**
 - 750 GeV diphoton (3.9s local, 2015) -> gone (2.1s global after LEE)
 - 2 TeV diboson WZ (3.4s, Run-1 8 TeV) -> gone
 - 95 GeV diphoton (~3s, ongoing), 151 GeV diphoton (~4.9s combined, debated)
