@@ -7,6 +7,14 @@ resonance-search paper, grouped by the spectrum it scans, assembled from INSPIRE
 by hand. The two are counted in different bases and are meant to be read against each other, not
 summed.
 
+Scope matches the budget's: invariant-mass and transverse-mass bump hunts for new states.
+Hadron-spectroscopy measurements that happen to be bump hunts are out.
+
+For the spectra that have gone stale, the `budget_axis` column records which of the 46 canonical
+axes each one falls on, or "-" where it falls on none. That distinction is the whole point of the
+stale list: re-running a spectrum whose axis is already in N costs no trials, while re-running one
+that is not extends the axis count.
+
 Reads data/published_spectra.csv (a committed input, not a derived table).
 Writes results/tables/published_census.csv and results/overviews/PUBLISHED_CENSUS.md.
 Pure standard library.
@@ -27,6 +35,8 @@ STATUS = ("current", "ageing", "stale")
 by_status = collections.Counter(r["status"] for r in rows)
 run3 = [r for r in rows if r["run3"] == "yes"]
 stale = sorted((r for r in rows if r["status"] == "stale"), key=lambda r: r["last_year"])
+on_axis = [r for r in stale if r["budget_axis"] != "-"]
+off_axis = [r for r in stale if r["budget_axis"] == "-"]
 observables = {r["observable"] for r in rows}
 
 print(f"catalogued spectra      : {len(rows)}")
@@ -39,9 +49,12 @@ print(f"with a Run-3 result     : {len(run3)}")
 print("\nby family:")
 for f, n in by_fam.most_common():
     print(f"  {f:42s} {n:3d} spectra   {pap_fam[f]:3d} papers")
-print(f"\nnot updated since before 2019 ({len(stale)}):")
+print(f"\nnot updated since before 2019 ({len(stale)}): "
+      f"{len(on_axis)} on an axis already counted, {len(off_axis)} would add one")
 for r in stale:
-    print(f"  {r['last_year']}  {r['spectrum']:52s} {r['observable']}")
+    ax = r["budget_axis"]
+    print(f"  {r['last_year']}  {r['spectrum']:52s} {r['observable']:18s} "
+          f"{'-> ' + ax if ax != '-' else 'adds an axis'}")
 
 with open(_p("results", "tables", "published_census.csv"), "w", newline="") as f:
     w = csv.writer(f)
@@ -58,7 +71,8 @@ md = f"""# The publication-side census
 
 Every ATLAS resonance search, grouped by the mass spectrum it scans. Assembled from the
 collaboration's publication record on INSPIRE-HEP and curated by hand; the per-spectrum rows, with
-their arXiv references, are in `data/published_spectra.csv`.
+their arXiv references, are in `data/published_spectra.csv`. Scope matches the budget's: bump hunts
+for new states, so hadron-spectroscopy measurements are out even where they are bump hunts.
 
 This is the complement to `SEARCH_BUDGET.md`. That counts the spectra public BSM models motivate
 (46 canonical mass axes); this counts the searches that have actually been published
@@ -92,15 +106,19 @@ md += (f"| **total** | **{len(rows)}** | **{len(papers)}** | "
 md += f"""
 ## Not revisited since before 2019
 
-These carry Run-1 or early-Run-2 sensitivity. They matter here because of what the budget says
-about them: **their mass axes are already counted in `N`, so revisiting one costs nothing in
-trials.** The discovery bar for a re-run is the bar the program already pays.
+These carry Run-1 or early-Run-2 sensitivity. What the budget says about them splits them in two.
 
-| last published | spectrum | observable |
-|--:|---|---|
+**{len(on_axis)} of the {len(stale)} sit on a mass axis that is already counted in `N`, so revisiting one costs
+nothing in trials** -- the discovery bar for the re-run is the bar the program already pays, and the
+whole cost is analysis effort. The remaining {len(off_axis)} fall on no axis in the budget's 46, so re-running
+one extends the axis count rather than reusing it, and it is priced like any other new spectrum.
+
+| last published | spectrum | observable | counted axis |
+|--:|---|---|---|
 """
 for r in stale:
-    md += f"| {r['last_year']} | {r['spectrum']} | `{r['observable']}` |\n"
+    ax = f"`{r['budget_axis']}`" if r["budget_axis"] != "-" else "**adds an axis**"
+    md += f"| {r['last_year']} | {r['spectrum']} | `{r['observable']}` | {ax} |\n"
 
 md += f"""
 ## Already re-run at 13.6 TeV

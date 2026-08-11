@@ -99,6 +99,24 @@ covered if any published search scans a mass built from those object types, allo
 "V" to be a Z, a jj pair or an ll pair, a published "t" to contain b+jets, and so on — so the
 uncovered list is a lower bound on the gap.
 
+### The publication census is a different base
+
+`published_census.py` counts from the other end: not the spectra models motivate, but the searches
+ATLAS has actually published. **Its 84 entries and the budget's 46 spectra must never be summed or
+compared as if they measured the same thing.** The publication record keeps two analyses on a shared
+mass axis as separate entries when they are separate papers, so the 84 entries carry only 60 distinct
+observables; the budget merges everything onto one axis and counts resolution elements along it. The
+census is a recency and coverage instrument, not a second trials count.
+
+Scope is matched to the budget's on purpose: bump hunts for new states, so hadron-spectroscopy
+measurements are excluded even when they are literally bump hunts in a mass spectrum.
+
+One claim does cross between the two, so the crossing is recorded in the data rather than asserted:
+for each spectrum that has gone stale, `published_spectra.csv` carries a `budget_axis` giving the
+canonical axis it falls on, or `-` for none. Revisiting a stale spectrum is free in trials **only**
+when its axis is already in `N` (12 of the 17); the other 5 extend the axis count and are priced like
+any new spectrum.
+
 ## Two-stage A/B unblinding
 
 Split the dataset into fractions `f` (A, exploration) and `1-f` (B, confirmation). Scan **all**

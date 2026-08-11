@@ -8,7 +8,7 @@ against the generated tables, not a program output — edit it directly; nothing
 | file | producer | content |
 |---|---|---|
 | `SEARCH_BUDGET.md` | `search_budget.py` | **the headline**: spectra, `N_trials`, `Z_local(5σ global)`, per-spectrum table |
-| `PUBLISHED_CENSUS.md` | `published_census.py` | the ATLAS resonance-search publication record: 86 spectra, 290 papers, recency and Run-3 coverage |
+| `PUBLISHED_CENSUS.md` | `published_census.py` | the ATLAS resonance-search publication record: 84 spectra, 288 papers, recency and Run-3 coverage |
 | `EXCESS_COUNTING.md` | hand-written | expected vs observed 3σ/5σ excesses — the external check on `N` |
 | `MAX_OF_GAUSSIANS.md` | hand-written | the statistics: argmax vs threshold vs Benjamini-Hochberg |
 | `TWO_STAGE_UNBLINDING.md` | hand-written | the A/B split strategy, reach and caveats |
