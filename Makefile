@@ -22,7 +22,7 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(P)/search_budget.png $(P)/budget_waterfall.png $(P)/excess_counting.png \
           $(T)/combinatorial_budget.csv $(T)/composition_gap.txt \
           $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md \
-          $(X)/census_refs.bib $(X)/census_appendix.tex
+          $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md
 
 AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png
 
@@ -57,7 +57,7 @@ $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md &: $(S)/published_census.py d
 	$(PY) $(S)/published_census.py
 # The bibliography of the census. fetch_census_meta.py refreshes data/census_papers.csv from the
 # arXiv API and is deliberately NOT a prerequisite: its output is committed so this stays offline.
-$(X)/census_refs.bib $(X)/census_appendix.tex &: $(S)/export_census_bib.py \
+$(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md &: $(S)/export_census_bib.py \
                                                  data/published_spectra.csv data/census_papers.csv
 	$(PY) $(S)/export_census_bib.py
 

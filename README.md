@@ -83,7 +83,7 @@ budget is remarkably insensitive to how finely you choose to slice the program.
 │   ├── tables/              machine-readable tables and the cached Monte Carlo (.npz)
 │   ├── plots/               figures; plots/max_of_gaussians/ is the selection-rule study
 │   ├── tex/                 the census bibliography and its per-spectrum appendix
-│   └── overviews/           the written reports
+│   └── overviews/           the written reports, incl. the full census reference list
 └── docs/
     ├── METHOD_NOTES.md      the counting conventions and why each one is what it is
     └── OUTPUTS.md           every output file and the script that writes it
@@ -96,7 +96,8 @@ against the excesses ATLAS has actually published;
 [`TWO_STAGE_UNBLINDING.md`](results/overviews/TWO_STAGE_UNBLINDING.md) for the A/B scheme and its
 caveats; [`MAX_OF_GAUSSIANS.md`](results/overviews/MAX_OF_GAUSSIANS.md) for the selection rules; and
 [`PUBLISHED_CENSUS.md`](results/overviews/PUBLISHED_CENSUS.md) for what the publication record itself
-contains, including the spectra that have gone stale.
+contains, including the spectra that have gone stale, with all 288 of its papers written out in full
+in [`CENSUS_REFERENCES.md`](results/overviews/CENSUS_REFERENCES.md).
 [`docs/OUTPUTS.md`](docs/OUTPUTS.md) maps every output file to the script that writes it, and
 [`docs/METHOD_NOTES.md`](docs/METHOD_NOTES.md) gives the reasoning behind each counting convention.
 
