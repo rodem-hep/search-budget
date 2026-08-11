@@ -3,12 +3,6 @@
 Every file under `results/`, with the script that writes it. "hand-written" means a report authored
 against the generated tables, not a program output — edit it directly; nothing regenerates it.
 
-## The note — `docs/note/`
-
-`main.tex` plus `sections/*.tex` and `refs.bib`, built with `make note` (or `make` in that
-directory). It pulls its figures straight from `results/plots/`, so rebuild those first if they are
-stale. `main.pdf` is committed so the note can be read without a LaTeX installation.
-
 ## Reports — `results/overviews/`
 
 | file | producer | content |

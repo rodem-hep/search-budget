@@ -1,0 +1,60 @@
+\contentsline {section}{\numberline {1}Introduction and scope}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The question}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}The one-paragraph answer}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}What this note does and does not use}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Conventions}{4}{subsection.1.4}%
+\contentsline {section}{\numberline {2}The search budget}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Method}{4}{subsection.2.1}%
+\contentsline {paragraph}{The window convention, and why it matters.}{4}{section*.2}%
+\contentsline {paragraph}{Scope.}{4}{section*.3}%
+\contentsline {paragraph}{What counts as one spectrum.}{5}{section*.4}%
+\contentsline {subsection}{\numberline {2.2}Result}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Which models feed which spectrum}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}How finely should searches be counted?}{5}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Reading the result}{5}{subsection.2.5}%
+\contentsline {section}{\numberline {3}The combinatorial scan, and what has never been looked at}{9}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Budget of a fully combinatorial scan}{9}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Which compositions has ATLAS actually scanned?}{9}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Three reasons the covered fraction is overstated}{10}{subsection.3.3}%
+\contentsline {paragraph}{Tag versus scan.}{10}{section*.12}%
+\contentsline {paragraph}{Almost all mixed-flavour coverage is three papers, all since 2022.}{10}{section*.13}%
+\contentsline {paragraph}{Most covered two-body spectra are covered only inside anomaly-selected phase space.}{10}{section*.14}%
+\contentsline {subsection}{\numberline {3.4}The programme that was meant to cover the rest}{10}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Named gaps}{11}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Does the arithmetic reproduce the excesses we have seen?}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}The prediction}{12}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}The record}{12}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Verdict}{13}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Selecting candidates from a scan}{13}{section.5}%
+\contentsline {subsection}{\numberline {5.1}The background maximum is not Gaussian}{13}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}A real signal often loses the scan}{14}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}A threshold dominates the argmax}{15}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Letting the data set the cut: Benjamini--Hochberg}{16}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}The same three rules with an imperfect estimator}{16}{subsection.5.5}%
+\contentsline {paragraph}{The threshold's margin over the argmax widens, from $+4$ to $+13.6$ points.}{17}{section*.25}%
+\contentsline {paragraph}{Contamination strips BH of the adaptivity that made it attractive.}{17}{section*.26}%
+\contentsline {paragraph}{And that dial becomes actively misleading.}{17}{section*.27}%
+\contentsline {paragraph}{The argmax should be dropped rather than deprioritised.}{17}{section*.28}%
+\contentsline {subsection}{\numberline {5.6}What this implies for a data-directed scan}{18}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Two-stage A/B unblinding}{18}{section.6}%
+\contentsline {subsection}{\numberline {6.1}The proposal}{18}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}The cost}{19}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}The look-elsewhere effect is conserved, not reduced}{20}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Would swapping the halves recover it?}{20}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}When the split is nonetheless the right choice}{21}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}The failure mode splitting does \emph {not} address}{22}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}What changes if the significance estimator is imperfect}{22}{subsection.6.7}%
+\contentsline {subsection}{\numberline {6.8}Recommended working point}{26}{subsection.6.8}%
+\contentsline {section}{\numberline {7}Software and reproducibility}{26}{section.7}%
+\contentsline {subsection}{\numberline {7.1}The two modules everything rests on}{26}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Layout and rebuilding}{26}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Determinism}{27}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Relation to the catalogue note}{27}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Summary and recommendations}{27}{section.8}%
+\contentsline {subsection}{\numberline {8.1}What was established}{27}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Recommendations}{28}{subsection.8.2}%
+\contentsline {paragraph}{For an analysis.}{28}{section*.42}%
+\contentsline {paragraph}{For the search program.}{28}{section*.43}%
+\contentsline {paragraph}{For a sample program.}{28}{section*.44}%
+\contentsline {subsection}{\numberline {8.3}Known limitations}{28}{subsection.8.3}%
+\contentsline {section}{\numberline {A}Scan windows and their sources}{29}{appendix.A}%

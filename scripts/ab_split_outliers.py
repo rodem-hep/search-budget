@@ -46,7 +46,7 @@ obs = sorted({canon(o) for objs in PUBLIC_OBS.values() for o in objs})
 N = int(round(sum(nsel(o) * ns_scan(o) for o in obs)))
 SQ2 = math.sqrt(2.0)
 
-Z_CUT, F_OPT, WIDEN = 3.0, 0.30, 3.0     # the note's recommended working point
+Z_CUT, F_OPT, WIDEN = 3.0, 0.30, 3.0     # recommended working point (TWO_STAGE_UNBLINDING.md)
 Z_SINGLE = z5(N)
 
 def Q(z):

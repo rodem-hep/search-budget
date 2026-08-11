@@ -3,14 +3,6 @@ __pycache__/
 *.log
 *.tmp
 
-# LaTeX intermediates (docs/note/main.pdf itself is committed)
-*.aux
-*.bbl
-*.blg
-*.out
-*.toc
-*.synctex.gz
-
 # editor / OS
 .DS_Store
 *.swp

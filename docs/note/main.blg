@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: unsrtnat.bst
+Database file #1: refs.bib
+Warning--empty journal in statinterp
+Warning--empty year in atlas_public_searches
+You've used 31 entries,
+            2481 wiz_defined-function locations,
+            764 strings with 10398 characters,
+and the built_in function-call counts, 10277 in all, are:
+= -- 970
+> -- 279
+< -- 30
++ -- 146
+- -- 78
+* -- 650
+:= -- 1680
+add.period$ -- 145
+call.type$ -- 31
+change.case$ -- 61
+chr.to.int$ -- 25
+cite$ -- 33
+duplicate$ -- 583
+empty$ -- 1038
+format.name$ -- 118
+if$ -- 2207
+int.to.chr$ -- 7
+int.to.str$ -- 32
+missing$ -- 31
+newline$ -- 215
+num.names$ -- 93
+pop$ -- 183
+preamble$ -- 1
+purify$ -- 31
+quote$ -- 0
+skip$ -- 330
+stack$ -- 0
+substring$ -- 393
+swap$ -- 71
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 214
+warning$ -- 2
+while$ -- 91
+width$ -- 0
+write$ -- 509
+(There were 2 warnings)

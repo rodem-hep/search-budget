@@ -156,7 +156,7 @@ print(f"  50%-power points (toys): single {z50['single']:.2f}, f=0.22 {z50['opt'
 # Run BOTH directions -- explore A confirm B, and explore B confirm A -- and claim on the union.
 # Both directions pre-register, so the bar is set by the TOTAL unblinded windows k_A + k_B: the
 # second chance is paid for with twice the coins. Validates the union formula of
-# ab_split_budget.py, which is what section 9 of the note quotes.
+# ab_split_budget.py, which is the number TWO_STAGE_UNBLINDING.md quotes.
 def toy_power_sym(mu, f, zcut, ntoy=1500):
     gA = rng.standard_normal((ntoy, N)); gB = rng.standard_normal((ntoy, N))
     gA[:, 0] += math.sqrt(f) * mu; gB[:, 0] += math.sqrt(1 - f) * mu

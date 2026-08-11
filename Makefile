@@ -25,7 +25,7 @@ AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png
 
 STATS := $(G)/max_of_gaussians_light.png $(G)/bh_scan.png $(G)/bh_zcut.png $(G)/bh_outliers.png
 
-.PHONY: help all budget ab stats note clean
+.PHONY: help all budget ab stats clean
 .DELETE_ON_ERROR:
 
 help:
@@ -34,7 +34,6 @@ help:
 	@echo "  budget    trials factor N, Z_local, the combinatorial scan and the excess bookkeeping"
 	@echo "  ab        two-stage A/B unblinding: reach, toy MC, imperfect-estimator robustness"
 	@echo "  stats     selection rules: argmax vs threshold vs Benjamini-Hochberg (MC is cached)"
-	@echo "  note      build docs/note/main.pdf (needs pdflatex; figures from results/plots/)"
 	@echo "  clean     drop __pycache__"
 	@echo "PY = $(PY)"
 
@@ -79,9 +78,5 @@ $(G)/bh_zcut.png $(T)/bh_zcut_per_pe.csv &: $(S)/bh_zcut.py $(S)/plot_style.py
 $(G)/bh_outliers.png: $(S)/bh_fdr_outliers.py $(S)/plot_style.py
 	$(PY) $(S)/bh_fdr_outliers.py
 
-note:
-	$(MAKE) -C docs/note
-
 clean:
 	rm -rf $(S)/__pycache__
-	$(MAKE) -C docs/note clean

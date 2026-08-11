@@ -1,0 +1,250 @@
+\begin{thebibliography}{31}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Volkovich et~al.(2022)Volkovich, De~Vito~Halevy, and Bressler]{ddp}
+Sergey Volkovich, Federico De~Vito~Halevy, and Shikma Bressler.
+\newblock {A Data-Directed Paradigm for BSM searches: the bump-hunting
+  example}.
+\newblock \emph{Eur. Phys. J. C}, 82:\penalty0 265, 2022.
+\newblock \doi{10.1140/epjc/s10052-022-10215-1}.
+\newblock arXiv:2107.11573.
+
+\bibitem[{ATLAS Collaboration}(2024{\natexlab{a}})]{atlas_ml_anomaly}
+{ATLAS Collaboration}.
+\newblock {Search for new phenomena in two-body invariant mass distributions
+  using unsupervised machine learning for anomaly detection at $\sqrt{s} =
+  13$~TeV with the ATLAS detector}.
+\newblock \emph{Phys. Rev. Lett.}, 132:\penalty0 081801, 2024{\natexlab{a}}.
+\newblock \doi{10.1103/PhysRevLett.132.081801}.
+\newblock arXiv:2307.01612.
+
+\bibitem[{ATLAS Collaboration}(2019)]{atlas_general_search}
+{ATLAS Collaboration}.
+\newblock {A strategy for a general search for new phenomena using data-derived
+  signal regions and its application within the ATLAS experiment}.
+\newblock \emph{Eur. Phys. J. C}, 79:\penalty0 120, 2019.
+\newblock \doi{10.1140/epjc/s10052-019-6540-y}.
+\newblock arXiv:1807.07447.
+
+\bibitem[Gross and Vitells(2010)]{grossvitells}
+Eilam Gross and Ofer Vitells.
+\newblock {Trial factors for the look elsewhere effect in high energy physics}.
+\newblock \emph{Eur. Phys. J. C}, 70:\penalty0 525, 2010.
+\newblock \doi{10.1140/epjc/s10052-010-1470-8}.
+\newblock arXiv:1005.1891.
+
+\bibitem[{ATLAS Collaboration}(2022{\natexlab{a}})]{atlas_btag_dijet}
+{ATLAS Collaboration}.
+\newblock {Search for heavy particles in the $b$-tagged dijet mass distribution
+  with additional $b$-tagged jets in proton-proton collisions at $\sqrt{s} =
+  13$~TeV with the ATLAS experiment}.
+\newblock \emph{Phys. Rev. D}, 105:\penalty0 012001, 2022{\natexlab{a}}.
+\newblock \doi{10.1103/PhysRevD.105.012001}.
+\newblock arXiv:2108.09059.
+
+\bibitem[{ATLAS Collaboration}(2020)]{atlas_dijet_lepton}
+{ATLAS Collaboration}.
+\newblock {Search for dijet resonances in events with an isolated charged
+  lepton using $\sqrt{s} = 13$~TeV proton-proton collision data collected by
+  the ATLAS detector}.
+\newblock \emph{JHEP}, 06:\penalty0 151, 2020.
+\newblock \doi{10.1007/JHEP06(2020)151}.
+\newblock arXiv:2002.11325.
+
+\bibitem[{ATLAS Collaboration}(2023{\natexlab{a}})]{atlas_multibody}
+{ATLAS Collaboration}.
+\newblock {Search for new phenomena in multi-body invariant masses in events
+  with at least one isolated lepton and two jets using $\sqrt{s} = 13$~TeV
+  proton-proton collision data collected by the ATLAS detector}.
+\newblock \emph{JHEP}, 07:\penalty0 202, 2023{\natexlab{a}}.
+\newblock \doi{10.1007/JHEP07(2023)202}.
+\newblock arXiv:2211.08945.
+
+\bibitem[{ATLAS Collaboration}(2023{\natexlab{b}})]{atlas_boostedz}
+{ATLAS Collaboration}.
+\newblock {A search for new resonances in multiple final states with a high
+  transverse momentum $Z$ boson in $\sqrt{s} = 13$~TeV $pp$ collisions with the
+  ATLAS detector}.
+\newblock \emph{JHEP}, 06:\penalty0 036, 2023{\natexlab{b}}.
+\newblock \doi{10.1007/JHEP06(2023)036}.
+\newblock arXiv:2209.15345.
+
+\bibitem[{ATLAS Collaboration}(2012{\natexlab{a}})]{atlas_lstar_7tev}
+{ATLAS Collaboration}.
+\newblock {Search for excited leptons in proton-proton collisions at $\sqrt{s}
+  = 7$~TeV with the ATLAS detector}.
+\newblock \emph{Phys. Rev. D}, 85:\penalty0 072003, 2012{\natexlab{a}}.
+\newblock \doi{10.1103/PhysRevD.85.072003}.
+\newblock arXiv:1201.3293.
+
+\bibitem[{ATLAS Collaboration}(2013)]{atlas_lstar_8tev}
+{ATLAS Collaboration}.
+\newblock {Search for excited electrons and muons in $\sqrt{s} = 8$~TeV
+  proton-proton collisions with the ATLAS detector}.
+\newblock \emph{New J. Phys.}, 15:\penalty0 093011, 2013.
+\newblock \doi{10.1088/1367-2630/15/9/093011}.
+\newblock arXiv:1308.1364.
+
+\bibitem[{ATLAS Collaboration}(2012{\natexlab{b}})]{atlas_dch_7tev}
+{ATLAS Collaboration}.
+\newblock {Search for doubly-charged Higgs bosons in like-sign dilepton final
+  states at $\sqrt{s} = 7$~TeV with the ATLAS detector}.
+\newblock \emph{Eur. Phys. J. C}, 72:\penalty0 2244, 2012{\natexlab{b}}.
+\newblock \doi{10.1140/epjc/s10052-012-2244-2}.
+\newblock arXiv:1210.5070.
+
+\bibitem[{ATLAS Collaboration}(2023{\natexlab{c}})]{atlas_dch_run2}
+{ATLAS Collaboration}.
+\newblock {Search for doubly charged Higgs boson production in multi-lepton
+  final states using 139~fb$^{-1}$ of proton-proton collisions at $\sqrt{s} =
+  13$~TeV with the ATLAS detector}.
+\newblock \emph{Eur. Phys. J. C}, 83:\penalty0 605, 2023{\natexlab{c}}.
+\newblock \doi{10.1140/epjc/s10052-023-11578-9}.
+\newblock arXiv:2211.07505.
+
+\bibitem[{ATLAS Collaboration}(2022{\natexlab{b}})]{atlas_hh4b}
+{ATLAS Collaboration}.
+\newblock {Search for resonant pair production of Higgs bosons in the
+  $b\bar{b}b\bar{b}$ final state using $pp$ collisions at $\sqrt{s} = 13$~TeV
+  with the ATLAS detector}.
+\newblock \emph{Phys. Rev. D}, 105:\penalty0 092002, 2022{\natexlab{b}}.
+\newblock \doi{10.1103/PhysRevD.105.092002}.
+\newblock arXiv:2202.07288.
+
+\bibitem[{CMS Collaboration}(2023)]{cms_gammajet}
+{CMS Collaboration}.
+\newblock {Search for resonances in events with photon and jet final states in
+  proton-proton collisions at $\sqrt{s} = 13$~TeV}.
+\newblock \emph{JHEP}, 12:\penalty0 189, 2023.
+\newblock \doi{10.1007/JHEP12(2023)189}.
+\newblock arXiv:2305.07998.
+
+\bibitem[{ATLAS Collaboration}(2023{\natexlab{d}})]{atlas_taustar}
+{ATLAS Collaboration}.
+\newblock {Search for excited $\tau$-leptons and leptoquarks in the final state
+  with $\tau$-leptons and jets in $pp$ collisions at $\sqrt{s} = 13$~TeV with
+  the ATLAS detector}.
+\newblock \emph{JHEP}, 06:\penalty0 199, 2023{\natexlab{d}}.
+\newblock \doi{10.1007/JHEP06(2023)199}.
+\newblock arXiv:2303.09444.
+
+\bibitem[{ATLAS Collaboration}(2025)]{atlas_ss_tt}
+{ATLAS Collaboration}.
+\newblock {Search for same-charge top-quark pair production in $pp$ collisions
+  at $\sqrt{s} = 13$~TeV with the ATLAS detector}.
+\newblock \emph{JHEP}, 02:\penalty0 084, 2025.
+\newblock \doi{10.1007/JHEP02(2025)084}.
+\newblock arXiv:2409.14982.
+
+\bibitem[{ATLAS Collaboration}(2015)]{atlas_vll_8tev}
+{ATLAS Collaboration}.
+\newblock {Search for heavy lepton resonances decaying to a $Z$ boson and a
+  lepton in $pp$ collisions at $\sqrt{s} = 8$~TeV with the ATLAS detector}.
+\newblock \emph{JHEP}, 09:\penalty0 108, 2015.
+\newblock \doi{10.1007/JHEP09(2015)108}.
+\newblock arXiv:1506.01291.
+
+\bibitem[{ATLAS Collaboration}(2014)]{atlas_vlq_zb_8tev}
+{ATLAS Collaboration}.
+\newblock {Search for pair and single production of new heavy quarks that decay
+  to a $Z$ boson and a third-generation quark in $pp$ collisions at $\sqrt{s} =
+  8$~TeV with the ATLAS detector}.
+\newblock \emph{JHEP}, 11:\penalty0 104, 2014.
+\newblock \doi{10.1007/JHEP11(2014)104}.
+\newblock arXiv:1409.5500.
+
+\bibitem[Chekanov(2026)]{statinterp}
+S.~V. Chekanov.
+\newblock {On the Statistical Interpretation of Discoveries in LHC Data}.
+\newblock 2026.
+\newblock preprint, arXiv:2605.24441.
+
+\bibitem[Asadi et~al.(2017)]{diggingdeeper}
+Pouya Asadi et~al.
+\newblock {Digging Deeper for New Physics in the LHC Data}.
+\newblock \emph{JHEP}, 11:\penalty0 194, 2017.
+\newblock \doi{10.1007/JHEP11(2017)194}.
+\newblock arXiv:1707.05783.
+
+\bibitem[Lyons(2008)]{lyons2008}
+Louis Lyons.
+\newblock {Open statistical issues in particle physics}.
+\newblock \emph{Ann. Appl. Stat.}, 2:\penalty0 887, 2008.
+\newblock \doi{10.1214/08-AOAS163}.
+\newblock arXiv:0811.1663.
+
+\bibitem[{ATLAS Collaboration}()]{atlas_public_searches}
+{ATLAS Collaboration}.
+\newblock {Summary plots and public results of ATLAS searches}.
+\newblock
+  \url{https://twiki.cern.ch/twiki/bin/view/AtlasPublic/SearchesPublicResults}.
+
+\bibitem[Fisher and Tippett(1928)]{fishertippett}
+R.~A. Fisher and L.~H.~C. Tippett.
+\newblock {Limiting forms of the frequency distribution of the largest or
+  smallest member of a sample}.
+\newblock \emph{Math. Proc. Camb. Phil. Soc.}, 24:\penalty0 180, 1928.
+\newblock \doi{10.1017/S0305004100015681}.
+
+\bibitem[Gumbel(1958)]{gumbel}
+E.~J. Gumbel.
+\newblock \emph{{Statistics of Extremes}}.
+\newblock Columbia University Press, 1958.
+
+\bibitem[Benjamini and Hochberg(1995)]{benjaminihochberg}
+Yoav Benjamini and Yosef Hochberg.
+\newblock {Controlling the false discovery rate: a practical and powerful
+  approach to multiple testing}.
+\newblock \emph{J. R. Stat. Soc. B}, 57:\penalty0 289, 1995.
+\newblock \doi{10.1111/j.2517-6161.1995.tb02031.x}.
+
+\bibitem[Daniels(1945)]{daniels}
+H.~E. Daniels.
+\newblock {The statistical theory of the strength of bundles of threads. I}.
+\newblock \emph{Proc. R. Soc. Lond. A}, 183:\penalty0 405--435, 1945.
+\newblock \doi{10.1098/rspa.1945.0011}.
+\newblock source of the identity $P(\sup_t F_n(t)/t \ge 1/q) = q$ for the
+  uniform empirical distribution, from which the exact null behaviour of the
+  step-up procedure follows.
+
+\bibitem[Harris et~al.(2020)]{numpy}
+Charles~R. Harris et~al.
+\newblock {Array programming with NumPy}.
+\newblock \emph{Nature}, 585:\penalty0 357, 2020.
+\newblock \doi{10.1038/s41586-020-2649-2}.
+
+\bibitem[Virtanen et~al.(2020)]{scipy}
+Pauli Virtanen et~al.
+\newblock {SciPy 1.0: fundamental algorithms for scientific computing in
+  Python}.
+\newblock \emph{Nature Methods}, 17:\penalty0 261, 2020.
+\newblock \doi{10.1038/s41592-019-0686-2}.
+
+\bibitem[Hunter(2007)]{matplotlib}
+John~D. Hunter.
+\newblock {Matplotlib: A 2D graphics environment}.
+\newblock \emph{Comput. Sci. Eng.}, 9:\penalty0 90, 2007.
+\newblock \doi{10.1109/MCSE.2007.55}.
+
+\bibitem[{ATLAS Collaboration}(2021)]{atlas_trilepton_res}
+{ATLAS Collaboration}.
+\newblock {Search for trilepton resonances from chargino and neutralino pair
+  production in $\sqrt{s} = 13$~TeV $pp$ collisions with the ATLAS detector}.
+\newblock \emph{Phys. Rev. D}, 103:\penalty0 112003, 2021.
+\newblock \doi{10.1103/PhysRevD.103.112003}.
+\newblock arXiv:2011.10543.
+
+\bibitem[{ATLAS Collaboration}(2024{\natexlab{b}})]{atlas_stop_rpv_bl}
+{ATLAS Collaboration}.
+\newblock {A search for $R$-parity violating supersymmetric decays of the top
+  squark to a $b$-jet and a lepton in $\sqrt{s} = 13$~TeV $pp$ collisions with
+  the ATLAS detector}.
+\newblock \emph{Phys. Rev. D}, 110:\penalty0 092004, 2024{\natexlab{b}}.
+\newblock \doi{10.1103/PhysRevD.110.092004}.
+\newblock arXiv:2406.18367.
+
+\end{thebibliography}

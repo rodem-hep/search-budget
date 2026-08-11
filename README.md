@@ -9,17 +9,19 @@ global 5σ, and how a scan of that size is best run.
 Every number comes from published searches and public model databases, so a clone reproduces all of
 it: the tables, the reports and the figures.
 
-| | |
-|---|---|
-| bump spectra in the public model space | **46** |
-| trials factor | `N ≈ 3.7k` inclusive, `6.6k` at published event-selection granularity |
-| the discovery bar | `Z_local(5σ global) ≈ 6.44 → 6.53`, stable to ±0.1σ under every counting choice |
-| fully combinatorial scan | 1502 mass spectra across 204 object categories, giving `N ≈ 143k` and `Z_local ≈ 6.98` |
-| never scanned | **57 of 82** reachable ≤4-object mass compositions have no published ATLAS bump hunt |
-| two-stage A/B unblinding | costs about 0.5σ in reach, buys a trials factor you can count exactly |
+| | | computed by | the list behind it |
+|---|---|---|---|
+| bump spectra in the public model space | **46** | [`search_budget.py`](scripts/search_budget.py) | [`search_budget.csv`](results/tables/search_budget.csv), one row per spectrum with its window and source |
+| trials factor | `N ≈ 3.7k` inclusive, `6.6k` at published event-selection granularity | [`search_budget.py`](scripts/search_budget.py) | [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md), [`search_budget_selections.csv`](results/tables/search_budget_selections.csv) |
+| the discovery bar | `Z_local(5σ global) ≈ 6.44 → 6.53`, stable to ±0.1σ under every counting choice | [`search_budget.py`](scripts/search_budget.py) | [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) |
+| fully combinatorial scan | 1502 mass spectra across 204 object categories, giving `N ≈ 143k` and `Z_local ≈ 6.98` | [`combinatorial_budget.py`](scripts/combinatorial_budget.py) | [`combinatorial_budget.csv`](results/tables/combinatorial_budget.csv) |
+| never scanned | **57 of 82** reachable ≤4-object mass compositions have no published ATLAS bump hunt | [`composition_gap.py`](scripts/composition_gap.py) | [`composition_gap.txt`](results/tables/composition_gap.txt), which names all 82 |
+| observed against expected excesses | the published 3σ and 5σ count is what `N` predicts | [`excess_counting.py`](scripts/excess_counting.py) | [`EXCESS_COUNTING.md`](results/overviews/EXCESS_COUNTING.md) |
+| two-stage A/B unblinding | costs about 0.5σ in reach, buys a trials factor you can count exactly | [`ab_split_budget.py`](scripts/ab_split_budget.py) | [`TWO_STAGE_UNBLINDING.md`](results/overviews/TWO_STAGE_UNBLINDING.md) |
+| selection rules under an imperfect estimator | a fixed threshold beats both argmax and Benjamini-Hochberg | [`bh_fdr_outliers.py`](scripts/bh_fdr_outliers.py) | [`MAX_OF_GAUSSIANS.md`](results/overviews/MAX_OF_GAUSSIANS.md), [`bh_fdr_scan.csv`](results/tables/bh_fdr_scan.csv) |
 
-If you would rather read the physics than the code, start with the note:
-[`docs/note/main.pdf`](docs/note/main.pdf).
+Every window carries the published search it was taken from, so any single row can be checked
+against its source without rerunning anything.
 
 ## Quick start
 
@@ -74,22 +76,17 @@ budget is remarkably insensitive to how finely you choose to slice the program.
 │   └── overviews/           the written reports
 └── docs/
     ├── METHOD_NOTES.md      the counting conventions and why each one is what it is
-    ├── OUTPUTS.md           every output file and the script that writes it
-    └── note/                the LaTeX note (main.pdf is committed)
+    └── OUTPUTS.md           every output file and the script that writes it
 ```
 
-## Key results
-
-| file | what |
-|---|---|
-| [`results/overviews/SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) | the headline: 46 spectra, `N ≈ 3.7k`, `Z_local ≈ 6.44` |
-| [`results/plots/budget_waterfall.png`](results/plots/budget_waterfall.png) | one figure for the whole story: `Z_local` against `N` across granularity levels |
-| [`results/overviews/EXCESS_COUNTING.md`](results/overviews/EXCESS_COUNTING.md) | expected against observed 3σ and 5σ excesses across ATLAS, the external check on `N` |
-| [`results/overviews/MAX_OF_GAUSSIANS.md`](results/overviews/MAX_OF_GAUSSIANS.md) | selection rules: argmax against a fixed threshold against Benjamini-Hochberg, with and without a perfect estimator |
-| [`results/overviews/TWO_STAGE_UNBLINDING.md`](results/overviews/TWO_STAGE_UNBLINDING.md) | A/B split unblinding: the logic, reach against split fraction, and the caveats |
-| [`results/tables/composition_gap.txt`](results/tables/composition_gap.txt) | which reachable mass compositions no published ATLAS search has ever scanned |
-
-[`docs/OUTPUTS.md`](docs/OUTPUTS.md) indexes all of them.
+The four reports in `results/overviews/` are the long form of the four rows above:
+[`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) for the budget itself, with the full
+per-spectrum table; [`EXCESS_COUNTING.md`](results/overviews/EXCESS_COUNTING.md) for the check
+against the excesses ATLAS has actually published;
+[`TWO_STAGE_UNBLINDING.md`](results/overviews/TWO_STAGE_UNBLINDING.md) for the A/B scheme and its
+caveats; and [`MAX_OF_GAUSSIANS.md`](results/overviews/MAX_OF_GAUSSIANS.md) for the selection rules.
+[`docs/OUTPUTS.md`](docs/OUTPUTS.md) maps every output file to the script that writes it, and
+[`docs/METHOD_NOTES.md`](docs/METHOD_NOTES.md) gives the reasoning behind each counting convention.
 
 ## Where the definitions live
 
