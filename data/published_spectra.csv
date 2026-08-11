@@ -1,0 +1,87 @@
+family,spectrum,observable,trigger,trigger_detail,n_papers,first_year,last_year,status,latest_mass_range,run3,arxiv
+Jets & hadronic,"Dijet (inclusive, high mass)",m_jj,no,single-jet,8,2010,2020,ageing,1.8-8.2 TeV,no,1008.2461 1103.3864 1108.6311 1407.1376 1512.01530 1703.09127 1910.08447 2005.02983
+Jets & hadronic,Photon + jet,m_(gamma j),no,single-photon,4,2011,2017,stale,,no,1112.3580 1309.3230 1512.05910 1709.10440
+Jets & hadronic,"Dijet (low mass, trigger-level)",m_jj,no,trigger-level analysis (jet),3,2018,2026,current,100-250 GeV,no,1804.03496 2509.01219 2606.03222
+Jets & hadronic,Dijet + ISR photon/jet,m_jj,no,single-photon / single-jet ISR,3,2018,2024,current,200-650 GeV,no,1801.08769 1901.10917 2403.08547
+Jets & hadronic,"Dijet, b-tagged",m_bb / m_jj(b),no,single-jet + b-jet,3,2016,2021,ageing,,no,1603.08791 1805.09299 2108.09059
+Jets & hadronic,Pair-produced dijet resonances (4 jets),m_jj (paired),no,multi-jet,3,2011,2017,stale,,no,1110.2693 1210.4826 1710.07171
+Jets & hadronic,Three-jet / multijet (3-quark res.),m_jjj,no,multi-jet,2,2012,2018,stale,,no,1210.4813 1804.03568
+Jets & hadronic,Z + light hadronic resonance (H decay),m_J,lepton,single/di-lepton,2,2020,2024,current,0.5-3.5 GeV,no,2004.01678 2411.16361
+Jets & hadronic,Dijet + isolated lepton,m_jj,lepton,single-lepton,1,2020,2020,ageing,0.25-6 TeV,no,2002.11325
+Jets & hadronic,Dijet from dark quarks,m_jj,no,single-jet,1,2023,2023,ageing,,no,2311.03944
+Jets & hadronic,Boosted light hadronic res. + photon,m_J,no,single-photon (ISR),1,2024,2024,current,20-100 GeV,no,2408.00049
+Photons,Diphoton (high mass),m_gamgam,no,diphoton,7,2012,2021,ageing,160-2800 GeV (spin-0),no,1202.1414 1205.0701 1407.6583 1504.05511 1606.03833 1707.04147 2102.13405
+Photons,Diphoton (low mass / boosted),m_gamgam,no,diphoton,2,2022,2024,current,,no,2211.04172 2407.07546
+Photons,"Diphoton, extra dimensions",m_gamgam,no,diphoton,2,2011,2012,stale,2.52-3.92 TeV,no,1112.2194 1210.8389
+Photons,Photon-jets (collimated gamma pairs),m_gamgam-jets,no,diphoton,1,2018,2018,stale,2-10 GeV,no,1808.10515
+Photons,Diphoton + forward protons (ALP),m_gamgam,no,diphoton (+AFP),1,2023,2023,ageing,150-1600 GeV,no,2304.10953
+Photons,Three photons,m_3gamma,no,diphoton / triphoton,1,2015,2015,stale,,no,1509.05051
+Photons,H -> Za -> ll gamgam,m_gamgam,lepton,single/di-lepton,1,2023,2023,ageing,0.1-33 GeV,no,2312.01942
+Leptons,Ditau,m_tautau,mixed,single-lepton (lep-had); ditau_had,10,2011,2026,current,20-85 GeV,no,1107.5003 1210.6604 1211.6956 1409.6064 1502.07177 1608.00890 1709.07242 2002.12223 2409.20381 2607.28484
+Leptons,"Dilepton (ee/mumu, high mass)",m_ll,lepton,"single/di-electron, single/di-muon",9,2011,2026,current,,yes,1103.6218 1108.1582 1209.2535 1405.4123 1607.03669 1707.02424 1903.06248 2105.13847 2607.28334
+Leptons,Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau),"m_emu, m_etau, m_mutau",mixed,"single/di-lepton (emu); +tau_had (etau, mutau)",8,2011,2023,ageing,,no,1103.5559 1109.3089 1205.0725 1212.1272 1503.04430 1607.08079 1807.06573 2307.08567
+Leptons,Four leptons / 4mu,"m_4l, m_4mu",lepton,single/di-lepton,6,2015,2024,current,5-81 GeV,no,1505.07645 1802.03388 2110.13673 2301.09342 2401.04742 2402.15212
+Leptons,Lepton + MET (W-prime),"m_T(l,nu)",lepton,single-electron / single-muon,6,2011,2019,ageing,0.15-7.0 TeV,no,1103.1391 1108.1316 1407.7494 1606.03977 1706.04786 1906.05609
+Leptons,LFV Z decays,m_ll (Z),lepton,single/di-lepton,5,2014,2022,ageing,,no,1408.5774 1804.09568 2010.02566 2105.12491 2204.10783
+Leptons,Dimuon (low / intermediate mass),m_mumu,lepton,single/di-muon,3,2019,2026,current,35-75 GeV,no,1901.08144 2304.14247 2601.21361
+Leptons,SFOS dilepton + MET (edge),m_ll,lepton,di-lepton (+MET trigger in some regions),3,2015,2018,stale,,no,1503.03290 1611.05791 1805.11381
+Leptons,Same-sign dimuon (strong gravity),m_mumu (SS),lepton,single/di-muon,2,2011,2013,stale,,no,1111.0080 1308.4075
+Leptons,Collimated / displaced lepton pairs,m_ll,lepton,di-muon (incl. small-displacement); photon for collimated ee,2,2023,2024,current,,no,2305.02005 2407.09168
+Leptons,Tau + MET,"m_T(tau,nu)",no,tau_had + MET,2,2018,2024,current,,no,1801.06992 2402.16576
+Leptons,Trilepton resonance,m_3l,lepton,single/di-lepton,1,2020,2020,ageing,100-1100 GeV,no,2011.10543
+Leptons,Periodic signals in dielectron/diphoton,"m_ee, m_gamgam",mixed,single/di-electron (ee); diphoton (gamgam),1,2023,2023,ageing,,no,2305.10894
+Leptons,LFV tau -> 3 mu,m_3mu,lepton,single/di-muon,1,2026,2026,current,,no,2603.18099
+Diboson,"ZZ/ZW -> llqq, vvqq, 4l","m_ZZ, m_ZW",mixed,"single/di-lepton (llqq, 4l); MET (vvqq)",6,2011,2020,ageing,,no,1108.5064 1203.0718 1409.6190 1708.09638 1712.06386 2009.14791
+Diboson,WZ/WW fully leptonic,"m_WZ, m_WW",lepton,single/di-lepton,4,2012,2022,ageing,,no,1204.1648 1406.4456 1806.01532 2207.03925
+Diboson,WW/WZ semileptonic (lvqq),m_VV,lepton,single-lepton,4,2013,2020,ageing,300-5000 GeV,no,1305.0125 1503.04677 1710.07235 2004.14636
+Diboson,Heavy Higgs -> ZZ / WW,"m_ZZ, m_WW",mixed,"single/di-lepton (4l, llvv, llqq, emu, lvqq); MET (vvqq)",4,2012,2015,stale,,no,1205.6744 1206.2443 1507.05930 1509.00389
+Diboson,Diboson fully hadronic (boson-tagged jets),m_JJ,no,large-R jet,3,2015,2019,ageing,>1.3 TeV,no,1506.00962 1708.04445 1906.08589
+Diboson,Diboson combination,m_VV,mixed,combination of all diboson channels,1,2016,2016,stale,500-3000 GeV,no,1606.04833
+Diboson,WW -> e-mu,m_WW,lepton,single/di-lepton,1,2017,2017,stale,,no,1710.01123
+Diboson,Triboson WWW,m_WWW,lepton,single/di-lepton (multilepton),1,2016,2016,stale,,no,1610.05088
+Vector boson + X,"VH (llbb, lvbb, vvbb)",m_VH,mixed,di-lepton (llbb); single-lepton (lvbb); MET (vvbb),5,2015,2022,ageing,220-5 TeV,no,1503.08089 1607.05621 1707.06958 1712.06518 2207.00230
+Vector boson + X,Z-gamma,m_Zgam,mixed,"single/di-lepton (llgam); photon (vvgam, qqgam)",3,2016,2023,ageing,220-3400 GeV,no,1607.06363 1708.00212 2309.04364
+Vector boson + X,"V-gamma, hadronic V","m_Wgam, m_Zgam",no,single-photon,3,2014,2023,ageing,1.0-6.8 TeV,no,1407.8150 1805.01908 2304.11962
+Vector boson + X,H -> Z gamma,m_llgam,lepton,single/di-lepton,2,2014,2025,current,,yes,1402.3051 2507.12598
+Vector boson + X,VH fully hadronic,m_VH,no,large-R jet / b-jet,1,2020,2020,ageing,1.5-5.0 TeV,no,2007.05293
+Vector boson + X,Higgs + photon,m_Hgam,no,single-photon,1,2020,2020,ageing,0.7-4 TeV,no,2008.05928
+Vector boson + X,High-pT Z + X resonances,m_Z+X,lepton,single/di-lepton,1,2022,2022,ageing,,no,2209.15345
+Top & heavy quarks,ttbar resonances,m_tt,mixed,single-lepton (l+jets); multi-jet (all-had),11,2012,2025,current,0.4-5.0 TeV,no,1205.5371 1207.2409 1211.2202 1305.2756 1505.07018 1707.06025 1804.10823 1902.10077 2005.05138 2404.18986 2512.17856
+Top & heavy quarks,Single VLQ: Wb / Ht / Zt / Hb,"m_Wb, m_Ht, m_Zt, m_Hb",mixed,single/di-lepton; some fully hadronic,11,2015,2026,current,,no,1503.05425 1602.05606 1602.06034 1812.07343 2201.07045 2305.03401 2308.02595 2409.20273 2506.15515 2605.28538 2607.28381
+Top & heavy quarks,"tb resonances (W-prime, charged Higgs)",m_tb,mixed,single-lepton (l+jets); multi-jet (all-had),9,2012,2023,ageing,0.5-6 TeV,no,1205.1016 1408.0886 1410.4103 1512.03704 1801.07893 1807.10473 1808.03599 2102.10076 2308.08521
+Top & heavy quarks,"Fourth-generation / heavy quark -> Wq, Zq","m_Wq, m_Zq",lepton,single/di-lepton,8,2011,2015,stale,,no,1112.5755 1202.3076 1202.3389 1202.6540 1204.1265 1209.4186 1210.5468 1509.04261
+Top & heavy quarks,Wt (excited/single VLQ),m_Wt,lepton,single-lepton,2,2013,2015,stale,,no,1301.1583 1510.02664
+Top & heavy quarks,Resonant top + jet,m_tq,lepton,single-lepton,1,2012,2012,stale,,no,1209.6593
+Top & heavy quarks,Top-philic resonances,m_tt+X,lepton,single-lepton,1,2023,2023,ageing,,no,2304.01678
+Top & heavy quarks,Dark mesons -> tb,m_tb,mixed,single-lepton; multi-jet (all-had),1,2024,2024,current,,no,2405.20061
+Higgs pairs & extended scalars,H -> aa (exotic Higgs decays),"m_aa, m_a",mixed,"single-mu / single-lep; also diphoton, b-jet, tau",12,2015,2026,current,15-60 GeV,no,1505.01609 1606.08391 1803.11145 1807.00539 2005.12236 2110.00313 2312.03306 2407.01335 2412.14046 2503.05463 2507.01165 2603.08323
+Higgs pairs & extended scalars,HH -> bbbb,m_HH,no,multi-jet + b-jet,7,2015,2024,current,1-5 TeV,no,1506.00285 1509.04670 1606.04782 1804.06174 2001.05178 2202.07288 2404.17193
+Higgs pairs & extended scalars,X -> S H (scalar + Higgs),m_SH,mixed,diphoton; single/di-lepton; ditau; b-jet,5,2023,2026,current,300-6 TeV,yes,2307.11120 2404.12915 2405.20926 2510.02857 2607.18484
+Higgs pairs & extended scalars,A -> ZH,m_ZH,mixed,single/di-lepton (llbb); MET (vvbb),4,2015,2023,ageing,,no,1502.04478 1804.01126 2011.05639 2311.04033
+Higgs pairs & extended scalars,HH -> bb gamgam,m_HH,no,diphoton,3,2014,2021,ageing,,no,1406.5053 1807.04873 2112.11876
+Higgs pairs & extended scalars,HH -> bbWW / WWWW / gamgamWW,m_HH,mixed,single/di-lepton; diphoton,3,2018,2018,stale,,no,1807.08567 1811.04671 1811.11028
+Higgs pairs & extended scalars,HH -> bb tautau,m_HH,mixed,single-lepton (lep-had); ditau_had; tau+MET,2,2018,2022,ageing,251-1600 GeV,no,1808.00336 2209.10910
+Higgs pairs & extended scalars,X -> H Y (anomaly detection / XH),m_XH,no,large-R jet,2,2017,2023,ageing,1.5-6 TeV,no,1709.06783 2306.03637
+Higgs pairs & extended scalars,Charged Higgs -> WZ / WH,"m_WZ, m_WH",mixed,single/di-lepton (lvll); jet (qqll / hadronic),2,2015,2024,current,250-3 TeV,no,1503.04233 2411.03969
+Higgs pairs & extended scalars,bbA -> bbbb (b-associated),m_bb,no,b-jet / multi-jet,2,2019,2025,current,12-100 GeV,no,1907.02749 2503.17254
+Higgs pairs & extended scalars,HH + vector boson,m_HH,mixed,"single/di-lepton (Wlv, Zll); MET (Zvv)",1,2022,2022,ageing,260-1000 GeV,no,2210.05415
+Higgs pairs & extended scalars,Triple Higgs (6b),m_HHH,no,multi-jet + b-jet,1,2024,2024,current,,no,2411.02040
+Higgs pairs & extended scalars,"t -> qX, X -> bb",m_bb,lepton,single-lepton,1,2023,2023,ageing,20-160 GeV,no,2301.03902
+Higgs pairs & extended scalars,HH + top quarks (ttHH),m_HH,mixed,single-lepton; dilepton(SS)/multilepton; diphoton,1,2026,2026,current,,yes,2603.13113
+"Leptoquarks, excited & heavy fermions",Leptoquark pair -> lepton + jet,m_lj,mixed,"single/di-lepton (eq, muq); tau_had (tauq)",9,2011,2022,ageing,,no,1104.4481 1112.4828 1203.3172 1508.04735 1605.06035 1902.00377 2006.05872 2010.02098 2210.04517
+"Leptoquarks, excited & heavy fermions",Third-generation LQ -> b tau / t tau,"m_btau, m_ttau",mixed,single-lepton; ditau_had,7,2013,2026,current,1.5-3.0 TeV,no,1303.0526 1902.08103 2101.11582 2303.01294 2305.15962 2306.17642 2606.02067
+"Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)","m_lj, m_ljj",lepton,di-lepton / single-lepton,5,2012,2023,ageing,,no,1201.3293 1308.1364 1601.05627 1906.03204 2303.09444
+"Leptoquarks, excited & heavy fermions",Heavy neutrino / right-handed W (lljj),"m_lljj, m_lj",lepton,di-lepton,5,2012,2023,ageing,,no,1203.5420 1506.06020 1809.11105 1904.12679 2304.09553
+"Leptoquarks, excited & heavy fermions",Quantum black holes -> lepton + jet,m_lj,lepton,single-lepton,3,2013,2026,current,,yes,1311.2006 2307.14967 2604.19495
+"Leptoquarks, excited & heavy fermions",Resonant single leptoquark,m_lj,lepton,single-lepton,1,2025,2025,current,,yes,2507.03650
+"Leptoquarks, excited & heavy fermions",Heavy lepton -> Z + lepton,m_Zl,lepton,di-lepton / trilepton,1,2015,2015,stale,114-176 GeV,no,1506.01291
+Generic & other,Quarkonium + photon (exclusive H/Z decays),m_(Qgam),mixed,"muon+photon (J/psi, Upsilon); photon+track (phi/rho/omega/K*/D*)",7,2015,2024,current,,no,1501.03276 1607.03400 1712.02758 1807.00802 2208.03122 2301.09938 2402.18731
+Generic & other,Doubly charged Higgs (same-sign ll / WW),"m_ll(SS), m_WW(SS)",lepton,di-lepton (same-sign),6,2012,2022,ageing,,no,1210.5070 1412.0237 1710.09748 1808.01899 2101.11961 2211.07505
+Generic & other,Heavy neutral lepton (displaced/prompt mass),m_HNL,lepton,single-muon / single-electron,4,2019,2025,current,8-65 GeV,no,1905.09787 2204.11988 2503.16213 2508.20929
+Generic & other,Anomaly detection (multilepton),many m_ij,lepton,multilepton (>=4 e/mu),1,2025,2025,current,,no,2508.19778
+Generic & other,Generic multi-body invariant masses,"many m_ij, m_ijk",lepton,single-lepton,1,2022,2022,ageing,,no,2211.08945
+Generic & other,"Two-body masses, unsupervised anomaly detection",many m_ij,lepton,single-lepton,1,2023,2023,ageing,,no,2307.01612
+Generic & other,B_s invariant mass structure (X(5568)),m_Bs pi,lepton,di-muon,1,2018,2018,stale,,no,1802.01840
+Generic & other,Xb -> Upsilon pi pi,m_Upsilon pipi,lepton,di-muon,1,2014,2014,stale,,no,1410.4409
+Generic & other,Dark photon in rare Z decays,m_ll,lepton,single/di-lepton,1,2023,2023,ageing,,no,2306.07413
+Generic & other,Displaced diphoton / dielectron,"m_gamgam, m_ee",no,diphoton,1,2023,2023,ageing,,no,2304.12885

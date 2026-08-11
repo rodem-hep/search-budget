@@ -19,7 +19,8 @@ MOD := $(S)/bump_observables.py $(S)/public_obs_map.py
 
 BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_BUDGET.md \
           $(P)/search_budget.png $(P)/budget_waterfall.png $(P)/excess_counting.png \
-          $(T)/combinatorial_budget.csv $(T)/composition_gap.txt
+          $(T)/combinatorial_budget.csv $(T)/composition_gap.txt \
+          $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md
 
 AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png
 
@@ -50,6 +51,9 @@ $(P)/budget_waterfall.png: $(T)/search_budget.csv $(T)/search_budget_selections.
 	$(PY) $(S)/budget_waterfall.py
 $(P)/excess_counting.png: $(T)/search_budget.csv $(S)/excess_counting.py
 	$(PY) $(S)/excess_counting.py
+$(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md &: $(S)/published_census.py data/published_spectra.csv
+	$(PY) $(S)/published_census.py
+
 $(T)/combinatorial_budget.csv: $(S)/combinatorial_budget.py $(S)/bump_observables.py
 	$(PY) $(S)/combinatorial_budget.py
 $(T)/composition_gap.txt: $(T)/combinatorial_budget.csv $(S)/composition_gap.py

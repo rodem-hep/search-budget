@@ -8,6 +8,7 @@ against the generated tables, not a program output — edit it directly; nothing
 | file | producer | content |
 |---|---|---|
 | `SEARCH_BUDGET.md` | `search_budget.py` | **the headline**: spectra, `N_trials`, `Z_local(5σ global)`, per-spectrum table |
+| `PUBLISHED_CENSUS.md` | `published_census.py` | the ATLAS resonance-search publication record: 86 spectra, 290 papers, recency and Run-3 coverage |
 | `EXCESS_COUNTING.md` | hand-written | expected vs observed 3σ/5σ excesses — the external check on `N` |
 | `MAX_OF_GAUSSIANS.md` | hand-written | the statistics: argmax vs threshold vs Benjamini-Hochberg |
 | `TWO_STAGE_UNBLINDING.md` | hand-written | the A/B split strategy, reach and caveats |
@@ -19,6 +20,7 @@ against the generated tables, not a program output — edit it directly; nothing
 | `search_budget.csv` | `search_budget.py` — one row per spectrum: `r`, floor, window, `n_s`, envelope, models, selections |
 | `search_budget_selections.csv` | `search_budget.py` — the event-selection multiplicity per spectrum |
 | `combinatorial_budget.csv` | `combinatorial_budget.py` — 1094 (category, mass-group) rows |
+| `published_census.csv` | `published_census.py` |
 | `composition_gap.txt` | `composition_gap.py` |
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh_fdr_ab.py` (the `.npz` is the Monte Carlo cache) |
 | `bh_zcut_per_pe.csv` | `bh_zcut.py` |
