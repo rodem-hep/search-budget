@@ -92,6 +92,10 @@ split `N` is the easy mistake here.
 Per-group resolution comes from the object composition, `r = ½·sqrt(⟨sigma_i²⟩)` with fractional
 p_T resolutions `sigma(e/mu/Z) = 0.04`, `sigma(j) = 0.10`, `sigma(b) = 0.20`; this reproduces the
 per-channel values in `bump_observables.RESOLUTION` (jj → 0.05, ll → 0.02, bb → 0.10, lj → 0.04).
+Note the ½ prefactor is an empirical calibration to those channels, not textbook propagation
+(which for a 2-body mass gives `½·sqrt(Σ sigma_i²)`, a factor √2 larger), and it makes `r`
+independent of group size — a 4-body mass is assumed as sharp as a 2-body one. Both choices only
+move `ln N`.
 
 `composition_gap.py` then asks which of those flavour compositions any published ATLAS bump hunt
 has ever scanned. The coverage mapping is deliberately **generous** — a composition counts as
