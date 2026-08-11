@@ -124,6 +124,19 @@ def floor(obs, default=FLOOR_DEFAULT):
 
 # Fractional mass resolution r = sigma_M / M per bump observable (rough central values; the one
 # real physics input to the trials count). Leptons/photons sharp; jets/tau/MET broad. Default 0.06.
+# Fractional mass resolutions. These are NOT resolutions quoted by individual searches: there is no
+# uniform set of 46 such numbers to copy. Each is propagated from the ATLAS performance measurement
+# of whichever object limits that mass axis --
+#   e/gamma  EM calorimeter energy resolution      arXiv:2309.05471
+#   mu       track sagitta, rises with pT          arXiv:2012.00578
+#   jet      jet energy scale and resolution       arXiv:2007.02645
+#   b-jet    as a jet, plus semileptonic nu        arXiv:1907.05120
+#   tau_had  visible decay products only           arXiv:1512.05955
+#   V/h/t/H  large-radius jet mass                 arXiv:2311.08885
+#   MET      transverse masses, coarsest axes      arXiv:2402.05858
+# -- and a two-body mass takes its worse leg. The consuming note derives all of this in its
+# resolution appendix; the factor-two band every headline carries is wider than the spread between
+# any two defensible choices here.
 RESOLUTION = {
     # ---- lepton-flavour leaves. The e/mu difference is the whole reason these axes are split:
     # electrons are measured in the EM calorimeter (sigma/m ~1.5%, ~mass-independent), muons by
