@@ -16,7 +16,7 @@ it: the tables, the reports and the figures.
 | the discovery bar | `Z_local(5σ global) ≈ 6.44 → 6.53`, stable to ±0.1σ under every counting choice | [`search_budget.py`](scripts/search_budget.py) | [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) |
 | fully combinatorial scan | 1502 mass spectra across 204 object categories, giving `N ≈ 143k` and `Z_local ≈ 6.98` | [`combinatorial_budget.py`](scripts/combinatorial_budget.py) | [`combinatorial_budget.csv`](results/tables/combinatorial_budget.csv) |
 | never scanned | **57 of 82** reachable ≤4-object mass compositions have no published ATLAS bump hunt | [`composition_gap.py`](scripts/composition_gap.py) | [`composition_gap.txt`](results/tables/composition_gap.txt), which names all 82 |
-| the published record | **84** catalogued spectra over **288** ATLAS papers; 17 not revisited since before 2019, of which 12 sit on an axis already counted; 6 with a Run-3 result | [`published_census.py`](scripts/published_census.py) | [`published_spectra.csv`](data/published_spectra.csv), one row per spectrum with its arXiv references |
+| the published record | **84** catalogued spectra over **288** ATLAS papers; 17 not revisited since before 2019, of which 12 sit on an axis already counted; 6 with a Run-3 result | [`published_census.py`](scripts/published_census.py) | [`published_spectra.csv`](data/published_spectra.csv), one row per spectrum with its arXiv references, and [`census_papers.csv`](data/census_papers.csv) with the title, journal and DOI of every one |
 | observed against expected excesses | the published 3σ and 5σ count is what `N` predicts | [`excess_counting.py`](scripts/excess_counting.py) | [`EXCESS_COUNTING.md`](results/overviews/EXCESS_COUNTING.md) |
 | two-stage A/B unblinding | costs about 0.5σ in reach, buys a trials factor you can count exactly | [`ab_split_budget.py`](scripts/ab_split_budget.py) | [`TWO_STAGE_UNBLINDING.md`](results/overviews/TWO_STAGE_UNBLINDING.md) |
 | selection rules under an imperfect estimator | a fixed threshold beats both argmax and Benjamini-Hochberg | [`bh_fdr_outliers.py`](scripts/bh_fdr_outliers.py) | [`MAX_OF_GAUSSIANS.md`](results/overviews/MAX_OF_GAUSSIANS.md), [`bh_fdr_scan.csv`](results/tables/bh_fdr_scan.csv) |
@@ -35,6 +35,11 @@ make help                              # the individual stages
 The budget itself (`search_budget.py`, `combinatorial_budget.py`, `composition_gap.py`) is pure
 standard library and runs under any `python3`; only the figures and the Monte Carlo need the
 dependencies. Targets are file-level, so a rerun redoes just what has gone stale.
+
+One script is outside `make all` and needs the network: `fetch_census_meta.py` refreshes the
+bibliographic details of the census papers from the arXiv API. Its output is committed, so
+everything else, including the generated bibliography, builds offline. Run it only after adding an
+arXiv ID to `published_spectra.csv`, and it will fetch just the new one.
 
 ## How the counting works
 
@@ -72,10 +77,12 @@ budget is remarkably insensitive to how finely you choose to slice the program.
 │   ├── public_obs_map.py    ** public model to spectrum map, published event-selection counts **
 │   └── ...                  one concern per file
 ├── data/
-│   └── published_spectra.csv  the ATLAS resonance-search record, one row per spectrum
+│   ├── published_spectra.csv  the ATLAS resonance-search record, one row per spectrum
+│   └── census_papers.csv     title, journal and DOI of every paper it cites
 ├── results/
 │   ├── tables/              machine-readable tables and the cached Monte Carlo (.npz)
 │   ├── plots/               figures; plots/max_of_gaussians/ is the selection-rule study
+│   ├── tex/                 the census bibliography and its per-spectrum appendix
 │   └── overviews/           the written reports
 └── docs/
     ├── METHOD_NOTES.md      the counting conventions and why each one is what it is

@@ -13,6 +13,7 @@ T  := results/tables
 O  := results/overviews
 P  := results/plots
 G  := results/plots/max_of_gaussians
+X  := results/tex
 
 # the two data-free modules every budget number derives from
 MOD := $(S)/bump_observables.py $(S)/public_obs_map.py
@@ -20,7 +21,8 @@ MOD := $(S)/bump_observables.py $(S)/public_obs_map.py
 BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_BUDGET.md \
           $(P)/search_budget.png $(P)/budget_waterfall.png $(P)/excess_counting.png \
           $(T)/combinatorial_budget.csv $(T)/composition_gap.txt \
-          $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md
+          $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md \
+          $(X)/census_refs.bib $(X)/census_appendix.tex
 
 AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png
 
@@ -53,6 +55,11 @@ $(P)/excess_counting.png: $(T)/search_budget.csv $(S)/excess_counting.py
 	$(PY) $(S)/excess_counting.py
 $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md &: $(S)/published_census.py data/published_spectra.csv
 	$(PY) $(S)/published_census.py
+# The bibliography of the census. fetch_census_meta.py refreshes data/census_papers.csv from the
+# arXiv API and is deliberately NOT a prerequisite: its output is committed so this stays offline.
+$(X)/census_refs.bib $(X)/census_appendix.tex &: $(S)/export_census_bib.py \
+                                                 data/published_spectra.csv data/census_papers.csv
+	$(PY) $(S)/export_census_bib.py
 
 $(T)/combinatorial_budget.csv: $(S)/combinatorial_budget.py $(S)/bump_observables.py
 	$(PY) $(S)/combinatorial_budget.py

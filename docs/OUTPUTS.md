@@ -3,6 +3,11 @@
 Every file under `results/`, with the script that writes it. "hand-written" means a report authored
 against the generated tables, not a program output — edit it directly; nothing regenerates it.
 
+Two files under `data/` are inputs rather than outputs, and are committed: `published_spectra.csv`
+(the census, curated by hand) and `census_papers.csv` (its bibliographic details, refreshed from the
+arXiv API by `fetch_census_meta.py`, the one script that needs the network and the one that is not
+part of `make all`).
+
 ## Reports — `results/overviews/`
 
 | file | producer | content |
@@ -25,6 +30,16 @@ against the generated tables, not a program output — edit it directly; nothing
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh_fdr_ab.py` (the `.npz` is the Monte Carlo cache) |
 | `bh_zcut_per_pe.csv` | `bh_zcut.py` |
 | `bh_outliers_scan.npz` | `bh_fdr_outliers.py` (Monte Carlo cache) |
+
+## LaTeX fragments — `results/tex/`
+
+Generated for a consuming document to `\input`, the same way `results/plots/` is generated for it to
+`\includegraphics`.
+
+| file | producer |
+|---|---|
+| `census_refs.bib` | `export_census_bib.py` — a BibTeX entry per census paper, keyed `census:<arxiv-id>` |
+| `census_appendix.tex` | `export_census_bib.py` — the census spectrum by spectrum, citing every paper behind each |
 
 ## Figures — `results/plots/`
 
