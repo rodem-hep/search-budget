@@ -1,5 +1,5 @@
 observable,r,floor_GeV,scan_window_GeV,ns_scan,ns_envelope,n_models_public,n_event_selections,ns_with_selections,scan_source
-m(gammagamma),0.01,40,60-110+150-5000,411.3,582.9,5,2,822.5,low-mass diphoton 66-110; spin-0/2 high-mass 150 GeV-5 TeV (incl. X->aa->4gamma)
+m(gammagamma),0.01,40,66-110+150-5000,401.7,582.9,5,2,803.5,low-mass diphoton 66-110 (JHEP 01 (2025) 053); spin-0/2 high-mass 150 GeV-5 TeV (incl. X->aa->4gamma)
 m(mumu) (Zd),0.02,0.3,0.3-400,359.8,536.1,2,1,359.8,prompt dark-photon muon LJ 0.3-10 + H->ZdZd->4mu 1-60 + grid to 400
 m(ee) SS,0.015,15,200-1300,124.8,454.0,2,1,124.8,H++ same-sign ee pair scan
 m(ee) (Zd),0.025,1,1-400,239.7,380.7,1,1,239.7,e-LJ 1-10 + H->ZdZd->4e 1-60 + heavy ZdZd grid to 400

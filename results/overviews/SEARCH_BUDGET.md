@@ -37,7 +37,7 @@ scan this axis separately (`public_obs_map.NSEL`).
 
 | # | spectrum (bump observable) | r | scan window [GeV] | n_s | n_s envelope | #models | #selections | n_s x sel |
 |--:|---|--:|---|--:|--:|--:|--:|--:|
-| 1 | `m(gammagamma)` | 0.01 | 60-110 + 150-5000 | 411 | 583 | 5 | 2 | 823 |
+| 1 | `m(gammagamma)` | 0.01 | 66-110 + 150-5000 | 402 | 583 | 5 | 2 | 803 |
 | 2 | `m(mumu) (Zd)` | 0.02 | 0.3-400 | 360 | 536 | 2 | 1 | 360 |
 | 3 | `m(ee) SS` | 0.015 | 200-1300 | 125 | 454 | 2 | 1 | 125 |
 | 4 | `m(ee) (Zd)` | 0.025 | 1-400 | 240 | 381 | 1 | 1 | 240 |
@@ -83,21 +83,21 @@ scan this axis separately (`public_obs_map.NSEL`).
 | 44 | `m(tt)` | 0.08 | 350-6000 | 36 | 46 | 9 | 4 | 142 |
 | 45 | `m(ttZ)/m(Zt)` | 0.08 | 1000-4000 | 17 | 43 | 1 | 2 | 35 |
 | 46 | `mT(muv)` | 0.15 | 150-7000 | 26 | 40 | 2 | 1 | 26 |
-| | **total (46 spectra)** | | | **3,694** | 6,442 | | **94** | **6,616** |
+| | **total (46 spectra)** | | | **3,685** | 6,442 | | **94** | **6,597** |
 
 ## Summary
 | granularity | # spectra | N_trials | band (r x0.5..x2) | Z_local for 5s global | band |
 |---|--:|--:|---|--:|---|
-| inclusive (1 spectrum / observable) | 46 | **3,694** | 1,847-7,389 | **6.44** | 6.33-6.54 |
-| **published event selections** | 94 | **6,616** | 3,308-13,231 | **6.53** | 6.42-6.63 |
+| inclusive (1 spectrum / observable) | 46 | **3,685** | 1,842-7,370 | **6.44** | 6.33-6.54 |
+| **published event selections** | 94 | **6,597** | 3,298-13,193 | **6.53** | 6.42-6.63 |
 | kinematic envelope (reference bound) | 46 | **6,442** | 3,221-12,884 | **6.52** | 6.42-6.63 |
 | full ATLAS BSM program (literature) | - | **50,000** | 25,000-100,000 | **6.83** | 6.73-6.93 |
 
 **Reading it.** Covering every bump channel that public BSM models motivate costs
-**N_trials = 3,694** over 46 spectra: a local 5 sigma degrades to
+**N_trials = 3,685** over 46 spectra: a local 5 sigma degrades to
 ~2.9 sigma global, and a 5 sigma-global discovery
 needs local **~6.44 sigma**. Slicing at the granularity real searches actually use
-(94 event selections) raises N to 6,616 and the bar only to 6.53. Because N
+(94 event selections) raises N to 6,597 and the bar only to 6.53. Because N
 enters through `ln N`, every level sits within ~0.1 sigma of 6.5 -- **breadth is cheap**, and the
 budget is extremely robust to counting choices.
 

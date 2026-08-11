@@ -184,8 +184,8 @@ def res(obs): return RESOLUTION.get(obs, RES_DEFAULT)
 # An entry is (lo, hi, source) or ([(lo1,hi1),(lo2,hi2),...], source) when the published program
 # scans DISJOINT segments of the axis (the gap between them is not scanned and not counted).
 SCAN = {
-    "m(gammagamma)": ([(60, 110), (150, 5000)],
-                      "low-mass diphoton 66-110; spin-0/2 high-mass 150 GeV-5 TeV (incl. X->aa->4gamma)"),
+    "m(gammagamma)": ([(66, 110), (150, 5000)],
+                      "low-mass diphoton 66-110 (JHEP 01 (2025) 053); spin-0/2 high-mass 150 GeV-5 TeV (incl. X->aa->4gamma)"),
     # Lepton-flavour leaves inherit their parent's PUBLISHED window: ATLAS scans the same mass
     # range in ee and mumu (the dilepton papers quote one range and combine at the limit stage),
     # so the split changes r and the channel count, NOT the window. The two exceptions below are

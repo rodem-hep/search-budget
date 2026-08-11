@@ -23,7 +23,6 @@ import csv, math, os, re, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def _p(*a): return os.path.join(ROOT, *a)
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-from public_obs_map import NSEL, NSEL_DEFAULT
 
 def p1(Z): return 0.5 * math.erfc(Z / math.sqrt(2.0))
 
@@ -113,10 +112,9 @@ with open(_p("results", "tables", "reported_excesses.csv"), "w", newline="") as 
 with open(_p("results", "tables", "search_budget.csv")) as f:
     budget = list(csv.DictReader(f))
 N_inc = sum(float(r["ns_scan"]) for r in budget)
-def _nsel(obs):
-    v = NSEL.get(obs, NSEL_DEFAULT)
-    return v[0] if isinstance(v, tuple) else v
-N_sel = sum(_nsel(r["observable"]) * float(r["ns_scan"]) for r in budget)
+# take the per-row product from the table rather than re-deriving it, so this report and
+# SEARCH_BUDGET.md cannot disagree in the last digit
+N_sel = sum(float(r["ns_with_selections"]) for r in budget)
 exp_inc, exp_sel = N_inc * p1(3.0), N_sel * p1(3.0)
 
 n_papers = len({r["arxiv"] for r in csv.DictReader(open(_p("data", "census_abstracts.csv")))})

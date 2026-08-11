@@ -1,5 +1,5 @@
 observable,n_event_selections,ns_inclusive,ns_with_selections,channels
-m(gammagamma),2,411.3,822.5,spin-0 (ggF) + spin-2/VBF (converted/unconverted categories)
+m(gammagamma),2,401.7,803.5,spin-0 (ggF) + spin-2/VBF (converted/unconverted categories)
 m(mumu) (Zd),1,359.8,359.8,prompt muon LJ / 4mu scan
 m(ee) SS,1,124.8,124.8,H++ same-sign ee
 m(ee) (Zd),1,239.7,239.7,prompt e-LJ / 4e scan

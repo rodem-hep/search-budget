@@ -15,7 +15,7 @@ Every quoted global significance above is <= 2.1 sigma, and none has since grown
 
 ## Against the background-only expectation
 
-A single background-only sweep of the 46-spectrum budget expects `N x p(>=3 sigma)` = 3694 x 1.35e-3 = **5.0** reports (**8.9** at selection granularity, N = 6616). The observed 6 sits between the two.
+A single background-only sweep of the 46-spectrum budget expects `N x p(>=3 sigma)` = 3685 x 1.35e-3 = **5.0** reports (**8.9** at selection granularity, N = 6597). The observed 6 sits between the two.
 
 Two corrections pull in opposite directions and are left uncorrected:
 
