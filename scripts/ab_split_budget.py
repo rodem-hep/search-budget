@@ -13,6 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from bump_observables import canon, ns_scan, z_local_for_global5 as z5
 from public_obs_map import PUBLIC_OBS, nsel
+from plot_style import style, BLUE, C_ARG, INK, GRID
 
 obs = sorted({canon(o) for objs in PUBLIC_OBS.values() for o in objs})
 N_incl = sum(ns_scan(o) for o in obs)                 # inclusive public budget
@@ -289,61 +290,55 @@ print("Both stay 0.3-0.5 above the single stage: the staircase fits the Neyman-P
       "better than the corner, never equals it.")
 
 # crossover figure
-figc, (axr, axg) = plt.subplots(2, 1, figsize=(9.0, 7.6), sharex=True,
+figc, (axr, axg) = plt.subplots(2, 1, figsize=(5.6, 4.7), sharex=True,
                                 gridspec_kw={"height_ratios": [2.0, 1.15], "hspace": 0.07})
+style(axr); style(axg)
 Nx = [c[0] for c in cross]
-axr.plot(Nx, [c[1] for c in cross], "--", color="#d1495b", lw=2,
-         label=r"single-stage exact correction: $\sqrt{25+2\ln N}$")
-axr.plot(Nx, [c[2] for c in cross], "-o", color="#9ecae9", lw=2, ms=4,
-         label="two-stage, optimized (f, $Z_{cut}$), exact windows (w=1)")
-axr.plot(Nx, [c[3] for c in cross], "-o", color="#2f4b6e", lw=2, ms=4,
-         label=r"two-stage, optimized, $\pm2\sigma_M$ window freedom (w=3)")
-axr.axvline(N, color="#888888", lw=1, ls=":")
-axr.text(N * 1.25, 5.6, "this program", fontsize=9.5, color="#52514e")
+axr.plot(Nx, [c[1] for c in cross], "--", color=C_ARG,
+         label=r"single-stage exact correction, $\sqrt{25+2\ln N}$")
+axr.plot(Nx, [c[2] for c in cross], "-o", color=BLUE[4], ms=3,
+         label=r"two-stage, optimised, exact windows ($w=1$)")
+axr.plot(Nx, [c[3] for c in cross], "-o", color=BLUE[6], ms=3,
+         label=r"two-stage, optimised, $\pm2\sigma_M$ freedom ($w=3$)")
+axr.axvline(N, color=INK, lw=0.6, ls=":")
+axr.text(N * 1.3, 5.6, "this program", color=INK)
 axr.set_xscale("log")
-axr.set_ylabel(r"discovery reach: $Z_{local}^{full}$ at 50% power")
-axr.grid(ls=":", alpha=0.35)
-axr.legend(fontsize=9, loc="upper left", frameon=False)
-axr.set_title("Single-stage against two-stage reach, over four decades of N",
-              fontsize=12.5, loc="left")
-axg.plot(Nx, [c[4] for c in cross], "-o", color="#5f9e6e", lw=2, ms=4)
-axg.axvline(N, color="#888888", lw=1, ls=":")
+axr.set_ylabel(r"reach: $Z_{\mathrm{local}}^{\mathrm{full}}$ at 50% power")
+axr.legend(loc="upper left")
+axg.plot(Nx, [c[4] for c in cross], "-o", color="#009e73", ms=3)
+axg.axvline(N, color=INK, lw=0.6, ls=":")
 axg.set_xscale("log")
 axg.set_ylim(0, 22)
-axg.set_xlabel("number of independent looks  N")
-axg.set_ylabel(r"$R^{*}$: trials inflation for" "\n" r"the split to win")
-axg.grid(ls=":", alpha=0.35, which="both")
+axg.set_xlabel(r"number of independent looks $N$")
+axg.set_ylabel(r"$R^{*}$ for the" "\n" "split to win")
 figc.tight_layout()
 outc = os.path.join(ROOT, "results", "plots", "ab_split_crossover.png")
 os.makedirs(os.path.dirname(outc), exist_ok=True)
-figc.savefig(outc, dpi=130)
+figc.savefig(outc, dpi=400)
 print(f"wrote {outc}")
 
 # ---------------------------------------------------------------- plot
 fs = np.linspace(0.05, 0.95, 400)
-fig, ax = plt.subplots(figsize=(9.5, 6.2))
-colors = {2.0: "#c6dbeF", 2.5: "#9ecae9", 3.0: "#4c78a8", 3.5: "#2f4b6e", 4.0: "#17324d"}
-for zcut in (2.0, 2.5, 3.0, 3.5, 4.0):
-    ax.plot(fs, [reach(f, N, zcut) for f in fs], lw=2,
-            color=colors[zcut], label=f"$Z_{{cut}}$ = {zcut:g}")
-ax.axhline(Z_single, color="#d1495b", ls="--", lw=1.8)
-ax.text(0.96, Z_single - 0.08, f"single-stage scan: Z = {Z_single:.2f}", color="#a02735",
-        fontsize=9.5, ha="right", va="top")
-ax.plot([opt[1]], [opt[2]], "o", ms=9, color="#2f4b6e", mec="white", mew=2, zorder=5)
-ax.annotate(f"best split: f = {opt[1]:.2f}, reach {opt[2]:.2f}",
-            (opt[1], opt[2]), textcoords="offset points", xytext=(26, -34), ha="left",
-            fontsize=9.5, color="#52514e",
-            arrowprops=dict(arrowstyle="-", color="#b9b9b4", lw=0.8))
-ax.set_xlabel("exploration fraction  f  (dataset A);  confirmation uses 1$-$f (dataset B)")
-ax.set_ylabel(r"discovery reach: full-dataset $Z_{local}$ at 50% power")
+fig, ax = plt.subplots(figsize=(5.6, 3.65))
+style(ax)
+# ordered thresholds -> one hue, light to dark
+ramp = ["#c6dbef", "#9ecae1", "#4292c6", "#2171b5", "#08306b"]
+for zcut, col in zip((2.0, 2.5, 3.0, 3.5, 4.0), ramp):
+    ax.plot(fs, [reach(f, N, zcut) for f in fs], color=col,
+            label=rf"$Z_{{\mathrm{{cut}}}} = {zcut:g}$")
+ax.axhline(Z_single, color=C_ARG, ls="--")
+ax.text(0.965, Z_single - 0.10, rf"single-stage scan, $Z = {Z_single:.2f}$", color=C_ARG,
+        ha="right", va="top")
+ax.plot([opt[1]], [opt[2]], "o", ms=4.5, color="#08306b", mec="white", mew=0.8, zorder=5)
+ax.annotate(rf"best split: $f = {opt[1]:.2f}$, reach ${opt[2]:.2f}$",
+            (opt[1], opt[2]), textcoords="offset points", xytext=(14, -22), ha="left",
+            color=INK, arrowprops=dict(arrowstyle="-", color=INK, lw=0.5))
+ax.set_xlabel(r"exploration fraction $f$")
+ax.set_ylabel(r"reach: full-dataset $Z_{\mathrm{local}}$ at 50% power")
 ax.set_ylim(5.6, 10)
-ax.grid(ls=":", alpha=0.35)
-ax.set_title("Discovery reach of a two-stage A/B split against the exploration fraction",
-             fontsize=12.5, loc="left")
-ax.legend(loc="upper center", ncol=2, fontsize=9.5, frameon=False,
-          title="selection threshold in A")
+ax.legend(loc="upper center", ncol=2, title=r"stage-A threshold")
 fig.tight_layout()
 out = os.path.join(ROOT, "results", "plots", "ab_split_reach.png")
 os.makedirs(os.path.dirname(out), exist_ok=True)
-fig.savefig(out, dpi=130)
+fig.savefig(out, dpi=400)
 print(f"\nwrote {out}")

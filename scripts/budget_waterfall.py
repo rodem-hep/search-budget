@@ -38,26 +38,26 @@ LEVELS = [  # (N, label, annotation offset (pts), ha)
 ]
 
 N = np.logspace(2.8, 5.6, 400)
-fig, ax = plt.subplots(figsize=(9.5, 5.8))
+fig, ax = plt.subplots(figsize=(5.5, 3.35))
 style(ax, grid=False)
 ax.grid(True, which="major", color=GRID, lw=0.8, alpha=0.6)
-ax.plot(N, [z5(v) for v in N], color=MARK, lw=2.2)
+ax.plot(N, [z5(v) for v in N], color=MARK, lw=1.3)
 ax.set_xscale("log")
 
 for Nv, name, off, ha in LEVELS:
     zv = z5(Nv)
-    ax.plot([Nv], [zv], "o", ms=9, color=MARK, mec="white", mew=2, zorder=5)
+    ax.plot([Nv], [zv], "o", ms=4.5, color=MARK, mec="white", mew=0.7, zorder=5)
     ax.annotate(f"{name}\nN = {Nv:,.0f},  Z = {zv:.2f}",
                 (Nv, zv), textcoords="offset points", xytext=off, ha=ha,
                 va="bottom" if off[1] > 0 else "top", fontsize=9.5, color=INK2,
                 arrowprops=dict(arrowstyle="-", color=GRID, lw=0.8))
 
 labels(ax, x="trials factor  N  (independent looks)",
-           y=r"$Z_{local}$ needed for a $5\sigma$ global discovery")
+           y=r"$Z_{\mathrm{local}}$ needed for a $5\sigma$ global discovery")
 title(ax, r"The look-elsewhere price grows as $\sqrt{25 + 2\ln N}$", size=12.5)
 fig.tight_layout()
 out = os.path.join(ROOT, "results", "plots", "budget_waterfall.png")
-fig.savefig(out, dpi=130)
+fig.savefig(out, dpi=400)
 print(f"wrote {out}")
 for Nv, name, *_ in LEVELS:
     print(f"  {name:28s} N = {Nv:8,.0f}   Z_local = {z5(Nv):.2f}")

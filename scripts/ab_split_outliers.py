@@ -38,6 +38,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from bump_observables import canon, ns_scan, z_local_for_global5 as z5
 from public_obs_map import PUBLIC_OBS, nsel
+from plot_style import style, BLUE, C_ARG, C_ALT, C_BKG, INK
 
 OUT = os.path.join(ROOT, "results", "plots")
 os.makedirs(OUT, exist_ok=True)
@@ -346,26 +347,24 @@ print(f"  P(spurious claim), single: toys {hits_single / NTOY:.2e} "
       f"[+-{math.sqrt(max(hits_single,1))/NTOY:.1e}]   analytic {claim_single(m, Z_SINGLE):.2e}")
 
 # ================================================================ 6. figure
-fig, ax = plt.subplots(figsize=(9.2, 5.8))
-for e, col in ((1e-4, "#4c78a8"), (1e-3, "#d9a441"), (1e-2, "#d1495b")):
+fig, ax = plt.subplots(figsize=(5.7, 3.6))
+for e, col in ((1e-4, "#0072b2"), (1e-3, "#e69f00"), (1e-2, "#d55e00")):
     n3 = N * e * float(Glitch(1.0).w @ Q(3.0 - Glitch(1.0).t))
-    ax.plot(rhos, curves[e], lw=2.2, color=col,
+    ax.plot(rhos, curves[e], lw=1.3, color=col,
             label=f"defect rate $\\epsilon$ = {e:.0e}  ({n3:.1f} artefacts $>3\\sigma$ per scan)")
 ax.axhline(0.0, color="#444444", lw=1.2)
-ax.axhline(-(reach_split(clean) - Z_SINGLE), color="#888888", ls=":", lw=1.4)
+ax.axhline(-(reach_split(clean) - Z_SINGLE), color="#000000", ls=":", lw=1.4)
 ax.text(0.012, -(reach_split(clean) - Z_SINGLE) + 0.03, "perfect estimator",
-        fontsize=9.5, color="#52514e")
-ax.fill_between([0, 1], 0, 3, color="#4c78a8", alpha=0.07)
-ax.text(0.36, 1.9, "split ahead", fontsize=11, color="#2f4b6e")
-ax.text(0.62, -0.45, "single stage ahead", fontsize=11, color="#8a5a2b")
+        fontsize=9.5, color="#000000")
+ax.fill_between([0, 1], 0, 3, color="#0072b2", alpha=0.07)
+ax.text(0.36, 1.9, "split ahead", color="#08306b")
+ax.text(0.62, -0.45, "single stage ahead", color="#8a5a2b")
 ax.set_xlim(0, 1); ax.set_ylim(-0.75, 2.6)
 ax.set_xlabel(r"coherent fraction $\rho$: outliers that repeat in both halves")
 ax.set_ylabel(r"advantage of the split  [$\sigma$ of reach]")
-ax.set_title("Advantage of the A/B split against how often an outlier repeats",
-             fontsize=12.5, loc="left")
 ax.grid(ls=":", alpha=0.35); ax.legend(loc="upper right", fontsize=9.5, frameon=False)
 fig.tight_layout()
-fig.savefig(os.path.join(OUT, "ab_split_outliers.png"), dpi=130)
+fig.savefig(os.path.join(OUT, "ab_split_outliers.png"), dpi=400)
 print("\nwrote ab_split_outliers.png")
 
 # ================================================================ 7. mechanism + scaling figure
@@ -399,54 +398,54 @@ def selected(kind, n_target, beta=BETA, zsig=7.5):
         if sum(len(x) for x in out_a) >= n_target: break
     return np.concatenate(out_a)[:n_target], np.concatenate(out_b)[:n_target]
 
-fig, (axL, axR) = plt.subplots(1, 2, figsize=(13.2, 5.4))
+fig, (axL, axR) = plt.subplots(1, 2, figsize=(6.2, 2.9))
 
 zr_c, _ = zreq(clean)
 axL.axvspan(Z_CUT, 12, color="#dfe8f0", alpha=0.45, zorder=0)
-axL.fill_between([Z_CUT, 12], zr_c, 12, color="#4c78a8", alpha=0.20, zorder=1)
+axL.fill_between([Z_CUT, 12], zr_c, 12, color="#0072b2", alpha=0.20, zorder=1)
 for kind, col, lbl, ms in (("bkg", "#b0b0b0", "background", 7),
-                           ("glitch", "#d1495b", "GLITCH (per-run artefact)", 13),
+                           ("glitch", "#d55e00", "GLITCH (per-run artefact)", 13),
                            ("bias", "#e08a1e", "BIAS (mismodelling)", 13),
-                           ("signal", "#2f6f4e", "real signal, $Z_{full}$ = 7.5", 13)):
+                           ("signal", "#2f6f4e", "real signal, $Z_{\mathrm{full}}$ = 7.5", 13)):
     a, b = selected(kind, 900 if kind == "bkg" else 350)
     axL.scatter(a, b, s=ms, alpha=0.45 if kind == "bkg" else 0.55, color=col, lw=0, label=lbl)
 xs = np.linspace(0, 12, 10)
-axL.plot(xs, SB / SF * xs, ls="--", lw=1.6, color="#2f6f4e")
+axL.plot(xs, SB / SF * xs, ls="--", lw=1.2, color="#2f6f4e")
 axL.text(7.9, 9.2, "signal locus", fontsize=9.5, color="#2f6f4e")
 axL.axvline(Z_CUT, color="#333333", lw=1.2)
 axL.axhline(zr_c, color="#333333", lw=1.2)
 axL.text(3.15, -1.6, f"$Z_{{cut}}$ = {Z_CUT:g}", fontsize=9)
 axL.text(8.4, zr_c + 0.2, f"claim bar $Z_B$ = {zr_c:.2f}", fontsize=9)
-axL.text(4.2, 7.6, "claim region", fontsize=10.5, color="#2f4b6e")
+axL.text(4.2, 7.6, "claim region", color="#08306b")
 axL.set_xlim(2.4, 12); axL.set_ylim(-2.5, 12)
 axL.set_xlabel("$Z_A$  (exploration half, 30% of the data)")
 axL.set_ylabel("$Z_B$  (confirmation half, 70%)")
-axL.set_title("Confirmation against exploration significance", fontsize=11, loc="left")
+axL.set_title("Confirmation against exploration significance", loc="left")
 axL.legend(loc="lower right", fontsize=9, frameon=False)
 axL.grid(ls=":", alpha=0.3)
 
 eps_grid = np.logspace(-6, -1, 40)
 # the two defects have IDENTICAL single-stage tails by construction -- one curve, and that is
 # precisely the point: a single pass cannot tell them apart, the split is what separates them.
-axR.plot(eps_grid, [claim_single(Glitch(e), Z_SINGLE) for e in eps_grid], lw=2.4, color="#333333",
+axR.plot(eps_grid, [claim_single(Glitch(e), Z_SINGLE) for e in eps_grid], lw=1.3, color="#333333",
          label=f"single stage @ {Z_SINGLE:.2f}: either defect")
-axR.plot(eps_grid, [claim_split(Bias(e)) for e in eps_grid], lw=2.4, ls="--", color="#e08a1e",
+axR.plot(eps_grid, [claim_split(Bias(e)) for e in eps_grid], lw=1.3, ls="--", color="#e08a1e",
          label="two-stage split, BIAS")
-axR.plot(eps_grid, [claim_split(Glitch(e)) for e in eps_grid], lw=2.4, ls="--", color="#d1495b",
+axR.plot(eps_grid, [claim_split(Glitch(e)) for e in eps_grid], lw=1.3, ls="--", color="#d55e00",
          label="two-stage split, GLITCH")
 axR.plot(eps_grid, 6e-2 * (eps_grid / 1e-3), color="#999999", lw=1.0, ls=":")
 axR.plot(eps_grid, 3e-4 * (eps_grid / 1e-3) ** 2, color="#999999", lw=1.0, ls=":")
-axR.text(2.2e-6, 4e-4, r"$\propto\epsilon$", fontsize=10, color="#777777", rotation=17)
-axR.text(1.1e-4, 2e-7, r"$\propto\epsilon^2$", fontsize=10, color="#777777")
+axR.text(2.2e-6, 4e-4, r"$\propto\epsilon$", color="#777777", rotation=17)
+axR.text(1.1e-4, 2e-7, r"$\propto\epsilon^2$", color="#777777")
 axR.set_xscale("log"); axR.set_yscale("log")
 axR.set_ylim(1e-9, 30.0)
 axR.set_xlabel(r"defect rate $\epsilon$ per look")
 axR.set_ylabel("P(spurious $5\\sigma$ claim) per scan")
-axR.set_title("Spurious-claim probability", fontsize=11, loc="left")
+axR.set_title("Spurious-claim probability", loc="left")
 axR.legend(loc="upper left", fontsize=9, frameon=False)
 axR.grid(ls=":", alpha=0.35, which="both")
 fig.tight_layout()
-fig.savefig(os.path.join(OUT, "ab_outliers_mechanism.png"), dpi=130)
+fig.savefig(os.path.join(OUT, "ab_outliers_mechanism.png"), dpi=400)
 print("wrote ab_outliers_mechanism.png")
 
 # ================================================================ 8. toy spectra
@@ -491,17 +490,17 @@ for seed in range(300):
     if 3.7 <= zA_g.max() <= 4.5 and 3.7 <= zA_c.max() <= 4.6: break
 print(f"  spectrum toys: seed {seed}")
 
-fig2, axs = plt.subplots(1, 2, figsize=(13.6, 5.3), sharey=True)
+fig2, axs = plt.subplots(1, 2, figsize=(6.2, 2.8), sharey=True)
 for ax, (za, zb), title, verdict, vcol in [
         (axs[0], (zA_g, zB_g),
          "GLITCH: the A-half background fit undershoots at 1.2 TeV\n"
          "(the events are not there -- the model is wrong, in A only)",
-         "DIES in B", "#a02735"),
+         "DIES in B", "#d55e00"),
         (axs[1], (zA_c, zB_c),
          "BIAS: the background really is mismodelled by "
          f"{100 * dC:.1f}% at 1.2 TeV\n(both halves see the same excess)",
          "CONFIRMS -- indistinguishable from a signal", "#2f6f4e")]:
-    ax.plot(ctr, za, lw=1.6, color="#4c78a8", label="stage A  $Z_A(m)$  (30% of data)")
+    ax.plot(ctr, za, lw=1.2, color="#0072b2", label="stage A  $Z_A(m)$  (30% of data)")
     sel = za >= Z_CUT
     first = True
     for j in np.where(sel)[0]:
@@ -512,25 +511,23 @@ for ax, (za, zb), title, verdict, vcol in [
     mask = np.zeros_like(sel)
     for j in np.where(sel)[0]:
         mask |= np.abs(np.log(ctr / ctr[j])) < 2 * SIGMA_REL
-    ax.plot(ctr, np.where(mask, zb, np.nan), lw=2.4, color="#d1495b",
+    ax.plot(ctr, np.where(mask, zb, np.nan), lw=1.3, color="#d55e00",
             label="stage B  $Z_B(m)$ -- unblinded ONLY here (70%)")
-    ax.axhline(Z_CUT, color="#4c78a8", ls="--", lw=1.1)
-    ax.axhline(zr_c, color="#d1495b", ls="--", lw=1.1)
-    ax.text(215, Z_CUT + 0.15, f"$Z_{{cut}}$ = {Z_CUT:g}", color="#2f4b6e", fontsize=8.5)
-    ax.text(215, zr_c + 0.15, f"claim bar $Z_B$ = {zr_c:.2f}", color="#a02735", fontsize=8.5)
-    ax.text(0.97, 0.055, verdict, transform=ax.transAxes, ha="right", fontsize=11.5,
+    ax.axhline(Z_CUT, color="#0072b2", ls="--", lw=1.1)
+    ax.axhline(zr_c, color="#d55e00", ls="--", lw=1.1)
+    ax.text(215, Z_CUT + 0.15, f"$Z_{{cut}}$ = {Z_CUT:g}", color="#08306b", fontsize=8.5)
+    ax.text(215, zr_c + 0.15, f"claim bar $Z_B$ = {zr_c:.2f}", color="#d55e00", fontsize=8.5)
+    ax.text(0.97, 0.055, verdict, transform=ax.transAxes, ha="right",
             color=vcol, weight="bold")
-    ax.set_xscale("log"); ax.set_xlabel("mass [GeV]"); ax.set_title(title, fontsize=10)
+    ax.set_xscale("log"); ax.set_xlabel("mass [GeV]"); ax.set_title(title)
     ax.xaxis.set_minor_formatter(matplotlib.ticker.ScalarFormatter())
     ax.xaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
     ax.tick_params(axis="x", which="minor", labelsize=7.5)
     ax.grid(ls=":", alpha=0.3)
 axs[0].set_ylabel("local significance in a $\\pm\\sigma_M$ window")
 axs[0].legend(fontsize=8.5, loc="upper left")
-fig2.suptitle("Two toy spectra: a defect that does not repeat in B, and one that does",
-              fontsize=12.5)
-fig2.tight_layout(rect=[0, 0, 1, 0.93])
-fig2.savefig(os.path.join(OUT, "ab_outliers_spectrum.png"), dpi=130)
+fig2.tight_layout()
+fig2.savefig(os.path.join(OUT, "ab_outliers_spectrum.png"), dpi=400)
 print(f"wrote ab_outliers_spectrum.png  (glitch: Z_A = {zA_g.max():.2f} -> "
       f"Z_B = {np.nanmax(np.where(zA_g >= Z_CUT, zB_g, np.nan)):.2f};  "
       f"bias: Z_A = {zA_c.max():.2f} -> Z_B = "

@@ -116,7 +116,7 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from plot_style import (SURF as surf, INK as ink, INK2 as ink2, C_BKG as c_bh, C_THR as c_thr,
                         C_ARG as c_bar, style)
 
-fig, ax = plt.subplots(figsize=(9.4, 5.4), facecolor=surf)
+fig, ax = plt.subplots(figsize=(5.9, 3.4), facecolor=surf)
 style(ax)
 
 qq = np.array(QS)
@@ -128,19 +128,17 @@ p84 = np.array([r["z_p84"] for r in rows])
 
 ax.fill_between(qq, p16, p84, color=c_bh, alpha=0.16, lw=0,
                 label="BH realized cut, central 68% of PEs")
-ax.semilogx(qq, med, color=c_bh, lw=2.4, marker="o", ms=5, mec=surf, mew=1.4,
+ax.semilogx(qq, med, color=c_bh, lw=1.3, marker="o", ms=5, mec=surf, mew=1.4,
             label="BH realized cut, median PE")
 ax.semilogx(qq, z1, color=c_bar, lw=1.5, ls=(0, (5, 2)),
             label="nominal rank-1 bar  $\\Phi^{-1}(1-q/n)$")
 ax.semilogx(qq, tm, color=c_thr, lw=1.5, ls=(0, (2, 2.5)),
             label="fixed threshold at the same fake budget")
 ax.axvline(0.381, color=ink2, lw=1, ls=(0, (2, 3)))
-ax.text(0.381 * 1.06, 3.15, "$q^\\star$", color=ink, fontsize=12, fontweight="medium")
-ax.set_xlabel("nominal false discovery rate  $q$", color=ink2, fontsize=10.5)
-ax.set_ylabel("$z$ of the weakest bin BH accepts", color=ink2, fontsize=10.5)
-ax.set_title("The $z$-cut BH applies, per pseudo-experiment under $H_0$",
-             color=ink, fontsize=13, pad=12, loc="left")
-ax.legend(frameon=False, fontsize=10, loc="upper right", labelcolor=ink2)
+ax.text(0.381 * 1.06, 3.15, "$q^\\star$", color=ink, fontweight="medium")
+ax.set_xlabel("nominal false discovery rate  $q$", color=ink2)
+ax.set_ylabel("$z$ of the weakest bin BH accepts", color=ink2)
+ax.legend(frameon=False, loc="upper right", labelcolor=ink2)
 ax.set_ylim(2.95, 6.3)
-fig.savefig(os.path.join(PLOTS, "bh_zcut.png"), dpi=170, facecolor=surf, bbox_inches="tight")
+fig.savefig(os.path.join(PLOTS, "bh_zcut.png"), dpi=400, facecolor=surf, bbox_inches="tight")
 print("wrote bh_zcut.png")

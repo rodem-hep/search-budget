@@ -165,95 +165,95 @@ from plot_style import (SURF as surf, INK as ink, INK2 as ink2, GRID as grid, BL
                         C_BKG as c_bkg, C_ARG as c_fake, C_ARG as c_arg, C_THR as c_thr, style)
 
 # ============ FIGURE 1: the scan (analogue of threshold_scan.png) ============
-fig, (a0, a1) = plt.subplots(1, 2, figsize=(13.4, 5.1), facecolor=surf,
+fig, (a0, a1) = plt.subplots(1, 2, figsize=(5.9, 2.7), facecolor=surf,
                              gridspec_kw=dict(wspace=0.22))
 for ax in (a0, a1): style(ax)
 
 a0.grid(color=grid, lw=0.8, alpha=0.6)
-a0.loglog(QGRID, EK0, color=c_bkg, lw=2.2, label="E[K]  (bins BH hands to B)")
+a0.loglog(QGRID, EK0, color=c_bkg, lw=1.3, label="E[K]  (bins BH hands to B)")
 a0.loglog(QGRID, P1_0, color=ink2, lw=1.4, ls=(0, (4, 3)),
           label="P(any rejection) $= q$  (Daniels)")
 a0.axhline(1, color=ink2, lw=1, ls=(0, (2, 3)))
 a0.axvline(q_star, color=ink2, lw=1, ls=(0, (2, 3)))
-a0.plot([q_star], [1], "o", ms=9, color=c_bkg, mec=surf, mew=2, zorder=6)
-a0.plot([0.05], [np.interp(0.05, QGRID, EK0)], "o", ms=7, color=c_bkg, mec=surf, mew=1.8, zorder=6)
-a0.text(0.043, np.interp(0.05, QGRID, EK0) * 1.9, "$q = 0.05$", color=ink2, fontsize=10,
+a0.plot([q_star], [1], "o", ms=4.5, color=c_bkg, mec=surf, mew=0.7, zorder=6)
+a0.plot([0.05], [np.interp(0.05, QGRID, EK0)], "o", ms=7, color=c_bkg, mec=surf, mew=0.7, zorder=6)
+a0.text(0.043, np.interp(0.05, QGRID, EK0) * 1.9, "$q = 0.05$", color=ink2,
         ha="right")
-a0.text(0.75, 1.35, "one expected fake", color=ink2, fontsize=10.5, ha="right")
-a0.text(q_star * 1.05, 3e-3, f"$q^\\star = {q_star:.2f}$", color=ink, fontsize=12,
+a0.text(0.75, 1.35, "one expected fake", color=ink2, ha="right")
+a0.text(q_star * 1.05, 3e-3, f"$q^\\star = {q_star:.2f}$", color=ink,
         fontweight="medium")
 a0.set_xlim(9e-4, 1.05); a0.set_ylim(8e-4, 6)
-a0.set_xlabel("nominal false discovery rate  $q$", color=ink2, fontsize=10.5)
-a0.set_ylabel("expected background bins selected in A", color=ink2, fontsize=10.5)
-a0.legend(frameon=False, fontsize=10, loc="lower right", labelcolor=ink2)
+a0.set_xlabel("nominal false discovery rate  $q$", color=ink2)
+a0.set_ylabel("expected background bins selected in A", color=ink2)
+a0.legend(frameon=False, loc="lower right", labelcolor=ink2)
 a0.set_title("Background bins BH selects",
-             color=ink, fontsize=13, pad=12, loc="left")
+             color=ink, pad=12, loc="left")
 
 a1.grid(color=grid, lw=0.8, alpha=0.6)
 for m in MUS:
-    a1.semilogx(QGRID, SEL[m] * 100, color=BLUE[m], lw=2.2)
+    a1.semilogx(QGRID, SEL[m] * 100, color=BLUE[m], lw=1.3)
     a1.semilogx(QGRID, cdf(m - norm.isf(QGRID / n)) * 100, color=BLUE[m], lw=1.0,
                 ls=(0, (2, 2.5)), alpha=0.9)
-    a1.plot([q_star], [SELs[m] * 100], "o", ms=7, color=BLUE[m], mec=surf, mew=1.8, zorder=6)
-    a1.text(0.92, SELs[m] * 100, f"$\\mu={m}\\sigma$", color=BLUE[m], fontsize=11.5,
+    a1.plot([q_star], [SELs[m] * 100], "o", ms=7, color=BLUE[m], mec=surf, mew=0.7, zorder=6)
+    a1.text(0.92, SELs[m] * 100, f"$\\mu={m}\\sigma$", color=BLUE[m],
             va="center", fontweight="medium")
 a1.axvline(q_star, color=ink2, lw=1, ls=(0, (2, 3)))
 a1.axhline(50, color=ink2, lw=1, ls=(0, (4, 3)), alpha=0.7)
 a1.text(1.1e-3, 92, "solid: BH step-up (MC)\ndashed: the rank-1 bar alone",
-        color=ink2, fontsize=10.5, linespacing=1.5)
-a1.text(q_star * 1.06, 4, "$q^\\star$", color=ink, fontsize=12, fontweight="medium")
+        color=ink2, linespacing=1.5)
+a1.text(q_star * 1.06, 4, "$q^\\star$", color=ink, fontweight="medium")
 a1.set_xlim(9e-4, 1.35); a1.set_ylim(0, 103)
-a1.set_xlabel("nominal false discovery rate  $q$", color=ink2, fontsize=10.5)
-a1.set_ylabel("signal bin passes stage 1   [%]", color=ink2, fontsize=10.5)
+a1.set_xlabel("nominal false discovery rate  $q$", color=ink2)
+a1.set_ylabel("signal bin passes stage 1   [%]", color=ink2)
 a1.set_title("Chance the signal bin passes BH",
-             color=ink, fontsize=13, pad=12, loc="left")
-fig.savefig(os.path.join(PLOTS, "bh_scan.png"), dpi=170, facecolor=surf, bbox_inches="tight")
+             color=ink, pad=12, loc="left")
+fig.savefig(os.path.join(PLOTS, "bh_scan.png"), dpi=400, facecolor=surf, bbox_inches="tight")
 
 # ============ FIGURE 2: power & false alarm vs q (analogue of threshold_vs_argmax.png) ========
-fig, (b0, b1) = plt.subplots(1, 2, figsize=(13.4, 5.1), facecolor=surf,
+fig, (b0, b1) = plt.subplots(1, 2, figsize=(5.9, 2.7), facecolor=surf,
                              gridspec_kw=dict(wspace=0.24))
 for ax in (b0, b1): style(ax)
 
 b0.grid(color=grid, lw=0.8, alpha=0.6)
 for m in MUS:
-    b0.semilogx(QGRID, SEL[m] * cdf(m - tB) * 100, color=BLUE[m], lw=2.2)
+    b0.semilogx(QGRID, SEL[m] * cdf(m - tB) * 100, color=BLUE[m], lw=1.3)
     pa = y_arg(m) * 100
     b0.plot([9e-4, 0.9], [pa, pa], color=BLUE[m], lw=1.1, ls=(0, (2, 2.5)), alpha=0.8)
-    b0.text(0.95, pa, f"${m}\\sigma$", color=BLUE[m], fontsize=11.5, va="center",
+    b0.text(0.95, pa, f"${m}\\sigma$", color=BLUE[m], va="center",
             fontweight="medium")
     b0.plot([q_star], [SELs[m] * cdf(m - tB) * 100], "o", ms=7, color=BLUE[m], mec=surf,
-            mew=1.8, zorder=6)
+            mew=0.7, zorder=6)
 b0.axvline(q_star, color=ink2, lw=1, ls=(0, (2, 3)))
 b0.text(1.1e-3, 110, "solid: BH at nominal FDR $q$        dashed: argmax rule",
-        color=ink2, fontsize=10.5, linespacing=1.5)
-b0.text(q_star * 1.06, 2.5, "$q^\\star$", color=ink, fontsize=12, fontweight="medium")
+        color=ink2, linespacing=1.5)
+b0.text(q_star * 1.06, 2.5, "$q^\\star$", color=ink, fontweight="medium")
 b0.set_xlim(9e-4, 1.5); b0.set_ylim(0, 124)
-b0.set_xlabel("nominal false discovery rate  $q$", color=ink2, fontsize=10.5)
-b0.set_ylabel("signal confirmed in B   [%]", color=ink2, fontsize=10.5)
+b0.set_xlabel("nominal false discovery rate  $q$", color=ink2)
+b0.set_ylabel("signal confirmed in B   [%]", color=ink2)
 b0.set_title("Confirmation power",
-             color=ink, fontsize=13, pad=12, loc="left")
+             color=ink, pad=12, loc="left")
 
 b1.grid(color=grid, lw=0.8, alpha=0.6)
-b1.loglog(QGRID, PF0, color=c_fake, lw=2.2)
+b1.loglog(QGRID, PF0, color=c_fake, lw=1.3)
 b1.axhline(sf(tB), color=ink2, lw=1.2, ls=(0, (4, 3)))
 b1.axvline(q_star, color=ink2, lw=1, ls=(0, (2, 3)))
-b1.plot([q_star], [np.interp(q_star, QGRID, PF0)], "o", ms=9, color=c_fake, mec=surf, mew=2,
+b1.plot([q_star], [np.interp(q_star, QGRID, PF0)], "o", ms=4.5, color=c_fake, mec=surf, mew=0.7,
         zorder=6)
 b1.fill_between(QGRID, PF0, 1e-9, where=(QGRID <= q_star), color=c_fake, alpha=0.06)
 b1.text(1.2e-3, 2e-4, "$P_{\\rm fake} \\simeq 1-e^{-E[K|H_0]\\,[1-\\Phi(3)]}$",
-        color=c_fake, fontsize=12.5)
-b1.text(0.78, 2.3e-3, r"argmax rule:  $1.35\times10^{-3}$", color=ink2, fontsize=10.5,
+        color=c_fake)
+b1.text(0.78, 2.3e-3, r"argmax rule:  $1.35\times10^{-3}$", color=ink2,
         ha="right")
-b1.text(q_star * 1.06, 1.6e-5, f"$q^\\star = {q_star:.2f}$", color=ink, fontsize=11)
+b1.text(q_star * 1.06, 1.6e-5, f"$q^\\star = {q_star:.2f}$", color=ink)
 b1.set_xlim(9e-4, 0.85); b1.set_ylim(1e-6, 3e-3)
-b1.set_xlabel("nominal false discovery rate  $q$", color=ink2, fontsize=10.5)
-b1.set_ylabel("P(at least one false confirmation)", color=ink2, fontsize=10.5)
-b1.set_title("Global false-alarm rate it buys", color=ink, fontsize=13,
+b1.set_xlabel("nominal false discovery rate  $q$", color=ink2)
+b1.set_ylabel("P(at least one false confirmation)", color=ink2)
+b1.set_title("Global false-alarm rate it buys", color=ink,
              pad=12, loc="left")
-fig.savefig(os.path.join(PLOTS, "bh_vs_argmax.png"), dpi=170, facecolor=surf, bbox_inches="tight")
+fig.savefig(os.path.join(PLOTS, "bh_vs_argmax.png"), dpi=400, facecolor=surf, bbox_inches="tight")
 
 # ============ FIGURE 3: the ROC (analogue of roc_threshold_vs_argmax.png) ============
-fig, (c0, c1) = plt.subplots(1, 2, figsize=(14.2, 5.4), facecolor=surf,
+fig, (c0, c1) = plt.subplots(1, 2, figsize=(5.9, 2.7), facecolor=surf,
                              gridspec_kw=dict(width_ratios=[1.18, 1], wspace=0.24))
 for ax in (c0, c1): style(ax)
 
@@ -263,50 +263,50 @@ c0.axvline(x_arg, color=c_arg, lw=1.1, ls=(0, (3, 3)), alpha=0.85, zorder=1)
 for m in MUS:
     c0.semilogx(x_thr(t), y_thr(m, t) * 100, color=c_thr, lw=1.4, ls=(0, (5, 2)), alpha=0.9,
                 zorder=2)
-    c0.semilogx(x_bh, SEL[m] * cdf(m - tB) * 100, color=BLUE[m], lw=2.3, zorder=3)
-    c0.plot([x_arg], [y_arg(m) * 100], marker="D", ms=9, color=c_arg, mec=surf, mew=1.8, zorder=6)
-    c0.plot([EKs[0] * sf(tB)], [SELs[m] * cdf(m - tB) * 100], "o", ms=8, color=BLUE[m], mec=surf,
-            mew=1.8, zorder=6)
+    c0.semilogx(x_bh, SEL[m] * cdf(m - tB) * 100, color=BLUE[m], lw=1.3, zorder=3)
+    c0.plot([x_arg], [y_arg(m) * 100], marker="D", ms=4.5, color=c_arg, mec=surf, mew=0.7, zorder=6)
+    c0.plot([EKs[0] * sf(tB)], [SELs[m] * cdf(m - tB) * 100], "o", ms=4, color=BLUE[m], mec=surf,
+            mew=0.7, zorder=6)
 for qq in (0.05, 0.2, 0.8):
     xq = np.interp(qq, QGRID, x_bh); yq = np.interp(qq, QGRID, SEL[5] * cdf(5 - tB)) * 100
-    c0.plot([xq], [yq], marker="|", ms=10, color=BLUE[5], mew=2, zorder=5)
+    c0.plot([xq], [yq], marker="|", ms=10, color=BLUE[5], mew=0.7, zorder=5)
     c0.text(xq, yq - 7, f"$q={qq:g}$", color=BLUE[5], fontsize=9.5, ha="center")
 for m, ylab in zip(MUS, [30, 72, 92, 101]):
-    c0.text(0.30, ylab, f"$\\mu={m}\\sigma$", color=BLUE[m], fontsize=11.5, va="center",
+    c0.text(0.30, ylab, f"$\\mu={m}\\sigma$", color=BLUE[m], va="center",
             fontweight="medium")
-c0.text(1.6e-6, 122, "◆  argmax rule", color=c_arg, fontsize=11, fontweight="medium")
-c0.text(1.6e-6, 112, "—  BH at nominal FDR $q$", color=BLUE[5], fontsize=11, fontweight="medium")
-c0.text(1.6e-6, 102, "- -  fixed threshold $t$ (Part III)", color=c_thr, fontsize=11, fontweight="medium")
+c0.text(1.6e-6, 122, "◆  argmax rule", color=c_arg, fontweight="medium")
+c0.text(1.6e-6, 112, "—  BH at nominal FDR $q$", color=BLUE[5], fontweight="medium")
+c0.text(1.6e-6, 102, "- -  fixed threshold $t$ (Part III)", color=c_thr, fontweight="medium")
 c0.text(1.0e-3, 4, "argmax budget", color=c_arg, fontsize=9.5,
         ha="right", linespacing=1.4)
 c0.set_xlim(1.2e-6, 8e-1); c0.set_ylim(0, 132)
-c0.set_xlabel("average number of false positives   $E[K_{\\rm fake}]$", color=ink2, fontsize=10.5)
-c0.set_ylabel("signal confirmed in B   [%]", color=ink2, fontsize=10.5)
+c0.set_xlabel("average number of false positives   $E[K_{\\rm fake}]$", color=ink2)
+c0.set_ylabel("signal confirmed in B   [%]", color=ink2)
 c0.set_title("Power against false-alarm rate",
-             color=ink, fontsize=12.8, pad=12, loc="left")
+             color=ink, pad=12, loc="left")
 
 # right panel: the realized FDR of the surviving candidates, before and after stage B
 c1.grid(color=grid, lw=0.8, alpha=0.6)
 for m in MUS:
     fdr_A = BKG_ALT[m] / np.maximum(BKG_ALT[m] + SEL[m], 1e-12)
     fdr_B = (BKG_ALT[m] * sf(tB)) / np.maximum(BKG_ALT[m] * sf(tB) + SEL[m] * cdf(m - tB), 1e-12)
-    c1.semilogx(QGRID, fdr_A * 100, color=BLUE[m], lw=2.2)
+    c1.semilogx(QGRID, fdr_A * 100, color=BLUE[m], lw=1.3)
     c1.semilogx(QGRID, fdr_B * 100, color=BLUE[m], lw=1.1, ls=(0, (2, 2.5)), alpha=0.9)
 c1.semilogx(QGRID, QGRID * 100, color=ink2, lw=1.2, ls=(0, (4, 3)))
 c1.axvline(q_star, color=ink2, lw=1, ls=(0, (2, 3)))
-c1.text(0.012, 62, "nominal $q$", color=ink2, fontsize=10.5, rotation=32)
+c1.text(0.012, 62, "nominal $q$", color=ink2, rotation=32)
 c1.text(1.15e-3, 92, "solid: after stage 1\ndashed: after the stage-B confirmation",
-        color=ink2, fontsize=10.5, linespacing=1.5)
+        color=ink2, linespacing=1.5)
 for m, qlab in zip(MUS, [0.006, 0.03, 0.09, 0.16]):
     fdr_A = BKG_ALT[m] / np.maximum(BKG_ALT[m] + SEL[m], 1e-12)
     c1.text(qlab, np.interp(qlab, QGRID, fdr_A) * 100 + 3.5, f"${m}\\sigma$", color=BLUE[m],
-            fontsize=11, va="bottom", ha="center", fontweight="medium")
-c1.text(q_star * 1.06, 4, "$q^\\star$", color=ink, fontsize=12, fontweight="medium")
+            va="bottom", ha="center", fontweight="medium")
+c1.text(q_star * 1.06, 4, "$q^\\star$", color=ink, fontweight="medium")
 c1.set_xlim(9e-4, 1.35); c1.set_ylim(0, 103)
-c1.set_xlabel("nominal false discovery rate  $q$", color=ink2, fontsize=10.5)
-c1.set_ylabel("realized false discovery rate   [%]", color=ink2, fontsize=10.5)
-c1.set_title("Realized against nominal FDR", color=ink, fontsize=12.8,
+c1.set_xlabel("nominal false discovery rate  $q$", color=ink2)
+c1.set_ylabel("realized false discovery rate   [%]", color=ink2)
+c1.set_title("Realized against nominal FDR", color=ink,
              pad=12, loc="left")
-fig.savefig(os.path.join(PLOTS, "roc_bh_vs_threshold.png"), dpi=170, facecolor=surf,
+fig.savefig(os.path.join(PLOTS, "roc_bh_vs_threshold.png"), dpi=400, facecolor=surf,
             bbox_inches="tight")
 print("wrote bh_scan.png, bh_vs_argmax.png, roc_bh_vs_threshold.png")

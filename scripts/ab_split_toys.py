@@ -14,6 +14,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from bump_observables import canon, ns_scan, z_local_for_global5 as z5
 from public_obs_map import PUBLIC_OBS, nsel
+from plot_style import style, BLUE, C_ARG, C_ALT, C_BKG, INK
 
 OUT = os.path.join(ROOT, "results", "plots")
 os.makedirs(OUT, exist_ok=True)
@@ -48,43 +49,43 @@ for start in range(0, NTOY, CHUNK):
 k_obs = np.concatenate(k_obs); zB_sel_max = np.concatenate(zB_sel_max)
 p_two = np.concatenate(p_two); p_one = np.concatenate(p_one)
 
-fig, axs = plt.subplots(1, 3, figsize=(15, 4.6))
+fig, axs = plt.subplots(1, 3, figsize=(6.2, 2.5))
 # (a) selections in A
 kmax = int(k_obs.max()) + 2
-axs[0].hist(k_obs, bins=np.arange(-0.5, kmax + 0.5), color="#4c78a8", edgecolor="white",
+axs[0].hist(k_obs, bins=np.arange(-0.5, kmax + 0.5), color="#0072b2", edgecolor="white",
             density=True, label="toys")
 from math import lgamma
 kk = np.arange(0, kmax)
 pois = np.exp(kk * np.log(K_BKG) - K_BKG - np.array([lgamma(v + 1) for v in kk]))
-axs[0].plot(kk, pois, "o-", ms=4, lw=1.2, color="#d1495b",
+axs[0].plot(kk, pois, "o-", ms=4, lw=1.2, color="#d55e00",
             label=f"Poisson($N\\,p_1(Z_{{cut}})$ = {K_BKG:.1f})")
 axs[0].set_xlabel(f"# windows selected in A  ($Z_A \\geq$ {Z_CUT:g})")
 axs[0].set_ylabel("fraction of toys")
-axs[0].set_title("Windows selected in A", fontsize=11, loc="left")
+axs[0].set_title("Windows selected in A", loc="left")
 axs[0].legend(fontsize=8.5)
 # (b) best z_B among selected windows
 v = zB_sel_max[np.isfinite(zB_sel_max)]
-axs[1].hist(v, bins=60, color="#4c78a8", edgecolor="white", density=True,
+axs[1].hist(v, bins=60, color="#0072b2", edgecolor="white", density=True,
             label="best $Z_B$ of the unblinded windows")
 med_thr = float(np.median(zthr(k_obs[k_obs > 0])))
-axs[1].axvline(med_thr, color="#d1495b", ls="--", lw=1.8,
+axs[1].axvline(med_thr, color="#d55e00", ls="--", lw=1.2,
                label=f"claim threshold $\\sqrt{{25+2\\ln k}}$ (median {med_thr:.2f})")
 axs[1].set_xlabel("best confirmation significance $Z_B$")
-axs[1].set_title("Best confirmation significance in B", fontsize=11, loc="left")
+axs[1].set_title("Best confirmation significance in B", loc="left")
 axs[1].legend(fontsize=8.5, loc="upper right")
 # (c) uniformity of the corrected global p
-for p, lbl, col in [(p_two, "two-stage: $k\\,p_1(Z_B^{best})$", "#4c78a8"),
-                    (p_one, "single-stage: $N\\,p_1(Z^{max})$", "#d9a441")]:
+for p, lbl, col in [(p_two, "two-stage: $k\\,p_1(Z_B^{best})$", "#0072b2"),
+                    (p_one, "single-stage: $N\\,p_1(Z^{max})$", "#e69f00")]:
     q = np.sort(p)
-    axs[2].plot(np.linspace(0, 1, len(q)), q, lw=1.8, color=col, label=lbl)
-axs[2].plot([0, 1], [0, 1], color="#888888", ls=":", lw=1.2, label="exact Uniform(0,1)")
+    axs[2].plot(np.linspace(0, 1, len(q)), q, lw=1.2, color=col, label=lbl)
+axs[2].plot([0, 1], [0, 1], color="#000000", ls=":", lw=1.2, label="exact Uniform(0,1)")
 axs[2].set_xlabel("expected quantile"); axs[2].set_ylabel("corrected global p-value")
-axs[2].set_title("Corrected global $p$ vs Uniform(0,1)", fontsize=11, loc="left")
+axs[2].set_title("Corrected global $p$ vs Uniform(0,1)", loc="left")
 axs[2].legend(fontsize=8.5)
 fig.suptitle(f"Two-stage A/B unblinding on background-only toys  "
-             f"(f = {F_OPT:g}, $Z_{{cut}}$ = {Z_CUT:g})", fontsize=12.5)
+             f"(f = {F_OPT:g}, $Z_{{cut}}$ = {Z_CUT:g})")
 fig.tight_layout(rect=[0, 0, 1, 0.94])
-fig.savefig(os.path.join(OUT, "ab_toys_background.png"), dpi=130)
+fig.savefig(os.path.join(OUT, "ab_toys_background.png"), dpi=400)
 print(f"wrote ab_toys_background.png   (mean k = {k_obs.mean():.2f}, "
       f"predicted {K_BKG:.2f}; max z_B = {np.nanmax(v):.2f} vs threshold ~{med_thr:.2f})")
 
@@ -124,23 +125,21 @@ def reach50(f):
     return 0.5 * (lo + hi)
 reach = {"single": Z_SINGLE, "50/50": reach50(0.5), "opt": reach50(F_OPT)}
 
-fig2, ax2 = plt.subplots(figsize=(9.5, 6))
-for y, lbl, col in [(pw_single, f"single-stage full scan (needs $Z\\geq${Z_SINGLE:.2f})", "#d9a441"),
-                    (pw_opt,   f"two-stage f = {F_OPT:g}, $Z_{{cut}}$ = {Z_CUT:g}", "#4c78a8"),
-                    (pw_5050,  f"two-stage 50/50, $Z_{{cut}}$ = {Z_CUT:g}", "#d1495b")]:
-    ax2.plot(mus, y, "o-", ms=4, lw=2, color=col, label=lbl)
-for key, col in [("single", "#d9a441"), ("opt", "#4c78a8"), ("50/50", "#d1495b")]:
+fig2, ax2 = plt.subplots(figsize=(5.7, 3.6))
+for y, lbl, col in [(pw_single, f"single-stage full scan (needs $Z\\geq${Z_SINGLE:.2f})", "#e69f00"),
+                    (pw_opt,   f"two-stage f = {F_OPT:g}, $Z_{{cut}}$ = {Z_CUT:g}", "#0072b2"),
+                    (pw_5050,  f"two-stage 50/50, $Z_{{cut}}$ = {Z_CUT:g}", "#d55e00")]:
+    ax2.plot(mus, y, "o-", ms=4, lw=1.3, color=col, label=lbl)
+for key, col in [("single", "#e69f00"), ("opt", "#0072b2"), ("50/50", "#d55e00")]:
     ax2.axvline(reach[key], color=col, ls=":", lw=1.3)
-ax2.axhline(0.5, color="#888888", ls="--", lw=0.9)
-ax2.set_xlabel(r"injected signal strength: full-dataset local significance  $Z_{full}$")
+ax2.axhline(0.5, color="#000000", ls="--", lw=0.9)
+ax2.set_xlabel(r"injected signal strength: full-dataset local significance  $Z_{\mathrm{full}}$")
 ax2.set_ylabel(r"discovery power  P(claim $5\sigma$ global)")
 ax2.set_ylim(0, 1.02)
 ax2.grid(ls=":", alpha=0.35)
-ax2.set_title(f"Discovery power of the three procedures  (N = {N:,} looks)",
-              fontsize=12.5, loc="left")
 ax2.legend(loc="upper left", fontsize=9.5, frameon=False)
 fig2.tight_layout()
-fig2.savefig(os.path.join(OUT, "ab_toys_power.png"), dpi=130)
+fig2.savefig(os.path.join(OUT, "ab_toys_power.png"), dpi=400)
 z50 = {lbl: float(np.interp(0.5, y, mus)) for lbl, y in
        [("single", pw_single), ("opt", pw_opt), ("50/50", pw_5050)]}
 print("wrote ab_toys_power.png")
@@ -217,11 +216,11 @@ while True:
     seed += 1
 zA_sig, zB_sig = split_toy(998, sig_mass=1200.0, sig_zfull=7.0)
 
-fig3, axs3 = plt.subplots(1, 2, figsize=(13.5, 5.2), sharey=True)
+fig3, axs3 = plt.subplots(1, 2, figsize=(6.0, 2.7), sharey=True)
 for ax, (za, zb), title in [
         (axs3[0], (zA, zB), f"background-only toy (seed {seed}): the A-selection DIES in B"),
-        (axs3[1], (zA_sig, zB_sig), "signal-injected toy ($Z_{full}$ = 7 at 1.2 TeV): CONFIRMS")]:
-    ax.plot(ctr, za, lw=1.6, color="#4c78a8", label="stage A scan  $Z_A(m)$  (25% of data)")
+        (axs3[1], (zA_sig, zB_sig), "signal-injected toy ($Z_{\mathrm{full}}$ = 7 at 1.2 TeV): CONFIRMS")]:
+    ax.plot(ctr, za, lw=1.2, color="#0072b2", label="stage A scan  $Z_A(m)$  (25% of data)")
     sel = za >= Z_CUT
     first = True
     for j in np.where(sel)[0]:
@@ -233,23 +232,21 @@ for ax, (za, zb), title in [
     for j in np.where(sel)[0]:
         inwin |= np.abs(np.log(ctr / ctr[j])) < 2 * SIGMA_REL
     zb_m = np.where(inwin, zb, np.nan)
-    ax.plot(ctr, zb_m, lw=2.4, color="#d1495b",
+    ax.plot(ctr, zb_m, lw=1.3, color="#d55e00",
             label="stage B  $Z_B(m)$ -- unblinded ONLY here (75%)")
-    ax.axhline(Z_CUT, color="#4c78a8", ls="--", lw=1.1)
-    ax.text(210, Z_CUT + 0.12, f"$Z_{{cut}}$ = {Z_CUT:g}", color="#2f4b6e", fontsize=8.5)
+    ax.axhline(Z_CUT, color="#0072b2", ls="--", lw=1.1)
+    ax.text(210, Z_CUT + 0.12, f"$Z_{{cut}}$ = {Z_CUT:g}", color="#08306b", fontsize=8.5)
     thr = float(zthr(max(int(sel.any()), np.count_nonzero(np.diff(np.where(sel)[0]) > 1) + 1
                          if sel.any() else 1)))
-    ax.axhline(thr, color="#d1495b", ls="--", lw=1.1)
+    ax.axhline(thr, color="#d55e00", ls="--", lw=1.1)
     ax.text(210, thr + 0.12, f"claim bar = {thr:.1f}",
-            color="#a02735", fontsize=8.5)
-    ax.set_xscale("log"); ax.set_xlabel("mass [GeV]"); ax.set_title(title, fontsize=10.5)
+            color="#d55e00", fontsize=8.5)
+    ax.set_xscale("log"); ax.set_xlabel("mass [GeV]"); ax.set_title(title)
     ax.grid(ls=":", alpha=0.3)
 axs3[0].set_ylabel("local significance in a $\\pm\\sigma_M$ window")
 axs3[0].legend(fontsize=8.5, loc="upper right")
-fig3.suptitle("Two-stage unblinding on one toy spectrum",
-              fontsize=12)
-fig3.tight_layout(rect=[0, 0, 1, 0.94])
-fig3.savefig(os.path.join(OUT, "ab_toys_spectrum.png"), dpi=130)
+fig3.tight_layout()
+fig3.savefig(os.path.join(OUT, "ab_toys_spectrum.png"), dpi=400)
 print(f"wrote ab_toys_spectrum.png  (bkg toy: max Z_A = {zA.max():.2f} -> "
       f"Z_B in window = {np.nanmax(np.where(zA>=Z_CUT, zB, np.nan)):.2f};  "
       f"signal toy: Z_A = {zA_sig.max():.2f} -> Z_B = {zB_sig.max():.2f})")
