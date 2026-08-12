@@ -1,20 +1,36 @@
 #!/usr/bin/env python3
-"""What a scaled-up scan costs: the combinatorial scan of combinatorial_budget.py over a wider
-object alphabet.
+"""What a scaled-up scan costs, and what fits inside a fixed trials budget.
 
-The baseline scan reaches five object types (e, mu, light jet, b-jet, leptonic Z). A general search
-built on today's reconstruction would also form masses from hadronic taus, photons and boosted
-large-R W/Z, H and top candidates, which is ten types. Same rules as the baseline -- exclusive
-multiplicity categories, at most four objects, every 2-to-4-object subset its own spectrum, MET a
-category split rather than a mass ingredient -- so the alphabet is the only thing that changes.
+The five-object scan of combinatorial_budget.py reaches e, mu, light jets, b-jets and a leptonic Z. A
+scan built on today's reconstruction would also form masses from hadronic taus, photons and the
+boosted large-R candidates for W/Z, H and top, and it would use missing energy as an ingredient of
+transverse masses rather than only as a category split. Rules:
+
+  * ten object types, no per-type ceiling, and STRICTLY at most four objects per category;
+  * missing energy does not count against those four and may be a fifth ingredient of a mass, so one
+    object plus it is already a transverse mass;
+  * every 2-to-4-object subset of a category is its own spectrum, as is every 1-to-4-object subset
+    with missing energy added;
+  * any trigger: a category needs no lepton;
+  * same-flavour dilepton categories still split OS/SS.
+
+That scan is far larger than anyone would run, so the second half of this script imposes a trials
+budget of TRIALS_BUDGET and asks which spectra survive it. Priority is, in order:
+
+  1. spectra whose object composition is one of the model-motivated axes of bump_observables (the 46
+     of the model-driven budget), highest expected rate first;
+  2. everything else, highest expected rate first.
+
+Expected rate is a declared order-of-magnitude weight per object type, multiplied over a category's
+content. Only the ordering of those weights matters for the ranking, not their values.
 
 Resolutions are not new inputs: each object's fractional sigma is read back out of the published
-resolution of its own symmetric channel, sigma = 2 r, the same inversion two_body_matrix.py uses to
-price its gaps. The leptonic Z has no symmetric published channel and keeps the baseline value.
+resolution of its own symmetric channel, sigma = 2 r, as two_body_matrix.py does. Missing energy has
+no symmetric channel and is read out of mT(e,v) instead.
 
 Reads  scripts/bump_observables.py (published resolutions), scripts/combinatorial_budget.py (rules).
-Writes results/tables/scaled_scan.csv          (one row per scan variant, the paper's table)
-       results/tables/scaled_scan_groups.csv   (looks per object composition, headline variant)
+Writes results/tables/scaled_scan.csv    (one row per scan variant)
+       results/tables/priority_scan.csv  (per composition: tier, spectra and looks, kept or dropped)
 Prints the report the Makefile captures as results/tables/scaled_scan.txt.
 """
 import os, sys, math, csv, collections
@@ -24,123 +40,233 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from bump_observables import res, z_local_for_global5
 import combinatorial_budget as CB
 
-# ------------------------------------------------------------------ the wider alphabet
-# key -> (label, symmetric channel the resolution comes from, mass floor contribution in GeV)
-WIDE = {
-    "e": ("e",              "m(ee)",             None),
-    "m": ("mu",             "m(mumu)",           None),
-    "T": ("tau_had",        "m(tautau)",         None),
-    "g": ("gamma",          "m(gammagamma)",     None),
-    "j": ("light jet",      "m(jj)",             None),
-    "b": ("b-jet",          "m(bb)",             None),
-    "t": ("boosted top",    "m(tt)",             173.0),
-    "V": ("boosted W/Z",    "m(VV)",              91.2),
-    "H": ("boosted H",      "m(HH)",             125.0),
-    "Z": ("leptonic Z",     None,                 91.2),
-}
-ORDER_WIDE = "emTgjbtVHZ"
-# The four bounds the mass combination, not the event: a category may hold more objects than any one
-# mass is built from. No per-type ceiling either, unlike the five-object scan, whose ceilings describe
-# one particular grid. A leptonic Z counts as one object here as it does there.
-KMAX_WIDE  = 4                                   # objects per mass combination
-NOBJ_WIDE  = (4, 6, 8)                           # objects per category, swept
-NMAX_WIDE  = {k: max(NOBJ_WIDE) for k in ORDER_WIDE}
-SIGMA_WIDE = {k: (CB.SIGMA["Z"] if ch is None else 2.0 * res(ch)) for k, (_, ch, _) in WIDE.items()}
-MASS_WIDE  = {k: m for k, (_, _, m) in WIDE.items() if m is not None}
-LEPTON_WIDE = "emT"                       # hadronic taus are charged: they split OS/SS too
-TRIG_WIDE   = "emZ"                       # a hadronic tau is not a lepton trigger
+TRIALS_BUDGET = 5.0e5
 
-# Same rules, five object types, resolutions from the same inversion: isolates the alphabet from
-# the resolution prescription, since the baseline declares sigma per object instead of deriving it.
+# ------------------------------------------------------------------ the wider alphabet
+# key -> (label, symmetric channel the resolution comes from, mass-floor contribution in GeV,
+#         order-of-magnitude rate weight relative to a light jet)
+WIDE = {
+    "e": ("e",             "m(ee)",         None,  1e-4),   # W/Z leptonic decay x acceptance
+    "m": ("mu",            "m(mumu)",       None,  1e-4),
+    "T": ("tau_had",       "m(tautau)",     None,  3e-5),   # ... x hadronic BR x tau ID
+    "g": ("gamma",         "m(gammagamma)", None,  1e-3),   # prompt photon vs jet production
+    "j": ("light jet",     "m(jj)",         None,  1.0),    # the reference
+    "b": ("b-jet",         "m(bb)",         None,  0.1),    # b fraction of a jet sample
+    "t": ("boosted top",   "m(tt)",         173.0, 3e-5),   # top pair x boost x large-R tagging
+    "V": ("boosted W/Z",   "m(VV)",          91.2, 1e-4),   # hadronic V x boost
+    "H": ("boosted H",     "m(HH)",         125.0, 1e-6),   # Higgs production x H->bb x boost
+    "Z": ("leptonic Z",     None,            91.2, 1e-5),   # Z x BR(ll)
+    "X": ("MET",           "mT(ev)",        None,  0.3),    # events with significant MET
+}
+MET_KEY    = "X"
+ORDER_WIDE = "emTgjbtVHZ"                        # MET is not an entry: it is the category's met flag
+KMAX_WIDE  = 4                                   # objects per mass combination, MET excluded
+NOBJ_WIDE  = 4                                   # objects per category, strictly
+NMAX_WIDE  = {k: NOBJ_WIDE for k in ORDER_WIDE}  # no per-type ceiling
+MASS_WIDE  = {k: m for k, (_, _, m, _) in WIDE.items() if m is not None}
+WEIGHT     = {k: w for k, (_, _, _, w) in WIDE.items()}
+LEPTON_WIDE = "emT"                              # hadronic taus are charged: they split OS/SS too
+
+# sigma = 2 r of the symmetric channel; MET from mT(e,v) with the electron's share taken out
+SIGMA_WIDE = {}
+for _k, (_lab, _ch, _m, _w) in WIDE.items():
+    if _k == MET_KEY:
+        continue
+    SIGMA_WIDE[_k] = CB.SIGMA["Z"] if _ch is None else 2.0 * res(_ch)
+SIGMA_WIDE[MET_KEY] = math.sqrt(max(2.0 * (2.0 * res("mT(ev)")) ** 2 - SIGMA_WIDE["e"] ** 2, 0.0))
+
+# five object types with resolutions from the same inversion: separates the alphabet from the
+# prescription, since the five-object scan declares its sigma per object instead of deriving it
 SIGMA_BASE_DERIVED = {k: SIGMA_WIDE[k] for k in CB.ORDER}
 
+# ------------------------------------------------------------------ the model-motivated axes
+# Every observable of the model-driven budget, as the object composition(s) a scan would build it
+# from. A tuple where the axis spans several compositions, None where this alphabet cannot form it.
+MOTIVATED = {
+    "m(gammagamma)": ("gg",),      "m(egamma)": ("eg",),     "m(mugamma)": ("gm",),
+    "m(jgamma)": ("gj",),          "m(Vgamma)": ("Vg",),
+    "m(ee)": ("ee",),              "m(ee) SS": ("ee",),      "m(ee) (Zd)": ("ee",),
+    "m(mumu)": ("mm",),            "m(mumu) SS": ("mm",),    "m(mumu) (Zd)": ("mm",),
+    "m(emu) LFV": ("em",),         "m(emu) SS": ("em",),
+    "m(tautau)": ("TT",),          "m(etau) LFV": ("eT",),   "m(mutau) LFV": ("Tm",),
+    "m(ej)": ("ej",),              "m(muj)": ("jm",),        "m(tauj)": ("Tj",),
+    "m(eb)": ("be",),              "m(mub)": ("bm",),        "m(taub)": ("Tb",),
+    "m(eZ)": ("eZ",),              "m(muZ)": ("mZ",),
+    "m(jj)": ("jj",),              "m(bj)": ("bj",),         "m(bb)": ("bb",),
+    "m(cb) dijet": ("bj",),        "m(3j)": ("jjj",),
+    "m(eejj)": ("eejj",),          "m(mumujj)": ("jjmm",),
+    "m(VV)": ("VV",),              "m(Vh)": ("HV",),         "m(HH)": ("HH",),
+    "m(tt)": ("tt",),              "m(tt)/m(jj)": ("tt", "jj"),
+    "m(tb)": ("bt",),              "m(tW)": ("Vt",),         "m(Wb)": ("Vb",),
+    "m(Ht)": ("Ht",),              "m(ttZ)/m(Zt)": ("Vt", "Zt"),
+    "mT(ev)": ("Xe",),             "mT(muv)": ("Xm",),       "mT(taunu)": ("TX",),
+    "multilepton": ("eee", "eem", "emm", "mmm"),
+    "m(multi)": None,              # a many-object mass with no fixed composition
+}
+canon = lambda c: "".join(sorted(c))
+MOTIVATED_COMPS = {canon(c) for cs in MOTIVATED.values() if cs for c in cs}
+
+print("object alphabet: resolution from the published symmetric channel, rate weight declared")
+for k in ORDER_WIDE + MET_KEY:
+    label, ch, _, w = WIDE[k]
+    src = "mT(e,v), electron share removed" if k == MET_KEY else \
+          "baseline value, no symmetric channel" if ch is None else ch
+    print(f"  {k}  {label:12s} sigma = {SIGMA_WIDE[k]:.3f}  rate {w:8.1e}   ({src})")
+print(f"\nmodel-motivated compositions: {len(MOTIVATED_COMPS)} from "
+      f"{sum(1 for v in MOTIVATED.values() if v)} of the {len(MOTIVATED)} axes "
+      f"({', '.join(k for k, v in MOTIVATED.items() if v is None)} has no fixed composition)")
+print()
+
+# ------------------------------------------------------------------ price the variants
 BASE = dict(order=CB.ORDER, nmax=CB.NMAX, sigma=CB.SIGMA, mass=CB.MASS, trig=CB.TRIG,
             lepton=CB.LEPTON, nobj=CB.NOBJ, kmax=CB.KMAX)
 WIDE_ARGS = dict(order=ORDER_WIDE, nmax=NMAX_WIDE, sigma=SIGMA_WIDE, mass=MASS_WIDE,
-                 lepton=LEPTON_WIDE, kmax=KMAX_WIDE)
+                 lepton=LEPTON_WIDE, kmax=KMAX_WIDE, nobj=NOBJ_WIDE, trig="")
 
 VARIANTS = [
-    ("five objects, declared resolutions", BASE),
-    ("five objects, derived resolutions",  {**BASE, "sigma": SIGMA_BASE_DERIVED}),
-    ("ten objects, lepton trigger",        {**WIDE_ARGS, "trig": TRIG_WIDE, "nobj": 4}),
+    ("five objects, lepton trigger",   BASE),
+    ("five objects, derived sigma",    {**BASE, "sigma": SIGMA_BASE_DERIVED}),
+    ("ten objects, MET a split only",  WIDE_ARGS),
+    ("ten objects, MET in the masses", {**WIDE_ARGS, "met_key": MET_KEY, "weight": WEIGHT}),
 ]
-# the sweep: the mass combination stays at four objects, the category ceiling rises
-VARIANTS += [(f"ten objects, <={n} per category", {**WIDE_ARGS, "trig": "", "nobj": n,
-                                                   "collect": n <= 6}) for n in NOBJ_WIDE]
 
-print("object resolutions of the wider alphabet (sigma = 2 r of the symmetric channel)")
-for k in ORDER_WIDE:
-    label, ch, _ = WIDE[k]
-    src = "baseline value (no symmetric published channel)" if ch is None else f"from {ch}"
-    print(f"  {k}  {label:12s} sigma = {SIGMA_WIDE[k]:.3f}   {src}")
-print()
-
-# ------------------------------------------------------------------ price each variant
 runs = []
 for label, kw in VARIANTS:
     s = CB.enumerate_scan(**kw)
     runs.append((label, kw, s))
-    print(f"=== {label}  ({len(kw['order'])} object types, K<={kw['kmax']} per mass, "
+    print(f"=== {label}  ({len(kw['order'])} object types, K<={kw['kmax']} objects per mass, "
           f"<={kw['nobj']} per category, "
-          f"{'lepton required' if kw.get('trig', CB.TRIG) else 'no trigger requirement'})")
+          f"{'lepton required' if kw.get('trig', CB.TRIG) else 'any trigger'})")
     CB.report(s)
     print()
 
-hdr = ("scan", "types", "K_max", "objects_per_category", "trigger", "categories", "spectra",
-       "compositions", "N_trials", "Z_local", "Z_lo", "Z_hi")
-row = lambda label, kw, s: [label, len(kw["order"]), kw["kmax"], kw["nobj"],
-                            "lepton" if kw.get("trig", CB.TRIG) else "any", s.n_cat, s.n_hist,
-                            len(s.by_type), f"{s.N:.0f}", f"{z_local_for_global5(s.N):.2f}",
-                            f"{z_local_for_global5(s.N*0.5):.2f}",
-                            f"{z_local_for_global5(s.N*2):.2f}"]
+full = runs[-1][2]
 
-print("%-36s %5s %5s %5s %7s %10s %8s %6s %11s %7s" % hdr[:10])
-for label, kw, s in runs:
-    r = row(label, kw, s)
-    print("%-36s %5s %5s %5s %7s %10s %8s %6s %11s %7s" % tuple(r[:10]))
+# ------------------------------------------------------------------ fit it into the budget
+# Three priority tiers, and inside each one the highest expected rate first:
+#   0  every model-motivated axis once, in the best-populated category it appears in, so that no
+#      motivated axis can be lost to the budget;
+#   1  the same axes in their remaining categories;
+#   2  everything else.
+# The budget then takes the priority-ordered prefix that fits. It stops at the first spectrum that
+# does not, rather than topping up with whatever cheap spectrum happens to fit in the remainder.
+spectra = [(canon(r[1]), r[7], r[6], r[0]) for r in full.rows]     # composition, rate, looks, cat
+best = {}
+for i, (key, rate, ns, cat) in enumerate(spectra):
+    if key in MOTIVATED_COMPS and (key not in best or rate > spectra[best[key]][1]):
+        best[key] = i
+once = set(best.values())
+ranked = sorted(((0 if i in once else 1 if key in MOTIVATED_COMPS else 2, -rate, ns, key, cat)
+                 for i, (key, rate, ns, cat) in enumerate(spectra)),
+                key=lambda x: (x[0], x[1], x[2]))
 
-base, wide4 = runs[0][2].N, runs[3][2].N
-print(f"\nat the same ceiling, trigger and resolution prescription, the alphabet multiplies the "
-      f"trials by {runs[2][2].N / runs[1][2].N:.1f}")
-print(f"dropping the lepton requirement at that ceiling: "
-      f"{z_local_for_global5(wide4) - z_local_for_global5(runs[2][2].N):+.2f} sigma")
-print(f"raising the category ceiling from 4 to {NOBJ_WIDE[-1]} multiplies them by a further "
-      f"{runs[-1][2].N / wide4:.1f}, i.e. "
-      f"{z_local_for_global5(runs[-1][2].N) - z_local_for_global5(wide4):+.2f} sigma")
-print(f"widest variant against the five-object scan: {runs[-1][2].N / base:.1f} times the trials, "
-      f"{z_local_for_global5(runs[-1][2].N) - z_local_for_global5(base):+.2f} sigma on the bar")
+kept_looks, kept_n = collections.Counter(), collections.Counter()
+drop_looks, drop_n = collections.Counter(), collections.Counter()
+tier_N = collections.Counter()
+tier_n = collections.Counter()
+N_sel, n_sel, cut_rate, stopped = 0.0, 0, None, False
+kept_cats, tier0_cats = set(), set()
+for tier, negrate, ns, key, cat in ranked:
+    tier_N[tier] += ns
+    tier_n[tier] += 1
+    if tier == 0:
+        tier0_cats.add(cat)
+    if not stopped and N_sel + ns <= TRIALS_BUDGET:
+        N_sel += ns
+        n_sel += 1
+        kept_looks[key] += ns
+        kept_n[key] += 1
+        kept_cats.add(cat)
+        cut_rate = -negrate
+    else:
+        stopped = True
+        drop_looks[key] += ns
+        drop_n[key] += 1
+tierA_N = tier_N[0] + tier_N[1]
+tierA_n = tier_n[0] + tier_n[1]
+
+print(f"=== full ten-object scan with MET in the masses")
+print(f"spectra {full.n_hist:,}   N = {full.N:,.0f}   Z_local = {z_local_for_global5(full.N):.2f}")
+print(f"tier 0, every motivated axis once : {tier_n[0]:6,d} spectra, N = {tier_N[0]:10,.0f} "
+      f"({100*tier_N[0]/full.N:4.1f} % of the scan), Z_local = {z_local_for_global5(tier_N[0]):.2f}")
+print(f"tier 1, those axes elsewhere      : {tier_n[1]:6,d} spectra, N = {tier_N[1]:10,.0f} "
+      f"({100*tier_N[1]/full.N:4.1f} %)")
+print(f"tier 2, the rest                  : {tier_n[2]:6,d} spectra, N = {tier_N[2]:10,.0f} "
+      f"({100*tier_N[2]/full.N:4.1f} %)")
+print(f"tiers 0+1 together: N = {tierA_N:,.0f}, which is "
+      f"{tierA_N/TRIALS_BUDGET:.1f} times the budget on its own")
+print()
+print(f"=== priority prefix that fits N <= {TRIALS_BUDGET:,.0f}")
+print(f"selected {n_sel:,} of {full.n_hist:,} spectra ({100*n_sel/full.n_hist:.1f} %) over "
+      f"{len(kept_n)} of {len(full.by_type)} compositions and {len(kept_cats):,} of "
+      f"{full.n_cat:,} categories")
+print(f"tier 0 alone lives in {len(tier0_cats)} categories")
+print(f"of the {tier_n[1]:,} tier-1 spectra, {n_sel - tier_n[0]:,} fit "
+      f"({100*(n_sel - tier_n[0])/tier_n[1]:.0f} %)")
+print(f"N = {N_sel:,.0f} ({100*N_sel/full.N:.1f} % of the full scan), "
+      f"Z_local = {z_local_for_global5(N_sel):.2f} "
+      f"(band {z_local_for_global5(N_sel*0.5):.2f}-{z_local_for_global5(N_sel*2):.2f})")
+print(f"the cut lands at a category rate weight of {cut_rate:.1e}: rarer categories are dropped")
+print(f"a local 5 sigma is then worth Z_global = "
+      f"{math.sqrt(max(25.0 - 2*math.log(N_sel), 0)):.2f} sigma")
+print()
+
+# which object types survive, and through which compositions
+print("object type    spectra in scan  selected   kept looks   what survives")
+for k in ORDER_WIDE + MET_KEY:
+    tot = sum(v for c, v in full.by_type.items() if k in c)
+    sel = sum(v for c, v in kept_n.items() if k in c)
+    lk = sum(v for c, v in kept_looks.items() if k in c)
+    comps = sorted((c for c in kept_n if k in c), key=lambda c: -kept_looks[c])
+    extra = [c for c in comps if c not in MOTIVATED_COMPS]
+    if not comps:
+        what = "DROPPED ENTIRELY"
+    else:
+        what = f"{len(comps)} compositions: " + " ".join(comps[:6]) + \
+               (" ..." if len(comps) > 6 else "") + \
+               (f"  (+{len(extra)} unmotivated)" if extra else "  (all motivated)")
+    print(f"  {k} {WIDE[k][0]:12s} {tot:9,d} {sel:9,d} {lk:12,.0f}   {what}")
+print()
+
+print("compositions dropped entirely, costliest first:")
+gone = [(c, drop_looks[c], drop_n[c]) for c in drop_looks if c not in kept_n]
+for c, lk, n in sorted(gone, key=lambda x: -x[1])[:15]:
+    print(f"  {c:6s} {n:6,d} spectra, {lk:10,.0f} looks")
+print(f"  ... {len(gone)} of {len(full.by_type)} compositions dropped entirely")
+print()
+print("costliest compositions that are kept:")
+for c in sorted(kept_looks, key=lambda c: -kept_looks[c])[:15]:
+    tag = "motivated" if c in MOTIVATED_COMPS else "by rate"
+    print(f"  {c:6s} {kept_n[c]:6,d} of {full.by_type[c]:6,d} spectra, "
+          f"{kept_looks[c]:9,.0f} looks   ({tag})")
+
+# ------------------------------------------------------------------ tables
+hdr = ("scan", "types", "K_max", "objects_per_category", "MET_in_mass", "trigger", "categories",
+       "spectra", "compositions", "N_trials", "Z_local", "Z_lo", "Z_hi")
+row = lambda label, kw, cats, nsp, ncomp, N: [
+    label, len(kw["order"]), kw["kmax"], kw["nobj"], "yes" if kw.get("met_key") else "no",
+    "lepton" if kw.get("trig", CB.TRIG) else "any", cats, nsp, ncomp, f"{N:.0f}",
+    f"{z_local_for_global5(N):.2f}", f"{z_local_for_global5(N*0.5):.2f}",
+    f"{z_local_for_global5(N*2):.2f}"]
 
 with open(os.path.join(ROOT, "results", "tables", "scaled_scan.csv"), "w", newline="") as f:
     w = csv.writer(f)
     w.writerow(hdr)
     for label, kw, s in runs:
-        w.writerow(row(label, kw, s))
+        w.writerow(row(label, kw, s.n_cat, s.n_hist, len(s.by_type), s.N))
+    w.writerow(row("... model-motivated axes only", VARIANTS[-1][1], len(tier0_cats), tier_n[0],
+                   len(MOTIVATED_COMPS & set(full.by_type)), tierA_N))
+    w.writerow(row(f"... prioritised to N <= {TRIALS_BUDGET:.0e}", VARIANTS[-1][1], len(kept_cats),
+                   n_sel, len(kept_n), N_sel))
 
-# ------------------------------------------------------------------ where the headline cost sits
-# the four-objects-per-category variant, which is the one comparable with the five-object grid
-head = runs[3][2]
-looks = head.looks
-with open(os.path.join(ROOT, "results", "tables", "scaled_scan_groups.csv"), "w", newline="") as f:
+with open(os.path.join(ROOT, "results", "tables", "priority_scan.csv"), "w", newline="") as f:
     w = csv.writer(f)
-    w.writerow(["composition", "K", "spectra", "looks"])
-    for comp in sorted(looks, key=lambda c: (len(c), -looks[c])):
-        w.writerow([comp, len(comp), head.by_type[comp], f"{looks[comp]:.0f}"])
+    w.writerow(["composition", "K", "tier", "spectra_total", "spectra_kept", "looks_total",
+                "looks_kept"])
+    for c in sorted(full.by_type, key=lambda c: (len(c), -full.looks[c])):
+        w.writerow([c, len(c), "motivated" if c in MOTIVATED_COMPS else "rate",
+                    full.by_type[c], kept_n.get(c, 0), f"{full.looks[c]:.0f}",
+                    f"{kept_looks.get(c, 0.0):.0f}"])
 
-byK = collections.Counter()
-for comp, v in looks.items():
-    byK[len(comp)] += v
-NEW = set("TgtVH")
-new_looks = sum(v for comp, v in looks.items() if NEW & set(comp))
-new_spec = sum(head.by_type[c] for c in looks if NEW & set(c))
-print(f"\nspectra reaching a new object type: {new_spec} of {head.n_hist} "
-      f"({100*new_spec/head.n_hist:.0f} %), carrying {100*new_looks/head.N:.0f} % of N")
-print("\nheadline scan, by group size:")
-for k in sorted(byK):
-    print(f"  K={k}: {head.by_size[k]:6d} spectra, {byK[k]:9.0f} looks "
-          f"({100*byK[k]/head.N:4.1f} % of N)")
-print("\ncostliest compositions of the headline scan:")
-for comp in sorted(looks, key=lambda c: -looks[c])[:12]:
-    print(f"  {comp:6s} {head.by_type[comp]:5d} spectra {looks[comp]:9.0f} looks")
-
-print(f"\nwrote results/tables/scaled_scan.csv ({len(runs)} variants) and "
-      f"scaled_scan_groups.csv ({len(looks)} compositions)", file=sys.stderr)
+print(f"\nwrote results/tables/scaled_scan.csv ({len(runs) + 2} rows) and priority_scan.csv "
+      f"({len(full.by_type)} compositions)", file=sys.stderr)

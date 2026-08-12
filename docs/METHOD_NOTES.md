@@ -97,6 +97,48 @@ Note the ½ prefactor is an empirical calibration to those channels, not textboo
 independent of group size — a 4-body mass is assumed as sharp as a 2-body one. Both choices only
 move `ln N`.
 
+### The scaled-up scan and its trials budget
+
+`scaled_scan.py` runs the same enumeration over the alphabet a general search would actually have,
+and then asks what fits inside a fixed trials budget. The rules that differ from the five-object
+scan, all of them design choices:
+
+* **ten object types** — e, mu, hadronic tau, photon, light jet, b-jet, boosted top, boosted W/Z,
+  boosted H, leptonic Z — with **no per-type ceiling**, since those describe one particular grid;
+* **strictly at most four objects per category**, and **MET does not count against that four**: it
+  may be a fifth ingredient of a mass, so one object plus MET is already a transverse mass. MET does
+  count as one constituent when picking the window class, and four is the widest class;
+* **any trigger**: a category needs no lepton;
+* resolutions are **derived, not declared**: `sigma = 2r` of each object's own symmetric published
+  channel (`m(ee)` → 0.030, `m(tautau)` → 0.24, `m(gammagamma)` → 0.02, ...), which is the inversion
+  `two_body_matrix.py` uses. MET has no symmetric channel and is read out of `mT(ev)` instead, giving
+  `sigma(MET) = 0.28`; that value reproduces `mT(muv)` at 0.105 against a published 0.15, i.e. it
+  errs towards more looks rather than fewer.
+
+That scan is **2.0e6 looks**, which nobody would run, so the budget: `TRIALS_BUDGET = 5e5`. Spectra
+are ordered by priority and the scan is the longest prefix that fits, stopping at the first spectrum
+that does not (rather than topping up with whatever cheap spectrum still fits the remainder). The
+priority is:
+
+0. **every model-motivated axis once**, in the best-populated category it appears in, so no motivated
+   axis can be lost to the budget. `MOTIVATED` maps each of the 46 observables of the model-driven
+   budget onto the composition(s) a scan would build it from; 45 of them have one, `m(multi)` has no
+   fixed composition, and they collapse onto **41 distinct compositions**;
+1. **those same axes in their remaining categories**, highest expected rate first;
+2. **everything else**, highest expected rate first.
+
+Expected rate is a declared **order-of-magnitude weight per object type**, multiplied over the
+category's content (`j` 1, `b` 0.1, MET 0.3, photon 1e-3, e/mu 1e-4, boosted V 1e-4, tau_had 3e-5,
+boosted top 3e-5, leptonic Z 1e-5, boosted H 1e-6). Only their **ordering** matters to the ranking,
+not the values. Tier 0 costs 4.2e3 looks, within 15 % of the 3.7e3 of the model-driven budget, which
+is the one place the two prescriptions can be checked against each other.
+
+The outcome: **tiers 0 and 1 together are 7.1e5, already 1.4x the budget**, so the scan never reaches
+an unmotivated composition. 4604 of 36906 spectra survive, on 41 of 1990 compositions, at
+`Z_local = 7.16`. No object type is dropped outright, because each appears in at least one motivated
+axis, but the rare ones survive *only* through those: boosted H only in `m(HH)`, `m(Vh)`, `m(Ht)`, and
+MET only in the three transverse masses.
+
 `composition_gap.py` then asks which of those flavour compositions any published ATLAS bump hunt
 has ever scanned. The coverage mapping is deliberately **generous** — a composition counts as
 covered if any published search scans a mass built from those object types, allowing a published

@@ -1,16 +1,19 @@
-object resolutions of the wider alphabet (sigma = 2 r of the symmetric channel)
-  e  e            sigma = 0.030   from m(ee)
-  m  mu           sigma = 0.100   from m(mumu)
-  T  tau_had      sigma = 0.240   from m(tautau)
-  g  gamma        sigma = 0.020   from m(gammagamma)
-  j  light jet    sigma = 0.100   from m(jj)
-  b  b-jet        sigma = 0.200   from m(bb)
-  t  boosted top  sigma = 0.160   from m(tt)
-  V  boosted W/Z  sigma = 0.120   from m(VV)
-  H  boosted H    sigma = 0.160   from m(HH)
-  Z  leptonic Z   sigma = 0.040   baseline value (no symmetric published channel)
+object alphabet: resolution from the published symmetric channel, rate weight declared
+  e  e            sigma = 0.030  rate  1.0e-04   (m(ee))
+  m  mu           sigma = 0.100  rate  1.0e-04   (m(mumu))
+  T  tau_had      sigma = 0.240  rate  3.0e-05   (m(tautau))
+  g  gamma        sigma = 0.020  rate  1.0e-03   (m(gammagamma))
+  j  light jet    sigma = 0.100  rate  1.0e+00   (m(jj))
+  b  b-jet        sigma = 0.200  rate  1.0e-01   (m(bb))
+  t  boosted top  sigma = 0.160  rate  3.0e-05   (m(tt))
+  V  boosted W/Z  sigma = 0.120  rate  1.0e-04   (m(VV))
+  H  boosted H    sigma = 0.160  rate  1.0e-06   (m(HH))
+  Z  leptonic Z   sigma = 0.040  rate  1.0e-05   (baseline value, no symmetric channel)
+  X  MET          sigma = 0.281  rate  3.0e-01   (mT(e,v), electron share removed)
 
-=== five objects, declared resolutions  (5 object types, K<=4 per mass, <=4 per category, lepton required)
+model-motivated compositions: 41 from 45 of the 46 axes (m(multi) has no fixed composition)
+
+=== five objects, lepton trigger  (5 object types, K<=4 objects per mass, <=4 per category, lepton required)
 categories (exclusive, MET-split, >=2 objects)                       : 150
   ... after splitting same-flavour dilepton cases into OS and SS     : 204
 (category, mass-group) combinations                                  : 1,094
@@ -23,7 +26,7 @@ Z_local for 5 sigma global = 6.98
   r band (x0.5..x2 -> N x2..x0.5): 6.88 - 7.08
   a local 5 sigma is worth Z_global = 1.12 sigma
 
-=== five objects, derived resolutions  (5 object types, K<=4 per mass, <=4 per category, lepton required)
+=== five objects, derived sigma  (5 object types, K<=4 objects per mass, <=4 per category, lepton required)
 categories (exclusive, MET-split, >=2 objects)                       : 150
   ... after splitting same-flavour dilepton cases into OS and SS     : 204
 (category, mass-group) combinations                                  : 1,094
@@ -36,20 +39,7 @@ Z_local for 5 sigma global = 6.96
   r band (x0.5..x2 -> N x2..x0.5): 6.86 - 7.06
   a local 5 sigma is worth Z_global = 1.26 sigma
 
-=== ten objects, lepton trigger  (10 object types, K<=4 per mass, <=4 per category, lepton required)
-categories (exclusive, MET-split, >=2 objects)                       : 1,336
-  ... after splitting same-flavour dilepton cases into OS and SS     : 1,712
-(category, mass-group) combinations                                  : 12,252
-mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 15,784
-  by group size: k=2: 8,920, k=3: 5,560, k=4: 1,304
-distinct object-type multisets (physics observables)                 : 780
-
-N_trials = 1,179,899    ln N = 13.98
-Z_local for 5 sigma global = 7.28
-  r band (x0.5..x2 -> N x2..x0.5): 7.18 - 7.37
-  a local 5 sigma is worth Z_global = 0.00 sigma
-
-=== ten objects, <=4 per category  (10 object types, K<=4 per mass, <=4 per category, no trigger requirement)
+=== ten objects, MET a split only  (10 object types, K<=4 objects per mass, <=4 per category, any trigger)
 categories (exclusive, MET-split, >=2 objects)                       : 1,980
   ... after splitting same-flavour dilepton cases into OS and SS     : 2,412
 (category, mass-group) combinations                                  : 17,600
@@ -62,62 +52,78 @@ Z_local for 5 sigma global = 7.31
   r band (x0.5..x2 -> N x2..x0.5): 7.21 - 7.40
   a local 5 sigma is worth Z_global = 0.00 sigma
 
-=== ten objects, <=6 per category  (10 object types, K<=4 per mass, <=6 per category, no trigger requirement)
-categories (exclusive, MET-split, >=2 objects)                       : 15,994
-  ... after splitting same-flavour dilepton cases into OS and SS     : 19,954
-(category, mass-group) combinations                                  : 618,200
-mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 773,444
-  by group size: k=2: 250,360, k=3: 308,308, k=4: 214,776
-distinct object-type multisets (physics observables)                 : 990
+=== ten objects, MET in the masses  (10 object types, K<=4 objects per mass, <=4 per category, any trigger)
+categories (exclusive, MET-split, >=2 objects)                       : 1,980
+  ... after splitting same-flavour dilepton cases into OS and SS     : 2,412
+(category, mass-group) combinations                                  : 30,030
+mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 36,906
+  by group size: k=2: 16,730, k=3: 13,733, k=4: 5,560, k=5: 883
+distinct object-type multisets (physics observables)                 : 1990
 
-N_trials = 46,086,197    ln N = 17.65
-Z_local for 5 sigma global = 7.76
-  r band (x0.5..x2 -> N x2..x0.5): 7.68 - 7.85
+N_trials = 1,955,486    ln N = 14.49
+Z_local for 5 sigma global = 7.35
+  r band (x0.5..x2 -> N x2..x0.5): 7.25 - 7.44
   a local 5 sigma is worth Z_global = 0.00 sigma
 
-=== ten objects, <=8 per category  (10 object types, K<=4 per mass, <=8 per category, no trigger requirement)
-categories (exclusive, MET-split, >=2 objects)                       : 87,494
-  ... after splitting same-flavour dilepton cases into OS and SS     : 108,086
-(category, mass-group) combinations                                  : 0
-mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 12,555,060
-  by group size: k=2: 2,519,088, k=3: 4,646,796, k=4: 5,389,176
-distinct object-type multisets (physics observables)                 : 990
+=== full ten-object scan with MET in the masses
+spectra 36,906   N = 1,955,486   Z_local = 7.35
+tier 0, every motivated axis once :     41 spectra, N =      4,238 ( 0.2 % of the scan), Z_local = 6.46
+tier 1, those axes elsewhere      :  6,834 spectra, N =    702,732 (35.9 %)
+tier 2, the rest                  : 23,155 spectra, N =  1,248,516 (63.8 %)
+tiers 0+1 together: N = 706,970, which is 1.4 times the budget on its own
 
-N_trials = 683,919,443    ln N = 20.34
-Z_local for 5 sigma global = 8.10
-  r band (x0.5..x2 -> N x2..x0.5): 8.02 - 8.19
-  a local 5 sigma is worth Z_global = 0.00 sigma
+=== priority prefix that fits N <= 500,000
+selected 4,604 of 36,906 spectra (12.5 %) over 41 of 1990 compositions and 1,307 of 2,412 categories
+tier 0 alone lives in 41 categories
+of the 6,834 tier-1 spectra, 4,563 fit (67 %)
+N = 499,977 (25.6 % of the full scan), Z_local = 7.16 (band 7.06-7.25)
+the cut lands at a category rate weight of 9.0e-17: rarer categories are dropped
+a local 5 sigma is then worth Z_global = 0.00 sigma
 
-scan                                 types K_max objects_per_category trigger categories  spectra compositions    N_trials Z_local
-five objects, declared resolutions       5     4     4  lepton        204     1502     82      143077    6.98
-five objects, derived resolutions        5     4     4  lepton        204     1502     82      121291    6.96
-ten objects, lepton trigger             10     4     4  lepton       1712    15784    780     1179899    7.28
-ten objects, <=4 per category           10     4     4     any       2412    21644    990     1480538    7.31
-ten objects, <=6 per category           10     4     6     any      19954   773444    990    46086197    7.76
-ten objects, <=8 per category           10     4     8     any     108086 12555060    990   683919443    8.10
+object type    spectra in scan  selected   kept looks   what survives
+  e e                8,442     1,115      201,098   12 compositions: eg ee ej Ze em be ...  (all motivated)
+  m mu               8,442     1,115      111,419   12 compositions: gm jm em bm mm Xm ...  (all motivated)
+  T tau_had          8,442       782       42,444   6 compositions: Tj TX Tb Te Tm TT  (all motivated)
+  g gamma            7,107       783      187,060   5 compositions: gg eg gm gj Vg  (all motivated)
+  j light jet        7,107     1,119      105,466   9 compositions: ej gj jm jj Tj bj ...  (all motivated)
+  b b-jet            7,107     1,233       66,005   7 compositions: be bm bj Vb Tb bb ...  (all motivated)
+  t boosted top      7,107       441       17,325   5 compositions: bt Zt Vt tt Ht  (all motivated)
+  V boosted W/Z      7,107       573       33,785   5 compositions: Vg Vb VV Vt HV  (all motivated)
+  H boosted H        7,107       132        5,272   3 compositions: HV Ht HH  (all motivated)
+  Z leptonic Z       7,107       223       34,840   3 compositions: Ze Zm Zt  (all motivated)
+  X MET             15,262       624       31,628   3 compositions: Xe Xm TX  (all motivated)
 
-at the same ceiling, trigger and resolution prescription, the alphabet multiplies the trials by 9.7
-dropping the lepton requirement at that ceiling: +0.03 sigma
-raising the category ceiling from 4 to 8 multiplies them by a further 461.9, i.e. +0.80 sigma
-widest variant against the five-object scan: 4780.1 times the trials, +1.12 sigma on the bar
+compositions dropped entirely, costliest first:
+  Zg        182 spectra,     44,667 looks
+  ZZ        182 spectra,     32,117 looks
+  Ve        182 spectra,     21,144 looks
+  Zj        182 spectra,     18,547 looks
+  Vm        182 spectra,     16,743 looks
+  Xg        363 spectra,     16,364 looks
+  Xj        363 spectra,     15,458 looks
+  XZ        363 spectra,     15,115 looks
+  He        182 spectra,     15,055 looks
+  VZ        182 spectra,     14,363 looks
+  VX        363 spectra,     14,042 looks
+  et        182 spectra,     13,928 looks
+  Xb        363 spectra,     13,370 looks
+  Hm        182 spectra,     12,989 looks
+  Vj        182 spectra,     12,788 looks
+  ... 1949 of 1990 compositions dropped entirely
 
-spectra reaching a new object type: 16780 of 21644 (78 %), carrying 69 % of N
-
-headline scan, by group size:
-  K=2:  12290 spectra,    980276 looks (66.2 % of N)
-  K=3:   7588 spectra,    426058 looks (28.8 % of N)
-  K=4:   1766 spectra,     74204 looks ( 5.0 % of N)
-
-costliest compositions of the headline scan:
-  eg       254 spectra     77949 looks
-  gg       194 spectra     75893 looks
-  ee       254 spectra     66244 looks
-  Ze       254 spectra     52308 looks
-  Zg       194 spectra     44667 looks
-  ZZ       194 spectra     32117 looks
-  gm       254 spectra     27559 looks
-  em       254 spectra     26919 looks
-  ej       254 spectra     26919 looks
-  Zm       254 spectra     24283 looks
-  Ve       254 spectra     21144 looks
-  gj       194 spectra     21049 looks
+costliest compositions that are kept:
+  gg        169 of    194 spectra,    70,808 looks   (motivated)
+  eg        142 of    254 spectra,    60,456 looks   (motivated)
+  ee        102 of    254 spectra,    39,381 looks   (motivated)
+  ej        181 of    254 spectra,    26,814 looks   (motivated)
+  Ze         77 of    254 spectra,    21,417 looks   (motivated)
+  gm        142 of    254 spectra,    21,374 looks   (motivated)
+  gj        182 of    194 spectra,    21,049 looks   (motivated)
+  jm        181 of    254 spectra,    19,795 looks   (motivated)
+  em        102 of    254 spectra,    16,003 looks   (motivated)
+  jj        182 of    194 spectra,    15,179 looks   (motivated)
+  be        177 of    254 spectra,    13,569 looks   (motivated)
+  Vg        148 of    194 spectra,    13,373 looks   (motivated)
+  bm        177 of    254 spectra,    12,272 looks   (motivated)
+  Xe        211 of    507 spectra,    11,814 looks   (motivated)
+  mm        102 of    254 spectra,    11,814 looks   (motivated)

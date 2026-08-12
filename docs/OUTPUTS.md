@@ -31,7 +31,7 @@ the only ones that are not part of `make all`.
 | `published_census.csv` | `published_census.py` |
 | `reported_excesses.csv` | `reported_excesses.py` — per paper: largest quoted local/global significance and the abstract sentence behind it |
 | `composition_gap.txt` | `composition_gap.py` (also writes the LaTeX fragment below) |
-| `scaled_scan.csv`, `scaled_scan_groups.csv`, `scaled_scan.txt` | `scaled_scan.py` — the same scan over the wider object alphabet: one row per variant, the looks per composition, and the report |
+| `scaled_scan.csv`, `priority_scan.csv`, `scaled_scan.txt` | `scaled_scan.py` — the ten-object scan with MET in the masses: one row per variant, per composition what the trials budget keeps or drops, and the report |
 | `two_body_matrix.csv` | `two_body_matrix.py` — every pair of grid objects: scanned or not, and the looks it costs either way |
 | `model_spectrum_map.csv` | `export_model_map_tex.py` — per spectrum: `n_s`, the model classes pointing at it, the event-selection multiplicity and what those selections are |
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh_fdr_ab.py` (the `.npz` is the Monte Carlo cache) |

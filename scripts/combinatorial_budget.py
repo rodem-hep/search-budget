@@ -43,7 +43,9 @@ def r_group(comp, sigma):
 
 
 def window(comp, mass):
-    lo, hi = WINDOW[len(comp)]
+    # Missing energy is free of the object ceiling but is one more constituent here, so a mass
+    # carrying it takes the next window class up, and four is the widest class there is.
+    lo, hi = WINDOW[min(len(comp), max(WINDOW))]
     return max(lo, sum(mass.get(t, LIGHT) for t in comp)), hi     # object-mass floor
 
 
@@ -76,10 +78,15 @@ def enumerate_categories(order, nmax, nobj=NOBJ, trig=TRIG, lepton=LEPTON):
     return cats
 
 
-def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, kmax=KMAX, collect=True, **kw):
+def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, kmax=KMAX, collect=True,
+                   met_key=None, weight=None, **kw):
     """Every (category, mass group) of the scan, with the looks each group costs.
 
     collect=False keeps only the aggregates, for ceilings where the row list would not fit.
+    met_key makes missing energy an ingredient of the masses as well as a category split: it does
+    not count against the object ceiling, so a mass may carry it on top of kmax objects, and one
+    object plus it is already a transverse mass. weight gives each row its category's rate weight,
+    the product over the objects present, for scans that have to be prioritised.
     """
     cats = enumerate_categories(order, nmax, **kw)
     rows, N_trials, n_hist = [], 0.0, 0
@@ -87,21 +94,29 @@ def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, kmax=KMAX, co
     looks = collections.Counter()
     for c in cats:
         objs = [t for t in order for _ in range(c.n[t])]       # indexed objects of the category
-        for k in range(KMIN, min(kmax, len(objs)) + 1):
+        met = met_key if (met_key and c.met) else None
+        w = None if weight is None else math.prod([weight[t] for t in objs]
+                                                  + ([weight[met_key]] if met else []))
+        kmin = 1 if met else KMIN                              # one object plus MET is a mass
+        for k in range(kmin, min(kmax, len(objs)) + 1):
             for idx in itertools.combinations(range(len(objs)), k):
                 comp = tuple(objs[i] for i in idx)
-                lo, hi = window(comp, mass)
-                r = r_group(comp, sigma)
-                ns = n_s(lo, hi, r) * c.os_ss                  # OS and SS are two disjoint looks
-                N_trials += ns
-                n_hist += c.os_ss
-                by_size[k] += c.os_ss
-                key = "".join(sorted(comp))
-                by_type[key] += c.os_ss
-                looks[key] += ns
-                if collect:
-                    rows.append(("".join(f"{t}{c.n[t]}" for t in order) + f"_{c.met}met",
-                                 "".join(comp), c.os_ss, r, lo, hi, ns))
+                groups = [comp] if k >= KMIN else []
+                if met:
+                    groups.append(comp + (met,))
+                for group in groups:
+                    lo, hi = window(group, mass)
+                    r = r_group(group, sigma)
+                    ns = n_s(lo, hi, r) * c.os_ss              # OS and SS are two disjoint looks
+                    N_trials += ns
+                    n_hist += c.os_ss
+                    by_size[len(group)] += c.os_ss
+                    key = "".join(sorted(group))
+                    by_type[key] += c.os_ss
+                    looks[key] += ns
+                    if collect:
+                        rows.append(("".join(f"{t}{c.n[t]}" for t in order) + f"_{c.met}met",
+                                     "".join(group), c.os_ss, r, lo, hi, ns, w))
     # Two category counts, and they differ by the OS/SS split of the same-flavour dilepton cases:
     # quote them together, since N_trials counts an OS and an SS look separately.
     return Scan(rows, N_trials, len(cats), sum(c.os_ss for c in cats), n_hist, by_size, by_type,

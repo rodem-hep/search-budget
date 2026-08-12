@@ -1,7 +1,7 @@
-scan,types,K_max,objects_per_category,trigger,categories,spectra,compositions,N_trials,Z_local,Z_lo,Z_hi
-"five objects, declared resolutions",5,4,4,lepton,204,1502,82,143077,6.98,6.88,7.08
-"five objects, derived resolutions",5,4,4,lepton,204,1502,82,121291,6.96,6.86,7.06
-"ten objects, lepton trigger",10,4,4,lepton,1712,15784,780,1179899,7.28,7.18,7.37
-"ten objects, <=4 per category",10,4,4,any,2412,21644,990,1480538,7.31,7.21,7.40
-"ten objects, <=6 per category",10,4,6,any,19954,773444,990,46086197,7.76,7.68,7.85
-"ten objects, <=8 per category",10,4,8,any,108086,12555060,990,683919443,8.10,8.02,8.19
+scan,types,K_max,objects_per_category,MET_in_mass,trigger,categories,spectra,compositions,N_trials,Z_local,Z_lo,Z_hi
+"five objects, lepton trigger",5,4,4,no,lepton,204,1502,82,143077,6.98,6.88,7.08
+"five objects, derived sigma",5,4,4,no,lepton,204,1502,82,121291,6.96,6.86,7.06
+"ten objects, MET a split only",10,4,4,no,any,2412,21644,990,1480538,7.31,7.21,7.40
+"ten objects, MET in the masses",10,4,4,yes,any,2412,36906,1990,1955486,7.35,7.25,7.44
+... model-motivated axes only,10,4,4,yes,any,41,41,41,706970,7.21,7.11,7.30
+... prioritised to N <= 5e+05,10,4,4,yes,any,1307,4604,41,499977,7.16,7.06,7.25
