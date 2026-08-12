@@ -120,8 +120,9 @@ is how many scan that spectrum and \\emph{{last}} is the year of the most recent
 recency classification in Table~\\ref{{tab:census}} is built from.
 
 Only that most recent paper is cited, one per spectrum, so the bibliography stays the length of the
-argument rather than of the record. The record itself lives with the code, as
-\\texttt{{CENSUS\\_REFERENCES.md}} under \\texttt{{results/overviews/}}, and lists all
+argument rather than of the record. The record itself lives with the code
+(\\url{{https://github.com/rodem-hep/search-budget}}), as \\texttt{{CENSUS\\_REFERENCES.md}} under
+\\texttt{{results/overviews/}}, and lists all
 {len(set(ids))} with title, journal reference and DOI, grouped under the spectrum each is counted
 against. Assembled from the collaboration's publication record and curated by hand, so it is
 complete to the best of our knowledge rather than machine-verifiable. Scope matches the budget's, so

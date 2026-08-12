@@ -270,32 +270,40 @@ for y, col, lbl, dash in ((pw_thr, c_thr, "threshold", "-"),
     a0.axhline(ref["thr" if col is c_thr else "bh" if col is c_bh else "arg"],
                color=col, lw=1.0, ls=(0, (2, 3)), alpha=0.7)
 a0.fill_between(EPS, pw_arg, pw_thr, color=c_thr, alpha=0.10)
-a0.text(2.5e-2, 88, "dotted: perfect estimator", color=ink2, fontsize=7.5, ha="right")
 a0.set_ylim(0, 95)
 a0.set_xlabel(r"defect rate $\epsilon$", color=ink2)
 a0.set_ylabel("signal confirmed [%]", color=ink2)
-a0.legend(frameon=False, fontsize=8, loc="lower left", labelcolor=ink2)
 
 # (b) the nominal FDR stops meaning anything
-a1.loglog(EPS, q_need, lw=1.3, color=c_bh)
-a1.axhline(0.05, color=ink2, lw=1.2, ls=(0, (4, 3)))
-a1.text(2.8e-2, 0.085, "$q = 0.05$", color=ink2, fontsize=7.5, ha="right")
-a1.axhline(ref_q := at_budget(b0[0], QGRID, XREF), color=ink2, lw=1.0, ls=(0, (2, 3)))
-a1.text(2.8e-2, ref_q * 1.4, f"perfect: {ref_q:.2f}",
-        color=ink2, fontsize=7.5, ha="right")
+a1.loglog(EPS, q_need, lw=1.3, color=c_bh, label="BH")
+a1.axhline(0.05, color=ink2, lw=1.2, ls=(0, (4, 3)), label="$q = 0.05$")
+a1.axhline(ref_q := at_budget(b0[0], QGRID, XREF), color=ink2, lw=1.0, ls=(0, (2, 3)),
+           label=f"perfect: {ref_q:.2f}")
 a1.set_xlabel(r"defect rate $\epsilon$", color=ink2)
 a1.set_ylabel("nominal $q$", color=ink2)
 
 # (c) the argmax has no dial at all
-a2.loglog(EPS, x_arg_b, lw=1.3, color=c_arg, label="coherent (BIAS)")
+a2.loglog(EPS, x_arg_b, lw=1.3, color=c_arg, label="BIAS")
 a2.loglog(EPS, x_arg_g, lw=1.3, ls=(0, (5, 2)), color=c_arg, alpha=0.65,
-          label="incoherent (GLITCH)")
-a2.axhline(XREF, color=ink2, lw=1.2, ls=(0, (4, 3)))
-a2.text(1.15e-5, XREF * 1.6, r"target $1.35\times10^{-3}$", color=ink2, fontsize=7.5)
+          label="GLITCH")
+a2.axhline(XREF, color=ink2, lw=1.2, ls=(0, (4, 3)),
+           label="target")
 a2.set_ylim(3e-4, 3.0)
 a2.set_xlabel(r"defect rate $\epsilon$", color=ink2)
 a2.set_ylabel("false-confirmation rate", color=ink2)
-a2.legend(frameon=False, fontsize=8, loc="upper left", labelcolor=ink2)
+
+# One frameless legend per panel and nothing floating: the dotted/dashed reference lines
+# are legend entries rather than annotations parked in whichever corner was free.
+from matplotlib.lines import Line2D
+a0.legend(handles=a0.get_legend_handles_labels()[0]
+                  + [Line2D([], [], color=ink2, lw=1.0, ls=(0, (2, 3)),
+                            label="perfect estimator")],
+          frameon=False, fontsize=7.5, loc="lower left", labelcolor=ink2,
+          handlelength=1.7, borderaxespad=0.5)
+a1.legend(frameon=False, fontsize=7.5, loc="lower left", labelcolor=ink2,
+          handlelength=1.7, borderaxespad=0.5)
+a2.legend(frameon=False, fontsize=7.5, loc="upper left", labelcolor=ink2,
+          handlelength=1.7, borderaxespad=0.5)
 
 fig.savefig(os.path.join(OUT, "bh_outliers.png"), dpi=400, facecolor=surf, bbox_inches="tight")
 print("\nwrote max_of_gaussians/bh_outliers.png")
