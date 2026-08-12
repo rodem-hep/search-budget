@@ -133,8 +133,13 @@ boosted top 3e-5, leptonic Z 1e-5, boosted H 1e-6). Only their **ordering** matt
 not the values. Tier 0 costs 4.2e3 looks, within 15 % of the 3.7e3 of the model-driven budget, which
 is the one place the two prescriptions can be checked against each other.
 
+Counting basis: a *spectrum* here is one axis in one category, i.e. one fitted histogram, and an
+OS/SS-split category holds two of them. `charge_split` is therefore the weight in every spectrum count
+below, exactly as in `N` — mixing the row count (30030 `(category, mass-group)` pairs) with the
+histogram count (36906) is the easy mistake.
+
 The outcome: **tiers 0 and 1 together are 7.1e5, already 1.4x the budget**, so the scan never reaches
-an unmotivated composition. 4604 of 36906 spectra survive, on 41 of 1990 compositions, at
+an unmotivated composition. 5842 of 36906 spectra survive, on 41 of 1990 compositions, at
 `Z_local = 7.16`. No object type is dropped outright, because each appears in at least one motivated
 axis, but the rare ones survive *only* through those: boosted H only in `m(HH)`, `m(Vh)`, `m(Ht)`, and
 MET only in the three transverse masses.

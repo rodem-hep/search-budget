@@ -3,5 +3,5 @@ scan,types,K_max,objects_per_category,MET_in_mass,trigger,categories,spectra,com
 "five objects, derived sigma",5,4,4,no,lepton,204,1502,82,121291,6.96,6.86,7.06
 "ten objects, MET a split only",10,4,4,no,any,2412,21644,990,1480538,7.31,7.21,7.40
 "ten objects, MET in the masses",10,4,4,yes,any,2412,36906,1990,1955486,7.35,7.25,7.44
-... model-motivated axes only,10,4,4,yes,any,41,41,41,706970,7.21,7.11,7.30
-... prioritised to N <= 5e+05,10,4,4,yes,any,1307,4604,41,499977,7.16,7.06,7.25
+... model-motivated axes only,10,4,4,yes,any,41,49,41,706970,7.21,7.11,7.30
+... prioritised to N <= 5e+05,10,4,4,yes,any,1307,5842,41,499977,7.16,7.06,7.25

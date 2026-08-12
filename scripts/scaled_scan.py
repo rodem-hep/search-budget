@@ -150,14 +150,16 @@ full = runs[-1][2]
 #   2  everything else.
 # The budget then takes the priority-ordered prefix that fits. It stops at the first spectrum that
 # does not, rather than topping up with whatever cheap spectrum happens to fit in the remainder.
-spectra = [(canon(r[1]), r[7], r[6], r[0]) for r in full.rows]     # composition, rate, looks, cat
+# composition, rate, looks, category, histograms (an OS/SS-split row is two of them, and its looks
+# already count both, so the two bases must not be mixed: everything below counts histograms)
+spectra = [(canon(r[1]), r[7], r[6], r[0], r[2]) for r in full.rows]
 best = {}
-for i, (key, rate, ns, cat) in enumerate(spectra):
+for i, (key, rate, ns, cat, nh) in enumerate(spectra):
     if key in MOTIVATED_COMPS and (key not in best or rate > spectra[best[key]][1]):
         best[key] = i
 once = set(best.values())
-ranked = sorted(((0 if i in once else 1 if key in MOTIVATED_COMPS else 2, -rate, ns, key, cat)
-                 for i, (key, rate, ns, cat) in enumerate(spectra)),
+ranked = sorted(((0 if i in once else 1 if key in MOTIVATED_COMPS else 2, -rate, ns, key, cat, nh)
+                 for i, (key, rate, ns, cat, nh) in enumerate(spectra)),
                 key=lambda x: (x[0], x[1], x[2]))
 
 kept_looks, kept_n = collections.Counter(), collections.Counter()
@@ -165,23 +167,24 @@ drop_looks, drop_n = collections.Counter(), collections.Counter()
 tier_N = collections.Counter()
 tier_n = collections.Counter()
 N_sel, n_sel, cut_rate, stopped = 0.0, 0, None, False
-kept_cats, tier0_cats = set(), set()
-for tier, negrate, ns, key, cat in ranked:
+kept_cats, tier0_cats, tier_axes = set(), set(), collections.Counter()
+for tier, negrate, ns, key, cat, nh in ranked:
     tier_N[tier] += ns
-    tier_n[tier] += 1
+    tier_n[tier] += nh
+    tier_axes[tier] += 1
     if tier == 0:
         tier0_cats.add(cat)
     if not stopped and N_sel + ns <= TRIALS_BUDGET:
         N_sel += ns
-        n_sel += 1
+        n_sel += nh
         kept_looks[key] += ns
-        kept_n[key] += 1
+        kept_n[key] += nh
         kept_cats.add(cat)
         cut_rate = -negrate
     else:
         stopped = True
         drop_looks[key] += ns
-        drop_n[key] += 1
+        drop_n[key] += nh
 tierA_N = tier_N[0] + tier_N[1]
 tierA_n = tier_n[0] + tier_n[1]
 
@@ -200,7 +203,7 @@ print(f"=== priority prefix that fits N <= {TRIALS_BUDGET:,.0f}")
 print(f"selected {n_sel:,} of {full.n_hist:,} spectra ({100*n_sel/full.n_hist:.1f} %) over "
       f"{len(kept_n)} of {len(full.by_type)} compositions and {len(kept_cats):,} of "
       f"{full.n_cat:,} categories")
-print(f"tier 0 alone lives in {len(tier0_cats)} categories")
+print(f"tier 0 is {tier_axes[0]} axes in {len(tier0_cats)} categories, {tier_n[0]} histograms")
 print(f"of the {tier_n[1]:,} tier-1 spectra, {n_sel - tier_n[0]:,} fit "
       f"({100*(n_sel - tier_n[0])/tier_n[1]:.0f} %)")
 print(f"N = {N_sel:,.0f} ({100*N_sel/full.N:.1f} % of the full scan), "

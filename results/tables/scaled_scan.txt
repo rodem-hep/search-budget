@@ -67,63 +67,63 @@ Z_local for 5 sigma global = 7.35
 
 === full ten-object scan with MET in the masses
 spectra 36,906   N = 1,955,486   Z_local = 7.35
-tier 0, every motivated axis once :     41 spectra, N =      4,238 ( 0.2 % of the scan), Z_local = 6.46
-tier 1, those axes elsewhere      :  6,834 spectra, N =    702,732 (35.9 %)
-tier 2, the rest                  : 23,155 spectra, N =  1,248,516 (63.8 %)
+tier 0, every motivated axis once :     49 spectra, N =      4,238 ( 0.2 % of the scan), Z_local = 6.46
+tier 1, those axes elsewhere      :  8,594 spectra, N =    702,732 (35.9 %)
+tier 2, the rest                  : 28,263 spectra, N =  1,248,516 (63.8 %)
 tiers 0+1 together: N = 706,970, which is 1.4 times the budget on its own
 
 === priority prefix that fits N <= 500,000
-selected 4,604 of 36,906 spectra (12.5 %) over 41 of 1990 compositions and 1,307 of 2,412 categories
-tier 0 alone lives in 41 categories
-of the 6,834 tier-1 spectra, 4,563 fit (67 %)
+selected 5,842 of 36,906 spectra (15.8 %) over 41 of 1990 compositions and 1,307 of 2,412 categories
+tier 0 is 41 axes in 41 categories, 49 histograms
+of the 8,594 tier-1 spectra, 5,793 fit (67 %)
 N = 499,977 (25.6 % of the full scan), Z_local = 7.16 (band 7.06-7.25)
 the cut lands at a category rate weight of 9.0e-17: rarer categories are dropped
 a local 5 sigma is then worth Z_global = 0.00 sigma
 
 object type    spectra in scan  selected   kept looks   what survives
-  e e                8,442     1,115      201,098   12 compositions: eg ee ej Ze em be ...  (all motivated)
-  m mu               8,442     1,115      111,419   12 compositions: gm jm em bm mm Xm ...  (all motivated)
-  T tau_had          8,442       782       42,444   6 compositions: Tj TX Tb Te Tm TT  (all motivated)
-  g gamma            7,107       783      187,060   5 compositions: gg eg gm gj Vg  (all motivated)
-  j light jet        7,107     1,119      105,466   9 compositions: ej gj jm jj Tj bj ...  (all motivated)
-  b b-jet            7,107     1,233       66,005   7 compositions: be bm bj Vb Tb bb ...  (all motivated)
-  t boosted top      7,107       441       17,325   5 compositions: bt Zt Vt tt Ht  (all motivated)
-  V boosted W/Z      7,107       573       33,785   5 compositions: Vg Vb VV Vt HV  (all motivated)
+  e e                8,442     1,577      201,098   12 compositions: eg ee ej Ze em be ...  (all motivated)
+  m mu               8,442     1,577      111,419   12 compositions: gm jm em bm mm Xm ...  (all motivated)
+  T tau_had          8,442     1,140       42,444   6 compositions: Tj TX Tb Te Tm TT  (all motivated)
+  g gamma            7,107       927      187,060   5 compositions: gg eg gm gj Vg  (all motivated)
+  j light jet        7,107     1,375      105,466   9 compositions: ej gj jm jj Tj bj ...  (all motivated)
+  b b-jet            7,107     1,489       66,005   7 compositions: be bm bj Vb Tb bb ...  (all motivated)
+  t boosted top      7,107       453       17,325   5 compositions: bt Zt Vt tt Ht  (all motivated)
+  V boosted W/Z      7,107       598       33,785   5 compositions: Vg Vb VV Vt HV  (all motivated)
   H boosted H        7,107       132        5,272   3 compositions: HV Ht HH  (all motivated)
-  Z leptonic Z       7,107       223       34,840   3 compositions: Ze Zm Zt  (all motivated)
-  X MET             15,262       624       31,628   3 compositions: Xe Xm TX  (all motivated)
+  Z leptonic Z       7,107       277       34,840   3 compositions: Ze Zm Zt  (all motivated)
+  X MET             15,262       892       31,628   3 compositions: Xe Xm TX  (all motivated)
 
 compositions dropped entirely, costliest first:
-  Zg        182 spectra,     44,667 looks
-  ZZ        182 spectra,     32,117 looks
-  Ve        182 spectra,     21,144 looks
-  Zj        182 spectra,     18,547 looks
-  Vm        182 spectra,     16,743 looks
-  Xg        363 spectra,     16,364 looks
-  Xj        363 spectra,     15,458 looks
-  XZ        363 spectra,     15,115 looks
-  He        182 spectra,     15,055 looks
-  VZ        182 spectra,     14,363 looks
-  VX        363 spectra,     14,042 looks
-  et        182 spectra,     13,928 looks
-  Xb        363 spectra,     13,370 looks
-  Hm        182 spectra,     12,989 looks
-  Vj        182 spectra,     12,788 looks
+  Zg        194 spectra,     44,667 looks
+  ZZ        194 spectra,     32,117 looks
+  Ve        254 spectra,     21,144 looks
+  Zj        194 spectra,     18,547 looks
+  Vm        254 spectra,     16,743 looks
+  Xg        417 spectra,     16,364 looks
+  Xj        417 spectra,     15,458 looks
+  XZ        417 spectra,     15,115 looks
+  He        254 spectra,     15,055 looks
+  VZ        194 spectra,     14,363 looks
+  VX        417 spectra,     14,042 looks
+  et        254 spectra,     13,928 looks
+  Xb        417 spectra,     13,370 looks
+  Hm        254 spectra,     12,989 looks
+  Vj        194 spectra,     12,788 looks
   ... 1949 of 1990 compositions dropped entirely
 
 costliest compositions that are kept:
-  gg        169 of    194 spectra,    70,808 looks   (motivated)
-  eg        142 of    254 spectra,    60,456 looks   (motivated)
-  ee        102 of    254 spectra,    39,381 looks   (motivated)
-  ej        181 of    254 spectra,    26,814 looks   (motivated)
-  Ze         77 of    254 spectra,    21,417 looks   (motivated)
-  gm        142 of    254 spectra,    21,374 looks   (motivated)
-  gj        182 of    194 spectra,    21,049 looks   (motivated)
-  jm        181 of    254 spectra,    19,795 looks   (motivated)
-  em        102 of    254 spectra,    16,003 looks   (motivated)
-  jj        182 of    194 spectra,    15,179 looks   (motivated)
-  be        177 of    254 spectra,    13,569 looks   (motivated)
-  Vg        148 of    194 spectra,    13,373 looks   (motivated)
-  bm        177 of    254 spectra,    12,272 looks   (motivated)
-  Xe        211 of    507 spectra,    11,814 looks   (motivated)
-  mm        102 of    254 spectra,    11,814 looks   (motivated)
+  gg        181 of    194 spectra,    70,808 looks   (motivated)
+  eg        197 of    254 spectra,    60,456 looks   (motivated)
+  ee        151 of    254 spectra,    39,381 looks   (motivated)
+  ej        253 of    254 spectra,    26,814 looks   (motivated)
+  Ze        104 of    254 spectra,    21,417 looks   (motivated)
+  gm        197 of    254 spectra,    21,374 looks   (motivated)
+  gj        194 of    194 spectra,    21,049 looks   (motivated)
+  jm        253 of    254 spectra,    19,795 looks   (motivated)
+  em        151 of    254 spectra,    16,003 looks   (motivated)
+  jj        194 of    194 spectra,    15,179 looks   (motivated)
+  be        248 of    254 spectra,    13,569 looks   (motivated)
+  Vg        158 of    194 spectra,    13,373 looks   (motivated)
+  bm        248 of    254 spectra,    12,272 looks   (motivated)
+  Xe        302 of    507 spectra,    11,814 looks   (motivated)
+  mm        151 of    254 spectra,    11,814 looks   (motivated)
