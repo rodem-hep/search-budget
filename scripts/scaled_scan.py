@@ -39,7 +39,12 @@ WIDE = {
     "Z": ("leptonic Z",     None,                 91.2),
 }
 ORDER_WIDE = "emTgjbtVHZ"
-NMAX_WIDE  = {"e": 2, "m": 2, "T": 2, "g": 2, "j": 3, "b": 3, "t": 2, "V": 2, "H": 2, "Z": 1}
+# The four bounds the mass combination, not the event: a category may hold more objects than any one
+# mass is built from. No per-type ceiling either, unlike the five-object scan, whose ceilings describe
+# one particular grid. A leptonic Z counts as one object here as it does there.
+KMAX_WIDE  = 4                                   # objects per mass combination
+NOBJ_WIDE  = (4, 6, 8)                           # objects per category, swept
+NMAX_WIDE  = {k: max(NOBJ_WIDE) for k in ORDER_WIDE}
 SIGMA_WIDE = {k: (CB.SIGMA["Z"] if ch is None else 2.0 * res(ch)) for k, (_, ch, _) in WIDE.items()}
 MASS_WIDE  = {k: m for k, (_, _, m) in WIDE.items() if m is not None}
 LEPTON_WIDE = "emT"                       # hadronic taus are charged: they split OS/SS too
@@ -49,15 +54,19 @@ TRIG_WIDE   = "emZ"                       # a hadronic tau is not a lepton trigg
 # the resolution prescription, since the baseline declares sigma per object instead of deriving it.
 SIGMA_BASE_DERIVED = {k: SIGMA_WIDE[k] for k in CB.ORDER}
 
+BASE = dict(order=CB.ORDER, nmax=CB.NMAX, sigma=CB.SIGMA, mass=CB.MASS, trig=CB.TRIG,
+            lepton=CB.LEPTON, nobj=CB.NOBJ, kmax=CB.KMAX)
+WIDE_ARGS = dict(order=ORDER_WIDE, nmax=NMAX_WIDE, sigma=SIGMA_WIDE, mass=MASS_WIDE,
+                 lepton=LEPTON_WIDE, kmax=KMAX_WIDE)
+
 VARIANTS = [
-    ("baseline, declared resolutions", CB.ORDER, CB.NMAX, CB.SIGMA, CB.MASS, CB.TRIG, CB.LEPTON),
-    ("baseline, derived resolutions",  CB.ORDER, CB.NMAX, SIGMA_BASE_DERIVED, CB.MASS,
-                                       CB.TRIG, CB.LEPTON),
-    ("wider alphabet, lepton trigger", ORDER_WIDE, NMAX_WIDE, SIGMA_WIDE, MASS_WIDE,
-                                       TRIG_WIDE, LEPTON_WIDE),
-    ("wider alphabet, any trigger",    ORDER_WIDE, NMAX_WIDE, SIGMA_WIDE, MASS_WIDE,
-                                       "", LEPTON_WIDE),
+    ("five objects, declared resolutions", BASE),
+    ("five objects, derived resolutions",  {**BASE, "sigma": SIGMA_BASE_DERIVED}),
+    ("ten objects, lepton trigger",        {**WIDE_ARGS, "trig": TRIG_WIDE, "nobj": 4}),
 ]
+# the sweep: the mass combination stays at four objects, the category ceiling rises
+VARIANTS += [(f"ten objects, <={n} per category", {**WIDE_ARGS, "trig": "", "nobj": n,
+                                                   "collect": n <= 6}) for n in NOBJ_WIDE]
 
 print("object resolutions of the wider alphabet (sigma = 2 r of the symmetric channel)")
 for k in ORDER_WIDE:
@@ -68,40 +77,49 @@ print()
 
 # ------------------------------------------------------------------ price each variant
 runs = []
-for label, order, nmax, sigma, mass, trig, lepton in VARIANTS:
-    s = CB.enumerate_scan(order=order, nmax=nmax, sigma=sigma, mass=mass, trig=trig, lepton=lepton)
-    runs.append((label, len(order), trig, s))
-    print(f"=== {label}  ({len(order)} object types, "
-          f"{'lepton required' if trig else 'no trigger requirement'})")
+for label, kw in VARIANTS:
+    s = CB.enumerate_scan(**kw)
+    runs.append((label, kw, s))
+    print(f"=== {label}  ({len(kw['order'])} object types, K<={kw['kmax']} per mass, "
+          f"<={kw['nobj']} per category, "
+          f"{'lepton required' if kw.get('trig', CB.TRIG) else 'no trigger requirement'})")
     CB.report(s)
     print()
 
-hdr = ("scan", "objects", "trigger", "categories", "spectra", "compositions", "N_trials",
-       "Z_local", "Z_lo", "Z_hi")
-print("%-32s %7s %8s %11s %8s %13s %10s %8s" % hdr[:8])
-for label, nobj, trig, s in runs:
-    print("%-32s %7d %8s %11d %8d %13d %10.4g %8.2f"
-          % (label, nobj, "lepton" if trig else "any", s.n_cat, s.n_hist, len(s.by_type),
-             s.N, z_local_for_global5(s.N)))
+hdr = ("scan", "types", "K_max", "objects_per_category", "trigger", "categories", "spectra",
+       "compositions", "N_trials", "Z_local", "Z_lo", "Z_hi")
+row = lambda label, kw, s: [label, len(kw["order"]), kw["kmax"], kw["nobj"],
+                            "lepton" if kw.get("trig", CB.TRIG) else "any", s.n_cat, s.n_hist,
+                            len(s.by_type), f"{s.N:.0f}", f"{z_local_for_global5(s.N):.2f}",
+                            f"{z_local_for_global5(s.N*0.5):.2f}",
+                            f"{z_local_for_global5(s.N*2):.2f}"]
 
-base = runs[0][3].N
-print(f"\nthe alphabet alone multiplies the trials by {runs[2][3].N / runs[1][3].N:.1f}, "
-      f"and the headline scan is {runs[3][3].N / base:.1f} times the baseline: "
-      f"{z_local_for_global5(runs[3][3].N) - z_local_for_global5(base):+.2f} sigma on the bar")
+print("%-36s %5s %5s %5s %7s %10s %8s %6s %11s %7s" % hdr[:10])
+for label, kw, s in runs:
+    r = row(label, kw, s)
+    print("%-36s %5s %5s %5s %7s %10s %8s %6s %11s %7s" % tuple(r[:10]))
+
+base, wide4 = runs[0][2].N, runs[3][2].N
+print(f"\nat the same ceiling, trigger and resolution prescription, the alphabet multiplies the "
+      f"trials by {runs[2][2].N / runs[1][2].N:.1f}")
+print(f"dropping the lepton requirement at that ceiling: "
+      f"{z_local_for_global5(wide4) - z_local_for_global5(runs[2][2].N):+.2f} sigma")
+print(f"raising the category ceiling from 4 to {NOBJ_WIDE[-1]} multiplies them by a further "
+      f"{runs[-1][2].N / wide4:.1f}, i.e. "
+      f"{z_local_for_global5(runs[-1][2].N) - z_local_for_global5(wide4):+.2f} sigma")
+print(f"widest variant against the five-object scan: {runs[-1][2].N / base:.1f} times the trials, "
+      f"{z_local_for_global5(runs[-1][2].N) - z_local_for_global5(base):+.2f} sigma on the bar")
 
 with open(os.path.join(ROOT, "results", "tables", "scaled_scan.csv"), "w", newline="") as f:
     w = csv.writer(f)
     w.writerow(hdr)
-    for label, nobj, trig, s in runs:
-        w.writerow([label, nobj, "lepton" if trig else "any", s.n_cat, s.n_hist, len(s.by_type),
-                    f"{s.N:.0f}", f"{z_local_for_global5(s.N):.2f}",
-                    f"{z_local_for_global5(s.N*0.5):.2f}", f"{z_local_for_global5(s.N*2):.2f}"])
+    for label, kw, s in runs:
+        w.writerow(row(label, kw, s))
 
 # ------------------------------------------------------------------ where the headline cost sits
-head = runs[-1][3]
-looks = collections.defaultdict(float)
-for r in head.rows:
-    looks["".join(sorted(r[1]))] += r[6]
+# the four-objects-per-category variant, which is the one comparable with the five-object grid
+head = runs[3][2]
+looks = head.looks
 with open(os.path.join(ROOT, "results", "tables", "scaled_scan_groups.csv"), "w", newline="") as f:
     w = csv.writer(f)
     w.writerow(["composition", "K", "spectra", "looks"])

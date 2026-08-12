@@ -33,7 +33,7 @@ MASS   = {"Z": 91.2}       # object masses that set the low edge; everything els
 LIGHT  = 40.0
 
 Cat  = collections.namedtuple("Cat", "n met os_ss")
-Scan = collections.namedtuple("Scan", "rows N n_cat_mult n_cat n_hist by_size by_type")
+Scan = collections.namedtuple("Scan", "rows N n_cat_mult n_cat n_hist by_size by_type looks")
 
 
 def r_group(comp, sigma):
@@ -48,11 +48,25 @@ def window(comp, mass):
 
 
 def enumerate_categories(order, nmax, nobj=NOBJ, trig=TRIG, lepton=LEPTON):
-    """Exclusive multiplicity categories, MET-split, with a trigger object required."""
+    """Exclusive multiplicity categories, MET-split, with a trigger object required.
+
+    nobj caps the objects in a category; KMAX caps the objects in one mass combination. They
+    coincide in the baseline scan and are separate knobs in scaled_scan.py.
+    """
+    def vectors(i, left, acc):
+        """Multiplicity vectors with at most nobj objects, last type varying fastest."""
+        if i == len(order):
+            yield tuple(acc)
+            return
+        for v in range(min(nmax[order[i]], left) + 1):
+            acc.append(v)
+            yield from vectors(i + 1, left - v, acc)
+            acc.pop()
+
     cats = []
-    for counts in itertools.product(*(range(nmax[t] + 1) for t in order)):
+    for counts in vectors(0, nobj, []):
         n = dict(zip(order, counts))
-        if not KMIN <= sum(counts) <= nobj:
+        if sum(counts) < KMIN:
             continue
         if trig and not any(n[t] for t in trig):
             continue
@@ -62,14 +76,18 @@ def enumerate_categories(order, nmax, nobj=NOBJ, trig=TRIG, lepton=LEPTON):
     return cats
 
 
-def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, **kw):
-    """Every (category, mass group) of the scan, with the looks each group costs."""
+def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, kmax=KMAX, collect=True, **kw):
+    """Every (category, mass group) of the scan, with the looks each group costs.
+
+    collect=False keeps only the aggregates, for ceilings where the row list would not fit.
+    """
     cats = enumerate_categories(order, nmax, **kw)
     rows, N_trials, n_hist = [], 0.0, 0
     by_size, by_type = collections.Counter(), collections.Counter()
+    looks = collections.Counter()
     for c in cats:
         objs = [t for t in order for _ in range(c.n[t])]       # indexed objects of the category
-        for k in range(KMIN, min(KMAX, len(objs)) + 1):
+        for k in range(KMIN, min(kmax, len(objs)) + 1):
             for idx in itertools.combinations(range(len(objs)), k):
                 comp = tuple(objs[i] for i in idx)
                 lo, hi = window(comp, mass)
@@ -78,12 +96,16 @@ def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, **kw):
                 N_trials += ns
                 n_hist += c.os_ss
                 by_size[k] += c.os_ss
-                by_type["".join(sorted(comp))] += c.os_ss
-                rows.append(("".join(f"{t}{c.n[t]}" for t in order) + f"_{c.met}met",
-                             "".join(comp), c.os_ss, r, lo, hi, ns))
+                key = "".join(sorted(comp))
+                by_type[key] += c.os_ss
+                looks[key] += ns
+                if collect:
+                    rows.append(("".join(f"{t}{c.n[t]}" for t in order) + f"_{c.met}met",
+                                 "".join(comp), c.os_ss, r, lo, hi, ns))
     # Two category counts, and they differ by the OS/SS split of the same-flavour dilepton cases:
     # quote them together, since N_trials counts an OS and an SS look separately.
-    return Scan(rows, N_trials, len(cats), sum(c.os_ss for c in cats), n_hist, by_size, by_type)
+    return Scan(rows, N_trials, len(cats), sum(c.os_ss for c in cats), n_hist, by_size, by_type,
+                looks)
 
 
 def report(s):
