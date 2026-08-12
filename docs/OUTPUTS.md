@@ -30,7 +30,7 @@ the only ones that are not part of `make all`.
 | `combinatorial_budget.csv` | `combinatorial_budget.py` — 1094 (category, mass-group) rows |
 | `published_census.csv` | `published_census.py` |
 | `reported_excesses.csv` | `reported_excesses.py` — per paper: largest quoted local/global significance and the abstract sentence behind it |
-| `composition_gap.txt` | `composition_gap.py` |
+| `composition_gap.txt` | `composition_gap.py` (also writes the LaTeX fragment below) |
 | `two_body_matrix.csv` | `two_body_matrix.py` — every pair of grid objects: scanned or not, and the looks it costs either way |
 | `model_spectrum_map.csv` | `export_model_map_tex.py` — per spectrum: `n_s`, the model classes pointing at it, the event-selection multiplicity and what those selections are |
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh_fdr_ab.py` (the `.npz` is the Monte Carlo cache) |
@@ -44,6 +44,7 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 
 | file | producer |
 |---|---|
+| `composition_appendix.tex` | `composition_gap.py` — all 82 reachable object compositions with the published search covering each, the row-by-row form of the coverage summary |
 | `census_refs.bib` | `export_census_bib.py` — a BibTeX entry per census paper, keyed `census:<arxiv-id>` |
 | `census_appendix.tex` | `export_census_bib.py` — the census spectrum by spectrum, citing every paper behind each |
 | `two_body_matrix.tex` | `two_body_matrix.py` — the two-body object grid priced in trials (a costed version of arXiv:1907.06659 Table 14); a bare `tabular`, so the consuming document supplies the float and caption |

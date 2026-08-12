@@ -21,6 +21,7 @@ MOD := $(S)/bump_observables.py $(S)/public_obs_map.py
 BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_BUDGET.md \
           $(P)/search_budget.png $(P)/budget_waterfall.png $(P)/excess_counting.png \
           $(T)/combinatorial_budget.csv $(T)/composition_gap.txt \
+          $(X)/composition_appendix.tex \
           $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md \
           $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md \
           $(X)/model_map_appendix.tex $(T)/model_spectrum_map.csv \
@@ -79,8 +80,9 @@ $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md &: $(S)/reported_excesses.p
 
 $(T)/combinatorial_budget.csv: $(S)/combinatorial_budget.py $(S)/bump_observables.py
 	$(PY) $(S)/combinatorial_budget.py
-$(T)/composition_gap.txt: $(T)/combinatorial_budget.csv $(S)/composition_gap.py
-	$(PY) $(S)/composition_gap.py > $@
+$(T)/composition_gap.txt $(X)/composition_appendix.tex &: $(T)/combinatorial_budget.csv \
+                                                 $(S)/composition_gap.py $(S)/obs_labels.py
+	$(PY) $(S)/composition_gap.py > $(T)/composition_gap.txt
 
 # ---------------------------------------------------------------- two-stage A/B unblinding
 ab: $(AB)
