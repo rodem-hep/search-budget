@@ -2,126 +2,131 @@
 \section{The publication census, spectrum by spectrum}
 \label{app:census}
 
-Every entry of the census of Section~\ref{sec:census}, grouped by final state, with the ATLAS
-papers that scan it. The 84 entries below carry 288 distinct papers between
-2010 and 2026; the
-\emph{last} column is the year of the most recent one, which is what the recency classification in
-Table~\ref{tab:census} is built from. Assembled from the collaboration's publication record and
-curated by hand, so it is complete to the best of our knowledge rather than machine-verifiable.
-Scope matches the budget's, so hadron-spectroscopy measurements are excluded even where they are
-bump hunts in a mass spectrum.
+Every entry of the census of Section~\ref{sec:census}, grouped by final state. The
+84 entries below carry 288 distinct papers between
+2010 and 2026; \emph{n}
+is how many scan that spectrum and \emph{last} is the year of the most recent, which is what the
+recency classification in Table~\ref{tab:census} is built from.
 
-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}r>{\raggedright\arraybackslash}p{0.39\textwidth}@{}}
+Only that most recent paper is cited, one per spectrum, so the bibliography stays the length of the
+argument rather than of the record. The record itself lives with the code, as
+\texttt{CENSUS\_REFERENCES.md} under \texttt{results/overviews/}, and lists all
+288 with title, journal reference and DOI, grouped under the spectrum each is counted
+against. Assembled from the collaboration's publication record and curated by hand, so it is
+complete to the best of our knowledge rather than machine-verifiable. Scope matches the budget's, so
+hadron-spectroscopy measurements are excluded even where they are bump hunts in a mass spectrum.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.175\textwidth}rr>{\raggedright\arraybackslash}p{0.25\textwidth}@{}}
 \toprule
-spectrum & observable & last & papers \\
+spectrum & observable & n & last & most recent paper \\
 \midrule
 \endfirsthead
 \toprule
-spectrum & observable & last & papers \\
+spectrum & observable & n & last & most recent paper \\
 \midrule
 \endhead
 \bottomrule
 \endlastfoot
-\multicolumn{4}{@{}l}{\textbf{Diboson}} \\[1pt]
-\quad Diboson combination & \texttt{m\_VV} & 2016 & \cite{census:1606.04833} \\
-\quad Diboson fully hadronic (boson-tagged jets) & \texttt{m\_JJ} & 2019 & \cite{census:1506.00962,census:1708.04445,census:1906.08589} \\
-\quad Heavy Higgs -> ZZ / WW & \texttt{m\_ZZ, m\_WW} & 2015 & \cite{census:1205.6744,census:1206.2443,census:1507.05930,census:1509.00389} \\
-\quad Triboson WWW & \texttt{m\_WWW} & 2016 & \cite{census:1610.05088} \\
-\quad WW -> e-mu & \texttt{m\_WW} & 2017 & \cite{census:1710.01123} \\
-\quad WW/WZ semileptonic (lvqq) & \texttt{m\_VV} & 2020 & \cite{census:1305.0125,census:1503.04677,census:1710.07235,census:2004.14636} \\
-\quad WZ/WW fully leptonic & \texttt{m\_WZ, m\_WW} & 2022 & \cite{census:1204.1648,census:1406.4456,census:1806.01532,census:2207.03925} \\
-\quad ZZ/ZW -> llqq, vvqq, 4l & \texttt{m\_ZZ, m\_ZW} & 2020 & \cite{census:1108.5064,census:1203.0718,census:1409.6190,census:1708.09638,census:1712.06386,census:2009.14791} \\
+\multicolumn{5}{@{}l}{\textbf{Diboson}} \\[1pt]
+\quad Diboson combination & \texttt{m\_VV} & 1 & 2016 & \cite{census:1606.04833} \\
+\quad Diboson fully hadronic (boson-tagged jets) & \texttt{m\_JJ} & 3 & 2019 & \cite{census:1906.08589} \\
+\quad Heavy Higgs -> ZZ / WW & \texttt{m\_ZZ, m\_WW} & 4 & 2015 & \cite{census:1509.00389} \\
+\quad Triboson WWW & \texttt{m\_WWW} & 1 & 2016 & \cite{census:1610.05088} \\
+\quad WW -> e-mu & \texttt{m\_WW} & 1 & 2017 & \cite{census:1710.01123} \\
+\quad WW/WZ semileptonic (lvqq) & \texttt{m\_VV} & 4 & 2020 & \cite{census:2004.14636} \\
+\quad WZ/WW fully leptonic & \texttt{m\_WZ, m\_WW} & 4 & 2022 & \cite{census:2207.03925} \\
+\quad ZZ/ZW -> llqq, vvqq, 4l & \texttt{m\_ZZ, m\_ZW} & 6 & 2020 & \cite{census:2009.14791} \\
 \addlinespace[3pt]
-\multicolumn{4}{@{}l}{\textbf{Generic \& other}} \\[1pt]
-\quad Anomaly detection (multilepton) & \texttt{many m\_ij} & 2025 & \cite{census:2508.19778} \\
-\quad Dark photon in rare Z decays & \texttt{m\_ll} & 2023 & \cite{census:2306.07413} \\
-\quad Displaced diphoton / dielectron & \texttt{m\_gamgam, m\_ee} & 2023 & \cite{census:2304.12885} \\
-\quad Doubly charged Higgs (same-sign ll / WW) & \texttt{m\_ll(SS), m\_WW(SS)} & 2022 & \cite{census:1210.5070,census:1412.0237,census:1710.09748,census:1808.01899,census:2101.11961,census:2211.07505} \\
-\quad Generic multi-body invariant masses & \texttt{many m\_ij, m\_ijk} & 2022 & \cite{census:2211.08945} \\
-\quad Heavy neutral lepton (displaced/prompt mass) & \texttt{m\_HNL} & 2025 & \cite{census:1905.09787,census:2204.11988,census:2503.16213,census:2508.20929} \\
-\quad Quarkonium + photon (exclusive H/Z decays) & \texttt{m\_(Qgam)} & 2024 & \cite{census:1501.03276,census:1607.03400,census:1712.02758,census:1807.00802,census:2208.03122,census:2301.09938,census:2402.18731} \\
-\quad Two-body masses, unsupervised anomaly detection & \texttt{many m\_ij} & 2023 & \cite{census:2307.01612} \\
+\multicolumn{5}{@{}l}{\textbf{Generic \& other}} \\[1pt]
+\quad Anomaly detection (multilepton) & \texttt{many m\_ij} & 1 & 2025 & \cite{census:2508.19778} \\
+\quad Dark photon in rare Z decays & \texttt{m\_ll} & 1 & 2023 & \cite{census:2306.07413} \\
+\quad Displaced diphoton / dielectron & \texttt{m\_gamgam, m\_ee} & 1 & 2023 & \cite{census:2304.12885} \\
+\quad Doubly charged Higgs (same-sign ll / WW) & \texttt{m\_ll(SS), m\_WW(SS)} & 6 & 2022 & \cite{census:2211.07505} \\
+\quad Generic multi-body invariant masses & \texttt{many m\_ij, m\_ijk} & 1 & 2022 & \cite{census:2211.08945} \\
+\quad Heavy neutral lepton (displaced/prompt mass) & \texttt{m\_HNL} & 4 & 2025 & \cite{census:2508.20929} \\
+\quad Quarkonium + photon (exclusive H/Z decays) & \texttt{m\_(Qgam)} & 7 & 2024 & \cite{census:2402.18731} \\
+\quad Two-body masses, unsupervised anomaly detection & \texttt{many m\_ij} & 1 & 2023 & \cite{census:2307.01612} \\
 \addlinespace[3pt]
-\multicolumn{4}{@{}l}{\textbf{Higgs pairs \& extended scalars}} \\[1pt]
-\quad A -> ZH & \texttt{m\_ZH} & 2023 & \cite{census:1502.04478,census:1804.01126,census:2011.05639,census:2311.04033} \\
-\quad Charged Higgs -> WZ / WH & \texttt{m\_WZ, m\_WH} & 2024 & \cite{census:1503.04233,census:2411.03969} \\
-\quad H -> aa (exotic Higgs decays) & \texttt{m\_aa, m\_a} & 2026 & \cite{census:1505.01609,census:1606.08391,census:1803.11145,census:1807.00539,census:2005.12236,census:2110.00313,census:2312.03306,census:2407.01335,census:2412.14046,census:2503.05463,census:2507.01165,census:2603.08323} \\
-\quad HH + top quarks (ttHH) & \texttt{m\_HH} & 2026 & \cite{census:2603.13113} \\
-\quad HH + vector boson & \texttt{m\_HH} & 2022 & \cite{census:2210.05415} \\
-\quad HH -> bb gamgam & \texttt{m\_HH} & 2021 & \cite{census:1406.5053,census:1807.04873,census:2112.11876} \\
-\quad HH -> bb tautau & \texttt{m\_HH} & 2022 & \cite{census:1808.00336,census:2209.10910} \\
-\quad HH -> bbWW / WWWW / gamgamWW & \texttt{m\_HH} & 2018 & \cite{census:1807.08567,census:1811.04671,census:1811.11028} \\
-\quad HH -> bbbb & \texttt{m\_HH} & 2024 & \cite{census:1506.00285,census:1509.04670,census:1606.04782,census:1804.06174,census:2001.05178,census:2202.07288,census:2404.17193} \\
-\quad Triple Higgs (6b) & \texttt{m\_HHH} & 2024 & \cite{census:2411.02040} \\
-\quad X -> H Y (anomaly detection / XH) & \texttt{m\_XH} & 2023 & \cite{census:1709.06783,census:2306.03637} \\
-\quad X -> S H (scalar + Higgs) & \texttt{m\_SH} & 2026 & \cite{census:2307.11120,census:2404.12915,census:2405.20926,census:2510.02857,census:2607.18484} \\
-\quad bbA -> bbbb (b-associated) & \texttt{m\_bb} & 2025 & \cite{census:1907.02749,census:2503.17254} \\
-\quad t -> qX, X -> bb & \texttt{m\_bb} & 2023 & \cite{census:2301.03902} \\
+\multicolumn{5}{@{}l}{\textbf{Higgs pairs \& extended scalars}} \\[1pt]
+\quad A -> ZH & \texttt{m\_ZH} & 4 & 2023 & \cite{census:2311.04033} \\
+\quad Charged Higgs -> WZ / WH & \texttt{m\_WZ, m\_WH} & 2 & 2024 & \cite{census:2411.03969} \\
+\quad H -> aa (exotic Higgs decays) & \texttt{m\_aa, m\_a} & 12 & 2026 & \cite{census:2603.08323} \\
+\quad HH + top quarks (ttHH) & \texttt{m\_HH} & 1 & 2026 & \cite{census:2603.13113} \\
+\quad HH + vector boson & \texttt{m\_HH} & 1 & 2022 & \cite{census:2210.05415} \\
+\quad HH -> bb gamgam & \texttt{m\_HH} & 3 & 2021 & \cite{census:2112.11876} \\
+\quad HH -> bb tautau & \texttt{m\_HH} & 2 & 2022 & \cite{census:2209.10910} \\
+\quad HH -> bbWW / WWWW / gamgamWW & \texttt{m\_HH} & 3 & 2018 & \cite{census:1811.11028} \\
+\quad HH -> bbbb & \texttt{m\_HH} & 7 & 2024 & \cite{census:2404.17193} \\
+\quad Triple Higgs (6b) & \texttt{m\_HHH} & 1 & 2024 & \cite{census:2411.02040} \\
+\quad X -> H Y (anomaly detection / XH) & \texttt{m\_XH} & 2 & 2023 & \cite{census:2306.03637} \\
+\quad X -> S H (scalar + Higgs) & \texttt{m\_SH} & 5 & 2026 & \cite{census:2607.18484} \\
+\quad bbA -> bbbb (b-associated) & \texttt{m\_bb} & 2 & 2025 & \cite{census:2503.17254} \\
+\quad t -> qX, X -> bb & \texttt{m\_bb} & 1 & 2023 & \cite{census:2301.03902} \\
 \addlinespace[3pt]
-\multicolumn{4}{@{}l}{\textbf{Jets \& hadronic}} \\[1pt]
-\quad Boosted light hadronic res. + photon & \texttt{m\_J} & 2024 & \cite{census:2408.00049} \\
-\quad Dijet (inclusive, high mass) & \texttt{m\_jj} & 2020 & \cite{census:1008.2461,census:1103.3864,census:1108.6311,census:1407.1376,census:1512.01530,census:1703.09127,census:1910.08447,census:2005.02983} \\
-\quad Dijet (low mass, trigger-level) & \texttt{m\_jj} & 2026 & \cite{census:1804.03496,census:2509.01219,census:2606.03222} \\
-\quad Dijet + ISR photon/jet & \texttt{m\_jj} & 2024 & \cite{census:1801.08769,census:1901.10917,census:2403.08547} \\
-\quad Dijet + isolated lepton & \texttt{m\_jj} & 2020 & \cite{census:2002.11325} \\
-\quad Dijet from dark quarks & \texttt{m\_jj} & 2023 & \cite{census:2311.03944} \\
-\quad Dijet, b-tagged & \texttt{m\_bb / m\_jj(b)} & 2021 & \cite{census:1603.08791,census:1805.09299,census:2108.09059} \\
-\quad Pair-produced dijet resonances (4 jets) & \texttt{m\_jj (paired)} & 2017 & \cite{census:1110.2693,census:1210.4826,census:1710.07171} \\
-\quad Photon + jet & \texttt{m\_(gamma j)} & 2017 & \cite{census:1112.3580,census:1309.3230,census:1512.05910,census:1709.10440} \\
-\quad Three-jet / multijet (3-quark res.) & \texttt{m\_jjj} & 2018 & \cite{census:1210.4813,census:1804.03568} \\
-\quad Z + light hadronic resonance (H decay) & \texttt{m\_J} & 2024 & \cite{census:2004.01678,census:2411.16361} \\
+\multicolumn{5}{@{}l}{\textbf{Jets \& hadronic}} \\[1pt]
+\quad Boosted light hadronic res. + photon & \texttt{m\_J} & 1 & 2024 & \cite{census:2408.00049} \\
+\quad Dijet (inclusive, high mass) & \texttt{m\_jj} & 8 & 2020 & \cite{census:2005.02983} \\
+\quad Dijet (low mass, trigger-level) & \texttt{m\_jj} & 3 & 2026 & \cite{census:2606.03222} \\
+\quad Dijet + ISR photon/jet & \texttt{m\_jj} & 3 & 2024 & \cite{census:2403.08547} \\
+\quad Dijet + isolated lepton & \texttt{m\_jj} & 1 & 2020 & \cite{census:2002.11325} \\
+\quad Dijet from dark quarks & \texttt{m\_jj} & 1 & 2023 & \cite{census:2311.03944} \\
+\quad Dijet, b-tagged & \texttt{m\_bb / m\_jj(b)} & 3 & 2021 & \cite{census:2108.09059} \\
+\quad Pair-produced dijet resonances (4 jets) & \texttt{m\_jj (paired)} & 3 & 2017 & \cite{census:1710.07171} \\
+\quad Photon + jet & \texttt{m\_(gamma j)} & 4 & 2017 & \cite{census:1709.10440} \\
+\quad Three-jet / multijet (3-quark res.) & \texttt{m\_jjj} & 2 & 2018 & \cite{census:1804.03568} \\
+\quad Z + light hadronic resonance (H decay) & \texttt{m\_J} & 2 & 2024 & \cite{census:2411.16361} \\
 \addlinespace[3pt]
-\multicolumn{4}{@{}l}{\textbf{Leptons}} \\[1pt]
-\quad Collimated / displaced lepton pairs & \texttt{m\_ll} & 2024 & \cite{census:2305.02005,census:2407.09168} \\
-\quad Dilepton (ee/mumu, high mass) & \texttt{m\_ll} & 2026 & \cite{census:1103.6218,census:1108.1582,census:1209.2535,census:1405.4123,census:1607.03669,census:1707.02424,census:1903.06248,census:2105.13847,census:2607.28334} \\
-\quad Dimuon (low / intermediate mass) & \texttt{m\_mumu} & 2026 & \cite{census:1901.08144,census:2304.14247,census:2601.21361} \\
-\quad Ditau & \texttt{m\_tautau} & 2026 & \cite{census:1107.5003,census:1210.6604,census:1211.6956,census:1409.6064,census:1502.07177,census:1608.00890,census:1709.07242,census:2002.12223,census:2409.20381,census:2607.28484} \\
-\quad Four leptons / 4mu & \texttt{m\_4l, m\_4mu} & 2024 & \cite{census:1505.07645,census:1802.03388,census:2110.13673,census:2301.09342,census:2401.04742,census:2402.15212} \\
-\quad LFV Z decays & \texttt{m\_ll (Z)} & 2022 & \cite{census:1408.5774,census:1804.09568,census:2010.02566,census:2105.12491,census:2204.10783} \\
-\quad LFV tau -> 3 mu & \texttt{m\_3mu} & 2026 & \cite{census:2603.18099} \\
-\quad Lepton + MET (W-prime) & \texttt{m\_T(l,nu)} & 2019 & \cite{census:1103.1391,census:1108.1316,census:1407.7494,census:1606.03977,census:1706.04786,census:1906.05609} \\
-\quad Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau) & \texttt{m\_emu, m\_etau, m\_mutau} & 2023 & \cite{census:1103.5559,census:1109.3089,census:1205.0725,census:1212.1272,census:1503.04430,census:1607.08079,census:1807.06573,census:2307.08567} \\
-\quad Periodic signals in dielectron/diphoton & \texttt{m\_ee, m\_gamgam} & 2023 & \cite{census:2305.10894} \\
-\quad SFOS dilepton + MET (edge) & \texttt{m\_ll} & 2018 & \cite{census:1503.03290,census:1611.05791,census:1805.11381} \\
-\quad Same-sign dimuon (strong gravity) & \texttt{m\_mumu (SS)} & 2013 & \cite{census:1111.0080,census:1308.4075} \\
-\quad Tau + MET & \texttt{m\_T(tau,nu)} & 2024 & \cite{census:1801.06992,census:2402.16576} \\
-\quad Trilepton resonance & \texttt{m\_3l} & 2020 & \cite{census:2011.10543} \\
+\multicolumn{5}{@{}l}{\textbf{Leptons}} \\[1pt]
+\quad Collimated / displaced lepton pairs & \texttt{m\_ll} & 2 & 2024 & \cite{census:2407.09168} \\
+\quad Dilepton (ee/mumu, high mass) & \texttt{m\_ll} & 9 & 2026 & \cite{census:2607.28334} \\
+\quad Dimuon (low / intermediate mass) & \texttt{m\_mumu} & 3 & 2026 & \cite{census:2601.21361} \\
+\quad Ditau & \texttt{m\_tautau} & 10 & 2026 & \cite{census:2607.28484} \\
+\quad Four leptons / 4mu & \texttt{m\_4l, m\_4mu} & 6 & 2024 & \cite{census:2402.15212} \\
+\quad LFV Z decays & \texttt{m\_ll (Z)} & 5 & 2022 & \cite{census:2204.10783} \\
+\quad LFV tau -> 3 mu & \texttt{m\_3mu} & 1 & 2026 & \cite{census:2603.18099} \\
+\quad Lepton + MET (W-prime) & \texttt{m\_T(l,nu)} & 6 & 2019 & \cite{census:1906.05609} \\
+\quad Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau) & \texttt{m\_emu, m\_etau, m\_mutau} & 8 & 2023 & \cite{census:2307.08567} \\
+\quad Periodic signals in dielectron/diphoton & \texttt{m\_ee, m\_gamgam} & 1 & 2023 & \cite{census:2305.10894} \\
+\quad SFOS dilepton + MET (edge) & \texttt{m\_ll} & 3 & 2018 & \cite{census:1805.11381} \\
+\quad Same-sign dimuon (strong gravity) & \texttt{m\_mumu (SS)} & 2 & 2013 & \cite{census:1308.4075} \\
+\quad Tau + MET & \texttt{m\_T(tau,nu)} & 2 & 2024 & \cite{census:2402.16576} \\
+\quad Trilepton resonance & \texttt{m\_3l} & 1 & 2020 & \cite{census:2011.10543} \\
 \addlinespace[3pt]
-\multicolumn{4}{@{}l}{\textbf{Leptoquarks, excited \& heavy fermions}} \\[1pt]
-\quad Excited leptons (e*, mu*, tau*) & \texttt{m\_lj, m\_ljj} & 2023 & \cite{census:1201.3293,census:1308.1364,census:1601.05627,census:1906.03204,census:2303.09444} \\
-\quad Heavy lepton -> Z + lepton & \texttt{m\_Zl} & 2015 & \cite{census:1506.01291} \\
-\quad Heavy neutrino / right-handed W (lljj) & \texttt{m\_lljj, m\_lj} & 2023 & \cite{census:1203.5420,census:1506.06020,census:1809.11105,census:1904.12679,census:2304.09553} \\
-\quad Leptoquark pair -> lepton + jet & \texttt{m\_lj} & 2022 & \cite{census:1104.4481,census:1112.4828,census:1203.3172,census:1508.04735,census:1605.06035,census:1902.00377,census:2006.05872,census:2010.02098,census:2210.04517} \\
-\quad Quantum black holes -> lepton + jet & \texttt{m\_lj} & 2026 & \cite{census:1311.2006,census:2307.14967,census:2604.19495} \\
-\quad Resonant single leptoquark & \texttt{m\_lj} & 2025 & \cite{census:2507.03650} \\
-\quad Third-generation LQ -> b tau / t tau & \texttt{m\_btau, m\_ttau} & 2026 & \cite{census:1303.0526,census:1902.08103,census:2101.11582,census:2303.01294,census:2305.15962,census:2306.17642,census:2606.02067} \\
+\multicolumn{5}{@{}l}{\textbf{Leptoquarks, excited \& heavy fermions}} \\[1pt]
+\quad Excited leptons (e*, mu*, tau*) & \texttt{m\_lj, m\_ljj} & 5 & 2023 & \cite{census:2303.09444} \\
+\quad Heavy lepton -> Z + lepton & \texttt{m\_Zl} & 1 & 2015 & \cite{census:1506.01291} \\
+\quad Heavy neutrino / right-handed W (lljj) & \texttt{m\_lljj, m\_lj} & 5 & 2023 & \cite{census:2304.09553} \\
+\quad Leptoquark pair -> lepton + jet & \texttt{m\_lj} & 9 & 2022 & \cite{census:2210.04517} \\
+\quad Quantum black holes -> lepton + jet & \texttt{m\_lj} & 3 & 2026 & \cite{census:2604.19495} \\
+\quad Resonant single leptoquark & \texttt{m\_lj} & 1 & 2025 & \cite{census:2507.03650} \\
+\quad Third-generation LQ -> b tau / t tau & \texttt{m\_btau, m\_ttau} & 7 & 2026 & \cite{census:2606.02067} \\
 \addlinespace[3pt]
-\multicolumn{4}{@{}l}{\textbf{Photons}} \\[1pt]
-\quad Diphoton (high mass) & \texttt{m\_gamgam} & 2021 & \cite{census:1202.1414,census:1205.0701,census:1407.6583,census:1504.05511,census:1606.03833,census:1707.04147,census:2102.13405} \\
-\quad Diphoton (low mass / boosted) & \texttt{m\_gamgam} & 2024 & \cite{census:2211.04172,census:2407.07546} \\
-\quad Diphoton + forward protons (ALP) & \texttt{m\_gamgam} & 2023 & \cite{census:2304.10953} \\
-\quad Diphoton, extra dimensions & \texttt{m\_gamgam} & 2012 & \cite{census:1112.2194,census:1210.8389} \\
-\quad H -> Za -> ll gamgam & \texttt{m\_gamgam} & 2023 & \cite{census:2312.01942} \\
-\quad Photon-jets (collimated gamma pairs) & \texttt{m\_gamgam-jets} & 2018 & \cite{census:1808.10515} \\
-\quad Three photons & \texttt{m\_3gamma} & 2015 & \cite{census:1509.05051} \\
+\multicolumn{5}{@{}l}{\textbf{Photons}} \\[1pt]
+\quad Diphoton (high mass) & \texttt{m\_gamgam} & 7 & 2021 & \cite{census:2102.13405} \\
+\quad Diphoton (low mass / boosted) & \texttt{m\_gamgam} & 2 & 2024 & \cite{census:2407.07546} \\
+\quad Diphoton + forward protons (ALP) & \texttt{m\_gamgam} & 1 & 2023 & \cite{census:2304.10953} \\
+\quad Diphoton, extra dimensions & \texttt{m\_gamgam} & 2 & 2012 & \cite{census:1210.8389} \\
+\quad H -> Za -> ll gamgam & \texttt{m\_gamgam} & 1 & 2023 & \cite{census:2312.01942} \\
+\quad Photon-jets (collimated gamma pairs) & \texttt{m\_gamgam-jets} & 1 & 2018 & \cite{census:1808.10515} \\
+\quad Three photons & \texttt{m\_3gamma} & 1 & 2015 & \cite{census:1509.05051} \\
 \addlinespace[3pt]
-\multicolumn{4}{@{}l}{\textbf{Top \& heavy quarks}} \\[1pt]
-\quad Dark mesons -> tb & \texttt{m\_tb} & 2024 & \cite{census:2405.20061} \\
-\quad Fourth-generation / heavy quark -> Wq, Zq & \texttt{m\_Wq, m\_Zq} & 2015 & \cite{census:1112.5755,census:1202.3076,census:1202.3389,census:1202.6540,census:1204.1265,census:1209.4186,census:1210.5468,census:1509.04261} \\
-\quad Resonant top + jet & \texttt{m\_tq} & 2012 & \cite{census:1209.6593} \\
-\quad Single VLQ: Wb / Ht / Zt / Hb & \texttt{m\_Wb, m\_Ht, m\_Zt, m\_Hb} & 2026 & \cite{census:1503.05425,census:1602.05606,census:1602.06034,census:1812.07343,census:2201.07045,census:2305.03401,census:2308.02595,census:2409.20273,census:2506.15515,census:2605.28538,census:2607.28381} \\
-\quad Top-philic resonances & \texttt{m\_tt+X} & 2023 & \cite{census:2304.01678} \\
-\quad Wt (excited/single VLQ) & \texttt{m\_Wt} & 2015 & \cite{census:1301.1583,census:1510.02664} \\
-\quad tb resonances (W-prime, charged Higgs) & \texttt{m\_tb} & 2023 & \cite{census:1205.1016,census:1408.0886,census:1410.4103,census:1512.03704,census:1801.07893,census:1807.10473,census:1808.03599,census:2102.10076,census:2308.08521} \\
-\quad ttbar resonances & \texttt{m\_tt} & 2025 & \cite{census:1205.5371,census:1207.2409,census:1211.2202,census:1305.2756,census:1505.07018,census:1707.06025,census:1804.10823,census:1902.10077,census:2005.05138,census:2404.18986,census:2512.17856} \\
+\multicolumn{5}{@{}l}{\textbf{Top \& heavy quarks}} \\[1pt]
+\quad Dark mesons -> tb & \texttt{m\_tb} & 1 & 2024 & \cite{census:2405.20061} \\
+\quad Fourth-generation / heavy quark -> Wq, Zq & \texttt{m\_Wq, m\_Zq} & 8 & 2015 & \cite{census:1509.04261} \\
+\quad Resonant top + jet & \texttt{m\_tq} & 1 & 2012 & \cite{census:1209.6593} \\
+\quad Single VLQ: Wb / Ht / Zt / Hb & \texttt{m\_Wb, m\_Ht, m\_Zt, m\_Hb} & 11 & 2026 & \cite{census:2607.28381} \\
+\quad Top-philic resonances & \texttt{m\_tt+X} & 1 & 2023 & \cite{census:2304.01678} \\
+\quad Wt (excited/single VLQ) & \texttt{m\_Wt} & 2 & 2015 & \cite{census:1510.02664} \\
+\quad tb resonances (W-prime, charged Higgs) & \texttt{m\_tb} & 9 & 2023 & \cite{census:2308.08521} \\
+\quad ttbar resonances & \texttt{m\_tt} & 11 & 2025 & \cite{census:2512.17856} \\
 \addlinespace[3pt]
-\multicolumn{4}{@{}l}{\textbf{Vector boson + X}} \\[1pt]
-\quad H -> Z gamma & \texttt{m\_llgam} & 2025 & \cite{census:1402.3051,census:2507.12598} \\
-\quad Higgs + photon & \texttt{m\_Hgam} & 2020 & \cite{census:2008.05928} \\
-\quad High-pT Z + X resonances & \texttt{m\_Z+X} & 2022 & \cite{census:2209.15345} \\
-\quad V-gamma, hadronic V & \texttt{m\_Wgam, m\_Zgam} & 2023 & \cite{census:1407.8150,census:1805.01908,census:2304.11962} \\
-\quad VH (llbb, lvbb, vvbb) & \texttt{m\_VH} & 2022 & \cite{census:1503.08089,census:1607.05621,census:1707.06958,census:1712.06518,census:2207.00230} \\
-\quad VH fully hadronic & \texttt{m\_VH} & 2020 & \cite{census:2007.05293} \\
-\quad Z-gamma & \texttt{m\_Zgam} & 2023 & \cite{census:1607.06363,census:1708.00212,census:2309.04364} \\
+\multicolumn{5}{@{}l}{\textbf{Vector boson + X}} \\[1pt]
+\quad H -> Z gamma & \texttt{m\_llgam} & 2 & 2025 & \cite{census:2507.12598} \\
+\quad Higgs + photon & \texttt{m\_Hgam} & 1 & 2020 & \cite{census:2008.05928} \\
+\quad High-pT Z + X resonances & \texttt{m\_Z+X} & 1 & 2022 & \cite{census:2209.15345} \\
+\quad V-gamma, hadronic V & \texttt{m\_Wgam, m\_Zgam} & 3 & 2023 & \cite{census:2304.11962} \\
+\quad VH (llbb, lvbb, vvbb) & \texttt{m\_VH} & 5 & 2022 & \cite{census:2207.00230} \\
+\quad VH fully hadronic & \texttt{m\_VH} & 1 & 2020 & \cite{census:2007.05293} \\
+\quad Z-gamma & \texttt{m\_Zgam} & 3 & 2023 & \cite{census:2309.04364} \\
 \addlinespace[3pt]
 \end{longtable}
