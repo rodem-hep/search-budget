@@ -23,6 +23,7 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(T)/combinatorial_budget.csv $(T)/composition_gap.txt \
           $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md \
           $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md \
+          $(X)/model_map_appendix.tex $(T)/model_spectrum_map.csv \
           $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md
 
 AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png
@@ -61,6 +62,10 @@ $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md &: $(S)/published_census.py d
 $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md &: $(S)/export_census_bib.py \
                                                  data/published_spectra.csv data/census_papers.csv
 	$(PY) $(S)/export_census_bib.py
+# The model-to-spectrum map as an appendix table: the inverse of model_observable_matrix.png.
+$(X)/model_map_appendix.tex $(T)/model_spectrum_map.csv &: $(S)/export_model_map_tex.py $(MOD) \
+                                                 $(S)/obs_labels.py
+	$(PY) $(S)/export_model_map_tex.py
 # The observed excesses, mined from the census abstracts. fetch_census_abstracts.py refreshes
 # data/census_abstracts.csv from the arXiv API and, like the metadata fetch, is NOT a prerequisite.
 $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md &: $(S)/reported_excesses.py $(MOD) \

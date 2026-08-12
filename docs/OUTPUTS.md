@@ -31,6 +31,7 @@ the only ones that are not part of `make all`.
 | `published_census.csv` | `published_census.py` |
 | `reported_excesses.csv` | `reported_excesses.py` — per paper: largest quoted local/global significance and the abstract sentence behind it |
 | `composition_gap.txt` | `composition_gap.py` |
+| `model_spectrum_map.csv` | `export_model_map_tex.py` — per spectrum: `n_s`, the model classes pointing at it, the event-selection multiplicity and what those selections are |
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh_fdr_ab.py` (the `.npz` is the Monte Carlo cache) |
 | `bh_zcut_per_pe.csv` | `bh_zcut.py` |
 | `bh_outliers_scan.npz` | `bh_fdr_outliers.py` (Monte Carlo cache) |
@@ -44,6 +45,7 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 |---|---|
 | `census_refs.bib` | `export_census_bib.py` — a BibTeX entry per census paper, keyed `census:<arxiv-id>` |
 | `census_appendix.tex` | `export_census_bib.py` — the census spectrum by spectrum, citing every paper behind each |
+| `model_map_appendix.tex` | `export_model_map_tex.py` — two tables: the model classes behind each spectrum, and the event selections that make the inclusive spectra into 94 channels |
 
 ## Figures — `results/plots/`
 

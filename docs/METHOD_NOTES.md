@@ -167,4 +167,6 @@ depend on the defect magnitude; the size of the gaps does.
 
 Monte Carlo in this repository is seeded explicitly, so the figures and the quoted validation
 numbers are reproducible bit-for-bit. `scripts/plot_style.py` holds the shared palette; import it
-rather than redefining colours per figure.
+rather than redefining colours per figure. `scripts/obs_labels.py` does the same for the observable
+labels, so a figure axis and an appendix row spell a spectrum the same way; it is standard library
+only, so the document generators can use it without matplotlib installed.
