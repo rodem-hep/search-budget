@@ -1,12 +1,12 @@
 # The census, reference by reference
 
-The 288 ATLAS papers behind the census of `PUBLISHED_CENSUS.md`, written out in full.
-Each is listed under the one spectrum it is counted against, so the 84 headings below carry
-288 references between them and the numbering runs to 288 exactly.
+The 290 ATLAS papers behind the census of `PUBLISHED_CENSUS.md`, written out in full.
+Each is listed under the one spectrum it is counted against, so the 86 headings below carry
+290 references between them and the numbering runs to 290 exactly.
 
 Where the count comes from: the census records, per catalogued spectrum, every published ATLAS
 search that scans it, and each paper is attributed to a single spectrum -- the one whose mass axis
-it is a bump hunt in. So 288 is the sum of the per-spectrum paper counts, with no
+it is a bump hunt in. So 290 is the sum of the per-spectrum paper counts, with no
 double counting and no paper appearing twice. Scope matches the budget's: bump hunts for new
 states, which leaves out hadron-spectroscopy measurements even where they are bumps in a mass
 spectrum.
@@ -15,7 +15,7 @@ spectrum.
 46 canonical mass axes that public BSM models motivate; this counts what has been published, which
 separates analyses that share an axis. See `docs/METHOD_NOTES.md`.
 
-Titles, journal references and DOIs are as recorded on arXiv (275 of 288 have a journal
+Titles, journal references and DOIs are as recorded on arXiv (277 of 290 have a journal
 reference so far). TeX in the titles is unwrapped into plain text, so `sqrt(s)` reads for the
 centre-of-mass energy and Greek letters are spelled out.
 
@@ -99,61 +99,73 @@ Papers span 2010-2026.
 
 25. ATLAS Collaboration, Search for Beyond the Standard Model physics with anomaly detection in multilepton final states in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Eur. Phys. J. C 86 (2026) 247, [arXiv:2508.19778](<https://arxiv.org/abs/2508.19778>), [doi:10.1140/epjc/s10052-025-15218-2](<https://doi.org/10.1140/epjc/s10052-025-15218-2>), 2025.
 
+### B\_s invariant mass structure (X(5568)): `m_Bs pi`
+
+1 paper, 2018-2018 (stale).
+
+26. ATLAS Collaboration, Search for a Structure in the B^0\_s pi^+- Invariant Mass Spectrum with the ATLAS Experiment, Phys. Rev. Lett. 120 (2018) 202007, [arXiv:1802.01840](<https://arxiv.org/abs/1802.01840>), [doi:10.1103/PhysRevLett.120.202007](<https://doi.org/10.1103/PhysRevLett.120.202007>), 2018.
+
 ### Dark photon in rare Z decays: `m_ll`
 
 1 paper, 2023-2023 (ageing).
 
-26. ATLAS Collaboration, Search for Dark Photons in Rare Z Boson Decays with the ATLAS Detector, Phys. Rev. Lett. 131 (2023) 251801, [arXiv:2306.07413](<https://arxiv.org/abs/2306.07413>), [doi:10.1103/PhysRevLett.131.251801](<https://doi.org/10.1103/PhysRevLett.131.251801>), 2023.
+27. ATLAS Collaboration, Search for Dark Photons in Rare Z Boson Decays with the ATLAS Detector, Phys. Rev. Lett. 131 (2023) 251801, [arXiv:2306.07413](<https://arxiv.org/abs/2306.07413>), [doi:10.1103/PhysRevLett.131.251801](<https://doi.org/10.1103/PhysRevLett.131.251801>), 2023.
 
 ### Displaced diphoton / dielectron: `m_gamgam, m_ee`
 
 1 paper, 2023-2023 (ageing).
 
-27. ATLAS Collaboration, Search in diphoton and dielectron final states for displaced production of Higgs or Z bosons with the ATLAS detector in sqrt(s) = 13 TeV pp collisions, Phys. Rev. D 108 (2023) 012012, [arXiv:2304.12885](<https://arxiv.org/abs/2304.12885>), [doi:10.1103/PhysRevD.108.012012](<https://doi.org/10.1103/PhysRevD.108.012012>), 2023.
+28. ATLAS Collaboration, Search in diphoton and dielectron final states for displaced production of Higgs or Z bosons with the ATLAS detector in sqrt(s) = 13 TeV pp collisions, Phys. Rev. D 108 (2023) 012012, [arXiv:2304.12885](<https://arxiv.org/abs/2304.12885>), [doi:10.1103/PhysRevD.108.012012](<https://doi.org/10.1103/PhysRevD.108.012012>), 2023.
 
 ### Doubly charged Higgs (same-sign ll / WW): `m_ll(SS), m_WW(SS)`
 
 6 papers, 2012-2022 (ageing).
 
-28. ATLAS Collaboration, Search for doubly-charged Higgs bosons in like-sign dilepton final states at sqrt(s) = 7 TeV with the ATLAS detector, Eur.Phys.J. C72 (2012) 2244, [arXiv:1210.5070](<https://arxiv.org/abs/1210.5070>), [doi:10.1140/epjc/s10052-012-2244-2](<https://doi.org/10.1140/epjc/s10052-012-2244-2>), 2012.
-29. ATLAS Collaboration, Search for anomalous production of prompt same-sign lepton pairs and pair-produced doubly charged Higgs bosons with sqrt(s) = 8 TeV pp collisions using the ATLAS detector, JHEP 03 (2015) 041, [arXiv:1412.0237](<https://arxiv.org/abs/1412.0237>), [doi:10.1007/JHEP03(2015)041](<https://doi.org/10.1007/JHEP03(2015)041>), 2014.
-30. ATLAS Collaboration, Search for doubly charged Higgs boson production in multi-lepton final states with the ATLAS detector using proton-proton collisions at sqrt(s) = 13 TeV, Eur. Phys. J. C 78 (2018) 199, [arXiv:1710.09748](<https://arxiv.org/abs/1710.09748>), [doi:10.1140/EPJC/S10052-018-5661-Z](<https://doi.org/10.1140/EPJC/S10052-018-5661-Z>), 2017.
-31. ATLAS Collaboration, Search for doubly charged scalar bosons decaying into same-sign W boson pairs with the ATLAS detector, Eur. Phys. J. C (2019) 79: 58, [arXiv:1808.01899](<https://arxiv.org/abs/1808.01899>), [doi:10.1140/epjc/s10052-018-6500-y](<https://doi.org/10.1140/epjc/s10052-018-6500-y>), 2018.
-32. ATLAS Collaboration, Search for doubly and singly charged Higgs bosons decaying into vector bosons in multi-lepton final states with the ATLAS detector using proton-proton collisions at sqrt(s) = 13 TeV, JHEP 06 (2021) 146, [arXiv:2101.11961](<https://arxiv.org/abs/2101.11961>), [doi:10.1007/JHEP06(2021)146](<https://doi.org/10.1007/JHEP06(2021)146>), 2021.
-33. ATLAS Collaboration, Search for doubly charged Higgs boson production in multi-lepton final states using 139 fb^-1 of proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J C 83 (2023) 605, [arXiv:2211.07505](<https://arxiv.org/abs/2211.07505>), [doi:10.1140/epjc/s10052-023-11578-9](<https://doi.org/10.1140/epjc/s10052-023-11578-9>), 2022.
+29. ATLAS Collaboration, Search for doubly-charged Higgs bosons in like-sign dilepton final states at sqrt(s) = 7 TeV with the ATLAS detector, Eur.Phys.J. C72 (2012) 2244, [arXiv:1210.5070](<https://arxiv.org/abs/1210.5070>), [doi:10.1140/epjc/s10052-012-2244-2](<https://doi.org/10.1140/epjc/s10052-012-2244-2>), 2012.
+30. ATLAS Collaboration, Search for anomalous production of prompt same-sign lepton pairs and pair-produced doubly charged Higgs bosons with sqrt(s) = 8 TeV pp collisions using the ATLAS detector, JHEP 03 (2015) 041, [arXiv:1412.0237](<https://arxiv.org/abs/1412.0237>), [doi:10.1007/JHEP03(2015)041](<https://doi.org/10.1007/JHEP03(2015)041>), 2014.
+31. ATLAS Collaboration, Search for doubly charged Higgs boson production in multi-lepton final states with the ATLAS detector using proton-proton collisions at sqrt(s) = 13 TeV, Eur. Phys. J. C 78 (2018) 199, [arXiv:1710.09748](<https://arxiv.org/abs/1710.09748>), [doi:10.1140/EPJC/S10052-018-5661-Z](<https://doi.org/10.1140/EPJC/S10052-018-5661-Z>), 2017.
+32. ATLAS Collaboration, Search for doubly charged scalar bosons decaying into same-sign W boson pairs with the ATLAS detector, Eur. Phys. J. C (2019) 79: 58, [arXiv:1808.01899](<https://arxiv.org/abs/1808.01899>), [doi:10.1140/epjc/s10052-018-6500-y](<https://doi.org/10.1140/epjc/s10052-018-6500-y>), 2018.
+33. ATLAS Collaboration, Search for doubly and singly charged Higgs bosons decaying into vector bosons in multi-lepton final states with the ATLAS detector using proton-proton collisions at sqrt(s) = 13 TeV, JHEP 06 (2021) 146, [arXiv:2101.11961](<https://arxiv.org/abs/2101.11961>), [doi:10.1007/JHEP06(2021)146](<https://doi.org/10.1007/JHEP06(2021)146>), 2021.
+34. ATLAS Collaboration, Search for doubly charged Higgs boson production in multi-lepton final states using 139 fb^-1 of proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J C 83 (2023) 605, [arXiv:2211.07505](<https://arxiv.org/abs/2211.07505>), [doi:10.1140/epjc/s10052-023-11578-9](<https://doi.org/10.1140/epjc/s10052-023-11578-9>), 2022.
 
 ### Generic multi-body invariant masses: `many m_ij, m_ijk`
 
 1 paper, 2022-2022 (ageing).
 
-34. ATLAS Collaboration, Search for new phenomena in multi-body invariant masses in events with at least one isolated lepton and two jets using sqrt(s) = 13 TeV proton-proton collision data collected by the ATLAS detector, JHEP 07 (2023) 202, [arXiv:2211.08945](<https://arxiv.org/abs/2211.08945>), [doi:10.1007/JHEP07(2023)202](<https://doi.org/10.1007/JHEP07(2023)202>), 2022.
+35. ATLAS Collaboration, Search for new phenomena in multi-body invariant masses in events with at least one isolated lepton and two jets using sqrt(s) = 13 TeV proton-proton collision data collected by the ATLAS detector, JHEP 07 (2023) 202, [arXiv:2211.08945](<https://arxiv.org/abs/2211.08945>), [doi:10.1007/JHEP07(2023)202](<https://doi.org/10.1007/JHEP07(2023)202>), 2022.
 
 ### Heavy neutral lepton (displaced/prompt mass): `m_HNL`
 
 4 papers, 2019-2025 (current).
 
-35. ATLAS Collaboration, Search for heavy neutral leptons in decays of W bosons produced in 13 TeV pp collisions using prompt and displaced signatures with the ATLAS detector, JHEP 10 (2019) 265, [arXiv:1905.09787](<https://arxiv.org/abs/1905.09787>), [doi:10.1007/JHEP10(2019)265](<https://doi.org/10.1007/JHEP10(2019)265>), 2019.
-36. ATLAS Collaboration, Search for heavy neutral leptons in decays of W bosons using a dilepton displaced vertex in sqrt(s)=13 TeV pp collisions with the ATLAS detector, Phys. Rev. Lett. 131 (2023) 061803, [arXiv:2204.11988](<https://arxiv.org/abs/2204.11988>), [doi:10.1103/PhysRevLett.131.061803](<https://doi.org/10.1103/PhysRevLett.131.061803>), 2022.
-37. ATLAS Collaboration, Search for heavy neutral leptons in decays of W bosons using leptonic and semi-leptonic displaced vertices in sqrt(s) = 13 TeV pp collisions with the ATLAS detector, JHEP 07 (2025) 196, [arXiv:2503.16213](<https://arxiv.org/abs/2503.16213>), [doi:10.1007/JHEP07(2025)196](<https://doi.org/10.1007/JHEP07(2025)196>), 2025.
-38. ATLAS Collaboration, Search for heavy neutral leptons in decays of W bosons produced in 13 TeV pp collisions using prompt signatures in the ATLAS detector, Eur.Phys.J. C 86 (2026) 153, [arXiv:2508.20929](<https://arxiv.org/abs/2508.20929>), [doi:10.1140/epjc/s10052-025-15191-w](<https://doi.org/10.1140/epjc/s10052-025-15191-w>), 2025.
+36. ATLAS Collaboration, Search for heavy neutral leptons in decays of W bosons produced in 13 TeV pp collisions using prompt and displaced signatures with the ATLAS detector, JHEP 10 (2019) 265, [arXiv:1905.09787](<https://arxiv.org/abs/1905.09787>), [doi:10.1007/JHEP10(2019)265](<https://doi.org/10.1007/JHEP10(2019)265>), 2019.
+37. ATLAS Collaboration, Search for heavy neutral leptons in decays of W bosons using a dilepton displaced vertex in sqrt(s)=13 TeV pp collisions with the ATLAS detector, Phys. Rev. Lett. 131 (2023) 061803, [arXiv:2204.11988](<https://arxiv.org/abs/2204.11988>), [doi:10.1103/PhysRevLett.131.061803](<https://doi.org/10.1103/PhysRevLett.131.061803>), 2022.
+38. ATLAS Collaboration, Search for heavy neutral leptons in decays of W bosons using leptonic and semi-leptonic displaced vertices in sqrt(s) = 13 TeV pp collisions with the ATLAS detector, JHEP 07 (2025) 196, [arXiv:2503.16213](<https://arxiv.org/abs/2503.16213>), [doi:10.1007/JHEP07(2025)196](<https://doi.org/10.1007/JHEP07(2025)196>), 2025.
+39. ATLAS Collaboration, Search for heavy neutral leptons in decays of W bosons produced in 13 TeV pp collisions using prompt signatures in the ATLAS detector, Eur.Phys.J. C 86 (2026) 153, [arXiv:2508.20929](<https://arxiv.org/abs/2508.20929>), [doi:10.1140/epjc/s10052-025-15191-w](<https://doi.org/10.1140/epjc/s10052-025-15191-w>), 2025.
 
 ### Quarkonium + photon (exclusive H/Z decays): `m_(Qgam)`
 
 7 papers, 2015-2024 (current).
 
-39. ATLAS Collaboration, Search for Higgs and Z Boson Decays to J/psigamma and Upsilon(nS)gamma with the ATLAS Detector, Phys. Rev. Lett. 114, 121801 (2015), [arXiv:1501.03276](<https://arxiv.org/abs/1501.03276>), [doi:10.1103/PhysRevLett.114.121801](<https://doi.org/10.1103/PhysRevLett.114.121801>), 2015.
-40. ATLAS Collaboration, Search for Higgs and Z Boson Decays to phi gamma with the ATLAS Detector, Phys. Rev. Lett. 117, 111802 (2016), [arXiv:1607.03400](<https://arxiv.org/abs/1607.03400>), [doi:10.1103/PhysRevLett.117.111802](<https://doi.org/10.1103/PhysRevLett.117.111802>), 2016.
-41. ATLAS Collaboration, Search for exclusive Higgs and Z boson decays to phigamma and rhogamma with the ATLAS detector, JHEP 07 (2018) 127, [arXiv:1712.02758](<https://arxiv.org/abs/1712.02758>), [doi:10.1007/JHEP07(2018)127](<https://doi.org/10.1007/JHEP07(2018)127>), 2017.
-42. ATLAS Collaboration, Searches for exclusive Higgs and Z boson decays into J/psigamma, psi(2S)gamma, and Upsilon(nS)gamma at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 786 (2018) 134, [arXiv:1807.00802](<https://arxiv.org/abs/1807.00802>), [doi:10.1016/j.physletb.2018.09.024](<https://doi.org/10.1016/j.physletb.2018.09.024>), 2018.
-43. ATLAS Collaboration, Searches for exclusive Higgs and Z boson decays into a vector quarkonium state and a photon using 139 fb^-1 of ATLAS sqrt(s)=13 TeV proton-proton collision data, Eur. Phys. J. C 83 (2023) 781, [arXiv:2208.03122](<https://arxiv.org/abs/2208.03122>), [doi:10.1140/epjc/s10052-023-11869-1](<https://doi.org/10.1140/epjc/s10052-023-11869-1>), 2022.
-44. ATLAS Collaboration, Search for exclusive Higgs and Z boson decays to omegagamma and Higgs boson decays to K^\*gamma with the ATLAS detector, Phys. Lett. B. 847 (2023) 138292, [arXiv:2301.09938](<https://arxiv.org/abs/2301.09938>), [doi:10.1016/j.physletb.2023.138292](<https://doi.org/10.1016/j.physletb.2023.138292>), 2023.
-45. ATLAS Collaboration, Searches for exclusive Higgs boson decays into D^\*gamma and Z boson decays into D^0gamma and K^0\_sgamma in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 855 (2024) 138762, [arXiv:2402.18731](<https://arxiv.org/abs/2402.18731>), [doi:10.1016/j.physletb.2024.138762](<https://doi.org/10.1016/j.physletb.2024.138762>), 2024.
+40. ATLAS Collaboration, Search for Higgs and Z Boson Decays to J/psigamma and Upsilon(nS)gamma with the ATLAS Detector, Phys. Rev. Lett. 114, 121801 (2015), [arXiv:1501.03276](<https://arxiv.org/abs/1501.03276>), [doi:10.1103/PhysRevLett.114.121801](<https://doi.org/10.1103/PhysRevLett.114.121801>), 2015.
+41. ATLAS Collaboration, Search for Higgs and Z Boson Decays to phi gamma with the ATLAS Detector, Phys. Rev. Lett. 117, 111802 (2016), [arXiv:1607.03400](<https://arxiv.org/abs/1607.03400>), [doi:10.1103/PhysRevLett.117.111802](<https://doi.org/10.1103/PhysRevLett.117.111802>), 2016.
+42. ATLAS Collaboration, Search for exclusive Higgs and Z boson decays to phigamma and rhogamma with the ATLAS detector, JHEP 07 (2018) 127, [arXiv:1712.02758](<https://arxiv.org/abs/1712.02758>), [doi:10.1007/JHEP07(2018)127](<https://doi.org/10.1007/JHEP07(2018)127>), 2017.
+43. ATLAS Collaboration, Searches for exclusive Higgs and Z boson decays into J/psigamma, psi(2S)gamma, and Upsilon(nS)gamma at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 786 (2018) 134, [arXiv:1807.00802](<https://arxiv.org/abs/1807.00802>), [doi:10.1016/j.physletb.2018.09.024](<https://doi.org/10.1016/j.physletb.2018.09.024>), 2018.
+44. ATLAS Collaboration, Searches for exclusive Higgs and Z boson decays into a vector quarkonium state and a photon using 139 fb^-1 of ATLAS sqrt(s)=13 TeV proton-proton collision data, Eur. Phys. J. C 83 (2023) 781, [arXiv:2208.03122](<https://arxiv.org/abs/2208.03122>), [doi:10.1140/epjc/s10052-023-11869-1](<https://doi.org/10.1140/epjc/s10052-023-11869-1>), 2022.
+45. ATLAS Collaboration, Search for exclusive Higgs and Z boson decays to omegagamma and Higgs boson decays to K^\*gamma with the ATLAS detector, Phys. Lett. B. 847 (2023) 138292, [arXiv:2301.09938](<https://arxiv.org/abs/2301.09938>), [doi:10.1016/j.physletb.2023.138292](<https://doi.org/10.1016/j.physletb.2023.138292>), 2023.
+46. ATLAS Collaboration, Searches for exclusive Higgs boson decays into D^\*gamma and Z boson decays into D^0gamma and K^0\_sgamma in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 855 (2024) 138762, [arXiv:2402.18731](<https://arxiv.org/abs/2402.18731>), [doi:10.1016/j.physletb.2024.138762](<https://doi.org/10.1016/j.physletb.2024.138762>), 2024.
 
 ### Two-body masses, unsupervised anomaly detection: `many m_ij`
 
 1 paper, 2023-2023 (ageing).
 
-46. ATLAS Collaboration, Search for new phenomena in two-body invariant mass distributions using unsupervised machine learning for anomaly detection at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. Lett. 132 (2024) 081801, [arXiv:2307.01612](<https://arxiv.org/abs/2307.01612>), [doi:10.1103/PhysRevLett.132.081801](<https://doi.org/10.1103/PhysRevLett.132.081801>), 2023.
+47. ATLAS Collaboration, Search for new phenomena in two-body invariant mass distributions using unsupervised machine learning for anomaly detection at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. Lett. 132 (2024) 081801, [arXiv:2307.01612](<https://arxiv.org/abs/2307.01612>), [doi:10.1103/PhysRevLett.132.081801](<https://doi.org/10.1103/PhysRevLett.132.081801>), 2023.
+
+### Xb -> Upsilon pi pi: `m_Upsilon pipi`
+
+1 paper, 2014-2014 (stale).
+
+48. ATLAS Collaboration, Search for the X\_b and other hidden-beauty states in the pi^+ pi^- Upsilon(1 S) channel at ATLAS, Physics Letters B 740 (2015), 199-217, [arXiv:1410.4409](<https://arxiv.org/abs/1410.4409>), [doi:10.1016/j.physletb.2014.11.055](<https://doi.org/10.1016/j.physletb.2014.11.055>), 2014.
 
 ## Higgs pairs & extended scalars
 
@@ -161,117 +173,117 @@ Papers span 2010-2026.
 
 4 papers, 2015-2023 (ageing).
 
-47. ATLAS Collaboration, Search for a CP-odd Higgs boson decaying to Zh in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Physics Letters B 744 (2015) 163-183, [arXiv:1502.04478](<https://arxiv.org/abs/1502.04478>), [doi:10.1016/j.physletb.2015.03.054](<https://doi.org/10.1016/j.physletb.2015.03.054>), 2015.
-48. ATLAS Collaboration, Search for a heavy Higgs boson decaying into a Z boson and another heavy Higgs boson in the ll bb final state in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 783 (2018) 392, [arXiv:1804.01126](<https://arxiv.org/abs/1804.01126>), [doi:10.1016/j.physletb.2018.07.006](<https://doi.org/10.1016/j.physletb.2018.07.006>), 2018.
-49. ATLAS Collaboration, Search for a heavy Higgs boson decaying into a Z boson and another heavy Higgs boson in the ll bb and ll WW final states in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C. 81 (2021) 396, [arXiv:2011.05639](<https://arxiv.org/abs/2011.05639>), [doi:10.1140/epjc/s10052-021-09117-5](<https://doi.org/10.1140/epjc/s10052-021-09117-5>), 2020.
-50. ATLAS Collaboration, Search for a CP-odd Higgs boson decaying into a heavy CP-even Higgs boson and a Z boson in the l^+l^- ttbar and nunubarbbbar final states using 140 fb^-1 of data collected with the ATLAS detector, JHEP 02 (2024) 197, [arXiv:2311.04033](<https://arxiv.org/abs/2311.04033>), [doi:10.1007/JHEP02(2024)197](<https://doi.org/10.1007/JHEP02(2024)197>), 2023.
+49. ATLAS Collaboration, Search for a CP-odd Higgs boson decaying to Zh in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Physics Letters B 744 (2015) 163-183, [arXiv:1502.04478](<https://arxiv.org/abs/1502.04478>), [doi:10.1016/j.physletb.2015.03.054](<https://doi.org/10.1016/j.physletb.2015.03.054>), 2015.
+50. ATLAS Collaboration, Search for a heavy Higgs boson decaying into a Z boson and another heavy Higgs boson in the ll bb final state in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 783 (2018) 392, [arXiv:1804.01126](<https://arxiv.org/abs/1804.01126>), [doi:10.1016/j.physletb.2018.07.006](<https://doi.org/10.1016/j.physletb.2018.07.006>), 2018.
+51. ATLAS Collaboration, Search for a heavy Higgs boson decaying into a Z boson and another heavy Higgs boson in the ll bb and ll WW final states in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C. 81 (2021) 396, [arXiv:2011.05639](<https://arxiv.org/abs/2011.05639>), [doi:10.1140/epjc/s10052-021-09117-5](<https://doi.org/10.1140/epjc/s10052-021-09117-5>), 2020.
+52. ATLAS Collaboration, Search for a CP-odd Higgs boson decaying into a heavy CP-even Higgs boson and a Z boson in the l^+l^- ttbar and nunubarbbbar final states using 140 fb^-1 of data collected with the ATLAS detector, JHEP 02 (2024) 197, [arXiv:2311.04033](<https://arxiv.org/abs/2311.04033>), [doi:10.1007/JHEP02(2024)197](<https://doi.org/10.1007/JHEP02(2024)197>), 2023.
 
 ### Charged Higgs -> WZ / WH: `m_WZ, m_WH`
 
 2 papers, 2015-2024 (current).
 
-51. ATLAS Collaboration, Search for a Charged Higgs Boson Produced in the Vector-boson Fusion Mode with Decay H^+- -> W^+- Z using pp Collisions at sqrt(s)=8 TeV with the ATLAS Experiment, Phys. Rev. Lett. 114, 231801 (2015), [arXiv:1503.04233](<https://arxiv.org/abs/1503.04233>), [doi:10.1103/PhysRevLett.114.231801](<https://doi.org/10.1103/PhysRevLett.114.231801>), 2015.
-52. ATLAS Collaboration, Search for a heavy charged Higgs boson decaying into a W boson and a Higgs boson in final states with leptons and b-jets in sqrt(s) = 13 TeV pp collisions with the ATLAS detector, JHEP 02 (2025) 143, [arXiv:2411.03969](<https://arxiv.org/abs/2411.03969>), [doi:10.1007/JHEP02(2025)143](<https://doi.org/10.1007/JHEP02(2025)143>), 2024.
+53. ATLAS Collaboration, Search for a Charged Higgs Boson Produced in the Vector-boson Fusion Mode with Decay H^+- -> W^+- Z using pp Collisions at sqrt(s)=8 TeV with the ATLAS Experiment, Phys. Rev. Lett. 114, 231801 (2015), [arXiv:1503.04233](<https://arxiv.org/abs/1503.04233>), [doi:10.1103/PhysRevLett.114.231801](<https://doi.org/10.1103/PhysRevLett.114.231801>), 2015.
+54. ATLAS Collaboration, Search for a heavy charged Higgs boson decaying into a W boson and a Higgs boson in final states with leptons and b-jets in sqrt(s) = 13 TeV pp collisions with the ATLAS detector, JHEP 02 (2025) 143, [arXiv:2411.03969](<https://arxiv.org/abs/2411.03969>), [doi:10.1007/JHEP02(2025)143](<https://doi.org/10.1007/JHEP02(2025)143>), 2024.
 
 ### H -> aa (exotic Higgs decays): `m_aa, m_a`
 
 12 papers, 2015-2026 (current).
 
-53. ATLAS Collaboration, Search for Higgs bosons decaying to aa in the mumutautau final state in pp collisions at sqrt(s) = 8 TeV with the ATLAS experiment, [arXiv:1505.01609](<https://arxiv.org/abs/1505.01609>), 2015.
-54. ATLAS Collaboration, Search for the Higgs boson produced in association with a W boson and decaying to four b-quarks via two spin-zero particles in pp collisions at 13 TeV with the ATLAS detector, Eur. Phys. J. C 76 (2016) 605, [arXiv:1606.08391](<https://arxiv.org/abs/1606.08391>), [doi:10.1140/epjc/s10052-016-4418-9](<https://doi.org/10.1140/epjc/s10052-016-4418-9>), 2016.
-55. ATLAS Collaboration, Search for Higgs boson decays into pairs of light (pseudo)scalar particles in the gammagammajj final state in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 782 (2018) 750, [arXiv:1803.11145](<https://arxiv.org/abs/1803.11145>), [doi:10.1016/j.physletb.2018.06.011](<https://doi.org/10.1016/j.physletb.2018.06.011>), 2018.
-56. ATLAS Collaboration, Search for Higgs boson decays into a pair of light bosons in the bbmumu final state in pp collision at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 790 (2019) 1, [arXiv:1807.00539](<https://arxiv.org/abs/1807.00539>), [doi:10.1016/j.physletb.2018.10.073](<https://doi.org/10.1016/j.physletb.2018.10.073>), 2018.
-57. ATLAS Collaboration, Search for Higgs boson decays into two new low-mass spin-0 particles in the 4b channel with the ATLAS detector using pp collisions at sqrt(s)= 13 TeV, Phys. Rev. D 102, 112006 (2020), [arXiv:2005.12236](<https://arxiv.org/abs/2005.12236>), [doi:10.1103/PhysRevD.102.112006](<https://doi.org/10.1103/PhysRevD.102.112006>), 2020.
-58. ATLAS Collaboration, Search for Higgs boson decays into a pair of pseudoscalar particles in the bbmumu final state with the ATLAS detector in pp collisions at sqrt(s)=13 TeV, Phys. Rev. D 105 (2022) 012006, [arXiv:2110.00313](<https://arxiv.org/abs/2110.00313>), [doi:10.1103/PhysRevD.105.012006](<https://doi.org/10.1103/PhysRevD.105.012006>), 2021.
-59. ATLAS Collaboration, Search for short- and long-lived axion-like particles in H-> a a -> 4gamma decays with the ATLAS experiment at the LHC, Eur. Phys. J. C 84 (2024) 742, [arXiv:2312.03306](<https://arxiv.org/abs/2312.03306>), [doi:10.1140/epjc/s10052-024-12979-0](<https://doi.org/10.1140/epjc/s10052-024-12979-0>), 2023.
-60. ATLAS Collaboration, Search for decays of the Higgs boson into a pair of pseudoscalar particles decaying into bbbartau^+tau^- using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 110 (2024) 052013, [arXiv:2407.01335](<https://arxiv.org/abs/2407.01335>), [doi:10.1103/PhysRevD.110.052013](<https://doi.org/10.1103/PhysRevD.110.052013>), 2024.
-61. ATLAS Collaboration, Search for Higgs boson decays into a pair of pseudoscalar particles in the gammagammatau\_hadtau\_had final state using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 03 (2025) 190, [arXiv:2412.14046](<https://arxiv.org/abs/2412.14046>), [doi:10.1007/JHEP03(2025)190](<https://doi.org/10.1007/JHEP03(2025)190>), 2024.
-62. ATLAS Collaboration, Search for Higgs boson exotic decays into Lorentz-boosted light bosons in the four-tau final state at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 870 (2025) 139843, [arXiv:2503.05463](<https://arxiv.org/abs/2503.05463>), [doi:10.1016/j.physletb.2025.139843](<https://doi.org/10.1016/j.physletb.2025.139843>), 2025.
-63. ATLAS Collaboration, Search for decays of the Higgs boson into scalar particles decaying into four or six b-quarks using pp collisions at sqrt(s)= 13 TeV with the ATLAS detector, Phys. Rev. D 112 (2025) 072005, [arXiv:2507.01165](<https://arxiv.org/abs/2507.01165>), [doi:10.1103/mzld-ldlt](<https://doi.org/10.1103/mzld-ldlt>), 2025.
-64. ATLAS Collaboration, Search for decays of the Higgs boson into pair-produced pseudoscalar particles decaying into tau^+tau^-tau^+tau^- using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, New J. Phys. 28 (2026) 063801, [arXiv:2603.08323](<https://arxiv.org/abs/2603.08323>), [doi:10.1088/1367-2630/ae78f7](<https://doi.org/10.1088/1367-2630/ae78f7>), 2026.
+55. ATLAS Collaboration, Search for Higgs bosons decaying to aa in the mumutautau final state in pp collisions at sqrt(s) = 8 TeV with the ATLAS experiment, [arXiv:1505.01609](<https://arxiv.org/abs/1505.01609>), 2015.
+56. ATLAS Collaboration, Search for the Higgs boson produced in association with a W boson and decaying to four b-quarks via two spin-zero particles in pp collisions at 13 TeV with the ATLAS detector, Eur. Phys. J. C 76 (2016) 605, [arXiv:1606.08391](<https://arxiv.org/abs/1606.08391>), [doi:10.1140/epjc/s10052-016-4418-9](<https://doi.org/10.1140/epjc/s10052-016-4418-9>), 2016.
+57. ATLAS Collaboration, Search for Higgs boson decays into pairs of light (pseudo)scalar particles in the gammagammajj final state in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 782 (2018) 750, [arXiv:1803.11145](<https://arxiv.org/abs/1803.11145>), [doi:10.1016/j.physletb.2018.06.011](<https://doi.org/10.1016/j.physletb.2018.06.011>), 2018.
+58. ATLAS Collaboration, Search for Higgs boson decays into a pair of light bosons in the bbmumu final state in pp collision at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 790 (2019) 1, [arXiv:1807.00539](<https://arxiv.org/abs/1807.00539>), [doi:10.1016/j.physletb.2018.10.073](<https://doi.org/10.1016/j.physletb.2018.10.073>), 2018.
+59. ATLAS Collaboration, Search for Higgs boson decays into two new low-mass spin-0 particles in the 4b channel with the ATLAS detector using pp collisions at sqrt(s)= 13 TeV, Phys. Rev. D 102, 112006 (2020), [arXiv:2005.12236](<https://arxiv.org/abs/2005.12236>), [doi:10.1103/PhysRevD.102.112006](<https://doi.org/10.1103/PhysRevD.102.112006>), 2020.
+60. ATLAS Collaboration, Search for Higgs boson decays into a pair of pseudoscalar particles in the bbmumu final state with the ATLAS detector in pp collisions at sqrt(s)=13 TeV, Phys. Rev. D 105 (2022) 012006, [arXiv:2110.00313](<https://arxiv.org/abs/2110.00313>), [doi:10.1103/PhysRevD.105.012006](<https://doi.org/10.1103/PhysRevD.105.012006>), 2021.
+61. ATLAS Collaboration, Search for short- and long-lived axion-like particles in H-> a a -> 4gamma decays with the ATLAS experiment at the LHC, Eur. Phys. J. C 84 (2024) 742, [arXiv:2312.03306](<https://arxiv.org/abs/2312.03306>), [doi:10.1140/epjc/s10052-024-12979-0](<https://doi.org/10.1140/epjc/s10052-024-12979-0>), 2023.
+62. ATLAS Collaboration, Search for decays of the Higgs boson into a pair of pseudoscalar particles decaying into bbbartau^+tau^- using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 110 (2024) 052013, [arXiv:2407.01335](<https://arxiv.org/abs/2407.01335>), [doi:10.1103/PhysRevD.110.052013](<https://doi.org/10.1103/PhysRevD.110.052013>), 2024.
+63. ATLAS Collaboration, Search for Higgs boson decays into a pair of pseudoscalar particles in the gammagammatau\_hadtau\_had final state using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 03 (2025) 190, [arXiv:2412.14046](<https://arxiv.org/abs/2412.14046>), [doi:10.1007/JHEP03(2025)190](<https://doi.org/10.1007/JHEP03(2025)190>), 2024.
+64. ATLAS Collaboration, Search for Higgs boson exotic decays into Lorentz-boosted light bosons in the four-tau final state at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 870 (2025) 139843, [arXiv:2503.05463](<https://arxiv.org/abs/2503.05463>), [doi:10.1016/j.physletb.2025.139843](<https://doi.org/10.1016/j.physletb.2025.139843>), 2025.
+65. ATLAS Collaboration, Search for decays of the Higgs boson into scalar particles decaying into four or six b-quarks using pp collisions at sqrt(s)= 13 TeV with the ATLAS detector, Phys. Rev. D 112 (2025) 072005, [arXiv:2507.01165](<https://arxiv.org/abs/2507.01165>), [doi:10.1103/mzld-ldlt](<https://doi.org/10.1103/mzld-ldlt>), 2025.
+66. ATLAS Collaboration, Search for decays of the Higgs boson into pair-produced pseudoscalar particles decaying into tau^+tau^-tau^+tau^- using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, New J. Phys. 28 (2026) 063801, [arXiv:2603.08323](<https://arxiv.org/abs/2603.08323>), [doi:10.1088/1367-2630/ae78f7](<https://doi.org/10.1088/1367-2630/ae78f7>), 2026.
 
 ### HH + top quarks (ttHH): `m_HH`
 
 1 paper, 2026-2026 (current).
 
-65. ATLAS Collaboration, Search for Higgs boson pair production in association with top-quark pairs using 196 fb^-1 of proton-proton collision data at sqrt(s)= 13 and 13.6 TeV with the ATLAS detector, [arXiv:2603.13113](<https://arxiv.org/abs/2603.13113>), 2026.
+67. ATLAS Collaboration, Search for Higgs boson pair production in association with top-quark pairs using 196 fb^-1 of proton-proton collision data at sqrt(s)= 13 and 13.6 TeV with the ATLAS detector, [arXiv:2603.13113](<https://arxiv.org/abs/2603.13113>), 2026.
 
 ### HH + vector boson: `m_HH`
 
 1 paper, 2022-2022 (ageing).
 
-66. ATLAS Collaboration, Search for Higgs boson pair production in association with a vector boson in pp collisions at sqrt(s)= 13 TeV with the ATLAS detector, Eur. Phys. J. C 83 (2023) 519, [arXiv:2210.05415](<https://arxiv.org/abs/2210.05415>), [doi:10.1140/epjc/s10052-023-11559-y](<https://doi.org/10.1140/epjc/s10052-023-11559-y>), 2022.
+68. ATLAS Collaboration, Search for Higgs boson pair production in association with a vector boson in pp collisions at sqrt(s)= 13 TeV with the ATLAS detector, Eur. Phys. J. C 83 (2023) 519, [arXiv:2210.05415](<https://arxiv.org/abs/2210.05415>), [doi:10.1140/epjc/s10052-023-11559-y](<https://doi.org/10.1140/epjc/s10052-023-11559-y>), 2022.
 
 ### HH -> bb gamgam: `m_HH`
 
 3 papers, 2014-2021 (ageing).
 
-67. ATLAS Collaboration, Search For Higgs Boson Pair Production in the gammagammabbbar Final State using pp Collision Data at sqrt(s)=8 TeV from the ATLAS Detector, Phys. Rev. Lett. 114, 081802 (2015), [arXiv:1406.5053](<https://arxiv.org/abs/1406.5053>), [doi:10.1103/PhysRevLett.114.081802](<https://doi.org/10.1103/PhysRevLett.114.081802>), 2014.
-68. ATLAS Collaboration, Search for Higgs boson pair production in the gammagammabbbar final state with 13 TeV pp collision data collected by the ATLAS experiment, JHEP 11 (2018) 040, [arXiv:1807.04873](<https://arxiv.org/abs/1807.04873>), [doi:10.1007/JHEP11(2018)040](<https://doi.org/10.1007/JHEP11(2018)040>), 2018.
-69. ATLAS Collaboration, Search for Higgs boson pair production in the two bottom quarks plus two photons final state in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 106 (2022) 052001, [arXiv:2112.11876](<https://arxiv.org/abs/2112.11876>), [doi:10.1103/PhysRevD.106.052001](<https://doi.org/10.1103/PhysRevD.106.052001>), 2021.
+69. ATLAS Collaboration, Search For Higgs Boson Pair Production in the gammagammabbbar Final State using pp Collision Data at sqrt(s)=8 TeV from the ATLAS Detector, Phys. Rev. Lett. 114, 081802 (2015), [arXiv:1406.5053](<https://arxiv.org/abs/1406.5053>), [doi:10.1103/PhysRevLett.114.081802](<https://doi.org/10.1103/PhysRevLett.114.081802>), 2014.
+70. ATLAS Collaboration, Search for Higgs boson pair production in the gammagammabbbar final state with 13 TeV pp collision data collected by the ATLAS experiment, JHEP 11 (2018) 040, [arXiv:1807.04873](<https://arxiv.org/abs/1807.04873>), [doi:10.1007/JHEP11(2018)040](<https://doi.org/10.1007/JHEP11(2018)040>), 2018.
+71. ATLAS Collaboration, Search for Higgs boson pair production in the two bottom quarks plus two photons final state in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 106 (2022) 052001, [arXiv:2112.11876](<https://arxiv.org/abs/2112.11876>), [doi:10.1103/PhysRevD.106.052001](<https://doi.org/10.1103/PhysRevD.106.052001>), 2021.
 
 ### HH -> bb tautau: `m_HH`
 
 2 papers, 2018-2022 (ageing).
 
-70. ATLAS Collaboration, Search for resonant and non-resonant Higgs boson pair production in the bbbartau^+tau^- decay channel in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. Lett. 121, 191801 (2018), [arXiv:1808.00336](<https://arxiv.org/abs/1808.00336>), [doi:10.1103/PhysRevLett.121.191801](<https://doi.org/10.1103/PhysRevLett.121.191801>), 2018.
-71. ATLAS Collaboration, Search for resonant and non-resonant Higgs boson pair production in the bbbartau^+tau^- decay channel using 13 TeV pp collision data from the ATLAS detector, JHEP 07 (2023) 040, [arXiv:2209.10910](<https://arxiv.org/abs/2209.10910>), [doi:10.1007/JHEP07(2023)040](<https://doi.org/10.1007/JHEP07(2023)040>), 2022.
+72. ATLAS Collaboration, Search for resonant and non-resonant Higgs boson pair production in the bbbartau^+tau^- decay channel in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. Lett. 121, 191801 (2018), [arXiv:1808.00336](<https://arxiv.org/abs/1808.00336>), [doi:10.1103/PhysRevLett.121.191801](<https://doi.org/10.1103/PhysRevLett.121.191801>), 2018.
+73. ATLAS Collaboration, Search for resonant and non-resonant Higgs boson pair production in the bbbartau^+tau^- decay channel using 13 TeV pp collision data from the ATLAS detector, JHEP 07 (2023) 040, [arXiv:2209.10910](<https://arxiv.org/abs/2209.10910>), [doi:10.1007/JHEP07(2023)040](<https://doi.org/10.1007/JHEP07(2023)040>), 2022.
 
 ### HH -> bbWW / WWWW / gamgamWW: `m_HH`
 
 3 papers, 2018-2018 (stale).
 
-72. ATLAS Collaboration, Search for Higgs boson pair production in the gammagammaWW^\* channel using pp collision data recorded at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C 78 (2018) 1007, [arXiv:1807.08567](<https://arxiv.org/abs/1807.08567>), [doi:10.1140/epjc/s10052-018-6457-x](<https://doi.org/10.1140/epjc/s10052-018-6457-x>), 2018.
-73. ATLAS Collaboration, Search for Higgs boson pair production in the bbbarWW^\* decay mode at sqrt(s)=13 TeV with the ATLAS detector, JHEP 04 (2019) 092, [arXiv:1811.04671](<https://arxiv.org/abs/1811.04671>), [doi:10.1007/JHEP04(2019)092](<https://doi.org/10.1007/JHEP04(2019)092>), 2018.
-74. ATLAS Collaboration, Search for Higgs boson pair production in the WW^(\*)WW^(\*) decay channel using ATLAS data recorded at sqrt(s)=13 TeV, JHEP 05 (2019) 124, [arXiv:1811.11028](<https://arxiv.org/abs/1811.11028>), [doi:10.1007/JHEP05(2019)124](<https://doi.org/10.1007/JHEP05(2019)124>), 2018.
+74. ATLAS Collaboration, Search for Higgs boson pair production in the gammagammaWW^\* channel using pp collision data recorded at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C 78 (2018) 1007, [arXiv:1807.08567](<https://arxiv.org/abs/1807.08567>), [doi:10.1140/epjc/s10052-018-6457-x](<https://doi.org/10.1140/epjc/s10052-018-6457-x>), 2018.
+75. ATLAS Collaboration, Search for Higgs boson pair production in the bbbarWW^\* decay mode at sqrt(s)=13 TeV with the ATLAS detector, JHEP 04 (2019) 092, [arXiv:1811.04671](<https://arxiv.org/abs/1811.04671>), [doi:10.1007/JHEP04(2019)092](<https://doi.org/10.1007/JHEP04(2019)092>), 2018.
+76. ATLAS Collaboration, Search for Higgs boson pair production in the WW^(\*)WW^(\*) decay channel using ATLAS data recorded at sqrt(s)=13 TeV, JHEP 05 (2019) 124, [arXiv:1811.11028](<https://arxiv.org/abs/1811.11028>), [doi:10.1007/JHEP05(2019)124](<https://doi.org/10.1007/JHEP05(2019)124>), 2018.
 
 ### HH -> bbbb: `m_HH`
 
 7 papers, 2015-2024 (current).
 
-75. ATLAS Collaboration, Search for Higgs boson pair production in the bbbar bbbar final state from pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Eur. Phys. J. C (2015) 75:412, [arXiv:1506.00285](<https://arxiv.org/abs/1506.00285>), [doi:10.1140/epjc/s10052-015-3628-x](<https://doi.org/10.1140/epjc/s10052-015-3628-x>), 2015.
-76. ATLAS Collaboration, Searches for Higgs boson pair production in the hh-> bbtautau, gammagammaWW\*, gammagammabb, bbbb channels with the ATLAS detector, Phys. Rev. D 92 (2015) 092004, [arXiv:1509.04670](<https://arxiv.org/abs/1509.04670>), [doi:10.1103/PhysRevD.92.092004](<https://doi.org/10.1103/PhysRevD.92.092004>), 2015.
-77. ATLAS Collaboration, Search for pair production of Higgs bosons in the bbbarbbbar final state using proton--proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 94, 052002 (2016), [arXiv:1606.04782](<https://arxiv.org/abs/1606.04782>), 2016.
-78. ATLAS Collaboration, Search for pair production of Higgs bosons in the bbbarbbbar final state using proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 01 (2019) 030, [arXiv:1804.06174](<https://arxiv.org/abs/1804.06174>), [doi:10.1007/JHEP01(2019)030](<https://doi.org/10.1007/JHEP01(2019)030>), 2018.
-79. ATLAS Collaboration, Search for the HH -> b bbar b bbar process via vector-boson fusion production using proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 07 (2020) 108, [arXiv:2001.05178](<https://arxiv.org/abs/2001.05178>), [doi:10.1007/JHEP01(2021)145](<https://doi.org/10.1007/JHEP01(2021)145>), 2020.
-80. ATLAS Collaboration, Search for resonant pair production of Higgs bosons in the bbbarbbbar final state using pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 105 (2022) 092002, [arXiv:2202.07288](<https://arxiv.org/abs/2202.07288>), [doi:10.1103/PhysRevD.105.092002](<https://doi.org/10.1103/PhysRevD.105.092002>), 2022.
-81. ATLAS Collaboration, Search for pair production of boosted Higgs bosons via vector-boson fusion in the bbbarbbbar final state using pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 858 (2024) 139007, [arXiv:2404.17193](<https://arxiv.org/abs/2404.17193>), [doi:10.1016/j.physletb.2024.139007](<https://doi.org/10.1016/j.physletb.2024.139007>), 2024.
+77. ATLAS Collaboration, Search for Higgs boson pair production in the bbbar bbbar final state from pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Eur. Phys. J. C (2015) 75:412, [arXiv:1506.00285](<https://arxiv.org/abs/1506.00285>), [doi:10.1140/epjc/s10052-015-3628-x](<https://doi.org/10.1140/epjc/s10052-015-3628-x>), 2015.
+78. ATLAS Collaboration, Searches for Higgs boson pair production in the hh-> bbtautau, gammagammaWW\*, gammagammabb, bbbb channels with the ATLAS detector, Phys. Rev. D 92 (2015) 092004, [arXiv:1509.04670](<https://arxiv.org/abs/1509.04670>), [doi:10.1103/PhysRevD.92.092004](<https://doi.org/10.1103/PhysRevD.92.092004>), 2015.
+79. ATLAS Collaboration, Search for pair production of Higgs bosons in the bbbarbbbar final state using proton--proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 94, 052002 (2016), [arXiv:1606.04782](<https://arxiv.org/abs/1606.04782>), 2016.
+80. ATLAS Collaboration, Search for pair production of Higgs bosons in the bbbarbbbar final state using proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 01 (2019) 030, [arXiv:1804.06174](<https://arxiv.org/abs/1804.06174>), [doi:10.1007/JHEP01(2019)030](<https://doi.org/10.1007/JHEP01(2019)030>), 2018.
+81. ATLAS Collaboration, Search for the HH -> b bbar b bbar process via vector-boson fusion production using proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 07 (2020) 108, [arXiv:2001.05178](<https://arxiv.org/abs/2001.05178>), [doi:10.1007/JHEP01(2021)145](<https://doi.org/10.1007/JHEP01(2021)145>), 2020.
+82. ATLAS Collaboration, Search for resonant pair production of Higgs bosons in the bbbarbbbar final state using pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 105 (2022) 092002, [arXiv:2202.07288](<https://arxiv.org/abs/2202.07288>), [doi:10.1103/PhysRevD.105.092002](<https://doi.org/10.1103/PhysRevD.105.092002>), 2022.
+83. ATLAS Collaboration, Search for pair production of boosted Higgs bosons via vector-boson fusion in the bbbarbbbar final state using pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 858 (2024) 139007, [arXiv:2404.17193](<https://arxiv.org/abs/2404.17193>), [doi:10.1016/j.physletb.2024.139007](<https://doi.org/10.1016/j.physletb.2024.139007>), 2024.
 
 ### Triple Higgs (6b): `m_HHH`
 
 1 paper, 2024-2024 (current).
 
-82. ATLAS Collaboration, A search for triple Higgs boson production in the 6b final state using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 111 (2025) 032006, [arXiv:2411.02040](<https://arxiv.org/abs/2411.02040>), [doi:10.1103/PhysRevD.111.032006](<https://doi.org/10.1103/PhysRevD.111.032006>), 2024.
+84. ATLAS Collaboration, A search for triple Higgs boson production in the 6b final state using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 111 (2025) 032006, [arXiv:2411.02040](<https://arxiv.org/abs/2411.02040>), [doi:10.1103/PhysRevD.111.032006](<https://doi.org/10.1103/PhysRevD.111.032006>), 2024.
 
 ### X -> H Y (anomaly detection / XH): `m_XH`
 
 2 papers, 2017-2023 (ageing).
 
-83. ATLAS Collaboration, A search for resonances decaying into a Higgs boson and a new particle X in the XH -> qqbb final state with the ATLAS detector, Phys. Lett. B 779 (2018) 24, [arXiv:1709.06783](<https://arxiv.org/abs/1709.06783>), [doi:10.1016/j.physletb.2018.01.042](<https://doi.org/10.1016/j.physletb.2018.01.042>), 2017.
-84. ATLAS Collaboration, Anomaly detection search for new resonances decaying into a Higgs boson and a generic new particle X in hadronic final states using sqrt(s) = 13 TeV pp collisions with the ATLAS detector, Phys. Rev. D 108 (2023) 052009, [arXiv:2306.03637](<https://arxiv.org/abs/2306.03637>), [doi:10.1103/PhysRevD.108.052009](<https://doi.org/10.1103/PhysRevD.108.052009>), 2023.
+85. ATLAS Collaboration, A search for resonances decaying into a Higgs boson and a new particle X in the XH -> qqbb final state with the ATLAS detector, Phys. Lett. B 779 (2018) 24, [arXiv:1709.06783](<https://arxiv.org/abs/1709.06783>), [doi:10.1016/j.physletb.2018.01.042](<https://doi.org/10.1016/j.physletb.2018.01.042>), 2017.
+86. ATLAS Collaboration, Anomaly detection search for new resonances decaying into a Higgs boson and a generic new particle X in hadronic final states using sqrt(s) = 13 TeV pp collisions with the ATLAS detector, Phys. Rev. D 108 (2023) 052009, [arXiv:2306.03637](<https://arxiv.org/abs/2306.03637>), [doi:10.1103/PhysRevD.108.052009](<https://doi.org/10.1103/PhysRevD.108.052009>), 2023.
 
 ### X -> S H (scalar + Higgs): `m_SH`
 
 5 papers, 2023-2026 (current).
 
-85. ATLAS Collaboration, Search for a new heavy scalar particle decaying into a Higgs boson and a new scalar singlet in final states with one or two light leptons and a pair of tau-leptons with the ATLAS detector, JHEP 10 (2023) 009, [arXiv:2307.11120](<https://arxiv.org/abs/2307.11120>), [doi:10.1007/JHEP10(2023)009](<https://doi.org/10.1007/JHEP10(2023)009>), 2023.
-86. ATLAS Collaboration, Search for a resonance decaying into a scalar particle and a Higgs boson in the final state with two bottom quarks and two photons in proton-proton collisions at a center of mass energy of 13 TeV with the ATLAS detector, JHEP 11 (2024) 047, [arXiv:2404.12915](<https://arxiv.org/abs/2404.12915>), [doi:10.1007/JHEP11(2024)047](<https://doi.org/10.1007/JHEP11(2024)047>), 2024.
-87. ATLAS Collaboration, Search for a resonance decaying into a scalar particle and a Higgs boson in final states with leptons and two photons in proton-proton collisions at sqrt s=13 TeV with the ATLAS detector, JHEP 10 (2024) 104, [arXiv:2405.20926](<https://arxiv.org/abs/2405.20926>), [doi:10.1007/JHEP10(2024)104](<https://doi.org/10.1007/JHEP10(2024)104>), 2024.
-88. ATLAS Collaboration, Search for a resonance decaying into a scalar particle and a Higgs boson in the final state with two bottom quarks and two photons with 199 fb^-1 of data collected at sqrt(s)=13 and 13.6 TeV with the ATLAS detector, PLB 877 (2026) 140425, [arXiv:2510.02857](<https://arxiv.org/abs/2510.02857>), [doi:10.1016/j.physletb.2026.140425](<https://doi.org/10.1016/j.physletb.2026.140425>), 2025.
-89. ATLAS Collaboration, Search for new scalars via X -> SH -> bbbarbbbar in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, [arXiv:2607.18484](<https://arxiv.org/abs/2607.18484>), 2026.
+87. ATLAS Collaboration, Search for a new heavy scalar particle decaying into a Higgs boson and a new scalar singlet in final states with one or two light leptons and a pair of tau-leptons with the ATLAS detector, JHEP 10 (2023) 009, [arXiv:2307.11120](<https://arxiv.org/abs/2307.11120>), [doi:10.1007/JHEP10(2023)009](<https://doi.org/10.1007/JHEP10(2023)009>), 2023.
+88. ATLAS Collaboration, Search for a resonance decaying into a scalar particle and a Higgs boson in the final state with two bottom quarks and two photons in proton-proton collisions at a center of mass energy of 13 TeV with the ATLAS detector, JHEP 11 (2024) 047, [arXiv:2404.12915](<https://arxiv.org/abs/2404.12915>), [doi:10.1007/JHEP11(2024)047](<https://doi.org/10.1007/JHEP11(2024)047>), 2024.
+89. ATLAS Collaboration, Search for a resonance decaying into a scalar particle and a Higgs boson in final states with leptons and two photons in proton-proton collisions at sqrt s=13 TeV with the ATLAS detector, JHEP 10 (2024) 104, [arXiv:2405.20926](<https://arxiv.org/abs/2405.20926>), [doi:10.1007/JHEP10(2024)104](<https://doi.org/10.1007/JHEP10(2024)104>), 2024.
+90. ATLAS Collaboration, Search for a resonance decaying into a scalar particle and a Higgs boson in the final state with two bottom quarks and two photons with 199 fb^-1 of data collected at sqrt(s)=13 and 13.6 TeV with the ATLAS detector, PLB 877 (2026) 140425, [arXiv:2510.02857](<https://arxiv.org/abs/2510.02857>), [doi:10.1016/j.physletb.2026.140425](<https://doi.org/10.1016/j.physletb.2026.140425>), 2025.
+91. ATLAS Collaboration, Search for new scalars via X -> SH -> bbbarbbbar in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, [arXiv:2607.18484](<https://arxiv.org/abs/2607.18484>), 2026.
 
 ### bbA -> bbbb (b-associated): `m_bb`
 
 2 papers, 2019-2025 (current).
 
-90. ATLAS Collaboration, Search for heavy neutral Higgs bosons produced in association with b-quarks and decaying into b-quarks at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 102, 032004 (2020), [arXiv:1907.02749](<https://arxiv.org/abs/1907.02749>), [doi:10.1103/PhysRevD.102.032004](<https://doi.org/10.1103/PhysRevD.102.032004>), 2019.
-91. ATLAS Collaboration, Search for a new pseudoscalar decaying into a pair of bottom and antibottom quarks in top-associated production in sqrt(s)=13 TeV proton-proton collisions with the ATLAS detector, Eur. Phys. J. C 85 (2025) 886, [arXiv:2503.17254](<https://arxiv.org/abs/2503.17254>), [doi:10.1140/epjc/s10052-025-14507-0](<https://doi.org/10.1140/epjc/s10052-025-14507-0>), 2025.
+92. ATLAS Collaboration, Search for heavy neutral Higgs bosons produced in association with b-quarks and decaying into b-quarks at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 102, 032004 (2020), [arXiv:1907.02749](<https://arxiv.org/abs/1907.02749>), [doi:10.1103/PhysRevD.102.032004](<https://doi.org/10.1103/PhysRevD.102.032004>), 2019.
+93. ATLAS Collaboration, Search for a new pseudoscalar decaying into a pair of bottom and antibottom quarks in top-associated production in sqrt(s)=13 TeV proton-proton collisions with the ATLAS detector, Eur. Phys. J. C 85 (2025) 886, [arXiv:2503.17254](<https://arxiv.org/abs/2503.17254>), [doi:10.1140/epjc/s10052-025-14507-0](<https://doi.org/10.1140/epjc/s10052-025-14507-0>), 2025.
 
 ### t -> qX, X -> bb: `m_bb`
 
 1 paper, 2023-2023 (ageing).
 
-92. ATLAS Collaboration, Search for a new scalar resonance in flavour-changing neutral-current top-quark decays t -> qX (q=u,c), with X -> bbbar, in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP07(2023)199, [arXiv:2301.03902](<https://arxiv.org/abs/2301.03902>), [doi:10.1007/JHEP07(2023)199](<https://doi.org/10.1007/JHEP07(2023)199>), 2023.
+94. ATLAS Collaboration, Search for a new scalar resonance in flavour-changing neutral-current top-quark decays t -> qX (q=u,c), with X -> bbbar, in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP07(2023)199, [arXiv:2301.03902](<https://arxiv.org/abs/2301.03902>), [doi:10.1007/JHEP07(2023)199](<https://doi.org/10.1007/JHEP07(2023)199>), 2023.
 
 ## Jets & hadronic
 
@@ -279,87 +291,87 @@ Papers span 2010-2026.
 
 1 paper, 2024-2024 (current).
 
-93. ATLAS Collaboration, Search for boosted low-mass resonances decaying into hadrons produced in association with a photon in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 01 (2025) 099, [arXiv:2408.00049](<https://arxiv.org/abs/2408.00049>), [doi:10.1007/JHEP01(2025)099](<https://doi.org/10.1007/JHEP01(2025)099>), 2024.
+95. ATLAS Collaboration, Search for boosted low-mass resonances decaying into hadrons produced in association with a photon in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 01 (2025) 099, [arXiv:2408.00049](<https://arxiv.org/abs/2408.00049>), [doi:10.1007/JHEP01(2025)099](<https://doi.org/10.1007/JHEP01(2025)099>), 2024.
 
 ### Dijet (inclusive, high mass): `m_jj`
 
 8 papers, 2010-2020 (ageing).
 
-94. ATLAS Collaboration, Search for New Particles in Two-Jet Final States in 7 TeV Proton-Proton Collisions with the ATLAS Detector at the LHC, Phys.Rev.Lett.105:161801,2010, [arXiv:1008.2461](<https://arxiv.org/abs/1008.2461>), [doi:10.1103/PhysRevLett.105.161801](<https://doi.org/10.1103/PhysRevLett.105.161801>), 2010.
-95. ATLAS Collaboration, Search for New Physics in Dijet Mass and Angular Distributions in pp Collisions at sqrt(s) = 7 TeV Measured with the ATLAS Detector, New J. Phys. 13 (2011) 053044, [arXiv:1103.3864](<https://arxiv.org/abs/1103.3864>), [doi:10.1088/1367-2630/13/5/053044](<https://doi.org/10.1088/1367-2630/13/5/053044>), 2011.
-96. ATLAS Collaboration, Search for New Physics in the Dijet Mass Distribution using 1 fb^-1 of pp Collision Data at sqrt(s) = 7 TeV collected by the ATLAS Detector, Phys.Lett.B 708 (2012) 37-54, [arXiv:1108.6311](<https://arxiv.org/abs/1108.6311>), [doi:10.1016/j.physletb.2012.01.035](<https://doi.org/10.1016/j.physletb.2012.01.035>), 2011.
-97. ATLAS Collaboration, Search for new phenomena in the dijet mass distribution using p-p collision data at sqrt(s)=8 TeV with the ATLAS detector, Phys. Rev. D 91, 052007 (2015), [arXiv:1407.1376](<https://arxiv.org/abs/1407.1376>), [doi:10.1103/PhysRevD.91.052007](<https://doi.org/10.1103/PhysRevD.91.052007>), 2014.
-98. ATLAS Collaboration, Search for New Phenomena in Dijet Mass and Angular Distributions from pp Collisions at sqrt(s) = 13 TeV with the ATLAS Detector, Physics Letters B 754 (2016) 302-322, [arXiv:1512.01530](<https://arxiv.org/abs/1512.01530>), [doi:10.1016/j.physletb.2016.01.032](<https://doi.org/10.1016/j.physletb.2016.01.032>), 2015.
-99. ATLAS Collaboration, Search for new phenomena in dijet events using 37 fb^-1 of pp collision data collected at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 96, 052004 (2017), [arXiv:1703.09127](<https://arxiv.org/abs/1703.09127>), [doi:10.1103/PhysRevD.96.052004](<https://doi.org/10.1103/PhysRevD.96.052004>), 2017.
-100. ATLAS Collaboration, Search for new resonances in mass distributions of jet pairs using 139 fb^-1 of pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 03 (2020) 145, [arXiv:1910.08447](<https://arxiv.org/abs/1910.08447>), [doi:10.1007/JHEP03(2020)145](<https://doi.org/10.1007/JHEP03(2020)145>), 2019.
-101. ATLAS Collaboration, Dijet resonance search with weak supervision using sqrt(s)=13 TeV pp collisions in the ATLAS detector, Phys. Rev. Lett. 125, 131801 (2020), [arXiv:2005.02983](<https://arxiv.org/abs/2005.02983>), [doi:10.1103/PhysRevLett.125.131801](<https://doi.org/10.1103/PhysRevLett.125.131801>), 2020.
+96. ATLAS Collaboration, Search for New Particles in Two-Jet Final States in 7 TeV Proton-Proton Collisions with the ATLAS Detector at the LHC, Phys.Rev.Lett.105:161801,2010, [arXiv:1008.2461](<https://arxiv.org/abs/1008.2461>), [doi:10.1103/PhysRevLett.105.161801](<https://doi.org/10.1103/PhysRevLett.105.161801>), 2010.
+97. ATLAS Collaboration, Search for New Physics in Dijet Mass and Angular Distributions in pp Collisions at sqrt(s) = 7 TeV Measured with the ATLAS Detector, New J. Phys. 13 (2011) 053044, [arXiv:1103.3864](<https://arxiv.org/abs/1103.3864>), [doi:10.1088/1367-2630/13/5/053044](<https://doi.org/10.1088/1367-2630/13/5/053044>), 2011.
+98. ATLAS Collaboration, Search for New Physics in the Dijet Mass Distribution using 1 fb^-1 of pp Collision Data at sqrt(s) = 7 TeV collected by the ATLAS Detector, Phys.Lett.B 708 (2012) 37-54, [arXiv:1108.6311](<https://arxiv.org/abs/1108.6311>), [doi:10.1016/j.physletb.2012.01.035](<https://doi.org/10.1016/j.physletb.2012.01.035>), 2011.
+99. ATLAS Collaboration, Search for new phenomena in the dijet mass distribution using p-p collision data at sqrt(s)=8 TeV with the ATLAS detector, Phys. Rev. D 91, 052007 (2015), [arXiv:1407.1376](<https://arxiv.org/abs/1407.1376>), [doi:10.1103/PhysRevD.91.052007](<https://doi.org/10.1103/PhysRevD.91.052007>), 2014.
+100. ATLAS Collaboration, Search for New Phenomena in Dijet Mass and Angular Distributions from pp Collisions at sqrt(s) = 13 TeV with the ATLAS Detector, Physics Letters B 754 (2016) 302-322, [arXiv:1512.01530](<https://arxiv.org/abs/1512.01530>), [doi:10.1016/j.physletb.2016.01.032](<https://doi.org/10.1016/j.physletb.2016.01.032>), 2015.
+101. ATLAS Collaboration, Search for new phenomena in dijet events using 37 fb^-1 of pp collision data collected at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 96, 052004 (2017), [arXiv:1703.09127](<https://arxiv.org/abs/1703.09127>), [doi:10.1103/PhysRevD.96.052004](<https://doi.org/10.1103/PhysRevD.96.052004>), 2017.
+102. ATLAS Collaboration, Search for new resonances in mass distributions of jet pairs using 139 fb^-1 of pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 03 (2020) 145, [arXiv:1910.08447](<https://arxiv.org/abs/1910.08447>), [doi:10.1007/JHEP03(2020)145](<https://doi.org/10.1007/JHEP03(2020)145>), 2019.
+103. ATLAS Collaboration, Dijet resonance search with weak supervision using sqrt(s)=13 TeV pp collisions in the ATLAS detector, Phys. Rev. Lett. 125, 131801 (2020), [arXiv:2005.02983](<https://arxiv.org/abs/2005.02983>), [doi:10.1103/PhysRevLett.125.131801](<https://doi.org/10.1103/PhysRevLett.125.131801>), 2020.
 
 ### Dijet (low mass, trigger-level): `m_jj`
 
 3 papers, 2018-2026 (current).
 
-102. ATLAS Collaboration, Search for low-mass dijet resonances using trigger-level jets with the ATLAS detector in pp collisions at sqrt(s)=13 TeV, Phys. Rev. Lett. 121 (2018) 081801, [arXiv:1804.03496](<https://arxiv.org/abs/1804.03496>), [doi:10.1103/PhysRevLett.121.081801](<https://doi.org/10.1103/PhysRevLett.121.081801>), 2018.
-103. ATLAS Collaboration, Search for electroweak-scale dijet resonances using trigger-level analysis with the ATLAS detector in 132 fb^-1 of pp collisions at sqrt(s) = 13 TeV, Phys. Rev. D 112 (2025) 092015, [arXiv:2509.01219](<https://arxiv.org/abs/2509.01219>), [doi:10.1103/15p2-bkg8](<https://doi.org/10.1103/15p2-bkg8>), 2025.
-104. ATLAS Collaboration, Search for electroweak scale dijet resonances in pile-up collisions at sqrt(s)=13 TeV with the ATLAS detector, [arXiv:2606.03222](<https://arxiv.org/abs/2606.03222>), 2026.
+104. ATLAS Collaboration, Search for low-mass dijet resonances using trigger-level jets with the ATLAS detector in pp collisions at sqrt(s)=13 TeV, Phys. Rev. Lett. 121 (2018) 081801, [arXiv:1804.03496](<https://arxiv.org/abs/1804.03496>), [doi:10.1103/PhysRevLett.121.081801](<https://doi.org/10.1103/PhysRevLett.121.081801>), 2018.
+105. ATLAS Collaboration, Search for electroweak-scale dijet resonances using trigger-level analysis with the ATLAS detector in 132 fb^-1 of pp collisions at sqrt(s) = 13 TeV, Phys. Rev. D 112 (2025) 092015, [arXiv:2509.01219](<https://arxiv.org/abs/2509.01219>), [doi:10.1103/15p2-bkg8](<https://doi.org/10.1103/15p2-bkg8>), 2025.
+106. ATLAS Collaboration, Search for electroweak scale dijet resonances in pile-up collisions at sqrt(s)=13 TeV with the ATLAS detector, [arXiv:2606.03222](<https://arxiv.org/abs/2606.03222>), 2026.
 
 ### Dijet + ISR photon/jet: `m_jj`
 
 3 papers, 2018-2024 (current).
 
-105. ATLAS Collaboration, Search for light resonances decaying to boosted quark pairs and produced in association with a photon or a jet in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 788 (2019) 316, [arXiv:1801.08769](<https://arxiv.org/abs/1801.08769>), [doi:10.1016/j.physletb.2018.09.062](<https://doi.org/10.1016/j.physletb.2018.09.062>), 2018.
-106. ATLAS Collaboration, Search for low-mass resonances decaying into two jets and produced in association with a photon using pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 795 (2019) 56, [arXiv:1901.10917](<https://arxiv.org/abs/1901.10917>), [doi:10.1016/j.physletb.2019.03.067](<https://doi.org/10.1016/j.physletb.2019.03.067>), 2019.
-107. ATLAS Collaboration, Search for low-mass resonances decaying into two jets and produced in association with a photon or a jet at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 110 (2024) 032002, [arXiv:2403.08547](<https://arxiv.org/abs/2403.08547>), [doi:10.1103/PhysRevD.110.032002](<https://doi.org/10.1103/PhysRevD.110.032002>), 2024.
+107. ATLAS Collaboration, Search for light resonances decaying to boosted quark pairs and produced in association with a photon or a jet in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 788 (2019) 316, [arXiv:1801.08769](<https://arxiv.org/abs/1801.08769>), [doi:10.1016/j.physletb.2018.09.062](<https://doi.org/10.1016/j.physletb.2018.09.062>), 2018.
+108. ATLAS Collaboration, Search for low-mass resonances decaying into two jets and produced in association with a photon using pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 795 (2019) 56, [arXiv:1901.10917](<https://arxiv.org/abs/1901.10917>), [doi:10.1016/j.physletb.2019.03.067](<https://doi.org/10.1016/j.physletb.2019.03.067>), 2019.
+109. ATLAS Collaboration, Search for low-mass resonances decaying into two jets and produced in association with a photon or a jet at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 110 (2024) 032002, [arXiv:2403.08547](<https://arxiv.org/abs/2403.08547>), [doi:10.1103/PhysRevD.110.032002](<https://doi.org/10.1103/PhysRevD.110.032002>), 2024.
 
 ### Dijet + isolated lepton: `m_jj`
 
 1 paper, 2020-2020 (ageing).
 
-108. ATLAS Collaboration, Search for dijet resonances in events with an isolated charged lepton using sqrt(s) = 13 TeV proton-proton collision data collected by the ATLAS detector, JHEP 06 (2020) 151, [arXiv:2002.11325](<https://arxiv.org/abs/2002.11325>), [doi:10.1007/JHEP06(2020)151](<https://doi.org/10.1007/JHEP06(2020)151>), 2020.
+110. ATLAS Collaboration, Search for dijet resonances in events with an isolated charged lepton using sqrt(s) = 13 TeV proton-proton collision data collected by the ATLAS detector, JHEP 06 (2020) 151, [arXiv:2002.11325](<https://arxiv.org/abs/2002.11325>), [doi:10.1007/JHEP06(2020)151](<https://doi.org/10.1007/JHEP06(2020)151>), 2020.
 
 ### Dijet from dark quarks: `m_jj`
 
 1 paper, 2023-2023 (ageing).
 
-109. ATLAS Collaboration, Search for Resonant Production of Dark Quarks in the Dijet Final State with the ATLAS Detector, JHEP 02 (2024) 128, [arXiv:2311.03944](<https://arxiv.org/abs/2311.03944>), [doi:10.1007/JHEP02(2024)128](<https://doi.org/10.1007/JHEP02(2024)128>), 2023.
+111. ATLAS Collaboration, Search for Resonant Production of Dark Quarks in the Dijet Final State with the ATLAS Detector, JHEP 02 (2024) 128, [arXiv:2311.03944](<https://arxiv.org/abs/2311.03944>), [doi:10.1007/JHEP02(2024)128](<https://doi.org/10.1007/JHEP02(2024)128>), 2023.
 
 ### Dijet, b-tagged: `m_bb / m_jj(b)`
 
 3 papers, 2016-2021 (ageing).
 
-110. ATLAS Collaboration, Search for resonances in the mass distribution of jet pairs with one or two jets identified as b-jets in proton--proton collisions at sqrt(s)=13 TeV with the ATLAS detector, Physics Letters B 759 (2016) 229-246, [arXiv:1603.08791](<https://arxiv.org/abs/1603.08791>), [doi:10.1016/j.physletb.2016.05.064](<https://doi.org/10.1016/j.physletb.2016.05.064>), 2016.
-111. ATLAS Collaboration, Search for resonances in the mass distribution of jet pairs with one or two jets identified as b-jets in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 98, 032016 (2018), [arXiv:1805.09299](<https://arxiv.org/abs/1805.09299>), [doi:10.1103/PhysRevD.98.032016](<https://doi.org/10.1103/PhysRevD.98.032016>), 2018.
-112. ATLAS Collaboration, Search for heavy particles in the b-tagged dijet mass distribution with additional b-tagged jets in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS experiment, Phys. Rev. D 105 (2022) 012001, [arXiv:2108.09059](<https://arxiv.org/abs/2108.09059>), [doi:10.1103/PhysRevD.105.012001](<https://doi.org/10.1103/PhysRevD.105.012001>), 2021.
+112. ATLAS Collaboration, Search for resonances in the mass distribution of jet pairs with one or two jets identified as b-jets in proton--proton collisions at sqrt(s)=13 TeV with the ATLAS detector, Physics Letters B 759 (2016) 229-246, [arXiv:1603.08791](<https://arxiv.org/abs/1603.08791>), [doi:10.1016/j.physletb.2016.05.064](<https://doi.org/10.1016/j.physletb.2016.05.064>), 2016.
+113. ATLAS Collaboration, Search for resonances in the mass distribution of jet pairs with one or two jets identified as b-jets in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 98, 032016 (2018), [arXiv:1805.09299](<https://arxiv.org/abs/1805.09299>), [doi:10.1103/PhysRevD.98.032016](<https://doi.org/10.1103/PhysRevD.98.032016>), 2018.
+114. ATLAS Collaboration, Search for heavy particles in the b-tagged dijet mass distribution with additional b-tagged jets in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS experiment, Phys. Rev. D 105 (2022) 012001, [arXiv:2108.09059](<https://arxiv.org/abs/2108.09059>), [doi:10.1103/PhysRevD.105.012001](<https://doi.org/10.1103/PhysRevD.105.012001>), 2021.
 
 ### Pair-produced dijet resonances (4 jets): `m_jj (paired)`
 
 3 papers, 2011-2017 (stale).
 
-113. ATLAS Collaboration, Search for massive colored scalars in four-jet final states in sqrts=7 TeV proton-proton collisions with the ATLAS detector, Eur.Phys.J.C 71 (2011) 1828, [arXiv:1110.2693](<https://arxiv.org/abs/1110.2693>), [doi:10.1140/epjc/s10052-011-1828-6](<https://doi.org/10.1140/epjc/s10052-011-1828-6>), 2011.
-114. ATLAS Collaboration, Search for pair-produced massive coloured scalars in four-jet final states with the ATLAS detector in proton-proton collisions at sqrt(s) = 7 TeV, Eur.Phys.J. C73 (2013) 2263, [arXiv:1210.4826](<https://arxiv.org/abs/1210.4826>), [doi:10.1140/epjc/s10052-012-2263-z](<https://doi.org/10.1140/epjc/s10052-012-2263-z>), 2012.
-115. ATLAS Collaboration, A search for pair-produced resonances in four-jet final states at sqrt(s) =13 TeV with the ATLAS detector, Eur. Phys. J. C 78 (2018) 250, [arXiv:1710.07171](<https://arxiv.org/abs/1710.07171>), [doi:10.1140/epjc/s10052-018-5693-4](<https://doi.org/10.1140/epjc/s10052-018-5693-4>), 2017.
+115. ATLAS Collaboration, Search for massive colored scalars in four-jet final states in sqrts=7 TeV proton-proton collisions with the ATLAS detector, Eur.Phys.J.C 71 (2011) 1828, [arXiv:1110.2693](<https://arxiv.org/abs/1110.2693>), [doi:10.1140/epjc/s10052-011-1828-6](<https://doi.org/10.1140/epjc/s10052-011-1828-6>), 2011.
+116. ATLAS Collaboration, Search for pair-produced massive coloured scalars in four-jet final states with the ATLAS detector in proton-proton collisions at sqrt(s) = 7 TeV, Eur.Phys.J. C73 (2013) 2263, [arXiv:1210.4826](<https://arxiv.org/abs/1210.4826>), [doi:10.1140/epjc/s10052-012-2263-z](<https://doi.org/10.1140/epjc/s10052-012-2263-z>), 2012.
+117. ATLAS Collaboration, A search for pair-produced resonances in four-jet final states at sqrt(s) =13 TeV with the ATLAS detector, Eur. Phys. J. C 78 (2018) 250, [arXiv:1710.07171](<https://arxiv.org/abs/1710.07171>), [doi:10.1140/epjc/s10052-018-5693-4](<https://doi.org/10.1140/epjc/s10052-018-5693-4>), 2017.
 
 ### Photon + jet: `m_(gamma j)`
 
 4 papers, 2011-2017 (stale).
 
-116. ATLAS Collaboration, Search for production of resonant states in the photon-jet mass distribution using pp collisions at sqrt(s) = 7 TeV collected by the ATLAS detector, Phys. Rev. Lett. 108 (2012) 211802, [arXiv:1112.3580](<https://arxiv.org/abs/1112.3580>), [doi:10.1103/PhysRevLett.108.211802](<https://doi.org/10.1103/PhysRevLett.108.211802>), 2011.
-117. ATLAS Collaboration, Search for new phenomena in photon+jet events collected in proton--proton collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys.Lett.B 728 C (2014) 562-578, [arXiv:1309.3230](<https://arxiv.org/abs/1309.3230>), [doi:10.1016/j.physletb.2013.12.029](<https://doi.org/10.1016/j.physletb.2013.12.029>), 2013.
-118. ATLAS Collaboration, Search for new phenomena with photon+jet events in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP03(2016)041, [arXiv:1512.05910](<https://arxiv.org/abs/1512.05910>), [doi:10.1007/JHEP03(2016)041](<https://doi.org/10.1007/JHEP03(2016)041>), 2015.
-119. ATLAS Collaboration, Search for new phenomena in high-mass final states with a photon and a jet from pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C (2018) 102, [arXiv:1709.10440](<https://arxiv.org/abs/1709.10440>), [doi:10.1140/epjc/s10052-018-5553-2](<https://doi.org/10.1140/epjc/s10052-018-5553-2>), 2017.
+118. ATLAS Collaboration, Search for production of resonant states in the photon-jet mass distribution using pp collisions at sqrt(s) = 7 TeV collected by the ATLAS detector, Phys. Rev. Lett. 108 (2012) 211802, [arXiv:1112.3580](<https://arxiv.org/abs/1112.3580>), [doi:10.1103/PhysRevLett.108.211802](<https://doi.org/10.1103/PhysRevLett.108.211802>), 2011.
+119. ATLAS Collaboration, Search for new phenomena in photon+jet events collected in proton--proton collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys.Lett.B 728 C (2014) 562-578, [arXiv:1309.3230](<https://arxiv.org/abs/1309.3230>), [doi:10.1016/j.physletb.2013.12.029](<https://doi.org/10.1016/j.physletb.2013.12.029>), 2013.
+120. ATLAS Collaboration, Search for new phenomena with photon+jet events in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP03(2016)041, [arXiv:1512.05910](<https://arxiv.org/abs/1512.05910>), [doi:10.1007/JHEP03(2016)041](<https://doi.org/10.1007/JHEP03(2016)041>), 2015.
+121. ATLAS Collaboration, Search for new phenomena in high-mass final states with a photon and a jet from pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C (2018) 102, [arXiv:1709.10440](<https://arxiv.org/abs/1709.10440>), [doi:10.1140/epjc/s10052-018-5553-2](<https://doi.org/10.1140/epjc/s10052-018-5553-2>), 2017.
 
 ### Three-jet / multijet (3-quark res.): `m_jjj`
 
 2 papers, 2012-2018 (stale).
 
-120. ATLAS Collaboration, Search for pair production of massive particles decaying into three quarks with the ATLAS detector in sqrt(s) = 7 TeV pp collisions at the LHC, JHEP 1212 (2012) 086, [arXiv:1210.4813](<https://arxiv.org/abs/1210.4813>), [doi:10.1007/JHEP12(2012)086](<https://doi.org/10.1007/JHEP12(2012)086>), 2012.
-121. ATLAS Collaboration, Search for R-parity-violating supersymmetric particles in multi-jet final states produced in p-p collisions at sqrt(s) =13 TeV using the ATLAS detector at the LHC, Phys. Lett. B 785 (2018) 136, [arXiv:1804.03568](<https://arxiv.org/abs/1804.03568>), [doi:10.1016/j.physletb.2018.08.021](<https://doi.org/10.1016/j.physletb.2018.08.021>), 2018.
+122. ATLAS Collaboration, Search for pair production of massive particles decaying into three quarks with the ATLAS detector in sqrt(s) = 7 TeV pp collisions at the LHC, JHEP 1212 (2012) 086, [arXiv:1210.4813](<https://arxiv.org/abs/1210.4813>), [doi:10.1007/JHEP12(2012)086](<https://doi.org/10.1007/JHEP12(2012)086>), 2012.
+123. ATLAS Collaboration, Search for R-parity-violating supersymmetric particles in multi-jet final states produced in p-p collisions at sqrt(s) =13 TeV using the ATLAS detector at the LHC, Phys. Lett. B 785 (2018) 136, [arXiv:1804.03568](<https://arxiv.org/abs/1804.03568>), [doi:10.1016/j.physletb.2018.08.021](<https://doi.org/10.1016/j.physletb.2018.08.021>), 2018.
 
 ### Z + light hadronic resonance (H decay): `m_J`
 
 2 papers, 2020-2024 (current).
 
-122. ATLAS Collaboration, Search for Higgs boson decays into a Z boson and a light hadronically decaying resonance using 13 TeV pp collision data from the ATLAS detector, Phys. Rev. Lett. 125 (2020) 221802, [arXiv:2004.01678](<https://arxiv.org/abs/2004.01678>), [doi:10.1103/PhysRevLett.125.221802](<https://doi.org/10.1103/PhysRevLett.125.221802>), 2020.
-123. ATLAS Collaboration, Search for Higgs boson decays into a Z boson and a light hadronically decaying resonance in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 868 (2025) 139671, [arXiv:2411.16361](<https://arxiv.org/abs/2411.16361>), [doi:10.1016/j.physletb.2025.139671](<https://doi.org/10.1016/j.physletb.2025.139671>), 2024.
+124. ATLAS Collaboration, Search for Higgs boson decays into a Z boson and a light hadronically decaying resonance using 13 TeV pp collision data from the ATLAS detector, Phys. Rev. Lett. 125 (2020) 221802, [arXiv:2004.01678](<https://arxiv.org/abs/2004.01678>), [doi:10.1103/PhysRevLett.125.221802](<https://doi.org/10.1103/PhysRevLett.125.221802>), 2020.
+125. ATLAS Collaboration, Search for Higgs boson decays into a Z boson and a light hadronically decaying resonance in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 868 (2025) 139671, [arXiv:2411.16361](<https://arxiv.org/abs/2411.16361>), [doi:10.1016/j.physletb.2025.139671](<https://doi.org/10.1016/j.physletb.2025.139671>), 2024.
 
 ## Leptons
 
@@ -367,130 +379,130 @@ Papers span 2010-2026.
 
 2 papers, 2023-2024 (current).
 
-124. ATLAS Collaboration, Search for pairs of muons with small displacements in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 846 (2023) 138172, [arXiv:2305.02005](<https://arxiv.org/abs/2305.02005>), [doi:10.1016/j.physletb.2023.138172](<https://doi.org/10.1016/j.physletb.2023.138172>), 2023.
-125. ATLAS Collaboration, Search for light neutral particles decaying promptly into collimated pairs of electrons or muons in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C 85 (2025) 335, [arXiv:2407.09168](<https://arxiv.org/abs/2407.09168>), [doi:10.1140/epjc/s10052-025-13916-5](<https://doi.org/10.1140/epjc/s10052-025-13916-5>), 2024.
+126. ATLAS Collaboration, Search for pairs of muons with small displacements in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 846 (2023) 138172, [arXiv:2305.02005](<https://arxiv.org/abs/2305.02005>), [doi:10.1016/j.physletb.2023.138172](<https://doi.org/10.1016/j.physletb.2023.138172>), 2023.
+127. ATLAS Collaboration, Search for light neutral particles decaying promptly into collimated pairs of electrons or muons in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C 85 (2025) 335, [arXiv:2407.09168](<https://arxiv.org/abs/2407.09168>), [doi:10.1140/epjc/s10052-025-13916-5](<https://doi.org/10.1140/epjc/s10052-025-13916-5>), 2024.
 
 ### Dilepton (ee/mumu, high mass): `m_ll`
 
 9 papers, 2011-2026 (current).
 
-126. ATLAS Collaboration, Search for high mass dilepton resonances in pp collisions at sqrts=7 TeV with the ATLAS experiment, Phys.Lett.B 700 (2011) 163-180, [arXiv:1103.6218](<https://arxiv.org/abs/1103.6218>), [doi:10.1016/j.physletb.2011.04.044](<https://doi.org/10.1016/j.physletb.2011.04.044>), 2011.
-127. ATLAS Collaboration, Search for dilepton resonances in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Rev.Lett. 107 (2011) 272002, [arXiv:1108.1582](<https://arxiv.org/abs/1108.1582>), [doi:10.1103/PhysRevLett.107.272002](<https://doi.org/10.1103/PhysRevLett.107.272002>), 2011.
-128. ATLAS Collaboration, Search for high-mass resonances decaying to dilepton final states in pp collisions at a center-of-mass energy of 7 TeV with the ATLAS detector, JHEP 1211 (2012) 138, [arXiv:1209.2535](<https://arxiv.org/abs/1209.2535>), [doi:10.1007/JHEP11(2012)138](<https://doi.org/10.1007/JHEP11(2012)138>), 2012.
-129. ATLAS Collaboration, Search for high-mass dilepton resonances in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys. Rev. D. 90, 052005 (2014), [arXiv:1405.4123](<https://arxiv.org/abs/1405.4123>), [doi:10.1103/PhysRevD.90.052005](<https://doi.org/10.1103/PhysRevD.90.052005>), 2014.
-130. ATLAS Collaboration, Search for high-mass new phenomena in the dilepton final state using proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 761 (2016) 372-392, [arXiv:1607.03669](<https://arxiv.org/abs/1607.03669>), [doi:10.1016/j.physletb.2016.08.055](<https://doi.org/10.1016/j.physletb.2016.08.055>), 2016.
-131. ATLAS Collaboration, Search for new high-mass phenomena in the dilepton final state using 36 fb^-1 of proton-proton collision data at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 10 (2017) 182, [arXiv:1707.02424](<https://arxiv.org/abs/1707.02424>), [doi:10.1007/JHEP10(2017)182](<https://doi.org/10.1007/JHEP10(2017)182>), 2017.
-132. ATLAS Collaboration, Search for high-mass dilepton resonances using 139 fb^-1 of pp collision data collected at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 796 (2019) 68, [arXiv:1903.06248](<https://arxiv.org/abs/1903.06248>), [doi:10.1016/j.physletb.2019.07.016](<https://doi.org/10.1016/j.physletb.2019.07.016>), 2019.
-133. ATLAS Collaboration, Search for new phenomena in final states with two leptons and one or no b-tagged jets at sqrt(s) = 13 TeV using the ATLAS detector, Phys. Rev. Lett. 127, 141801 (2021), [arXiv:2105.13847](<https://arxiv.org/abs/2105.13847>), [doi:10.1103/PhysRevLett.127.141801](<https://doi.org/10.1103/PhysRevLett.127.141801>), 2021.
-134. ATLAS Collaboration, Search for high-mass dilepton resonances in pp collisions at sqrt(s)=13.6 TeV combined with 13 TeV results using the ATLAS detector, [arXiv:2607.28334](<https://arxiv.org/abs/2607.28334>), 2026.
+128. ATLAS Collaboration, Search for high mass dilepton resonances in pp collisions at sqrts=7 TeV with the ATLAS experiment, Phys.Lett.B 700 (2011) 163-180, [arXiv:1103.6218](<https://arxiv.org/abs/1103.6218>), [doi:10.1016/j.physletb.2011.04.044](<https://doi.org/10.1016/j.physletb.2011.04.044>), 2011.
+129. ATLAS Collaboration, Search for dilepton resonances in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Rev.Lett. 107 (2011) 272002, [arXiv:1108.1582](<https://arxiv.org/abs/1108.1582>), [doi:10.1103/PhysRevLett.107.272002](<https://doi.org/10.1103/PhysRevLett.107.272002>), 2011.
+130. ATLAS Collaboration, Search for high-mass resonances decaying to dilepton final states in pp collisions at a center-of-mass energy of 7 TeV with the ATLAS detector, JHEP 1211 (2012) 138, [arXiv:1209.2535](<https://arxiv.org/abs/1209.2535>), [doi:10.1007/JHEP11(2012)138](<https://doi.org/10.1007/JHEP11(2012)138>), 2012.
+131. ATLAS Collaboration, Search for high-mass dilepton resonances in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys. Rev. D. 90, 052005 (2014), [arXiv:1405.4123](<https://arxiv.org/abs/1405.4123>), [doi:10.1103/PhysRevD.90.052005](<https://doi.org/10.1103/PhysRevD.90.052005>), 2014.
+132. ATLAS Collaboration, Search for high-mass new phenomena in the dilepton final state using proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 761 (2016) 372-392, [arXiv:1607.03669](<https://arxiv.org/abs/1607.03669>), [doi:10.1016/j.physletb.2016.08.055](<https://doi.org/10.1016/j.physletb.2016.08.055>), 2016.
+133. ATLAS Collaboration, Search for new high-mass phenomena in the dilepton final state using 36 fb^-1 of proton-proton collision data at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 10 (2017) 182, [arXiv:1707.02424](<https://arxiv.org/abs/1707.02424>), [doi:10.1007/JHEP10(2017)182](<https://doi.org/10.1007/JHEP10(2017)182>), 2017.
+134. ATLAS Collaboration, Search for high-mass dilepton resonances using 139 fb^-1 of pp collision data collected at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 796 (2019) 68, [arXiv:1903.06248](<https://arxiv.org/abs/1903.06248>), [doi:10.1016/j.physletb.2019.07.016](<https://doi.org/10.1016/j.physletb.2019.07.016>), 2019.
+135. ATLAS Collaboration, Search for new phenomena in final states with two leptons and one or no b-tagged jets at sqrt(s) = 13 TeV using the ATLAS detector, Phys. Rev. Lett. 127, 141801 (2021), [arXiv:2105.13847](<https://arxiv.org/abs/2105.13847>), [doi:10.1103/PhysRevLett.127.141801](<https://doi.org/10.1103/PhysRevLett.127.141801>), 2021.
+136. ATLAS Collaboration, Search for high-mass dilepton resonances in pp collisions at sqrt(s)=13.6 TeV combined with 13 TeV results using the ATLAS detector, [arXiv:2607.28334](<https://arxiv.org/abs/2607.28334>), 2026.
 
 ### Dimuon (low / intermediate mass): `m_mumu`
 
 3 papers, 2019-2026 (current).
 
-135. ATLAS Collaboration, Search for scalar resonances decaying into mu^+mu^- in events with and without b-tagged jets produced in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 07 (2019) 117, [arXiv:1901.08144](<https://arxiv.org/abs/1901.08144>), [doi:10.1007/JHEP07(2019)117](<https://doi.org/10.1007/JHEP07(2019)117>), 2019.
-136. ATLAS Collaboration, Search for a new pseudoscalar decaying into a pair of muons in events with a top-quark pair at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 108 (2023) 092007, [arXiv:2304.14247](<https://arxiv.org/abs/2304.14247>), [doi:10.1103/PhysRevD.108.092007](<https://doi.org/10.1103/PhysRevD.108.092007>), 2023.
-137. ATLAS Collaboration, Search for dimuon resonance in the 35 to 75 GeV mass range using 140 fb^-1 of 13 TeV pp collisions with the ATLAS detector, JHEP 06 (2026) 165, [arXiv:2601.21361](<https://arxiv.org/abs/2601.21361>), [doi:10.1007/JHEP06(2026)165](<https://doi.org/10.1007/JHEP06(2026)165>), 2026.
+137. ATLAS Collaboration, Search for scalar resonances decaying into mu^+mu^- in events with and without b-tagged jets produced in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 07 (2019) 117, [arXiv:1901.08144](<https://arxiv.org/abs/1901.08144>), [doi:10.1007/JHEP07(2019)117](<https://doi.org/10.1007/JHEP07(2019)117>), 2019.
+138. ATLAS Collaboration, Search for a new pseudoscalar decaying into a pair of muons in events with a top-quark pair at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 108 (2023) 092007, [arXiv:2304.14247](<https://arxiv.org/abs/2304.14247>), [doi:10.1103/PhysRevD.108.092007](<https://doi.org/10.1103/PhysRevD.108.092007>), 2023.
+139. ATLAS Collaboration, Search for dimuon resonance in the 35 to 75 GeV mass range using 140 fb^-1 of 13 TeV pp collisions with the ATLAS detector, JHEP 06 (2026) 165, [arXiv:2601.21361](<https://arxiv.org/abs/2601.21361>), [doi:10.1007/JHEP06(2026)165](<https://doi.org/10.1007/JHEP06(2026)165>), 2026.
 
 ### Ditau: `m_tautau`
 
 10 papers, 2011-2026 (current).
 
-138. ATLAS Collaboration, Search for neutral MSSM Higgs bosons decaying to tau^+ tau^- pairs in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Lett.B 705 (2011) 174-192, [arXiv:1107.5003](<https://arxiv.org/abs/1107.5003>), [doi:10.1016/j.physletb.2011.10.001](<https://doi.org/10.1016/j.physletb.2011.10.001>), 2011.
-139. ATLAS Collaboration, A search for high-mass resonances decaying to tau+tau- in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys. Lett. B 719 (2013) 242-260, [arXiv:1210.6604](<https://arxiv.org/abs/1210.6604>), [doi:10.1016/j.physletb.2013.01.040](<https://doi.org/10.1016/j.physletb.2013.01.040>), 2012.
-140. ATLAS Collaboration, Search for the neutral Higgs bosons of the Minimal Supersymmetric Standard Model in pp collisions at sqrt(s)=7 TeV with the ATLAS detector, JHEP02 (2013) 095, [arXiv:1211.6956](<https://arxiv.org/abs/1211.6956>), [doi:10.1007/JHEP02(2013)095](<https://doi.org/10.1007/JHEP02(2013)095>), 2012.
-141. ATLAS Collaboration, Search for neutral Higgs bosons of the minimal supersymmetric standard model in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, JHEP11(2014)056, [arXiv:1409.6064](<https://arxiv.org/abs/1409.6064>), [doi:10.1007/JHEP11(2014)056](<https://doi.org/10.1007/JHEP11(2014)056>), 2014.
-142. ATLAS Collaboration, A search for high-mass resonances decaying to tau^+tau^- in pp collisions at sqrt(s)=8 TeV with the ATLAS detector, JHEP07(2015)157, [arXiv:1502.07177](<https://arxiv.org/abs/1502.07177>), [doi:10.1007/JHEP07(2015)157](<https://doi.org/10.1007/JHEP07(2015)157>), 2015.
-143. ATLAS Collaboration, Search for Minimal Supersymmetric Standard Model Higgs bosons H/A and for a Z' boson in the tautau final state produced in pp collisions at sqrt(s)=13 TeV with the ATLAS Detector, Eur. Phys. J. C76 (2016) 585, [arXiv:1608.00890](<https://arxiv.org/abs/1608.00890>), [doi:10.1140/epjc/s10052-016-4400-6](<https://doi.org/10.1140/epjc/s10052-016-4400-6>), 2016.
-144. ATLAS Collaboration, Search for additional heavy neutral Higgs and gauge bosons in the ditau final state produced in 36 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 01 (2018) 055, [arXiv:1709.07242](<https://arxiv.org/abs/1709.07242>), [doi:10.1007/JHEP01(2018)055](<https://doi.org/10.1007/JHEP01(2018)055>), 2017.
-145. ATLAS Collaboration, Search for heavy Higgs bosons decaying into two tau leptons with the ATLAS detector using pp collisions at sqrt(s)=13 TeV, Phys. Rev. Lett. 125 (2020) 051801, [arXiv:2002.12223](<https://arxiv.org/abs/2002.12223>), [doi:10.1103/PhysRevLett.125.051801](<https://doi.org/10.1103/PhysRevLett.125.051801>), 2020.
-146. ATLAS Collaboration, Search for a light CP-odd Higgs boson decaying into a pair of tau-leptons in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 12 (2024) 126, [arXiv:2409.20381](<https://arxiv.org/abs/2409.20381>), [doi:10.1007/JHEP12(2024)126](<https://doi.org/10.1007/JHEP12(2024)126>), 2024.
-147. ATLAS Collaboration, Search for Lorentz-boosted di-tau resonances produced in association with top quark pairs in sqrt(s)=13 TeV pp collisions with the ATLAS detector, [arXiv:2607.28484](<https://arxiv.org/abs/2607.28484>), 2026.
+140. ATLAS Collaboration, Search for neutral MSSM Higgs bosons decaying to tau^+ tau^- pairs in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Lett.B 705 (2011) 174-192, [arXiv:1107.5003](<https://arxiv.org/abs/1107.5003>), [doi:10.1016/j.physletb.2011.10.001](<https://doi.org/10.1016/j.physletb.2011.10.001>), 2011.
+141. ATLAS Collaboration, A search for high-mass resonances decaying to tau+tau- in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys. Lett. B 719 (2013) 242-260, [arXiv:1210.6604](<https://arxiv.org/abs/1210.6604>), [doi:10.1016/j.physletb.2013.01.040](<https://doi.org/10.1016/j.physletb.2013.01.040>), 2012.
+142. ATLAS Collaboration, Search for the neutral Higgs bosons of the Minimal Supersymmetric Standard Model in pp collisions at sqrt(s)=7 TeV with the ATLAS detector, JHEP02 (2013) 095, [arXiv:1211.6956](<https://arxiv.org/abs/1211.6956>), [doi:10.1007/JHEP02(2013)095](<https://doi.org/10.1007/JHEP02(2013)095>), 2012.
+143. ATLAS Collaboration, Search for neutral Higgs bosons of the minimal supersymmetric standard model in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, JHEP11(2014)056, [arXiv:1409.6064](<https://arxiv.org/abs/1409.6064>), [doi:10.1007/JHEP11(2014)056](<https://doi.org/10.1007/JHEP11(2014)056>), 2014.
+144. ATLAS Collaboration, A search for high-mass resonances decaying to tau^+tau^- in pp collisions at sqrt(s)=8 TeV with the ATLAS detector, JHEP07(2015)157, [arXiv:1502.07177](<https://arxiv.org/abs/1502.07177>), [doi:10.1007/JHEP07(2015)157](<https://doi.org/10.1007/JHEP07(2015)157>), 2015.
+145. ATLAS Collaboration, Search for Minimal Supersymmetric Standard Model Higgs bosons H/A and for a Z' boson in the tautau final state produced in pp collisions at sqrt(s)=13 TeV with the ATLAS Detector, Eur. Phys. J. C76 (2016) 585, [arXiv:1608.00890](<https://arxiv.org/abs/1608.00890>), [doi:10.1140/epjc/s10052-016-4400-6](<https://doi.org/10.1140/epjc/s10052-016-4400-6>), 2016.
+146. ATLAS Collaboration, Search for additional heavy neutral Higgs and gauge bosons in the ditau final state produced in 36 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 01 (2018) 055, [arXiv:1709.07242](<https://arxiv.org/abs/1709.07242>), [doi:10.1007/JHEP01(2018)055](<https://doi.org/10.1007/JHEP01(2018)055>), 2017.
+147. ATLAS Collaboration, Search for heavy Higgs bosons decaying into two tau leptons with the ATLAS detector using pp collisions at sqrt(s)=13 TeV, Phys. Rev. Lett. 125 (2020) 051801, [arXiv:2002.12223](<https://arxiv.org/abs/2002.12223>), [doi:10.1103/PhysRevLett.125.051801](<https://doi.org/10.1103/PhysRevLett.125.051801>), 2020.
+148. ATLAS Collaboration, Search for a light CP-odd Higgs boson decaying into a pair of tau-leptons in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 12 (2024) 126, [arXiv:2409.20381](<https://arxiv.org/abs/2409.20381>), [doi:10.1007/JHEP12(2024)126](<https://doi.org/10.1007/JHEP12(2024)126>), 2024.
+149. ATLAS Collaboration, Search for Lorentz-boosted di-tau resonances produced in association with top quark pairs in sqrt(s)=13 TeV pp collisions with the ATLAS detector, [arXiv:2607.28484](<https://arxiv.org/abs/2607.28484>), 2026.
 
 ### Four leptons / 4mu: `m_4l, m_4mu`
 
 6 papers, 2015-2024 (current).
 
-148. ATLAS Collaboration, Search for new light gauge bosons in Higgs boson decays to four-lepton final states in pp collisions at sqrt(s)=8 TeV with the ATLAS detector at the LHC, Phys. Rev. D 92, 092001 (2015), [arXiv:1505.07645](<https://arxiv.org/abs/1505.07645>), [doi:10.1103/PhysRevD.92.092001](<https://doi.org/10.1103/PhysRevD.92.092001>), 2015.
-149. ATLAS Collaboration, Search for Higgs boson decays to beyond-the-Standard-Model light bosons in four-lepton events with the ATLAS detector at sqrt(s)=13 TeV, JHEP 06 (2018) 166, [arXiv:1802.03388](<https://arxiv.org/abs/1802.03388>), [doi:10.1007/JHEP06(2018)166](<https://doi.org/10.1007/JHEP06(2018)166>), 2018.
-150. ATLAS Collaboration, Search for Higgs bosons decaying into new spin-0 or spin-1 particles in four-lepton final states with the ATLAS detector with 139 fb^-1 of pp collision data at sqrt(s)=13 TeV, JHEP 03 (2022) 041, [arXiv:2110.13673](<https://arxiv.org/abs/2110.13673>), [doi:10.1007/JHEP03(2022)041](<https://doi.org/10.1007/JHEP03(2022)041>), 2021.
-151. ATLAS Collaboration, Search for a new Z' gauge boson in 4mu events with the ATLAS experiment, JHEP 07 (2023) 90, [arXiv:2301.09342](<https://arxiv.org/abs/2301.09342>), [doi:10.1007/JHEP07(2023)090](<https://doi.org/10.1007/JHEP07(2023)090>), 2023.
-152. ATLAS Collaboration, Search for heavy resonances in final states with four leptons and missing transverse momentum or jets in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 10 (2024) 130, [arXiv:2401.04742](<https://arxiv.org/abs/2401.04742>), [doi:10.1007/JHEP10(2024)130](<https://doi.org/10.1007/JHEP10(2024)130>), 2024.
-153. ATLAS Collaboration, Search for a new Z' gauge boson via the pp -> W^+-(\*) -> Z' mu^+- nu-> mu^+-mu^-+mu^+-nu process in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 110 (2024) 072008, [arXiv:2402.15212](<https://arxiv.org/abs/2402.15212>), [doi:10.1103/PhysRevD.110.072008](<https://doi.org/10.1103/PhysRevD.110.072008>), 2024.
+150. ATLAS Collaboration, Search for new light gauge bosons in Higgs boson decays to four-lepton final states in pp collisions at sqrt(s)=8 TeV with the ATLAS detector at the LHC, Phys. Rev. D 92, 092001 (2015), [arXiv:1505.07645](<https://arxiv.org/abs/1505.07645>), [doi:10.1103/PhysRevD.92.092001](<https://doi.org/10.1103/PhysRevD.92.092001>), 2015.
+151. ATLAS Collaboration, Search for Higgs boson decays to beyond-the-Standard-Model light bosons in four-lepton events with the ATLAS detector at sqrt(s)=13 TeV, JHEP 06 (2018) 166, [arXiv:1802.03388](<https://arxiv.org/abs/1802.03388>), [doi:10.1007/JHEP06(2018)166](<https://doi.org/10.1007/JHEP06(2018)166>), 2018.
+152. ATLAS Collaboration, Search for Higgs bosons decaying into new spin-0 or spin-1 particles in four-lepton final states with the ATLAS detector with 139 fb^-1 of pp collision data at sqrt(s)=13 TeV, JHEP 03 (2022) 041, [arXiv:2110.13673](<https://arxiv.org/abs/2110.13673>), [doi:10.1007/JHEP03(2022)041](<https://doi.org/10.1007/JHEP03(2022)041>), 2021.
+153. ATLAS Collaboration, Search for a new Z' gauge boson in 4mu events with the ATLAS experiment, JHEP 07 (2023) 90, [arXiv:2301.09342](<https://arxiv.org/abs/2301.09342>), [doi:10.1007/JHEP07(2023)090](<https://doi.org/10.1007/JHEP07(2023)090>), 2023.
+154. ATLAS Collaboration, Search for heavy resonances in final states with four leptons and missing transverse momentum or jets in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 10 (2024) 130, [arXiv:2401.04742](<https://arxiv.org/abs/2401.04742>), [doi:10.1007/JHEP10(2024)130](<https://doi.org/10.1007/JHEP10(2024)130>), 2024.
+155. ATLAS Collaboration, Search for a new Z' gauge boson via the pp -> W^+-(\*) -> Z' mu^+- nu-> mu^+-mu^-+mu^+-nu process in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 110 (2024) 072008, [arXiv:2402.15212](<https://arxiv.org/abs/2402.15212>), [doi:10.1103/PhysRevD.110.072008](<https://doi.org/10.1103/PhysRevD.110.072008>), 2024.
 
 ### LFV Z decays: `m_ll (Z)`
 
 5 papers, 2014-2022 (ageing).
 
-154. ATLAS Collaboration, Search for the lepton flavor violating decay Z -> e mu in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys. Rev. D 90, 072010 (2014), [arXiv:1408.5774](<https://arxiv.org/abs/1408.5774>), [doi:10.1103/PhysRevD.90.072010](<https://doi.org/10.1103/PhysRevD.90.072010>), 2014.
-155. ATLAS Collaboration, Search for lepton-flavor-violating decays of the Z boson into a tau lepton and a light lepton with the ATLAS detector, Phys. Rev. D 98, 092010 (2018), [arXiv:1804.09568](<https://arxiv.org/abs/1804.09568>), [doi:10.1103/PhysRevD.98.092010](<https://doi.org/10.1103/PhysRevD.98.092010>), 2018.
-156. ATLAS Collaboration, Search for charged-lepton-flavour violation in Z-boson decays with the ATLAS detector, Nature Phys. 17(2021) 819, [arXiv:2010.02566](<https://arxiv.org/abs/2010.02566>), [doi:10.1038/s41567-021-01225-z](<https://doi.org/10.1038/s41567-021-01225-z>), 2020.
-157. ATLAS Collaboration, Search for lepton-flavor-violation in Z-boson decays with tau-leptons with the ATLAS detector, Phys. Rev. Lett. 127 (2021) 271801, [arXiv:2105.12491](<https://arxiv.org/abs/2105.12491>), [doi:10.1103/PhysRevLett.127.271801](<https://doi.org/10.1103/PhysRevLett.127.271801>), 2021.
-158. ATLAS Collaboration, Search for the charged-lepton-flavor-violating decay Z-> emu in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 108 (2023) 032015, [arXiv:2204.10783](<https://arxiv.org/abs/2204.10783>), [doi:10.1103/PhysRevD.108.032015](<https://doi.org/10.1103/PhysRevD.108.032015>), 2022.
+156. ATLAS Collaboration, Search for the lepton flavor violating decay Z -> e mu in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys. Rev. D 90, 072010 (2014), [arXiv:1408.5774](<https://arxiv.org/abs/1408.5774>), [doi:10.1103/PhysRevD.90.072010](<https://doi.org/10.1103/PhysRevD.90.072010>), 2014.
+157. ATLAS Collaboration, Search for lepton-flavor-violating decays of the Z boson into a tau lepton and a light lepton with the ATLAS detector, Phys. Rev. D 98, 092010 (2018), [arXiv:1804.09568](<https://arxiv.org/abs/1804.09568>), [doi:10.1103/PhysRevD.98.092010](<https://doi.org/10.1103/PhysRevD.98.092010>), 2018.
+158. ATLAS Collaboration, Search for charged-lepton-flavour violation in Z-boson decays with the ATLAS detector, Nature Phys. 17(2021) 819, [arXiv:2010.02566](<https://arxiv.org/abs/2010.02566>), [doi:10.1038/s41567-021-01225-z](<https://doi.org/10.1038/s41567-021-01225-z>), 2020.
+159. ATLAS Collaboration, Search for lepton-flavor-violation in Z-boson decays with tau-leptons with the ATLAS detector, Phys. Rev. Lett. 127 (2021) 271801, [arXiv:2105.12491](<https://arxiv.org/abs/2105.12491>), [doi:10.1103/PhysRevLett.127.271801](<https://doi.org/10.1103/PhysRevLett.127.271801>), 2021.
+160. ATLAS Collaboration, Search for the charged-lepton-flavor-violating decay Z-> emu in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 108 (2023) 032015, [arXiv:2204.10783](<https://arxiv.org/abs/2204.10783>), [doi:10.1103/PhysRevD.108.032015](<https://doi.org/10.1103/PhysRevD.108.032015>), 2022.
 
 ### LFV tau -> 3 mu: `m_3mu`
 
 1 paper, 2026-2026 (current).
 
-159. ATLAS Collaboration, A search for lepton-flavour violating tau-> 3mu decays with the ATLAS detector, Phys. Lett. B 880 (2026) 140748, [arXiv:2603.18099](<https://arxiv.org/abs/2603.18099>), [doi:10.1016/j.physletb.2026.140748](<https://doi.org/10.1016/j.physletb.2026.140748>), 2026.
+161. ATLAS Collaboration, A search for lepton-flavour violating tau-> 3mu decays with the ATLAS detector, Phys. Lett. B 880 (2026) 140748, [arXiv:2603.18099](<https://arxiv.org/abs/2603.18099>), [doi:10.1016/j.physletb.2026.140748](<https://doi.org/10.1016/j.physletb.2026.140748>), 2026.
 
 ### Lepton + MET (W-prime): `m_T(l,nu)`
 
 6 papers, 2011-2019 (ageing).
 
-160. ATLAS Collaboration, Search for high-mass states with one lepton plus missing transverse momentum in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Lett.B701:50-69,2011, [arXiv:1103.1391](<https://arxiv.org/abs/1103.1391>), [doi:10.1016/j.physletb.2011.05.043](<https://doi.org/10.1016/j.physletb.2011.05.043>), 2011.
-161. ATLAS Collaboration, Search for a heavy gauge boson decaying to a charged lepton and a neutrino in 1 fb-1 of pp collisions at sqrt(s) = 7 TeV using the ATLAS detector, Phys.Lett.B 705 (2011) 28-46, [arXiv:1108.1316](<https://arxiv.org/abs/1108.1316>), [doi:10.1016/j.physletb.2011.09.093](<https://doi.org/10.1016/j.physletb.2011.09.093>), 2011.
-162. ATLAS Collaboration, Search for new particles in events with one lepton and missing transverse momentum in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, JHEP09 (2014) 037, [arXiv:1407.7494](<https://arxiv.org/abs/1407.7494>), [doi:10.1007/JHEP09(2014)037](<https://doi.org/10.1007/JHEP09(2014)037>), 2014.
-163. ATLAS Collaboration, Search for new resonances in events with one lepton and missing transverse momentum in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 762 (2016) 334, [arXiv:1606.03977](<https://arxiv.org/abs/1606.03977>), [doi:10.1016/j.physletb.2016.09.040](<https://doi.org/10.1016/j.physletb.2016.09.040>), 2016.
-164. ATLAS Collaboration, Search for a new heavy gauge boson resonance decaying into a lepton and missing transverse momentum in 36 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS experiment, Eur. Phys. J. C 78 (2018) 401, [arXiv:1706.04786](<https://arxiv.org/abs/1706.04786>), [doi:10.1140/epjc/s10052-018-5877-y](<https://doi.org/10.1140/epjc/s10052-018-5877-y>), 2017.
-165. ATLAS Collaboration, Search for a heavy charged boson in events with a charged lepton and missing transverse momentum from pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 100, 052013 (2019), [arXiv:1906.05609](<https://arxiv.org/abs/1906.05609>), [doi:10.1103/PhysRevD.100.052013](<https://doi.org/10.1103/PhysRevD.100.052013>), 2019.
+162. ATLAS Collaboration, Search for high-mass states with one lepton plus missing transverse momentum in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Lett.B701:50-69,2011, [arXiv:1103.1391](<https://arxiv.org/abs/1103.1391>), [doi:10.1016/j.physletb.2011.05.043](<https://doi.org/10.1016/j.physletb.2011.05.043>), 2011.
+163. ATLAS Collaboration, Search for a heavy gauge boson decaying to a charged lepton and a neutrino in 1 fb-1 of pp collisions at sqrt(s) = 7 TeV using the ATLAS detector, Phys.Lett.B 705 (2011) 28-46, [arXiv:1108.1316](<https://arxiv.org/abs/1108.1316>), [doi:10.1016/j.physletb.2011.09.093](<https://doi.org/10.1016/j.physletb.2011.09.093>), 2011.
+164. ATLAS Collaboration, Search for new particles in events with one lepton and missing transverse momentum in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, JHEP09 (2014) 037, [arXiv:1407.7494](<https://arxiv.org/abs/1407.7494>), [doi:10.1007/JHEP09(2014)037](<https://doi.org/10.1007/JHEP09(2014)037>), 2014.
+165. ATLAS Collaboration, Search for new resonances in events with one lepton and missing transverse momentum in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 762 (2016) 334, [arXiv:1606.03977](<https://arxiv.org/abs/1606.03977>), [doi:10.1016/j.physletb.2016.09.040](<https://doi.org/10.1016/j.physletb.2016.09.040>), 2016.
+166. ATLAS Collaboration, Search for a new heavy gauge boson resonance decaying into a lepton and missing transverse momentum in 36 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS experiment, Eur. Phys. J. C 78 (2018) 401, [arXiv:1706.04786](<https://arxiv.org/abs/1706.04786>), [doi:10.1140/epjc/s10052-018-5877-y](<https://doi.org/10.1140/epjc/s10052-018-5877-y>), 2017.
+167. ATLAS Collaboration, Search for a heavy charged boson in events with a charged lepton and missing transverse momentum from pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 100, 052013 (2019), [arXiv:1906.05609](<https://arxiv.org/abs/1906.05609>), [doi:10.1103/PhysRevD.100.052013](<https://doi.org/10.1103/PhysRevD.100.052013>), 2019.
 
 ### Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau): `m_emu, m_etau, m_mutau`
 
 8 papers, 2011-2023 (ageing).
 
-166. ATLAS Collaboration, Search for a heavy particle decaying into an electron and a muon with the ATLAS detector in sqrt(s) = 7 TeV pp collisions at the LHC, Phys.Rev.Lett. 106 (2011) 251801, [arXiv:1103.5559](<https://arxiv.org/abs/1103.5559>), [doi:10.1103/PhysRevLett.106.251801](<https://doi.org/10.1103/PhysRevLett.106.251801>), 2011.
-167. ATLAS Collaboration, Search for a heavy neutral particle decaying into an electron and a muon using 1 fb^-1 of ATLAS data, Eur.Phys.J.C 71 (2011) 1809, [arXiv:1109.3089](<https://arxiv.org/abs/1109.3089>), [doi:10.1140/epjc/s10052-011-1809-9](<https://doi.org/10.1140/epjc/s10052-011-1809-9>), 2011.
-168. ATLAS Collaboration, Search for lepton flavour violation in the emu continuum with the ATLAS detector in sqrt(s) = 7 TeV pp collisions at the LHC, Eur.Phys.J. C72 (2012) 2040, [arXiv:1205.0725](<https://arxiv.org/abs/1205.0725>), [doi:10.1140/epjc/s10052-012-2040-z](<https://doi.org/10.1140/epjc/s10052-012-2040-z>), 2012.
-169. ATLAS Collaboration, Search for a heavy narrow resonance decaying to e mu, e tau, or mu tau with the ATLAS detector in sqrt(s) = 7 TeV pp collisions at the LHC, Phys.Lett. B723 (2013) 15-32, [arXiv:1212.1272](<https://arxiv.org/abs/1212.1272>), [doi:10.1016/j.physletb.2013.04.035](<https://doi.org/10.1016/j.physletb.2013.04.035>), 2012.
-170. ATLAS Collaboration, Search for a Heavy Neutral Particle Decaying to emu, etau, or mutau in pp Collisions at sqrt(s)=8 TeV with the ATLAS Detector, Phys. Rev. Lett. 115, 031801 (2015), [arXiv:1503.04430](<https://arxiv.org/abs/1503.04430>), [doi:10.1103/PhysRevLett.115.031801](<https://doi.org/10.1103/PhysRevLett.115.031801>), 2015.
-171. ATLAS Collaboration, Search for new phenomena in different-flavour high-mass dilepton final states in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Eur. Phys. J. C76 (2016) 541, [arXiv:1607.08079](<https://arxiv.org/abs/1607.08079>), [doi:10.1140/epjc/s10052-016-4385-1](<https://doi.org/10.1140/epjc/s10052-016-4385-1>), 2016.
-172. ATLAS Collaboration, Search for lepton-flavor violation in different-flavor, high-mass final states in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 98, 092008 (2018), [arXiv:1807.06573](<https://arxiv.org/abs/1807.06573>), [doi:10.1103/PhysRevD.98.092008](<https://doi.org/10.1103/PhysRevD.98.092008>), 2018.
-173. ATLAS Collaboration, Search for lepton-flavour violation in high-mass dilepton final states using 139 fb^-1 of pp collisions at sqrt(s)=13 TeV with the ATLAS detector, J. High Energ. Phys. 2023, 82 (2023), [arXiv:2307.08567](<https://arxiv.org/abs/2307.08567>), [doi:10.1007/JHEP10(2023)082](<https://doi.org/10.1007/JHEP10(2023)082>), 2023.
+168. ATLAS Collaboration, Search for a heavy particle decaying into an electron and a muon with the ATLAS detector in sqrt(s) = 7 TeV pp collisions at the LHC, Phys.Rev.Lett. 106 (2011) 251801, [arXiv:1103.5559](<https://arxiv.org/abs/1103.5559>), [doi:10.1103/PhysRevLett.106.251801](<https://doi.org/10.1103/PhysRevLett.106.251801>), 2011.
+169. ATLAS Collaboration, Search for a heavy neutral particle decaying into an electron and a muon using 1 fb^-1 of ATLAS data, Eur.Phys.J.C 71 (2011) 1809, [arXiv:1109.3089](<https://arxiv.org/abs/1109.3089>), [doi:10.1140/epjc/s10052-011-1809-9](<https://doi.org/10.1140/epjc/s10052-011-1809-9>), 2011.
+170. ATLAS Collaboration, Search for lepton flavour violation in the emu continuum with the ATLAS detector in sqrt(s) = 7 TeV pp collisions at the LHC, Eur.Phys.J. C72 (2012) 2040, [arXiv:1205.0725](<https://arxiv.org/abs/1205.0725>), [doi:10.1140/epjc/s10052-012-2040-z](<https://doi.org/10.1140/epjc/s10052-012-2040-z>), 2012.
+171. ATLAS Collaboration, Search for a heavy narrow resonance decaying to e mu, e tau, or mu tau with the ATLAS detector in sqrt(s) = 7 TeV pp collisions at the LHC, Phys.Lett. B723 (2013) 15-32, [arXiv:1212.1272](<https://arxiv.org/abs/1212.1272>), [doi:10.1016/j.physletb.2013.04.035](<https://doi.org/10.1016/j.physletb.2013.04.035>), 2012.
+172. ATLAS Collaboration, Search for a Heavy Neutral Particle Decaying to emu, etau, or mutau in pp Collisions at sqrt(s)=8 TeV with the ATLAS Detector, Phys. Rev. Lett. 115, 031801 (2015), [arXiv:1503.04430](<https://arxiv.org/abs/1503.04430>), [doi:10.1103/PhysRevLett.115.031801](<https://doi.org/10.1103/PhysRevLett.115.031801>), 2015.
+173. ATLAS Collaboration, Search for new phenomena in different-flavour high-mass dilepton final states in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Eur. Phys. J. C76 (2016) 541, [arXiv:1607.08079](<https://arxiv.org/abs/1607.08079>), [doi:10.1140/epjc/s10052-016-4385-1](<https://doi.org/10.1140/epjc/s10052-016-4385-1>), 2016.
+174. ATLAS Collaboration, Search for lepton-flavor violation in different-flavor, high-mass final states in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 98, 092008 (2018), [arXiv:1807.06573](<https://arxiv.org/abs/1807.06573>), [doi:10.1103/PhysRevD.98.092008](<https://doi.org/10.1103/PhysRevD.98.092008>), 2018.
+175. ATLAS Collaboration, Search for lepton-flavour violation in high-mass dilepton final states using 139 fb^-1 of pp collisions at sqrt(s)=13 TeV with the ATLAS detector, J. High Energ. Phys. 2023, 82 (2023), [arXiv:2307.08567](<https://arxiv.org/abs/2307.08567>), [doi:10.1007/JHEP10(2023)082](<https://doi.org/10.1007/JHEP10(2023)082>), 2023.
 
 ### Periodic signals in dielectron/diphoton: `m_ee, m_gamgam`
 
 1 paper, 2023-2023 (ageing).
 
-174. ATLAS Collaboration, Search for periodic signals in the dielectron and diphoton invariant mass spectra using 139 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 10 (2023) 079, [arXiv:2305.10894](<https://arxiv.org/abs/2305.10894>), [doi:10.1007/JHEP10(2023)079](<https://doi.org/10.1007/JHEP10(2023)079>), 2023.
+176. ATLAS Collaboration, Search for periodic signals in the dielectron and diphoton invariant mass spectra using 139 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 10 (2023) 079, [arXiv:2305.10894](<https://arxiv.org/abs/2305.10894>), [doi:10.1007/JHEP10(2023)079](<https://doi.org/10.1007/JHEP10(2023)079>), 2023.
 
 ### SFOS dilepton + MET (edge): `m_ll`
 
 3 papers, 2015-2018 (stale).
 
-175. ATLAS Collaboration, Search for supersymmetry in events containing a same-flavour opposite-sign dilepton pair, jets, and large missing transverse momentum in sqrt(s)=8 TeV pp collisions with the ATLAS detector, Eur. Phys. J. C 75 (2015) 318, [arXiv:1503.03290](<https://arxiv.org/abs/1503.03290>), [doi:10.1140/epjc/s10052-015-3518-2](<https://doi.org/10.1140/epjc/s10052-015-3518-2>), 2015.
-176. ATLAS Collaboration, Search for new phenomena in events containing a same-flavour opposite-sign dilepton pair, jets, and large missing transverse momentum in sqrt(s)=13 TeV pp collisions with the ATLAS detector, Eur. Phys. J C 77 (2017) 144, [arXiv:1611.05791](<https://arxiv.org/abs/1611.05791>), [doi:10.1140/epjc/s10052-017-4700-5](<https://doi.org/10.1140/epjc/s10052-017-4700-5>), 2016.
-177. ATLAS Collaboration, Search for new phenomena using the invariant mass distribution of same-flavour opposite-sign dilepton pairs in events with missing transverse momentum in sqrt(s)=13 TeV pp collisions with the ATLAS detector, Eur. Phys. J. C 78 (2018) 625, [arXiv:1805.11381](<https://arxiv.org/abs/1805.11381>), [doi:10.1140/epjc/s10052-018-6081-9](<https://doi.org/10.1140/epjc/s10052-018-6081-9>), 2018.
+177. ATLAS Collaboration, Search for supersymmetry in events containing a same-flavour opposite-sign dilepton pair, jets, and large missing transverse momentum in sqrt(s)=8 TeV pp collisions with the ATLAS detector, Eur. Phys. J. C 75 (2015) 318, [arXiv:1503.03290](<https://arxiv.org/abs/1503.03290>), [doi:10.1140/epjc/s10052-015-3518-2](<https://doi.org/10.1140/epjc/s10052-015-3518-2>), 2015.
+178. ATLAS Collaboration, Search for new phenomena in events containing a same-flavour opposite-sign dilepton pair, jets, and large missing transverse momentum in sqrt(s)=13 TeV pp collisions with the ATLAS detector, Eur. Phys. J C 77 (2017) 144, [arXiv:1611.05791](<https://arxiv.org/abs/1611.05791>), [doi:10.1140/epjc/s10052-017-4700-5](<https://doi.org/10.1140/epjc/s10052-017-4700-5>), 2016.
+179. ATLAS Collaboration, Search for new phenomena using the invariant mass distribution of same-flavour opposite-sign dilepton pairs in events with missing transverse momentum in sqrt(s)=13 TeV pp collisions with the ATLAS detector, Eur. Phys. J. C 78 (2018) 625, [arXiv:1805.11381](<https://arxiv.org/abs/1805.11381>), [doi:10.1140/epjc/s10052-018-6081-9](<https://doi.org/10.1140/epjc/s10052-018-6081-9>), 2018.
 
 ### Same-sign dimuon (strong gravity): `m_mumu (SS)`
 
 2 papers, 2011-2013 (stale).
 
-178. ATLAS Collaboration, Search for strong gravity signatures in same-sign dimuon final states using the ATLAS detector at the LHC, Phys. Lett. B 709 (2012) 322-340, [arXiv:1111.0080](<https://arxiv.org/abs/1111.0080>), [doi:10.1016/j.physletb.2012.02.049](<https://doi.org/10.1016/j.physletb.2012.02.049>), 2011.
-179. ATLAS Collaboration, Search for microscopic black holes in a like-sign dimuon final state using large track multiplicity with the ATLAS detector, Phys. Rev. D 88 (2013) 072001, [arXiv:1308.4075](<https://arxiv.org/abs/1308.4075>), [doi:10.1103/PhysRevD.88.072001](<https://doi.org/10.1103/PhysRevD.88.072001>), 2013.
+180. ATLAS Collaboration, Search for strong gravity signatures in same-sign dimuon final states using the ATLAS detector at the LHC, Phys. Lett. B 709 (2012) 322-340, [arXiv:1111.0080](<https://arxiv.org/abs/1111.0080>), [doi:10.1016/j.physletb.2012.02.049](<https://doi.org/10.1016/j.physletb.2012.02.049>), 2011.
+181. ATLAS Collaboration, Search for microscopic black holes in a like-sign dimuon final state using large track multiplicity with the ATLAS detector, Phys. Rev. D 88 (2013) 072001, [arXiv:1308.4075](<https://arxiv.org/abs/1308.4075>), [doi:10.1103/PhysRevD.88.072001](<https://doi.org/10.1103/PhysRevD.88.072001>), 2013.
 
 ### Tau + MET: `m_T(tau,nu)`
 
 2 papers, 2018-2024 (current).
 
-180. ATLAS Collaboration, Search for High-Mass Resonances Decaying to taunu in pp Collisions at sqrt(s) = 13 TeV with the ATLAS Detector, Phys. Rev. Lett. 120, 161802 (2018), [arXiv:1801.06992](<https://arxiv.org/abs/1801.06992>), [doi:10.1103/PhysRevLett.120.161802](<https://doi.org/10.1103/PhysRevLett.120.161802>), 2018.
-181. ATLAS Collaboration, Search for high-mass resonances in final states with a tau-lepton and missing transverse momentum with the ATLAS detector, Phys. Rev. D 109 (2024) 112008, [arXiv:2402.16576](<https://arxiv.org/abs/2402.16576>), [doi:10.1103/PhysRevD.109.112008](<https://doi.org/10.1103/PhysRevD.109.112008>), 2024.
+182. ATLAS Collaboration, Search for High-Mass Resonances Decaying to taunu in pp Collisions at sqrt(s) = 13 TeV with the ATLAS Detector, Phys. Rev. Lett. 120, 161802 (2018), [arXiv:1801.06992](<https://arxiv.org/abs/1801.06992>), [doi:10.1103/PhysRevLett.120.161802](<https://doi.org/10.1103/PhysRevLett.120.161802>), 2018.
+183. ATLAS Collaboration, Search for high-mass resonances in final states with a tau-lepton and missing transverse momentum with the ATLAS detector, Phys. Rev. D 109 (2024) 112008, [arXiv:2402.16576](<https://arxiv.org/abs/2402.16576>), [doi:10.1103/PhysRevD.109.112008](<https://doi.org/10.1103/PhysRevD.109.112008>), 2024.
 
 ### Trilepton resonance: `m_3l`
 
 1 paper, 2020-2020 (ageing).
 
-182. ATLAS Collaboration, Search for trilepton resonances from chargino and neutralino pair production in sqrt(s) = 13 TeV pp collisions with the ATLAS detector, Phys. Rev. D 103, 112003 (2021), [arXiv:2011.10543](<https://arxiv.org/abs/2011.10543>), [doi:10.1103/PhysRevD.103.112003](<https://doi.org/10.1103/PhysRevD.103.112003>), 2020.
+184. ATLAS Collaboration, Search for trilepton resonances from chargino and neutralino pair production in sqrt(s) = 13 TeV pp collisions with the ATLAS detector, Phys. Rev. D 103, 112003 (2021), [arXiv:2011.10543](<https://arxiv.org/abs/2011.10543>), [doi:10.1103/PhysRevD.103.112003](<https://doi.org/10.1103/PhysRevD.103.112003>), 2020.
 
 ## Leptoquarks, excited & heavy fermions
 
@@ -498,67 +510,67 @@ Papers span 2010-2026.
 
 5 papers, 2012-2023 (ageing).
 
-183. ATLAS Collaboration, Search for excited leptons in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys. Rev. D85 (2012) 072003, [arXiv:1201.3293](<https://arxiv.org/abs/1201.3293>), [doi:10.1103/PhysRevD.85.072003](<https://doi.org/10.1103/PhysRevD.85.072003>), 2012.
-184. ATLAS Collaboration, Search for excited electrons and muons in sqrt(s)=8 TeV proton-proton collisions with the ATLAS detector, New J. Phys. 15 (2013) 093011, [arXiv:1308.1364](<https://arxiv.org/abs/1308.1364>), [doi:10.1088/1367-2630/15/9/093011](<https://doi.org/10.1088/1367-2630/15/9/093011>), 2013.
-185. ATLAS Collaboration, A search for an excited muon decaying to a muon and two jets in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, New J. Phys. 18 (2016) 073021, [arXiv:1601.05627](<https://arxiv.org/abs/1601.05627>), [doi:10.1088/1367-2630/18/7/073021](<https://doi.org/10.1088/1367-2630/18/7/073021>), 2016.
-186. ATLAS Collaboration, Search for excited electrons singly produced in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS experiment at the LHC, Eur. Phys. J. C 79 (2019) 803, [arXiv:1906.03204](<https://arxiv.org/abs/1906.03204>), [doi:10.1140/epjc/s10052-019-7295-1](<https://doi.org/10.1140/epjc/s10052-019-7295-1>), 2019.
-187. ATLAS Collaboration, Search for excited tau-leptons and leptoquarks in the final state with tau-leptons and jets in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 06 (2023) 199, [arXiv:2303.09444](<https://arxiv.org/abs/2303.09444>), [doi:10.1007/JHEP06(2023)199](<https://doi.org/10.1007/JHEP06(2023)199>), 2023.
+185. ATLAS Collaboration, Search for excited leptons in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys. Rev. D85 (2012) 072003, [arXiv:1201.3293](<https://arxiv.org/abs/1201.3293>), [doi:10.1103/PhysRevD.85.072003](<https://doi.org/10.1103/PhysRevD.85.072003>), 2012.
+186. ATLAS Collaboration, Search for excited electrons and muons in sqrt(s)=8 TeV proton-proton collisions with the ATLAS detector, New J. Phys. 15 (2013) 093011, [arXiv:1308.1364](<https://arxiv.org/abs/1308.1364>), [doi:10.1088/1367-2630/15/9/093011](<https://doi.org/10.1088/1367-2630/15/9/093011>), 2013.
+187. ATLAS Collaboration, A search for an excited muon decaying to a muon and two jets in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, New J. Phys. 18 (2016) 073021, [arXiv:1601.05627](<https://arxiv.org/abs/1601.05627>), [doi:10.1088/1367-2630/18/7/073021](<https://doi.org/10.1088/1367-2630/18/7/073021>), 2016.
+188. ATLAS Collaboration, Search for excited electrons singly produced in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS experiment at the LHC, Eur. Phys. J. C 79 (2019) 803, [arXiv:1906.03204](<https://arxiv.org/abs/1906.03204>), [doi:10.1140/epjc/s10052-019-7295-1](<https://doi.org/10.1140/epjc/s10052-019-7295-1>), 2019.
+189. ATLAS Collaboration, Search for excited tau-leptons and leptoquarks in the final state with tau-leptons and jets in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 06 (2023) 199, [arXiv:2303.09444](<https://arxiv.org/abs/2303.09444>), [doi:10.1007/JHEP06(2023)199](<https://doi.org/10.1007/JHEP06(2023)199>), 2023.
 
 ### Heavy lepton -> Z + lepton: `m_Zl`
 
 1 paper, 2015-2015 (stale).
 
-188. ATLAS Collaboration, Search for heavy lepton resonances decaying to a Z boson and a lepton in pp collisions at sqrt(s)=8 TeV with the ATLAS detector, JHEP09(2015)108, [arXiv:1506.01291](<https://arxiv.org/abs/1506.01291>), [doi:10.1007/JHEP09(2015)108](<https://doi.org/10.1007/JHEP09(2015)108>), 2015.
+190. ATLAS Collaboration, Search for heavy lepton resonances decaying to a Z boson and a lepton in pp collisions at sqrt(s)=8 TeV with the ATLAS detector, JHEP09(2015)108, [arXiv:1506.01291](<https://arxiv.org/abs/1506.01291>), [doi:10.1007/JHEP09(2015)108](<https://doi.org/10.1007/JHEP09(2015)108>), 2015.
 
 ### Heavy neutrino / right-handed W (lljj): `m_lljj, m_lj`
 
 5 papers, 2012-2023 (ageing).
 
-189. ATLAS Collaboration, Search for heavy neutrinos and right-handed W bosons in events with two leptons and jets in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Eur.Phys.J. C72 (2012) 2056, [arXiv:1203.5420](<https://arxiv.org/abs/1203.5420>), [doi:10.1140/epjc/s10052-012-2056-4](<https://doi.org/10.1140/epjc/s10052-012-2056-4>), 2012.
-190. ATLAS Collaboration, Search for heavy Majorana neutrinos with the ATLAS detector in pp collisions at sqrt(s) = 8 TeV, JHEP07(2015)162, [arXiv:1506.06020](<https://arxiv.org/abs/1506.06020>), [doi:10.1007/JHEP07(2015)162](<https://doi.org/10.1007/JHEP07(2015)162>), 2015.
-191. ATLAS Collaboration, Search for heavy Majorana or Dirac neutrinos and right-handed W gauge bosons in final states with two charged leptons and two jets at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 01(2019) 016, [arXiv:1809.11105](<https://arxiv.org/abs/1809.11105>), [doi:10.1007/JHEP01(2019)016](<https://doi.org/10.1007/JHEP01(2019)016>), 2018.
-192. ATLAS Collaboration, Search for a right-handed gauge boson decaying into a high-momentum heavy neutrino and a charged lepton in pp collisions with the ATLAS detector at sqrt(s)=13 TeV, Phys. Lett. B 798 (2019) 134942, [arXiv:1904.12679](<https://arxiv.org/abs/1904.12679>), [doi:10.1016/j.physletb.2019.134942](<https://doi.org/10.1016/j.physletb.2019.134942>), 2019.
-193. ATLAS Collaboration, Search for heavy Majorana or Dirac neutrinos and right-handed W gauge bosons in final states with charged leptons and jets in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Eur. Phys. J. C 83 (2023) 1164, [arXiv:2304.09553](<https://arxiv.org/abs/2304.09553>), [doi:10.1140/epjc/s10052-023-12021-9](<https://doi.org/10.1140/epjc/s10052-023-12021-9>), 2023.
+191. ATLAS Collaboration, Search for heavy neutrinos and right-handed W bosons in events with two leptons and jets in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Eur.Phys.J. C72 (2012) 2056, [arXiv:1203.5420](<https://arxiv.org/abs/1203.5420>), [doi:10.1140/epjc/s10052-012-2056-4](<https://doi.org/10.1140/epjc/s10052-012-2056-4>), 2012.
+192. ATLAS Collaboration, Search for heavy Majorana neutrinos with the ATLAS detector in pp collisions at sqrt(s) = 8 TeV, JHEP07(2015)162, [arXiv:1506.06020](<https://arxiv.org/abs/1506.06020>), [doi:10.1007/JHEP07(2015)162](<https://doi.org/10.1007/JHEP07(2015)162>), 2015.
+193. ATLAS Collaboration, Search for heavy Majorana or Dirac neutrinos and right-handed W gauge bosons in final states with two charged leptons and two jets at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 01(2019) 016, [arXiv:1809.11105](<https://arxiv.org/abs/1809.11105>), [doi:10.1007/JHEP01(2019)016](<https://doi.org/10.1007/JHEP01(2019)016>), 2018.
+194. ATLAS Collaboration, Search for a right-handed gauge boson decaying into a high-momentum heavy neutrino and a charged lepton in pp collisions with the ATLAS detector at sqrt(s)=13 TeV, Phys. Lett. B 798 (2019) 134942, [arXiv:1904.12679](<https://arxiv.org/abs/1904.12679>), [doi:10.1016/j.physletb.2019.134942](<https://doi.org/10.1016/j.physletb.2019.134942>), 2019.
+195. ATLAS Collaboration, Search for heavy Majorana or Dirac neutrinos and right-handed W gauge bosons in final states with charged leptons and jets in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Eur. Phys. J. C 83 (2023) 1164, [arXiv:2304.09553](<https://arxiv.org/abs/2304.09553>), [doi:10.1140/epjc/s10052-023-12021-9](<https://doi.org/10.1140/epjc/s10052-023-12021-9>), 2023.
 
 ### Leptoquark pair -> lepton + jet: `m_lj`
 
 9 papers, 2011-2022 (ageing).
 
-194. ATLAS Collaboration, Search for pair production of first or second generation leptoquarks in proton-proton collisions at sqrt(s)=7 TeV using the ATLAS detector at the LHC, Phys.Rev.D 83 (2011) 112006, [arXiv:1104.4481](<https://arxiv.org/abs/1104.4481>), [doi:10.1103/PhysRevD.83.112006](<https://doi.org/10.1103/PhysRevD.83.112006>), 2011.
-195. ATLAS Collaboration, Search for first generation scalar leptoquarks in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys. Lett. B709 (2012) 158-176, [arXiv:1112.4828](<https://arxiv.org/abs/1112.4828>), [doi:10.1016/j.physletb.2012.02.004](<https://doi.org/10.1016/j.physletb.2012.02.004>), 2011.
-196. ATLAS Collaboration, Search for second generation scalar leptoquarks in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Eur.Phys.J. C72 (2012) 2151, [arXiv:1203.3172](<https://arxiv.org/abs/1203.3172>), [doi:10.1140/epjc/s10052-012-2151-6](<https://doi.org/10.1140/epjc/s10052-012-2151-6>), 2012.
-197. ATLAS Collaboration, Searches for scalar leptoquarks in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Eur. Phys. J. C, 76(1), 1-28 (2016), [arXiv:1508.04735](<https://arxiv.org/abs/1508.04735>), [doi:10.1140/epjc/s10052-015-3823-9](<https://doi.org/10.1140/epjc/s10052-015-3823-9>), 2015.
-198. ATLAS Collaboration, Search for scalar leptoquarks in pp collisions at sqrt(s) = 13 TeV with the ATLAS experiment, New J. Phys. 18 (2016) 093016, [arXiv:1605.06035](<https://arxiv.org/abs/1605.06035>), [doi:10.1088/1367-2630/18/9/093016](<https://doi.org/10.1088/1367-2630/18/9/093016>), 2016.
-199. ATLAS Collaboration, Searches for scalar leptoquarks and differential cross-section measurements in dilepton-dijet events in proton-proton collisions at a centre-of-mass energy of sqrt(s) = 13 TeV with the ATLAS experiment, Eur. Phys. J. C 79 (2019) 733, [arXiv:1902.00377](<https://arxiv.org/abs/1902.00377>), [doi:10.1140/epjc/s10052-019-7181-x](<https://doi.org/10.1140/epjc/s10052-019-7181-x>), 2019.
-200. ATLAS Collaboration, Search for pairs of scalar leptoquarks decaying into quarks and electrons or muons in sqrt(s)=13 TeV pp collisions with the ATLAS detector, JHEP 10 (2020) 112, [arXiv:2006.05872](<https://arxiv.org/abs/2006.05872>), [doi:10.1007/JHEP10(2020)112](<https://doi.org/10.1007/JHEP10(2020)112>), 2020.
-201. ATLAS Collaboration, Search for pair production of scalar leptoquarks decaying into first- or second-generation leptons and top quarks in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C 81 (2021) 313, [arXiv:2010.02098](<https://arxiv.org/abs/2010.02098>), [doi:10.1140/epjc/s10052-021-09009-8](<https://doi.org/10.1140/epjc/s10052-021-09009-8>), 2020.
-202. ATLAS Collaboration, Search for pair-produced scalar and vector leptoquarks decaying into third-generation quarks and first- or second-generation leptons in pp collisions with the ATLAS detector, JHEP 06(2023)188, [arXiv:2210.04517](<https://arxiv.org/abs/2210.04517>), [doi:10.1007/JHEP06(2023)188](<https://doi.org/10.1007/JHEP06(2023)188>), 2022.
+196. ATLAS Collaboration, Search for pair production of first or second generation leptoquarks in proton-proton collisions at sqrt(s)=7 TeV using the ATLAS detector at the LHC, Phys.Rev.D 83 (2011) 112006, [arXiv:1104.4481](<https://arxiv.org/abs/1104.4481>), [doi:10.1103/PhysRevD.83.112006](<https://doi.org/10.1103/PhysRevD.83.112006>), 2011.
+197. ATLAS Collaboration, Search for first generation scalar leptoquarks in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys. Lett. B709 (2012) 158-176, [arXiv:1112.4828](<https://arxiv.org/abs/1112.4828>), [doi:10.1016/j.physletb.2012.02.004](<https://doi.org/10.1016/j.physletb.2012.02.004>), 2011.
+198. ATLAS Collaboration, Search for second generation scalar leptoquarks in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, Eur.Phys.J. C72 (2012) 2151, [arXiv:1203.3172](<https://arxiv.org/abs/1203.3172>), [doi:10.1140/epjc/s10052-012-2151-6](<https://doi.org/10.1140/epjc/s10052-012-2151-6>), 2012.
+199. ATLAS Collaboration, Searches for scalar leptoquarks in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Eur. Phys. J. C, 76(1), 1-28 (2016), [arXiv:1508.04735](<https://arxiv.org/abs/1508.04735>), [doi:10.1140/epjc/s10052-015-3823-9](<https://doi.org/10.1140/epjc/s10052-015-3823-9>), 2015.
+200. ATLAS Collaboration, Search for scalar leptoquarks in pp collisions at sqrt(s) = 13 TeV with the ATLAS experiment, New J. Phys. 18 (2016) 093016, [arXiv:1605.06035](<https://arxiv.org/abs/1605.06035>), [doi:10.1088/1367-2630/18/9/093016](<https://doi.org/10.1088/1367-2630/18/9/093016>), 2016.
+201. ATLAS Collaboration, Searches for scalar leptoquarks and differential cross-section measurements in dilepton-dijet events in proton-proton collisions at a centre-of-mass energy of sqrt(s) = 13 TeV with the ATLAS experiment, Eur. Phys. J. C 79 (2019) 733, [arXiv:1902.00377](<https://arxiv.org/abs/1902.00377>), [doi:10.1140/epjc/s10052-019-7181-x](<https://doi.org/10.1140/epjc/s10052-019-7181-x>), 2019.
+202. ATLAS Collaboration, Search for pairs of scalar leptoquarks decaying into quarks and electrons or muons in sqrt(s)=13 TeV pp collisions with the ATLAS detector, JHEP 10 (2020) 112, [arXiv:2006.05872](<https://arxiv.org/abs/2006.05872>), [doi:10.1007/JHEP10(2020)112](<https://doi.org/10.1007/JHEP10(2020)112>), 2020.
+203. ATLAS Collaboration, Search for pair production of scalar leptoquarks decaying into first- or second-generation leptons and top quarks in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C 81 (2021) 313, [arXiv:2010.02098](<https://arxiv.org/abs/2010.02098>), [doi:10.1140/epjc/s10052-021-09009-8](<https://doi.org/10.1140/epjc/s10052-021-09009-8>), 2020.
+204. ATLAS Collaboration, Search for pair-produced scalar and vector leptoquarks decaying into third-generation quarks and first- or second-generation leptons in pp collisions with the ATLAS detector, JHEP 06(2023)188, [arXiv:2210.04517](<https://arxiv.org/abs/2210.04517>), [doi:10.1007/JHEP06(2023)188](<https://doi.org/10.1007/JHEP06(2023)188>), 2022.
 
 ### Quantum black holes -> lepton + jet: `m_lj`
 
 3 papers, 2013-2026 (current).
 
-203. ATLAS Collaboration, Search for Quantum Black-Hole Production in High-Invariant-Mass Lepton+Jet Final States Using Proton-Proton Collisions at sqrt(s) = 8 TeV and the ATLAS Detector, Phys. Rev. Lett 112, 091804 (2014), [arXiv:1311.2006](<https://arxiv.org/abs/1311.2006>), [doi:10.1103/PhysRevLett.112.091804](<https://doi.org/10.1103/PhysRevLett.112.091804>), 2013.
-204. ATLAS Collaboration, Search for quantum black hole production in lepton+jet final states using proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 109 (2024) 032010, [arXiv:2307.14967](<https://arxiv.org/abs/2307.14967>), [doi:10.1103/PhysRevD.109.032010](<https://doi.org/10.1103/PhysRevD.109.032010>), 2023.
-205. ATLAS Collaboration, Search for quantum black holes in lepton+jet final states using proton-proton collisions at sqrt(s)=13.6 TeV with the ATLAS detector, [arXiv:2604.19495](<https://arxiv.org/abs/2604.19495>), 2026.
+205. ATLAS Collaboration, Search for Quantum Black-Hole Production in High-Invariant-Mass Lepton+Jet Final States Using Proton-Proton Collisions at sqrt(s) = 8 TeV and the ATLAS Detector, Phys. Rev. Lett 112, 091804 (2014), [arXiv:1311.2006](<https://arxiv.org/abs/1311.2006>), [doi:10.1103/PhysRevLett.112.091804](<https://doi.org/10.1103/PhysRevLett.112.091804>), 2013.
+206. ATLAS Collaboration, Search for quantum black hole production in lepton+jet final states using proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 109 (2024) 032010, [arXiv:2307.14967](<https://arxiv.org/abs/2307.14967>), [doi:10.1103/PhysRevD.109.032010](<https://doi.org/10.1103/PhysRevD.109.032010>), 2023.
+207. ATLAS Collaboration, Search for quantum black holes in lepton+jet final states using proton-proton collisions at sqrt(s)=13.6 TeV with the ATLAS detector, [arXiv:2604.19495](<https://arxiv.org/abs/2604.19495>), 2026.
 
 ### Resonant single leptoquark: `m_lj`
 
 1 paper, 2025-2025 (current).
 
-206. ATLAS Collaboration, Search for resonant leptoquark production via lepton-jet signatures in pp collisions at sqrt(s) = 13 TeV and sqrt(s) = 13.6 TeV with the ATLAS detector, JHEP 12 (2025) 180, [arXiv:2507.03650](<https://arxiv.org/abs/2507.03650>), [doi:10.1007/JHEP12(2025)180](<https://doi.org/10.1007/JHEP12(2025)180>), 2025.
+208. ATLAS Collaboration, Search for resonant leptoquark production via lepton-jet signatures in pp collisions at sqrt(s) = 13 TeV and sqrt(s) = 13.6 TeV with the ATLAS detector, JHEP 12 (2025) 180, [arXiv:2507.03650](<https://arxiv.org/abs/2507.03650>), [doi:10.1007/JHEP12(2025)180](<https://doi.org/10.1007/JHEP12(2025)180>), 2025.
 
 ### Third-generation LQ -> b tau / t tau: `m_btau, m_ttau`
 
 7 papers, 2013-2026 (current).
 
-207. ATLAS Collaboration, Search for third generation scalar leptoquarks in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, JHEP06(2013)033, [arXiv:1303.0526](<https://arxiv.org/abs/1303.0526>), [doi:10.1007/JHEP06(2013)033](<https://doi.org/10.1007/JHEP06(2013)033>), 2013.
-208. ATLAS Collaboration, Searches for third-generation scalar leptoquarks in sqrt(s) = 13 TeV pp collisions with the ATLAS detector, JHEP 06 (2019) 144, [arXiv:1902.08103](<https://arxiv.org/abs/1902.08103>), [doi:10.1007/JHEP06(2019)144](<https://doi.org/10.1007/JHEP06(2019)144>), 2019.
-209. ATLAS Collaboration, Search for pair production of third-generation scalar leptoquarks decaying into a top quark and a tau-lepton in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 06 (2021) 179, [arXiv:2101.11582](<https://arxiv.org/abs/2101.11582>), [doi:10.1007/JHEP06(2021)179](<https://doi.org/10.1007/JHEP06(2021)179>), 2021.
-210. ATLAS Collaboration, Search for pair production of third-generation leptoquarks decaying into a bottom quark and a tau-lepton with the ATLAS detector, Eur. Phys. J. C 83 (2023) 1075, [arXiv:2303.01294](<https://arxiv.org/abs/2303.01294>), [doi:10.1140/epjc/s10052-023-12104-7](<https://doi.org/10.1140/epjc/s10052-023-12104-7>), 2023.
-211. ATLAS Collaboration, Search for leptoquarks decaying into the btau final state in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 10 (2023) 001, [arXiv:2305.15962](<https://arxiv.org/abs/2305.15962>), [doi:10.1007/JHEP10(2023)001](<https://doi.org/10.1007/JHEP10(2023)001>), 2023.
-212. ATLAS Collaboration, Search for leptoquark pair production decaying into te^- tbare^+ or tmu^- tbarmu^+ in multi-lepton final states in pp collisions at 13 TeV with the ATLAS detector, Eur. Phys. J. C 84 (2024) 818, [arXiv:2306.17642](<https://arxiv.org/abs/2306.17642>), [doi:10.1140/epjc/s10052-024-12975-4](<https://doi.org/10.1140/epjc/s10052-024-12975-4>), 2023.
-213. ATLAS Collaboration, Search for a leptoquark in events with a hadronically decaying tau-lepton and missing transverse momentum using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, [arXiv:2606.02067](<https://arxiv.org/abs/2606.02067>), 2026.
+209. ATLAS Collaboration, Search for third generation scalar leptoquarks in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, JHEP06(2013)033, [arXiv:1303.0526](<https://arxiv.org/abs/1303.0526>), [doi:10.1007/JHEP06(2013)033](<https://doi.org/10.1007/JHEP06(2013)033>), 2013.
+210. ATLAS Collaboration, Searches for third-generation scalar leptoquarks in sqrt(s) = 13 TeV pp collisions with the ATLAS detector, JHEP 06 (2019) 144, [arXiv:1902.08103](<https://arxiv.org/abs/1902.08103>), [doi:10.1007/JHEP06(2019)144](<https://doi.org/10.1007/JHEP06(2019)144>), 2019.
+211. ATLAS Collaboration, Search for pair production of third-generation scalar leptoquarks decaying into a top quark and a tau-lepton in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 06 (2021) 179, [arXiv:2101.11582](<https://arxiv.org/abs/2101.11582>), [doi:10.1007/JHEP06(2021)179](<https://doi.org/10.1007/JHEP06(2021)179>), 2021.
+212. ATLAS Collaboration, Search for pair production of third-generation leptoquarks decaying into a bottom quark and a tau-lepton with the ATLAS detector, Eur. Phys. J. C 83 (2023) 1075, [arXiv:2303.01294](<https://arxiv.org/abs/2303.01294>), [doi:10.1140/epjc/s10052-023-12104-7](<https://doi.org/10.1140/epjc/s10052-023-12104-7>), 2023.
+213. ATLAS Collaboration, Search for leptoquarks decaying into the btau final state in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 10 (2023) 001, [arXiv:2305.15962](<https://arxiv.org/abs/2305.15962>), [doi:10.1007/JHEP10(2023)001](<https://doi.org/10.1007/JHEP10(2023)001>), 2023.
+214. ATLAS Collaboration, Search for leptoquark pair production decaying into te^- tbare^+ or tmu^- tbarmu^+ in multi-lepton final states in pp collisions at 13 TeV with the ATLAS detector, Eur. Phys. J. C 84 (2024) 818, [arXiv:2306.17642](<https://arxiv.org/abs/2306.17642>), [doi:10.1140/epjc/s10052-024-12975-4](<https://doi.org/10.1140/epjc/s10052-024-12975-4>), 2023.
+215. ATLAS Collaboration, Search for a leptoquark in events with a hadronically decaying tau-lepton and missing transverse momentum using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, [arXiv:2606.02067](<https://arxiv.org/abs/2606.02067>), 2026.
 
 ## Photons
 
@@ -566,51 +578,51 @@ Papers span 2010-2026.
 
 7 papers, 2012-2021 (ageing).
 
-214. ATLAS Collaboration, Search for the Standard Model Higgs boson in the diphoton decay channel with 4.9 fb-1 of pp collisions at sqrt(s) = 7 TeV with ATLAS, Phys. Rev. Lett. 108 (2012) 111803, [arXiv:1202.1414](<https://arxiv.org/abs/1202.1414>), [doi:10.1103/PhysRevLett.108.111803](<https://doi.org/10.1103/PhysRevLett.108.111803>), 2012.
-215. ATLAS Collaboration, Search for a fermiophobic Higgs boson in the diphoton decay channel with the ATLAS detector, Eur. Phys. J. C (2012) 72:2157, [arXiv:1205.0701](<https://arxiv.org/abs/1205.0701>), [doi:10.1140/epjc/s10052-012-2157-0](<https://doi.org/10.1140/epjc/s10052-012-2157-0>), 2012.
-216. ATLAS Collaboration, Search for Scalar Diphoton Resonances in the Mass Range 65-600 GeV with the ATLAS Detector in pp Collision Data at sqrt(s) = 8 TeV, Phys. Rev. Lett. 113, 171801 (2014), [arXiv:1407.6583](<https://arxiv.org/abs/1407.6583>), [doi:10.1103/PhysRevLett.113.171801](<https://doi.org/10.1103/PhysRevLett.113.171801>), 2014.
-217. ATLAS Collaboration, Search for high-mass diphoton resonances in pp collisions at sqrt(s)=8 TeV with the ATLAS detector, Phys. Rev. D 92, 032004 (2015), [arXiv:1504.05511](<https://arxiv.org/abs/1504.05511>), [doi:10.1103/PhysRevD.92.032004](<https://doi.org/10.1103/PhysRevD.92.032004>), 2015.
-218. ATLAS Collaboration, Search for resonances in diphoton events at sqrt(s)=13 TeV with the ATLAS detector, JHEP 09 (2016) 001, [arXiv:1606.03833](<https://arxiv.org/abs/1606.03833>), [doi:10.1007/JHEP09(2016)001](<https://doi.org/10.1007/JHEP09(2016)001>), 2016.
-219. ATLAS Collaboration, Search for new phenomena in high-mass diphoton final states using 37 fb^-1 of proton-proton collisions collected at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 775 (2017) 105, [arXiv:1707.04147](<https://arxiv.org/abs/1707.04147>), [doi:10.1016/j.physletb.2017.10.039](<https://doi.org/10.1016/j.physletb.2017.10.039>), 2017.
-220. ATLAS Collaboration, Search for resonances decaying into photon pairs in 139 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 822 (2021) 136651, [arXiv:2102.13405](<https://arxiv.org/abs/2102.13405>), [doi:10.1016/j.physletb.2021.136651](<https://doi.org/10.1016/j.physletb.2021.136651>), 2021.
+216. ATLAS Collaboration, Search for the Standard Model Higgs boson in the diphoton decay channel with 4.9 fb-1 of pp collisions at sqrt(s) = 7 TeV with ATLAS, Phys. Rev. Lett. 108 (2012) 111803, [arXiv:1202.1414](<https://arxiv.org/abs/1202.1414>), [doi:10.1103/PhysRevLett.108.111803](<https://doi.org/10.1103/PhysRevLett.108.111803>), 2012.
+217. ATLAS Collaboration, Search for a fermiophobic Higgs boson in the diphoton decay channel with the ATLAS detector, Eur. Phys. J. C (2012) 72:2157, [arXiv:1205.0701](<https://arxiv.org/abs/1205.0701>), [doi:10.1140/epjc/s10052-012-2157-0](<https://doi.org/10.1140/epjc/s10052-012-2157-0>), 2012.
+218. ATLAS Collaboration, Search for Scalar Diphoton Resonances in the Mass Range 65-600 GeV with the ATLAS Detector in pp Collision Data at sqrt(s) = 8 TeV, Phys. Rev. Lett. 113, 171801 (2014), [arXiv:1407.6583](<https://arxiv.org/abs/1407.6583>), [doi:10.1103/PhysRevLett.113.171801](<https://doi.org/10.1103/PhysRevLett.113.171801>), 2014.
+219. ATLAS Collaboration, Search for high-mass diphoton resonances in pp collisions at sqrt(s)=8 TeV with the ATLAS detector, Phys. Rev. D 92, 032004 (2015), [arXiv:1504.05511](<https://arxiv.org/abs/1504.05511>), [doi:10.1103/PhysRevD.92.032004](<https://doi.org/10.1103/PhysRevD.92.032004>), 2015.
+220. ATLAS Collaboration, Search for resonances in diphoton events at sqrt(s)=13 TeV with the ATLAS detector, JHEP 09 (2016) 001, [arXiv:1606.03833](<https://arxiv.org/abs/1606.03833>), [doi:10.1007/JHEP09(2016)001](<https://doi.org/10.1007/JHEP09(2016)001>), 2016.
+221. ATLAS Collaboration, Search for new phenomena in high-mass diphoton final states using 37 fb^-1 of proton-proton collisions collected at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 775 (2017) 105, [arXiv:1707.04147](<https://arxiv.org/abs/1707.04147>), [doi:10.1016/j.physletb.2017.10.039](<https://doi.org/10.1016/j.physletb.2017.10.039>), 2017.
+222. ATLAS Collaboration, Search for resonances decaying into photon pairs in 139 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 822 (2021) 136651, [arXiv:2102.13405](<https://arxiv.org/abs/2102.13405>), [doi:10.1016/j.physletb.2021.136651](<https://doi.org/10.1016/j.physletb.2021.136651>), 2021.
 
 ### Diphoton (low mass / boosted): `m_gamgam`
 
 2 papers, 2022-2024 (current).
 
-221. ATLAS Collaboration, Search for boosted diphoton resonances in the 10 to 70 GeV mass range using 138 fb^-1 of 13 TeV pp collisions with the ATLAS detector, JHEP07(2023)155, [arXiv:2211.04172](<https://arxiv.org/abs/2211.04172>), [doi:10.1007/JHEP07(2023)155](<https://doi.org/10.1007/JHEP07(2023)155>), 2022.
-222. ATLAS Collaboration, Search for diphoton resonances in the 66 to 110 GeV mass range using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 01 (2025) 053, [arXiv:2407.07546](<https://arxiv.org/abs/2407.07546>), [doi:10.1007/JHEP01(2025)053](<https://doi.org/10.1007/JHEP01(2025)053>), 2024.
+223. ATLAS Collaboration, Search for boosted diphoton resonances in the 10 to 70 GeV mass range using 138 fb^-1 of 13 TeV pp collisions with the ATLAS detector, JHEP07(2023)155, [arXiv:2211.04172](<https://arxiv.org/abs/2211.04172>), [doi:10.1007/JHEP07(2023)155](<https://doi.org/10.1007/JHEP07(2023)155>), 2022.
+224. ATLAS Collaboration, Search for diphoton resonances in the 66 to 110 GeV mass range using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 01 (2025) 053, [arXiv:2407.07546](<https://arxiv.org/abs/2407.07546>), [doi:10.1007/JHEP01(2025)053](<https://doi.org/10.1007/JHEP01(2025)053>), 2024.
 
 ### Diphoton + forward protons (ALP): `m_gamgam`
 
 1 paper, 2023-2023 (ageing).
 
-223. ATLAS Collaboration, Search for an axion-like particle with forward proton scattering in association with photon pairs at ATLAS, JHEP 07 (2023) 234, [arXiv:2304.10953](<https://arxiv.org/abs/2304.10953>), [doi:10.1007/JHEP07(2023)234](<https://doi.org/10.1007/JHEP07(2023)234>), 2023.
+225. ATLAS Collaboration, Search for an axion-like particle with forward proton scattering in association with photon pairs at ATLAS, JHEP 07 (2023) 234, [arXiv:2304.10953](<https://arxiv.org/abs/2304.10953>), [doi:10.1007/JHEP07(2023)234](<https://doi.org/10.1007/JHEP07(2023)234>), 2023.
 
 ### Diphoton, extra dimensions: `m_gamgam`
 
 2 papers, 2011-2012 (stale).
 
-224. ATLAS Collaboration, Search for extra dimensions using diphoton events in 7 TeV proton-proton collisions with the ATLAS detector, Phys. Lett. B710 (2012) 538-556, [arXiv:1112.2194](<https://arxiv.org/abs/1112.2194>), [doi:10.1016/j.physletb.2012.03.022](<https://doi.org/10.1016/j.physletb.2012.03.022>), 2011.
-225. ATLAS Collaboration, Search for Extra Dimensions in diphoton events using proton-proton collisions recorded at sqrt(s) = 7 TeV with the ATLAS detector at the LHC, New J. Phys. 15 (2013) 043007, [arXiv:1210.8389](<https://arxiv.org/abs/1210.8389>), [doi:10.1088/1367-2630/15/4/043007](<https://doi.org/10.1088/1367-2630/15/4/043007>), 2012.
+226. ATLAS Collaboration, Search for extra dimensions using diphoton events in 7 TeV proton-proton collisions with the ATLAS detector, Phys. Lett. B710 (2012) 538-556, [arXiv:1112.2194](<https://arxiv.org/abs/1112.2194>), [doi:10.1016/j.physletb.2012.03.022](<https://doi.org/10.1016/j.physletb.2012.03.022>), 2011.
+227. ATLAS Collaboration, Search for Extra Dimensions in diphoton events using proton-proton collisions recorded at sqrt(s) = 7 TeV with the ATLAS detector at the LHC, New J. Phys. 15 (2013) 043007, [arXiv:1210.8389](<https://arxiv.org/abs/1210.8389>), [doi:10.1088/1367-2630/15/4/043007](<https://doi.org/10.1088/1367-2630/15/4/043007>), 2012.
 
 ### H -> Za -> ll gamgam: `m_gamgam`
 
 1 paper, 2023-2023 (ageing).
 
-226. ATLAS Collaboration, Search for the decay of the Higgs boson to a Z boson and a light pseudoscalar particle decaying to two photons, Phys. Lett. B 848 (2024) 138536, [arXiv:2312.01942](<https://arxiv.org/abs/2312.01942>), [doi:10.1016/j.physletb.2024.138536](<https://doi.org/10.1016/j.physletb.2024.138536>), 2023.
+228. ATLAS Collaboration, Search for the decay of the Higgs boson to a Z boson and a light pseudoscalar particle decaying to two photons, Phys. Lett. B 848 (2024) 138536, [arXiv:2312.01942](<https://arxiv.org/abs/2312.01942>), [doi:10.1016/j.physletb.2024.138536](<https://doi.org/10.1016/j.physletb.2024.138536>), 2023.
 
 ### Photon-jets (collimated gamma pairs): `m_gamgam-jets`
 
 1 paper, 2018-2018 (stale).
 
-227. ATLAS Collaboration, Search for pairs of highly collimated photon-jets in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 99, 012008 (2019), [arXiv:1808.10515](<https://arxiv.org/abs/1808.10515>), [doi:10.1103/PhysRevD.99.012008](<https://doi.org/10.1103/PhysRevD.99.012008>), 2018.
+229. ATLAS Collaboration, Search for pairs of highly collimated photon-jets in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 99, 012008 (2019), [arXiv:1808.10515](<https://arxiv.org/abs/1808.10515>), [doi:10.1103/PhysRevD.99.012008](<https://doi.org/10.1103/PhysRevD.99.012008>), 2018.
 
 ### Three photons: `m_3gamma`
 
 1 paper, 2015-2015 (stale).
 
-228. ATLAS Collaboration, Search for new phenomena in events with at least three photons collected in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Eur. Phys. J. C 76(4) , 1-26 (2016), [arXiv:1509.05051](<https://arxiv.org/abs/1509.05051>), [doi:10.1140/epjc/s10052-016-4034-8](<https://doi.org/10.1140/epjc/s10052-016-4034-8>), 2015.
+230. ATLAS Collaboration, Search for new phenomena in events with at least three photons collected in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Eur. Phys. J. C 76(4) , 1-26 (2016), [arXiv:1509.05051](<https://arxiv.org/abs/1509.05051>), [doi:10.1140/epjc/s10052-016-4034-8](<https://doi.org/10.1140/epjc/s10052-016-4034-8>), 2015.
 
 ## Top & heavy quarks
 
@@ -618,85 +630,85 @@ Papers span 2010-2026.
 
 1 paper, 2024-2024 (current).
 
-229. ATLAS Collaboration, Search for dark mesons decaying to top and bottom quarks in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 09 (2024) 005, [arXiv:2405.20061](<https://arxiv.org/abs/2405.20061>), [doi:10.1007/JHEP09(2024)005](<https://doi.org/10.1007/JHEP09(2024)005>), 2024.
+231. ATLAS Collaboration, Search for dark mesons decaying to top and bottom quarks in proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 09 (2024) 005, [arXiv:2405.20061](<https://arxiv.org/abs/2405.20061>), [doi:10.1007/JHEP09(2024)005](<https://doi.org/10.1007/JHEP09(2024)005>), 2024.
 
 ### Fourth-generation / heavy quark -> Wq, Zq: `m_Wq, m_Zq`
 
 8 papers, 2011-2015 (stale).
 
-230. ATLAS Collaboration, Search for heavy vector-like quarks coupling to light quarks in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys. Lett. B712 (2012) 22-39, [arXiv:1112.5755](<https://arxiv.org/abs/1112.5755>), [doi:10.1016/j.physletb.2012.03.082](<https://doi.org/10.1016/j.physletb.2012.03.082>), 2011.
-231. ATLAS Collaboration, Search for pair production of a heavy up-type quark decaying to a W boson and a b quark in the lepton+jets channel with the ATLAS detector, Phys.Rev.Lett. 108 (2012) 261802, [arXiv:1202.3076](<https://arxiv.org/abs/1202.3076>), [doi:10.1103/PhysRevLett.108.261802](<https://doi.org/10.1103/PhysRevLett.108.261802>), 2012.
-232. ATLAS Collaboration, Search for pair-produced heavy quarks decaying to Wq in the two-lepton channel at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Rev. D86 (2012) 012007, [arXiv:1202.3389](<https://arxiv.org/abs/1202.3389>), [doi:10.1103/PhysRevD.86.012007](<https://doi.org/10.1103/PhysRevD.86.012007>), 2012.
-233. ATLAS Collaboration, Search for down-type fourth generation quarks with the ATLAS detector in events with one lepton and hadronically decaying W bosons, Phys.Rev.Lett. 109 (2012) 032001, [arXiv:1202.6540](<https://arxiv.org/abs/1202.6540>), [doi:10.1103/PhysRevLett.109.032001](<https://doi.org/10.1103/PhysRevLett.109.032001>), 2012.
-234. ATLAS Collaboration, Search for pair production of a new quark that decays to a Z boson and a bottom quark with the ATLAS detector, Phys.Rev.Lett. 109 (2012) 071801, [arXiv:1204.1265](<https://arxiv.org/abs/1204.1265>), [doi:10.1103/PhysRevLett.109.071801](<https://doi.org/10.1103/PhysRevLett.109.071801>), 2012.
-235. ATLAS Collaboration, Search for a heavy top-quark partner in final states with two leptons with the ATLAS detector at the LHC, JHEP 1211 (2012) 094, [arXiv:1209.4186](<https://arxiv.org/abs/1209.4186>), [doi:10.1007/JHEP11(2012)094](<https://doi.org/10.1007/JHEP11(2012)094>), 2012.
-236. ATLAS Collaboration, Search for pair production of heavy top-like quarks decaying to a high-pT W boson and a b quark in the lepton plus jets final state at sqrt(s)=7 TeV with the ATLAS detector, Phys. Lett. B 718 (2013)1284-1302, [arXiv:1210.5468](<https://arxiv.org/abs/1210.5468>), [doi:10.1016/j.physletb.2012.11.071](<https://doi.org/10.1016/j.physletb.2012.11.071>), 2012.
-237. ATLAS Collaboration, Search for pair production of a new heavy quark that decays into a W boson and a light quark in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys. Rev. D 92, 112007 (2015), [arXiv:1509.04261](<https://arxiv.org/abs/1509.04261>), [doi:10.1103/PhysRevD.92.112007](<https://doi.org/10.1103/PhysRevD.92.112007>), 2015.
+232. ATLAS Collaboration, Search for heavy vector-like quarks coupling to light quarks in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys. Lett. B712 (2012) 22-39, [arXiv:1112.5755](<https://arxiv.org/abs/1112.5755>), [doi:10.1016/j.physletb.2012.03.082](<https://doi.org/10.1016/j.physletb.2012.03.082>), 2011.
+233. ATLAS Collaboration, Search for pair production of a heavy up-type quark decaying to a W boson and a b quark in the lepton+jets channel with the ATLAS detector, Phys.Rev.Lett. 108 (2012) 261802, [arXiv:1202.3076](<https://arxiv.org/abs/1202.3076>), [doi:10.1103/PhysRevLett.108.261802](<https://doi.org/10.1103/PhysRevLett.108.261802>), 2012.
+234. ATLAS Collaboration, Search for pair-produced heavy quarks decaying to Wq in the two-lepton channel at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Rev. D86 (2012) 012007, [arXiv:1202.3389](<https://arxiv.org/abs/1202.3389>), [doi:10.1103/PhysRevD.86.012007](<https://doi.org/10.1103/PhysRevD.86.012007>), 2012.
+235. ATLAS Collaboration, Search for down-type fourth generation quarks with the ATLAS detector in events with one lepton and hadronically decaying W bosons, Phys.Rev.Lett. 109 (2012) 032001, [arXiv:1202.6540](<https://arxiv.org/abs/1202.6540>), [doi:10.1103/PhysRevLett.109.032001](<https://doi.org/10.1103/PhysRevLett.109.032001>), 2012.
+236. ATLAS Collaboration, Search for pair production of a new quark that decays to a Z boson and a bottom quark with the ATLAS detector, Phys.Rev.Lett. 109 (2012) 071801, [arXiv:1204.1265](<https://arxiv.org/abs/1204.1265>), [doi:10.1103/PhysRevLett.109.071801](<https://doi.org/10.1103/PhysRevLett.109.071801>), 2012.
+237. ATLAS Collaboration, Search for a heavy top-quark partner in final states with two leptons with the ATLAS detector at the LHC, JHEP 1211 (2012) 094, [arXiv:1209.4186](<https://arxiv.org/abs/1209.4186>), [doi:10.1007/JHEP11(2012)094](<https://doi.org/10.1007/JHEP11(2012)094>), 2012.
+238. ATLAS Collaboration, Search for pair production of heavy top-like quarks decaying to a high-pT W boson and a b quark in the lepton plus jets final state at sqrt(s)=7 TeV with the ATLAS detector, Phys. Lett. B 718 (2013)1284-1302, [arXiv:1210.5468](<https://arxiv.org/abs/1210.5468>), [doi:10.1016/j.physletb.2012.11.071](<https://doi.org/10.1016/j.physletb.2012.11.071>), 2012.
+239. ATLAS Collaboration, Search for pair production of a new heavy quark that decays into a W boson and a light quark in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys. Rev. D 92, 112007 (2015), [arXiv:1509.04261](<https://arxiv.org/abs/1509.04261>), [doi:10.1103/PhysRevD.92.112007](<https://doi.org/10.1103/PhysRevD.92.112007>), 2015.
 
 ### Resonant top + jet: `m_tq`
 
 1 paper, 2012-2012 (stale).
 
-238. ATLAS Collaboration, Search for resonant top plus jet production in ttbar + jets events with the ATLAS detector in pp collisions at sqrt(s) = 7 TeV, Phys. Rev. D 86, 091103 (2012), [arXiv:1209.6593](<https://arxiv.org/abs/1209.6593>), [doi:10.1103/PhysRevD.86.091103](<https://doi.org/10.1103/PhysRevD.86.091103>), 2012.
+240. ATLAS Collaboration, Search for resonant top plus jet production in ttbar + jets events with the ATLAS detector in pp collisions at sqrt(s) = 7 TeV, Phys. Rev. D 86, 091103 (2012), [arXiv:1209.6593](<https://arxiv.org/abs/1209.6593>), [doi:10.1103/PhysRevD.86.091103](<https://doi.org/10.1103/PhysRevD.86.091103>), 2012.
 
 ### Single VLQ: Wb / Ht / Zt / Hb: `m_Wb, m_Ht, m_Zt, m_Hb`
 
 11 papers, 2015-2026 (current).
 
-239. ATLAS Collaboration, Search for vector-like B quarks in events with one isolated lepton, missing transverse momentum and jets at sqrt(s)= 8 TeV with the ATLAS detector, Phys. Rev. D 91, 112011 (2015), [arXiv:1503.05425](<https://arxiv.org/abs/1503.05425>), [doi:10.1103/PhysRevD.91.112011](<https://doi.org/10.1103/PhysRevD.91.112011>), 2015.
-240. ATLAS Collaboration, Search for single production of vector-like quarks decaying into Wb in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, [arXiv:1602.05606](<https://arxiv.org/abs/1602.05606>), [doi:10.1140/epjc/s10052-016-4281-8](<https://doi.org/10.1140/epjc/s10052-016-4281-8>), 2016.
-241. ATLAS Collaboration, Search for single production of a vector-like quark via a heavy gluon in the 4b final state with the ATLAS detector in pp collisions at sqrt(s) = 8 TeV, Phys. Lett. B758 (2016) 249, [arXiv:1602.06034](<https://arxiv.org/abs/1602.06034>), [doi:10.1016/j.physletb.2016.04.061](<https://doi.org/10.1016/j.physletb.2016.04.061>), 2016.
-242. ATLAS Collaboration, Search for single production of vector-like quarks decaying into Wb in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 05 (2019) 164, [arXiv:1812.07343](<https://arxiv.org/abs/1812.07343>), [doi:10.1007/JHEP05(2019)164](<https://doi.org/10.1007/JHEP05(2019)164>), 2018.
-243. ATLAS Collaboration, Search for single production of a vector-like T quark decaying into a Higgs boson and top quark with fully hadronic final states using the ATLAS detector, Phys. Rev. D 105 (2022) 092012, [arXiv:2201.07045](<https://arxiv.org/abs/2201.07045>), [doi:10.1103/PhysRevD.105.092012](<https://doi.org/10.1103/PhysRevD.105.092012>), 2022.
-244. ATLAS Collaboration, Search for single production of vector-like T quarks decaying into Ht or Zt in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 08 (2023) 153, [arXiv:2305.03401](<https://arxiv.org/abs/2305.03401>), [doi:10.1007/JHEP08(2023)153](<https://doi.org/10.1007/JHEP08(2023)153>), 2023.
-245. ATLAS Collaboration, Search for single vector-like B quark production and decay via B-> bH(bbbar) in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, J. High Energ. Phys. 2023, 168 (2023), [arXiv:2308.02595](<https://arxiv.org/abs/2308.02595>), [doi:10.1007/JHEP11(2023)168](<https://doi.org/10.1007/JHEP11(2023)168>), 2023.
-246. ATLAS Collaboration, Search for single-production of vector-like quarks decaying into Wb in the fully hadronic final state in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 02 (2025) 075, [arXiv:2409.20273](<https://arxiv.org/abs/2409.20273>), [doi:10.1007/JHEP02(2025)075](<https://doi.org/10.1007/JHEP02(2025)075>), 2024.
-247. ATLAS Collaboration, Search for single production of vector-like quarks decaying into W(lnu)b in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 12 (2025) 012, [arXiv:2506.15515](<https://arxiv.org/abs/2506.15515>), [doi:10.1007/JHEP12(2025)012](<https://doi.org/10.1007/JHEP12(2025)012>), 2025.
-248. ATLAS Collaboration, Search for pair-produced vector-like T-quarks decaying into Ht final states in the lepton-plus-jets channel in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, [arXiv:2605.28538](<https://arxiv.org/abs/2605.28538>), 2026.
-249. ATLAS Collaboration, Search for pair-production of vector-like T quarks decaying into a top quark and a spin-0 particle in the diphoton final state in proton proton collisions at sqrt(s)=13 TeV with the ATLAS detector, [arXiv:2607.28381](<https://arxiv.org/abs/2607.28381>), 2026.
+241. ATLAS Collaboration, Search for vector-like B quarks in events with one isolated lepton, missing transverse momentum and jets at sqrt(s)= 8 TeV with the ATLAS detector, Phys. Rev. D 91, 112011 (2015), [arXiv:1503.05425](<https://arxiv.org/abs/1503.05425>), [doi:10.1103/PhysRevD.91.112011](<https://doi.org/10.1103/PhysRevD.91.112011>), 2015.
+242. ATLAS Collaboration, Search for single production of vector-like quarks decaying into Wb in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, [arXiv:1602.05606](<https://arxiv.org/abs/1602.05606>), [doi:10.1140/epjc/s10052-016-4281-8](<https://doi.org/10.1140/epjc/s10052-016-4281-8>), 2016.
+243. ATLAS Collaboration, Search for single production of a vector-like quark via a heavy gluon in the 4b final state with the ATLAS detector in pp collisions at sqrt(s) = 8 TeV, Phys. Lett. B758 (2016) 249, [arXiv:1602.06034](<https://arxiv.org/abs/1602.06034>), [doi:10.1016/j.physletb.2016.04.061](<https://doi.org/10.1016/j.physletb.2016.04.061>), 2016.
+244. ATLAS Collaboration, Search for single production of vector-like quarks decaying into Wb in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 05 (2019) 164, [arXiv:1812.07343](<https://arxiv.org/abs/1812.07343>), [doi:10.1007/JHEP05(2019)164](<https://doi.org/10.1007/JHEP05(2019)164>), 2018.
+245. ATLAS Collaboration, Search for single production of a vector-like T quark decaying into a Higgs boson and top quark with fully hadronic final states using the ATLAS detector, Phys. Rev. D 105 (2022) 092012, [arXiv:2201.07045](<https://arxiv.org/abs/2201.07045>), [doi:10.1103/PhysRevD.105.092012](<https://doi.org/10.1103/PhysRevD.105.092012>), 2022.
+246. ATLAS Collaboration, Search for single production of vector-like T quarks decaying into Ht or Zt in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 08 (2023) 153, [arXiv:2305.03401](<https://arxiv.org/abs/2305.03401>), [doi:10.1007/JHEP08(2023)153](<https://doi.org/10.1007/JHEP08(2023)153>), 2023.
+247. ATLAS Collaboration, Search for single vector-like B quark production and decay via B-> bH(bbbar) in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, J. High Energ. Phys. 2023, 168 (2023), [arXiv:2308.02595](<https://arxiv.org/abs/2308.02595>), [doi:10.1007/JHEP11(2023)168](<https://doi.org/10.1007/JHEP11(2023)168>), 2023.
+248. ATLAS Collaboration, Search for single-production of vector-like quarks decaying into Wb in the fully hadronic final state in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 02 (2025) 075, [arXiv:2409.20273](<https://arxiv.org/abs/2409.20273>), [doi:10.1007/JHEP02(2025)075](<https://doi.org/10.1007/JHEP02(2025)075>), 2024.
+249. ATLAS Collaboration, Search for single production of vector-like quarks decaying into W(lnu)b in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 12 (2025) 012, [arXiv:2506.15515](<https://arxiv.org/abs/2506.15515>), [doi:10.1007/JHEP12(2025)012](<https://doi.org/10.1007/JHEP12(2025)012>), 2025.
+250. ATLAS Collaboration, Search for pair-produced vector-like T-quarks decaying into Ht final states in the lepton-plus-jets channel in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, [arXiv:2605.28538](<https://arxiv.org/abs/2605.28538>), 2026.
+251. ATLAS Collaboration, Search for pair-production of vector-like T quarks decaying into a top quark and a spin-0 particle in the diphoton final state in proton proton collisions at sqrt(s)=13 TeV with the ATLAS detector, [arXiv:2607.28381](<https://arxiv.org/abs/2607.28381>), 2026.
 
 ### Top-philic resonances: `m_tt+X`
 
 1 paper, 2023-2023 (ageing).
 
-250. ATLAS Collaboration, Search for top-philic heavy resonances in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Eur. Phys. J. C 84 (2024) 157, [arXiv:2304.01678](<https://arxiv.org/abs/2304.01678>), [doi:10.1140/epjc/s10052-023-12318-9](<https://doi.org/10.1140/epjc/s10052-023-12318-9>), 2023.
+252. ATLAS Collaboration, Search for top-philic heavy resonances in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Eur. Phys. J. C 84 (2024) 157, [arXiv:2304.01678](<https://arxiv.org/abs/2304.01678>), [doi:10.1140/epjc/s10052-023-12318-9](<https://doi.org/10.1140/epjc/s10052-023-12318-9>), 2023.
 
 ### Wt (excited/single VLQ): `m_Wt`
 
 2 papers, 2013-2015 (stale).
 
-251. ATLAS Collaboration, Search for single b\*-quark production with the ATLAS detector at sqrt(s)=7 TeV, Phys. Lett. B 721 (2013) 171-189, [arXiv:1301.1583](<https://arxiv.org/abs/1301.1583>), [doi:10.1016/j.physletb.2013.03.016](<https://doi.org/10.1016/j.physletb.2013.03.016>), 2013.
-252. ATLAS Collaboration, Search for the production of single vector-like and excited quarks in the Wt final state in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, JHEP02(2016)110, [arXiv:1510.02664](<https://arxiv.org/abs/1510.02664>), [doi:10.1007/JHEP02(2016)110](<https://doi.org/10.1007/JHEP02(2016)110>), 2015.
+253. ATLAS Collaboration, Search for single b\*-quark production with the ATLAS detector at sqrt(s)=7 TeV, Phys. Lett. B 721 (2013) 171-189, [arXiv:1301.1583](<https://arxiv.org/abs/1301.1583>), [doi:10.1016/j.physletb.2013.03.016](<https://doi.org/10.1016/j.physletb.2013.03.016>), 2013.
+254. ATLAS Collaboration, Search for the production of single vector-like and excited quarks in the Wt final state in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, JHEP02(2016)110, [arXiv:1510.02664](<https://arxiv.org/abs/1510.02664>), [doi:10.1007/JHEP02(2016)110](<https://doi.org/10.1007/JHEP02(2016)110>), 2015.
 
 ### tb resonances (W-prime, charged Higgs): `m_tb`
 
 9 papers, 2012-2023 (ageing).
 
-253. ATLAS Collaboration, Search for tb resonances in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Rev.Lett. 109 (2012) 081801, [arXiv:1205.1016](<https://arxiv.org/abs/1205.1016>), [doi:10.1103/PhysRevLett.109.081801](<https://doi.org/10.1103/PhysRevLett.109.081801>), 2012.
-254. ATLAS Collaboration, Search for W' -> tb -> qqbb Decays in pp Collisions at sqrt(s) = 8 TeV with the ATLAS Detector, Eur. Phys. J. C (2015) 75:165, [arXiv:1408.0886](<https://arxiv.org/abs/1408.0886>), [doi:10.1140/epjc/s10052-015-3372-2](<https://doi.org/10.1140/epjc/s10052-015-3372-2>), 2014.
-255. ATLAS Collaboration, Search for W' -> tbbar in the lepton plus jets final state in proton-proton collisions at a centre-of-mass energy of sqrt(s) = 8 TeV with the ATLAS detector, Physics Letters B 743 (2015) 235-255, [arXiv:1410.4103](<https://arxiv.org/abs/1410.4103>), [doi:10.1016/j.physletb.2015.02.051](<https://doi.org/10.1016/j.physletb.2015.02.051>), 2014.
-256. ATLAS Collaboration, Search for charged Higgs bosons in the H^+- -> tb decay channel in pp collisions at sqrt(s) = 8 TeV using the ATLAS detector, JHEP03(2016)127, [arXiv:1512.03704](<https://arxiv.org/abs/1512.03704>), [doi:10.1007/JHEP03(2016)127](<https://doi.org/10.1007/JHEP03(2016)127>), 2015.
-257. ATLAS Collaboration, Search for W' -> tb decays in the hadronic final state using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 781 (2018) 327, [arXiv:1801.07893](<https://arxiv.org/abs/1801.07893>), [doi:10.1016/j.physletb.2018.03.036](<https://doi.org/10.1016/j.physletb.2018.03.036>), 2018.
-258. ATLAS Collaboration, Search for vector-boson resonances decaying to a top quark and bottom quark in the lepton plus jets final state in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 788 (2019) 347, [arXiv:1807.10473](<https://arxiv.org/abs/1807.10473>), [doi:10.1016/j.physletb.2018.11.032](<https://doi.org/10.1016/j.physletb.2018.11.032>), 2018.
-259. ATLAS Collaboration, Search for charged Higgs bosons decaying into top and bottom quarks at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 11 (2018) 085, [arXiv:1808.03599](<https://arxiv.org/abs/1808.03599>), [doi:10.1007/JHEP11(2018)085](<https://doi.org/10.1007/JHEP11(2018)085>), 2018.
-260. ATLAS Collaboration, Search for charged Higgs bosons decaying into a top quark and a bottom quark at sqrt(s)=13 TeV with the ATLAS detector, JHEP 06 (2021) 145, [arXiv:2102.10076](<https://arxiv.org/abs/2102.10076>), [doi:10.1007/JHEP06(2021)145](<https://doi.org/10.1007/JHEP06(2021)145>), 2021.
-261. ATLAS Collaboration, Search for vector-boson resonances decaying into a top quark and a bottom quark using pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 12 (2023) 073, [arXiv:2308.08521](<https://arxiv.org/abs/2308.08521>), [doi:10.1007/JHEP12(2023)073](<https://doi.org/10.1007/JHEP12(2023)073>), 2023.
+255. ATLAS Collaboration, Search for tb resonances in proton-proton collisions at sqrt(s) = 7 TeV with the ATLAS detector, Phys.Rev.Lett. 109 (2012) 081801, [arXiv:1205.1016](<https://arxiv.org/abs/1205.1016>), [doi:10.1103/PhysRevLett.109.081801](<https://doi.org/10.1103/PhysRevLett.109.081801>), 2012.
+256. ATLAS Collaboration, Search for W' -> tb -> qqbb Decays in pp Collisions at sqrt(s) = 8 TeV with the ATLAS Detector, Eur. Phys. J. C (2015) 75:165, [arXiv:1408.0886](<https://arxiv.org/abs/1408.0886>), [doi:10.1140/epjc/s10052-015-3372-2](<https://doi.org/10.1140/epjc/s10052-015-3372-2>), 2014.
+257. ATLAS Collaboration, Search for W' -> tbbar in the lepton plus jets final state in proton-proton collisions at a centre-of-mass energy of sqrt(s) = 8 TeV with the ATLAS detector, Physics Letters B 743 (2015) 235-255, [arXiv:1410.4103](<https://arxiv.org/abs/1410.4103>), [doi:10.1016/j.physletb.2015.02.051](<https://doi.org/10.1016/j.physletb.2015.02.051>), 2014.
+258. ATLAS Collaboration, Search for charged Higgs bosons in the H^+- -> tb decay channel in pp collisions at sqrt(s) = 8 TeV using the ATLAS detector, JHEP03(2016)127, [arXiv:1512.03704](<https://arxiv.org/abs/1512.03704>), [doi:10.1007/JHEP03(2016)127](<https://doi.org/10.1007/JHEP03(2016)127>), 2015.
+259. ATLAS Collaboration, Search for W' -> tb decays in the hadronic final state using pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 781 (2018) 327, [arXiv:1801.07893](<https://arxiv.org/abs/1801.07893>), [doi:10.1016/j.physletb.2018.03.036](<https://doi.org/10.1016/j.physletb.2018.03.036>), 2018.
+260. ATLAS Collaboration, Search for vector-boson resonances decaying to a top quark and bottom quark in the lepton plus jets final state in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 788 (2019) 347, [arXiv:1807.10473](<https://arxiv.org/abs/1807.10473>), [doi:10.1016/j.physletb.2018.11.032](<https://doi.org/10.1016/j.physletb.2018.11.032>), 2018.
+261. ATLAS Collaboration, Search for charged Higgs bosons decaying into top and bottom quarks at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 11 (2018) 085, [arXiv:1808.03599](<https://arxiv.org/abs/1808.03599>), [doi:10.1007/JHEP11(2018)085](<https://doi.org/10.1007/JHEP11(2018)085>), 2018.
+262. ATLAS Collaboration, Search for charged Higgs bosons decaying into a top quark and a bottom quark at sqrt(s)=13 TeV with the ATLAS detector, JHEP 06 (2021) 145, [arXiv:2102.10076](<https://arxiv.org/abs/2102.10076>), [doi:10.1007/JHEP06(2021)145](<https://doi.org/10.1007/JHEP06(2021)145>), 2021.
+263. ATLAS Collaboration, Search for vector-boson resonances decaying into a top quark and a bottom quark using pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 12 (2023) 073, [arXiv:2308.08521](<https://arxiv.org/abs/2308.08521>), [doi:10.1007/JHEP12(2023)073](<https://doi.org/10.1007/JHEP12(2023)073>), 2023.
 
 ### ttbar resonances: `m_tt`
 
 11 papers, 2012-2025 (current).
 
-262. ATLAS Collaboration, A search for ttbar resonances with the ATLAS detector in 2.05 fb^-1 of proton-proton collisions at sqrt(s) = 7 TeV, Eur.Phys.J. C72 (2012) 2083, [arXiv:1205.5371](<https://arxiv.org/abs/1205.5371>), [doi:10.1140/epjc/s10052-012-2083-1](<https://doi.org/10.1140/epjc/s10052-012-2083-1>), 2012.
-263. ATLAS Collaboration, A search for ttbar resonances in lepton+jets events with highly boosted top quarks collected in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, JHEP 1209 (2012) 041, [arXiv:1207.2409](<https://arxiv.org/abs/1207.2409>), [doi:10.1007/JHEP09(2012)041](<https://doi.org/10.1007/JHEP09(2012)041>), 2012.
-264. ATLAS Collaboration, Search for resonances decaying into top-quark pairs using fully hadronic decays in pp collisions with ATLAS at sqrt(s) = 7 TeV, JHEP 1301 (2013) 116, [arXiv:1211.2202](<https://arxiv.org/abs/1211.2202>), [doi:10.1007/JHEP01(2013)116](<https://doi.org/10.1007/JHEP01(2013)116>), 2012.
-265. ATLAS Collaboration, A search for ttbar resonances in the lepton plus jets final state with ATLAS using 4.7 fb^-1 of pp collisions at sqrt(s) = 7 TeV, [arXiv:1305.2756](<https://arxiv.org/abs/1305.2756>), [doi:10.1103/PhysRevD.88.012004](<https://doi.org/10.1103/PhysRevD.88.012004>), 2013.
-266. ATLAS Collaboration, A search for ttbar resonances using lepton-plus-jets events in proton-proton collisions at sqrt(s) = 8 TeV with the ATLAS detector, JHEP08 (2015) 148, [arXiv:1505.07018](<https://arxiv.org/abs/1505.07018>), [doi:10.1007/JHEP08(2015)148](<https://doi.org/10.1007/JHEP08(2015)148>), 2015.
-267. ATLAS Collaboration, Search for heavy Higgs bosons A/H decaying to a top quark pair in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys. Rev. Lett. 119, 191803 (2017), [arXiv:1707.06025](<https://arxiv.org/abs/1707.06025>), [doi:10.1103/PhysRevLett.119.191803](<https://doi.org/10.1103/PhysRevLett.119.191803>), 2017.
-268. ATLAS Collaboration, Search for heavy particles decaying into top-quark pairs using lepton-plus-jets events in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C 78 (2018) 565, [arXiv:1804.10823](<https://arxiv.org/abs/1804.10823>), [doi:10.1140/epjc/s10052-018-5995-6](<https://doi.org/10.1140/epjc/s10052-018-5995-6>), 2018.
-269. ATLAS Collaboration, Search for heavy particles decaying into a top-quark pair in the fully hadronic final state in pp collisions at sqrt(s) =13 TeV with the ATLAS detector, Phys. Rev. D 99, 092004 (2019), [arXiv:1902.10077](<https://arxiv.org/abs/1902.10077>), [doi:10.1103/PhysRevD.99.092004](<https://doi.org/10.1103/PhysRevD.99.092004>), 2019.
-270. ATLAS Collaboration, Search for ttbar resonances in fully hadronic final states in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 10 (2020) 61, [arXiv:2005.05138](<https://arxiv.org/abs/2005.05138>), [doi:10.1007/JHEP10(2020)061](<https://doi.org/10.1007/JHEP10(2020)061>), 2020.
-271. ATLAS Collaboration, Search for heavy neutral Higgs bosons decaying into a top quark pair in 140 fb^-1 of proton-proton collision data at sqrt(s)=13 TeV with the ATLAS detector, JHEP 08 (2024) 013, [arXiv:2404.18986](<https://arxiv.org/abs/2404.18986>), [doi:10.1007/JHEP08(2024)013](<https://doi.org/10.1007/JHEP08(2024)013>), 2024.
-272. ATLAS Collaboration, Search for ttbar resonances in final states with exactly one or two leptons using 140 fb^-1 of pp collision data at sqrt(s)=13 TeV with the ATLAS experiment, [arXiv:2512.17856](<https://arxiv.org/abs/2512.17856>), 2025.
+264. ATLAS Collaboration, A search for ttbar resonances with the ATLAS detector in 2.05 fb^-1 of proton-proton collisions at sqrt(s) = 7 TeV, Eur.Phys.J. C72 (2012) 2083, [arXiv:1205.5371](<https://arxiv.org/abs/1205.5371>), [doi:10.1140/epjc/s10052-012-2083-1](<https://doi.org/10.1140/epjc/s10052-012-2083-1>), 2012.
+265. ATLAS Collaboration, A search for ttbar resonances in lepton+jets events with highly boosted top quarks collected in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector, JHEP 1209 (2012) 041, [arXiv:1207.2409](<https://arxiv.org/abs/1207.2409>), [doi:10.1007/JHEP09(2012)041](<https://doi.org/10.1007/JHEP09(2012)041>), 2012.
+266. ATLAS Collaboration, Search for resonances decaying into top-quark pairs using fully hadronic decays in pp collisions with ATLAS at sqrt(s) = 7 TeV, JHEP 1301 (2013) 116, [arXiv:1211.2202](<https://arxiv.org/abs/1211.2202>), [doi:10.1007/JHEP01(2013)116](<https://doi.org/10.1007/JHEP01(2013)116>), 2012.
+267. ATLAS Collaboration, A search for ttbar resonances in the lepton plus jets final state with ATLAS using 4.7 fb^-1 of pp collisions at sqrt(s) = 7 TeV, [arXiv:1305.2756](<https://arxiv.org/abs/1305.2756>), [doi:10.1103/PhysRevD.88.012004](<https://doi.org/10.1103/PhysRevD.88.012004>), 2013.
+268. ATLAS Collaboration, A search for ttbar resonances using lepton-plus-jets events in proton-proton collisions at sqrt(s) = 8 TeV with the ATLAS detector, JHEP08 (2015) 148, [arXiv:1505.07018](<https://arxiv.org/abs/1505.07018>), [doi:10.1007/JHEP08(2015)148](<https://doi.org/10.1007/JHEP08(2015)148>), 2015.
+269. ATLAS Collaboration, Search for heavy Higgs bosons A/H decaying to a top quark pair in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector, Phys. Rev. Lett. 119, 191803 (2017), [arXiv:1707.06025](<https://arxiv.org/abs/1707.06025>), [doi:10.1103/PhysRevLett.119.191803](<https://doi.org/10.1103/PhysRevLett.119.191803>), 2017.
+270. ATLAS Collaboration, Search for heavy particles decaying into top-quark pairs using lepton-plus-jets events in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Eur. Phys. J. C 78 (2018) 565, [arXiv:1804.10823](<https://arxiv.org/abs/1804.10823>), [doi:10.1140/epjc/s10052-018-5995-6](<https://doi.org/10.1140/epjc/s10052-018-5995-6>), 2018.
+271. ATLAS Collaboration, Search for heavy particles decaying into a top-quark pair in the fully hadronic final state in pp collisions at sqrt(s) =13 TeV with the ATLAS detector, Phys. Rev. D 99, 092004 (2019), [arXiv:1902.10077](<https://arxiv.org/abs/1902.10077>), [doi:10.1103/PhysRevD.99.092004](<https://doi.org/10.1103/PhysRevD.99.092004>), 2019.
+272. ATLAS Collaboration, Search for ttbar resonances in fully hadronic final states in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, JHEP 10 (2020) 61, [arXiv:2005.05138](<https://arxiv.org/abs/2005.05138>), [doi:10.1007/JHEP10(2020)061](<https://doi.org/10.1007/JHEP10(2020)061>), 2020.
+273. ATLAS Collaboration, Search for heavy neutral Higgs bosons decaying into a top quark pair in 140 fb^-1 of proton-proton collision data at sqrt(s)=13 TeV with the ATLAS detector, JHEP 08 (2024) 013, [arXiv:2404.18986](<https://arxiv.org/abs/2404.18986>), [doi:10.1007/JHEP08(2024)013](<https://doi.org/10.1007/JHEP08(2024)013>), 2024.
+274. ATLAS Collaboration, Search for ttbar resonances in final states with exactly one or two leptons using 140 fb^-1 of pp collision data at sqrt(s)=13 TeV with the ATLAS experiment, [arXiv:2512.17856](<https://arxiv.org/abs/2512.17856>), 2025.
 
 ## Vector boson + X
 
@@ -704,50 +716,50 @@ Papers span 2010-2026.
 
 2 papers, 2014-2025 (current).
 
-273. ATLAS Collaboration, Search for Higgs boson decays to a photon and a Z boson in pp collisions at sqrt(s)=7 and 8 TeV with the ATLAS detector, Phys. Lett. B 732C (2014) 8-27, [arXiv:1402.3051](<https://arxiv.org/abs/1402.3051>), [doi:10.1016/j.physletb.2014.03.015](<https://doi.org/10.1016/j.physletb.2014.03.015>), 2014.
-274. ATLAS Collaboration, Search for the Higgs boson decay to a Z boson and a photon in pp collisions at sqrt(s)=13 TeV and 13.6 TeV with the ATLAS detector, Phys. Lett. B 876 (2026) 140313, [arXiv:2507.12598](<https://arxiv.org/abs/2507.12598>), [doi:10.1016/j.physletb.2026.140313](<https://doi.org/10.1016/j.physletb.2026.140313>), 2025.
+275. ATLAS Collaboration, Search for Higgs boson decays to a photon and a Z boson in pp collisions at sqrt(s)=7 and 8 TeV with the ATLAS detector, Phys. Lett. B 732C (2014) 8-27, [arXiv:1402.3051](<https://arxiv.org/abs/1402.3051>), [doi:10.1016/j.physletb.2014.03.015](<https://doi.org/10.1016/j.physletb.2014.03.015>), 2014.
+276. ATLAS Collaboration, Search for the Higgs boson decay to a Z boson and a photon in pp collisions at sqrt(s)=13 TeV and 13.6 TeV with the ATLAS detector, Phys. Lett. B 876 (2026) 140313, [arXiv:2507.12598](<https://arxiv.org/abs/2507.12598>), [doi:10.1016/j.physletb.2026.140313](<https://doi.org/10.1016/j.physletb.2026.140313>), 2025.
 
 ### Higgs + photon: `m_Hgam`
 
 1 paper, 2020-2020 (ageing).
 
-275. ATLAS Collaboration, Search for heavy resonances decaying into a photon and a hadronically decaying Higgs boson in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. Lett. 125, 251802 (2020), [arXiv:2008.05928](<https://arxiv.org/abs/2008.05928>), [doi:10.1103/PhysRevLett.125.251802](<https://doi.org/10.1103/PhysRevLett.125.251802>), 2020.
+277. ATLAS Collaboration, Search for heavy resonances decaying into a photon and a hadronically decaying Higgs boson in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. Lett. 125, 251802 (2020), [arXiv:2008.05928](<https://arxiv.org/abs/2008.05928>), [doi:10.1103/PhysRevLett.125.251802](<https://doi.org/10.1103/PhysRevLett.125.251802>), 2020.
 
 ### High-pT Z + X resonances: `m_Z+X`
 
 1 paper, 2022-2022 (ageing).
 
-276. ATLAS Collaboration, A search for new resonances in multiple final states with a high transverse momentum Z boson in sqrt(s)=13 TeV pp collisions with the ATLAS detector, JHEP 06 (2023) 036, [arXiv:2209.15345](<https://arxiv.org/abs/2209.15345>), [doi:10.1007/JHEP06(2023)036](<https://doi.org/10.1007/JHEP06(2023)036>), 2022.
+278. ATLAS Collaboration, A search for new resonances in multiple final states with a high transverse momentum Z boson in sqrt(s)=13 TeV pp collisions with the ATLAS detector, JHEP 06 (2023) 036, [arXiv:2209.15345](<https://arxiv.org/abs/2209.15345>), [doi:10.1007/JHEP06(2023)036](<https://doi.org/10.1007/JHEP06(2023)036>), 2022.
 
 ### V-gamma, hadronic V: `m_Wgam, m_Zgam`
 
 3 papers, 2014-2023 (ageing).
 
-277. ATLAS Collaboration, Search for new resonances in Wgamma and Zgamma Final States in pp Collisions at sqrt(s)=8 TeV with the ATLAS Detector, Phys.Lett. B738 (2014) 428-447, [arXiv:1407.8150](<https://arxiv.org/abs/1407.8150>), [doi:10.1016/j.physletb.2014.10.002](<https://doi.org/10.1016/j.physletb.2014.10.002>), 2014.
-278. ATLAS Collaboration, Search for heavy resonances decaying to a photon and a hadronically decaying Z/W/H boson in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 98 (2018) 032015, [arXiv:1805.01908](<https://arxiv.org/abs/1805.01908>), [doi:10.1103/PhysRevD.98.032015](<https://doi.org/10.1103/PhysRevD.98.032015>), 2018.
-279. ATLAS Collaboration, Search for high-mass Wgamma and Zgamma resonances using hadronic W/Z boson decays from 139 fb^-1 of pp collisions at sqrt(s)= 13 TeV with the ATLAS detector, JHEP07(2023)125, [arXiv:2304.11962](<https://arxiv.org/abs/2304.11962>), [doi:10.1007/JHEP07(2023)125](<https://doi.org/10.1007/JHEP07(2023)125>), 2023.
+279. ATLAS Collaboration, Search for new resonances in Wgamma and Zgamma Final States in pp Collisions at sqrt(s)=8 TeV with the ATLAS Detector, Phys.Lett. B738 (2014) 428-447, [arXiv:1407.8150](<https://arxiv.org/abs/1407.8150>), [doi:10.1016/j.physletb.2014.10.002](<https://doi.org/10.1016/j.physletb.2014.10.002>), 2014.
+280. ATLAS Collaboration, Search for heavy resonances decaying to a photon and a hadronically decaying Z/W/H boson in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Rev. D 98 (2018) 032015, [arXiv:1805.01908](<https://arxiv.org/abs/1805.01908>), [doi:10.1103/PhysRevD.98.032015](<https://doi.org/10.1103/PhysRevD.98.032015>), 2018.
+281. ATLAS Collaboration, Search for high-mass Wgamma and Zgamma resonances using hadronic W/Z boson decays from 139 fb^-1 of pp collisions at sqrt(s)= 13 TeV with the ATLAS detector, JHEP07(2023)125, [arXiv:2304.11962](<https://arxiv.org/abs/2304.11962>), [doi:10.1007/JHEP07(2023)125](<https://doi.org/10.1007/JHEP07(2023)125>), 2023.
 
 ### VH (llbb, lvbb, vvbb): `m_VH`
 
 5 papers, 2015-2022 (ageing).
 
-280. ATLAS Collaboration, Search for a new resonance decaying to a W or Z boson and a Higgs boson in the l l/ l nu/ nunu+ b bbar final states with the ATLAS Detector, Eur. Phys. J. C (2015) 75: 263, [arXiv:1503.08089](<https://arxiv.org/abs/1503.08089>), [doi:10.1140/epjc/s10052-015-3474-x](<https://doi.org/10.1140/epjc/s10052-015-3474-x>), 2015.
-281. ATLAS Collaboration, Search for new resonances decaying to a W or Z boson and a Higgs boson in the l^+ l^- bbbar, l nubbbar, and nunubar bbbar channels with pp collisions at sqrt s = 13 TeV with the ATLAS detector, Physics Letters B 765(2017) 32-52, [arXiv:1607.05621](<https://arxiv.org/abs/1607.05621>), [doi:10.1016/j.physletb.2016.11.045](<https://doi.org/10.1016/j.physletb.2016.11.045>), 2016.
-282. ATLAS Collaboration, Search for heavy resonances decaying to a W or Z boson and a Higgs boson in the qqbar^(')bbbar final state in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 774 (2017) 494, [arXiv:1707.06958](<https://arxiv.org/abs/1707.06958>), [doi:10.1016/j.physletb.2017.09.066](<https://doi.org/10.1016/j.physletb.2017.09.066>), 2017.
-283. ATLAS Collaboration, Search for heavy resonances decaying into a W or Z boson and a Higgs boson in final states with leptons and b-jets in 36 fb^-1 of sqrt s = 13 TeV pp collisions with the ATLAS detector, JHEP 03 (2018) 174, [arXiv:1712.06518](<https://arxiv.org/abs/1712.06518>), [doi:10.1007/JHEP03(2018)174](<https://doi.org/10.1007/JHEP03(2018)174>), 2017.
-284. ATLAS Collaboration, Search for heavy resonances decaying into a Z or W boson and a Higgs boson in final states with leptons and b-jets in 139~fb^-1 of pp collisions at sqrt(s)=13~TeV with the ATLAS detector, JHEP 06 (2023) 016, [arXiv:2207.00230](<https://arxiv.org/abs/2207.00230>), [doi:10.1007/JHEP06(2023)016](<https://doi.org/10.1007/JHEP06(2023)016>), 2022.
+282. ATLAS Collaboration, Search for a new resonance decaying to a W or Z boson and a Higgs boson in the l l/ l nu/ nunu+ b bbar final states with the ATLAS Detector, Eur. Phys. J. C (2015) 75: 263, [arXiv:1503.08089](<https://arxiv.org/abs/1503.08089>), [doi:10.1140/epjc/s10052-015-3474-x](<https://doi.org/10.1140/epjc/s10052-015-3474-x>), 2015.
+283. ATLAS Collaboration, Search for new resonances decaying to a W or Z boson and a Higgs boson in the l^+ l^- bbbar, l nubbbar, and nunubar bbbar channels with pp collisions at sqrt s = 13 TeV with the ATLAS detector, Physics Letters B 765(2017) 32-52, [arXiv:1607.05621](<https://arxiv.org/abs/1607.05621>), [doi:10.1016/j.physletb.2016.11.045](<https://doi.org/10.1016/j.physletb.2016.11.045>), 2016.
+284. ATLAS Collaboration, Search for heavy resonances decaying to a W or Z boson and a Higgs boson in the qqbar^(')bbbar final state in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Lett. B 774 (2017) 494, [arXiv:1707.06958](<https://arxiv.org/abs/1707.06958>), [doi:10.1016/j.physletb.2017.09.066](<https://doi.org/10.1016/j.physletb.2017.09.066>), 2017.
+285. ATLAS Collaboration, Search for heavy resonances decaying into a W or Z boson and a Higgs boson in final states with leptons and b-jets in 36 fb^-1 of sqrt s = 13 TeV pp collisions with the ATLAS detector, JHEP 03 (2018) 174, [arXiv:1712.06518](<https://arxiv.org/abs/1712.06518>), [doi:10.1007/JHEP03(2018)174](<https://doi.org/10.1007/JHEP03(2018)174>), 2017.
+286. ATLAS Collaboration, Search for heavy resonances decaying into a Z or W boson and a Higgs boson in final states with leptons and b-jets in 139~fb^-1 of pp collisions at sqrt(s)=13~TeV with the ATLAS detector, JHEP 06 (2023) 016, [arXiv:2207.00230](<https://arxiv.org/abs/2207.00230>), [doi:10.1007/JHEP06(2023)016](<https://doi.org/10.1007/JHEP06(2023)016>), 2022.
 
 ### VH fully hadronic: `m_VH`
 
 1 paper, 2020-2020 (ageing).
 
-285. ATLAS Collaboration, Search for resonances decaying into a weak vector boson and a Higgs boson in the fully hadronic final state produced in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 102, 112008 (2020), [arXiv:2007.05293](<https://arxiv.org/abs/2007.05293>), [doi:10.1103/PhysRevD.102.112008](<https://doi.org/10.1103/PhysRevD.102.112008>), 2020.
+287. ATLAS Collaboration, Search for resonances decaying into a weak vector boson and a Higgs boson in the fully hadronic final state produced in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector, Phys. Rev. D 102, 112008 (2020), [arXiv:2007.05293](<https://arxiv.org/abs/2007.05293>), [doi:10.1103/PhysRevD.102.112008](<https://doi.org/10.1103/PhysRevD.102.112008>), 2020.
 
 ### Z-gamma: `m_Zgam`
 
 3 papers, 2016-2023 (ageing).
 
-286. ATLAS Collaboration, Search for heavy resonances decaying to a Z boson and a photon in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 764 (2017) 11, [arXiv:1607.06363](<https://arxiv.org/abs/1607.06363>), [doi:10.1016/j.physletb.2016.11.005](<https://doi.org/10.1016/j.physletb.2016.11.005>), 2016.
-287. ATLAS Collaboration, Searches for the Zgamma decay mode of the Higgs boson and for new high-mass resonances in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 10 (2017) 112, [arXiv:1708.00212](<https://arxiv.org/abs/1708.00212>), [doi:10.1007/JHEP10(2017)112](<https://doi.org/10.1007/JHEP10(2017)112>), 2017.
-288. ATLAS Collaboration, Search for the Zgamma decay mode of new high-mass resonances in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 848 (2024) 138394, [arXiv:2309.04364](<https://arxiv.org/abs/2309.04364>), [doi:10.1016/j.physletb.2023.138394](<https://doi.org/10.1016/j.physletb.2023.138394>), 2023.
+288. ATLAS Collaboration, Search for heavy resonances decaying to a Z boson and a photon in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 764 (2017) 11, [arXiv:1607.06363](<https://arxiv.org/abs/1607.06363>), [doi:10.1016/j.physletb.2016.11.005](<https://doi.org/10.1016/j.physletb.2016.11.005>), 2016.
+289. ATLAS Collaboration, Searches for the Zgamma decay mode of the Higgs boson and for new high-mass resonances in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector, JHEP 10 (2017) 112, [arXiv:1708.00212](<https://arxiv.org/abs/1708.00212>), [doi:10.1007/JHEP10(2017)112](<https://doi.org/10.1007/JHEP10(2017)112>), 2017.
+290. ATLAS Collaboration, Search for the Zgamma decay mode of new high-mass resonances in pp collisions at sqrt(s)=13 TeV with the ATLAS detector, Phys. Lett. B 848 (2024) 138394, [arXiv:2309.04364](<https://arxiv.org/abs/2309.04364>), [doi:10.1016/j.physletb.2023.138394](<https://doi.org/10.1016/j.physletb.2023.138394>), 2023.
 

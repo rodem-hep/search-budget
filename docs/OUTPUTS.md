@@ -14,10 +14,10 @@ the only ones that are not part of `make all`.
 | file | producer | content |
 |---|---|---|
 | `SEARCH_BUDGET.md` | `search_budget.py` | **the headline**: spectra, `N_trials`, `Z_local(5σ global)`, per-spectrum table |
-| `PUBLISHED_CENSUS.md` | `published_census.py` | the ATLAS resonance-search publication record: 84 spectra, 288 papers, recency and Run-3 coverage |
-| `CENSUS_REFERENCES.md` | `export_census_bib.py` | all 288 census papers written out in full, numbered, under the spectrum each is counted against |
+| `PUBLISHED_CENSUS.md` | `published_census.py` | the ATLAS resonance-search publication record: 86 spectra, 290 papers, recency and Run-3 coverage |
+| `CENSUS_REFERENCES.md` | `export_census_bib.py` | all 290 census papers written out in full, numbered, under the spectrum each is counted against |
 | `EXCESS_COUNTING.md` | hand-written | expected vs observed 3σ/5σ excesses — the external check on `N` |
-| `REPORTED_EXCESSES.md` | `reported_excesses.py` | the observed side made concrete: every excess ≥3σ reported in the 288 census abstracts |
+| `REPORTED_EXCESSES.md` | `reported_excesses.py` | the observed side made concrete: every excess ≥3σ reported in the 290 census abstracts |
 | `MAX_OF_GAUSSIANS.md` | hand-written | the statistics: argmax vs threshold vs Benjamini-Hochberg |
 | `TWO_STAGE_UNBLINDING.md` | hand-written | the A/B split strategy, reach and caveats |
 

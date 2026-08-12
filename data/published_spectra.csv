@@ -83,3 +83,5 @@ Generic & other,Generic multi-body invariant masses,"many m_ij, m_ijk",lepton,si
 Generic & other,"Two-body masses, unsupervised anomaly detection",many m_ij,lepton,single-lepton,1,2023,2023,ageing,,no,2307.01612,
 Generic & other,Dark photon in rare Z decays,m_ll,lepton,single/di-lepton,1,2023,2023,ageing,,no,2306.07413,
 Generic & other,Displaced diphoton / dielectron,"m_gamgam, m_ee",no,diphoton,1,2023,2023,ageing,,no,2304.12885,
+Generic & other,B_s invariant mass structure (X(5568)),m_Bs pi,lepton,di-muon,1,2018,2018,stale,,no,1802.01840,-
+Generic & other,Xb -> Upsilon pi pi,m_Upsilon pipi,lepton,di-muon,1,2014,2014,stale,,no,1410.4409,-

@@ -106,9 +106,9 @@ uncovered list is a lower bound on the gap.
 ### The publication census is a different base
 
 `published_census.py` counts from the other end: not the spectra models motivate, but the searches
-ATLAS has actually published. **Its 84 entries and the budget's 46 spectra must never be summed or
+ATLAS has actually published. **Its 86 entries and the budget's 46 spectra must never be summed or
 compared as if they measured the same thing.** The publication record keeps two analyses on a shared
-mass axis as separate entries when they are separate papers, so the 84 entries carry only 60 distinct
+mass axis as separate entries when they are separate papers, so the 86 entries carry only 62 distinct
 observables; the budget merges everything onto one axis and counts resolution elements along it. The
 census is a recency and coverage instrument, not a second trials count.
 

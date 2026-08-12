@@ -37,7 +37,7 @@ Expected count = `N * p`:
 
 ## 3. Observed
 **For the resonance subset the observed side is now measured rather than anecdotal:**
-`REPORTED_EXCESSES.md` mines the abstracts of the 288 census papers and finds **6 reported local
+`REPORTED_EXCESSES.md` mines the abstracts of the 290 census papers and finds **6 reported local
 excesses >= 3 sigma** (every quoted global <= 2.1s), against 5.0 expected per background-only
 sweep of the 46-spectrum budget (8.9 at selection granularity).
 

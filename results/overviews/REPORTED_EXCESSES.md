@@ -1,6 +1,6 @@
 # Reported excesses, mined from the census abstracts
 
-The observed side of `EXCESS_COUNTING.md`, made concrete for the resonance subset: of the 288 census papers, **6 report a local excess >= 3 sigma in their abstract**, and 5 more quantify a largest deviation below 3 sigma; the rest report no significant excess or none at all. Extraction: `scripts/reported_excesses.py`; the full rows, with the abstract sentence each number came from, are in `results/tables/reported_excesses.csv`.
+The observed side of `EXCESS_COUNTING.md`, made concrete for the resonance subset: of the 290 census papers, **6 report a local excess >= 3 sigma in their abstract**, and 5 more quantify a largest deviation below 3 sigma; the rest report no significant excess or none at all. Extraction: `scripts/reported_excesses.py`; the full rows, with the abstract sentence each number came from, are in `results/tables/reported_excesses.csv`.
 
 | arXiv | year | spectrum | Z_local | Z_global |
 |---|--:|---|--:|--:|
