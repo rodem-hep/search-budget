@@ -1,0 +1,5 @@
+scan,objects,trigger,categories,spectra,compositions,N_trials,Z_local,Z_lo,Z_hi
+"baseline, declared resolutions",5,lepton,204,1502,82,143077,6.98,6.88,7.08
+"baseline, derived resolutions",5,lepton,204,1502,82,121291,6.96,6.86,7.06
+"wider alphabet, lepton trigger",10,lepton,1494,13574,672,958842,7.25,7.15,7.34
+"wider alphabet, any trigger",10,any,2110,18580,845,1198485,7.28,7.18,7.37

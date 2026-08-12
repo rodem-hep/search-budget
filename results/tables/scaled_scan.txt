@@ -1,0 +1,92 @@
+object resolutions of the wider alphabet (sigma = 2 r of the symmetric channel)
+  e  e            sigma = 0.030   from m(ee)
+  m  mu           sigma = 0.100   from m(mumu)
+  T  tau_had      sigma = 0.240   from m(tautau)
+  g  gamma        sigma = 0.020   from m(gammagamma)
+  j  light jet    sigma = 0.100   from m(jj)
+  b  b-jet        sigma = 0.200   from m(bb)
+  t  boosted top  sigma = 0.160   from m(tt)
+  V  boosted W/Z  sigma = 0.120   from m(VV)
+  H  boosted H    sigma = 0.160   from m(HH)
+  Z  leptonic Z   sigma = 0.040   baseline value (no symmetric published channel)
+
+=== baseline, declared resolutions  (5 object types, lepton required)
+categories (exclusive, MET-split, >=2 objects)                       : 150
+  ... after splitting same-flavour dilepton cases into OS and SS     : 204
+(category, mass-group) combinations                                  : 1,094
+mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 1,502
+  by group size: k=2: 886, k=3: 506, k=4: 110
+distinct object-type multisets (physics observables)                 : 82
+
+N_trials = 143,077    ln N = 11.87
+Z_local for 5 sigma global = 6.98
+  r band (x0.5..x2 -> N x2..x0.5): 6.88 - 7.08
+  a local 5 sigma is worth Z_global = 1.12 sigma
+
+=== baseline, derived resolutions  (5 object types, lepton required)
+categories (exclusive, MET-split, >=2 objects)                       : 150
+  ... after splitting same-flavour dilepton cases into OS and SS     : 204
+(category, mass-group) combinations                                  : 1,094
+mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 1,502
+  by group size: k=2: 886, k=3: 506, k=4: 110
+distinct object-type multisets (physics observables)                 : 82
+
+N_trials = 121,291    ln N = 11.71
+Z_local for 5 sigma global = 6.96
+  r band (x0.5..x2 -> N x2..x0.5): 6.86 - 7.06
+  a local 5 sigma is worth Z_global = 1.26 sigma
+
+=== wider alphabet, lepton trigger  (10 object types, lepton required)
+categories (exclusive, MET-split, >=2 objects)                       : 1,130
+  ... after splitting same-flavour dilepton cases into OS and SS     : 1,494
+(category, mass-group) combinations                                  : 10,174
+mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 13,574
+  by group size: k=2: 7,694, k=3: 4,768, k=4: 1,112
+distinct object-type multisets (physics observables)                 : 672
+
+N_trials = 958,842    ln N = 13.77
+Z_local for 5 sigma global = 7.25
+  r band (x0.5..x2 -> N x2..x0.5): 7.15 - 7.34
+  a local 5 sigma is worth Z_global = 0.00 sigma
+
+=== wider alphabet, any trigger  (10 object types, no trigger requirement)
+categories (exclusive, MET-split, >=2 objects)                       : 1,690
+  ... after splitting same-flavour dilepton cases into OS and SS     : 2,110
+(category, mass-group) combinations                                  : 14,668
+mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 18,580
+  by group size: k=2: 10,590, k=3: 6,490, k=4: 1,500
+distinct object-type multisets (physics observables)                 : 845
+
+N_trials = 1,198,485    ln N = 14.00
+Z_local for 5 sigma global = 7.28
+  r band (x0.5..x2 -> N x2..x0.5): 7.18 - 7.37
+  a local 5 sigma is worth Z_global = 0.00 sigma
+
+scan                             objects  trigger  categories  spectra  compositions   N_trials  Z_local
+baseline, declared resolutions         5   lepton         204     1502            82  1.431e+05     6.98
+baseline, derived resolutions          5   lepton         204     1502            82  1.213e+05     6.96
+wider alphabet, lepton trigger        10   lepton        1494    13574           672  9.588e+05     7.25
+wider alphabet, any trigger           10      any        2110    18580           845  1.198e+06     7.28
+
+the alphabet alone multiplies the trials by 7.9, and the headline scan is 8.4 times the baseline: +0.30 sigma on the bar
+
+spectra reaching a new object type: 14772 of 18580 (80 %), carrying 72 % of N
+
+headline scan, by group size:
+  K=2:  10590 spectra,    797903 looks (66.6 % of N)
+  K=3:   6490 spectra,    341173 looks (28.5 % of N)
+  K=4:   1500 spectra,     59408 looks ( 5.0 % of N)
+
+costliest compositions of the headline scan:
+  eg       240 spectra     73652 looks
+  gg       120 spectra     46944 looks
+  ee       178 spectra     46423 looks
+  Ze       182 spectra     37480 looks
+  Zg       138 spectra     31774 looks
+  ej       246 spectra     26072 looks
+  gm       240 spectra     26040 looks
+  em       238 spectra     25224 looks
+  gj       186 spectra     20181 looks
+  Ve       240 spectra     19979 looks
+  jm       246 spectra     19247 looks
+  Zm       182 spectra     17400 looks
