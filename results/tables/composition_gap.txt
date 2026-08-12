@@ -7,6 +7,12 @@ K : uncovered / total
   K=3 :  21 /  28
   K=4 :  36 /  40
 
+covered fraction  compositions / spectra / looks
+  K=2 :  14/ 14 = 100%    886/ 886 = 100%    96712/ 96712 = 100%
+  K=3 :   7/ 28 =  25%     88/ 506 =  17%     9811/ 39845 =  25%
+  K=4 :   4/ 40 =  10%     14/ 110 =  13%      939/  6510 =  14%
+  all :  25/ 82 =  30%    988/1502 =  66%   107462/143067 =  75%
+
 === K=2 compositions with NO published ATLAS bump hunt ===
 
 === K=3 uncovered (first 30) ===

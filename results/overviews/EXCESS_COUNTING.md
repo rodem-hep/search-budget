@@ -42,18 +42,22 @@ excesses >= 3 sigma** (every quoted global <= 2.1s), against 5.0 expected per ba
 sweep of the 46-spectrum budget (8.9 at selection granularity).
 
 **Program-wide, take the number from the curated catalogue** rather than from a list of remembered
-excesses: the LHC BSM Working Group maintains the list of excesses currently open, grouped by
-signature, admitting anything above **2.4 sigma local** whatever the search type:
-<https://lhc-bsm-wg.docs.cern.ch/excesses/> (steering committee, updated ~6-monthly). Of order 100
-entries, **none reaches 5 sigma** and **no quoted global exceeds ~2.8 sigma**.
+excesses: the LHC BSM Working Group keeps the list of excesses currently open, grouped by signature,
+admitting anything above **2.4 sigma local** whatever the search type:
+<https://lhc-bsm-wg.docs.cern.ch/excesses/> (steering committee, updated ~6-monthly). Restricted to
+ATLAS, as the rest of this study is, it holds **~20 entries**, the largest at **3.5 sigma local**,
+**none reaching 5 sigma** and **no quoted global above ~2.5 sigma**. (Two independent reads of the
+page gave 18 and 21 entries and 3.5 / 3.6 sigma for the largest, so quote it as "about twenty" and
+"about 3.5 sigma" unless someone counts by hand.)
 
 Scope differences to respect before comparing it with our numbers:
 
-- it spans **ATLAS + CMS + LHCb** and mixes bump hunts with shape fits, SR counting and
-  unconventional signatures, so it is not the 46-axis basis;
-- it lists **open** excesses only, while the census keeps every paper;
+- it mixes bump hunts with shape fits, SR counting and unconventional signatures, so it is not the
+  46-axis basis;
+- it lists **open** excesses only, so it is not the historical population that the "~tens of >=3
+  sigma" row counts; roughly 8 of the ~20 ATLAS entries are at or above 3 sigma;
 - it reads the **paper bodies**, so it carries ATLAS resonance excesses >=3 sigma that our abstract
-  mining misses (trigger-level dijet at 650 GeV, `A -> ZH -> llbb`, charged Higgs -> cb at 130 GeV).
+  mining misses (trigger-level dijets, `A -> ZH -> llbb`, charged Higgs -> cb, resonant `X -> HH`).
   Our 6 is therefore a floor.
 
 **>=5-sigma: every one is a genuine Standard-Model process**, none BSM. Spurious BSM >=5-sigma:
@@ -75,7 +79,8 @@ the trials-factor argument in `SEARCH_BUDGET.md`.
 ## Caveats
 - N spans a factor ~10; the *conclusion* survives the whole 1e4-1e5 range (>=3s stays "tens", >=5s
   stays "<<1").
-- Counts mix ATLAS-only and ATLAS+CMS excesses; for ATLAS alone the numbers are smaller but same order.
+- N and the counts are ATLAS-only throughout, as in the note. CMS runs an equivalent program, which
+  doubles the LHC-wide trials and moves the bar by ~0.1 sigma; the per-program conclusion is unchanged.
 - "Observed ~tens" is the count of *notable/highlighted* >=3s excesses; the raw number of individual
   >=3s bins is larger and unremarked (they are the expected noise), also consistent.
 - One-sided (upward) tail used, appropriate for excess searches; deficits are a separate (also
@@ -86,5 +91,5 @@ the trials-factor argument in `SEARCH_BUDGET.md`.
   looks; 5s local -> ~1.5-2.5s global; recommend 7s)
 - Digging Deeper for New Physics in the LHC Data -- arXiv:1707.05783 (hundreds of SRs/search; hidden ~3s)
 - Gross & Vitells, Trial factors for the look-elsewhere effect -- arXiv:1005.1891
-- 750 GeV diphoton excess -- en.wikipedia.org/wiki/750_GeV_diphoton_excess
+- Emerging excesses in LHC searches -- lhc-bsm-wg.docs.cern.ch/excesses/ (open excesses, >=2.4s local)
 - ATLAS Searches public results -- twiki.cern.ch/twiki/bin/view/AtlasPublic/SearchesPublicResults

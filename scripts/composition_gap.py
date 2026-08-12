@@ -79,6 +79,27 @@ print("K : uncovered / total")
 for k in sorted(byKall):
     print("  K=%d : %3d / %3d" % (k, byK.get(k,0), byKall[k]))
 print()
+
+# Same coverage question weighted by what the scan actually histograms, and by what it costs:
+# a composition is one final state, but it recurs across categories and object indices.
+sp   = collections.Counter(); spc = collections.Counter()
+lk   = collections.Counter(); lkc = collections.Counter()
+for r in rows:
+    k, w, ns = len(r["group"]), int(r["charge_split"]), float(r["n_s"])
+    sp[k] += w; lk[k] += ns
+    if norm(r["group"]) in covered_set:
+        spc[k] += w; lkc[k] += ns
+pc = lambda a, b: 100.0 * a / b if b else 0.0
+print("covered fraction  compositions / spectra / looks")
+for k in sorted(sp):
+    print("  K=%d : %3d/%3d = %3.0f%%   %4d/%4d = %3.0f%%   %6.0f/%6.0f = %3.0f%%"
+          % (k, byKall[k]-byK.get(k,0), byKall[k], pc(byKall[k]-byK.get(k,0), byKall[k]),
+             spc[k], sp[k], pc(spc[k], sp[k]), lkc[k], lk[k], pc(lkc[k], lk[k])))
+print("  all : %3d/%3d = %3.0f%%   %4d/%4d = %3.0f%%   %6.0f/%6.0f = %3.0f%%"
+      % (len(covered_hits), len(comps), pc(len(covered_hits), len(comps)),
+         sum(spc.values()), sum(sp.values()), pc(sum(spc.values()), sum(sp.values())),
+         sum(lkc.values()), sum(lk.values()), pc(sum(lkc.values()), sum(lk.values()))))
+print()
 print("=== K=2 compositions with NO published ATLAS bump hunt ===")
 for c,n,k in uncovered:
     if k==2: print("   %-6s (appears in %d exclusive categories)" % (c,n))
