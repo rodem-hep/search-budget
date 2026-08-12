@@ -41,17 +41,23 @@ Expected count = `N * p`:
 excesses >= 3 sigma** (every quoted global <= 2.1s), against 5.0 expected per background-only
 sweep of the 46-spectrum budget (8.9 at selection granularity).
 
-**Program-wide, >=3-sigma local excesses -- order tens, and essentially all faded with more data:**
-- 750 GeV diphoton (3.9s local, 2015) -> gone (2.1s global after LEE)
-- 2 TeV diboson WZ (3.4s, Run-1 8 TeV) -> gone
-- 95 GeV diphoton (~3s, ongoing), 151 GeV diphoton (~4.9s combined, debated)
-- ATLAS/CMS multilepton anomalies (~3s, debated), 400 GeV ttbar (3.5s)
-- "Digging Deeper" (1707.05783): ~4 surviving ~3s excesses hidden in jets+MET SUSY signal regions
-- tttt: evolved 3s -> 5s, but turned out **real** (SM four-top)
+**Program-wide, take the number from the curated catalogue** rather than from a list of remembered
+excesses: the LHC BSM Working Group maintains the list of excesses currently open, grouped by
+signature, admitting anything above **2.4 sigma local** whatever the search type:
+<https://lhc-bsm-wg.docs.cern.ch/excesses/> (steering committee, updated ~6-monthly). Of order 100
+entries, **none reaches 5 sigma** and **no quoted global exceeds ~2.8 sigma**.
 
-**>=5-sigma excesses -- every one is a genuine Standard-Model process**, none BSM:
-Higgs (2012), four-top tttt (2023), ttZ/ttW/ttH, VBS, single-top, etc.
-**Spurious BSM >=5-sigma: exactly zero.** Literature: "no BSM Z_local >= 4.5s ever observed" at ATLAS/CMS.
+Scope differences to respect before comparing it with our numbers:
+
+- it spans **ATLAS + CMS + LHCb** and mixes bump hunts with shape fits, SR counting and
+  unconventional signatures, so it is not the 46-axis basis;
+- it lists **open** excesses only, while the census keeps every paper;
+- it reads the **paper bodies**, so it carries ATLAS resonance excesses >=3 sigma that our abstract
+  mining misses (trigger-level dijet at 650 GeV, `A -> ZH -> llbb`, charged Higgs -> cb at 130 GeV).
+  Our 6 is therefore a floor.
+
+**>=5-sigma: every one is a genuine Standard-Model process**, none BSM. Spurious BSM >=5-sigma:
+exactly zero.
 
 ## 4. Verdict -- consistent with background
 | | expected (N~5e4) | observed |
