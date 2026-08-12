@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""The two-body object grid, priced in trials.
+
+A trials-costed version of the two-body coverage matrix of Kim, Kong, Nachman and Whiteson
+(arXiv:1907.06659, Table 14), which marks each pair of decay products as searched or not. Here each
+cell instead carries a number of independent looks: for a pair this catalogue scans, the looks
+already spent on it, summed over every canonical spectrum built from that pair; for a pair it does
+not, what one axis there would cost.
+
+The gap price cannot use a published window, because there is no published search to take one from,
+so it uses the convention of the combinatorial scan (combinatorial_budget.py): a 100 GeV-5 TeV
+two-body window and r = 1/2 sqrt(mean sigma^2) over the pair. The per-object sigma is not a new
+input either -- it is read back out of RESOLUTION via the symmetric channel of each object, so a
+change to a resolution there moves the prices here.
+
+Reads  scripts/bump_observables.py, scripts/public_obs_map.py (modules; no data files).
+Writes results/tex/two_body_matrix.tex, results/tables/two_body_matrix.csv.
+Pure standard library.
+"""
+import collections, csv, math, os, sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
+from bump_observables import (canon, CANON_ORDER, ns_scan, n_s, res,
+                              z_local_for_global5 as z5)
+from public_obs_map import PUBLIC_OBS
+
+def _p(*a): return os.path.join(ROOT, *a)
+
+# Table 14's alphabet and its order.
+OBJ = [("e", "$e$"), ("mu", r"$\mu$"), ("tau", r"$\tau$"), ("j", "$q/g$"), ("b", "$b$"),
+       ("t", "$t$"), ("ga", r"$\gamma$"), ("V", "$Z/W$"), ("H", "$H$")]
+KEYS = [k for k, _ in OBJ]
+
+# The object pair each canonical spectrum is a mass of. None = not a two-body mass of two of the
+# objects above: the transverse masses (a neutrino is not in the grid), the >=3-body axes, and the
+# multiplicity axes.
+PAIR = {
+    "m(gammagamma)": ("ga", "ga"), "m(ee)": ("e", "e"), "m(ee) (Zd)": ("e", "e"),
+    "m(ee) SS": ("e", "e"), "m(mumu)": ("mu", "mu"), "m(mumu) (Zd)": ("mu", "mu"),
+    "m(mumu) SS": ("mu", "mu"), "m(tautau)": ("tau", "tau"),
+    "m(emu) LFV": ("e", "mu"), "m(emu) SS": ("e", "mu"),
+    "m(etau) LFV": ("e", "tau"), "m(mutau) LFV": ("mu", "tau"),
+    "m(ej)": ("e", "j"), "m(muj)": ("mu", "j"), "m(tauj)": ("tau", "j"),
+    "m(eb)": ("e", "b"), "m(mub)": ("mu", "b"), "m(taub)": ("tau", "b"),
+    "m(egamma)": ("e", "ga"), "m(mugamma)": ("mu", "ga"), "m(jgamma)": ("j", "ga"),
+    "m(Vgamma)": ("V", "ga"),
+    "m(jj)": ("j", "j"), "m(cb) dijet": ("b", "j"), "m(bj)": ("b", "j"), "m(bb)": ("b", "b"),
+    "m(tt)": ("t", "t"), "m(tb)": ("t", "b"), "m(tt)/m(jj)": ("t", "t"),
+    "m(VV)": ("V", "V"), "m(Vh)": ("V", "H"), "m(HH)": ("H", "H"), "m(Ht)": ("H", "t"),
+    "m(Wb)": ("V", "b"), "m(tW)": ("t", "V"), "m(ttZ)/m(Zt)": ("t", "V"),
+    "m(eZ)": ("e", "V"), "m(muZ)": ("mu", "V"),
+    "multilepton": None, "m(3j)": None, "m(multi)": None,
+    "m(eejj)": None, "m(mumujj)": None,
+    "mT(ev)": None, "mT(muv)": None, "mT(taunu)": None,
+}
+
+# The symmetric channel each object's resolution is read from, so sigma is derived and not declared.
+SYM = {"e": "m(ee)", "mu": "m(mumu)", "tau": "m(tautau)", "j": "m(jj)", "b": "m(bb)",
+       "t": "m(tt)", "ga": "m(gammagamma)", "V": "m(VV)", "H": "m(HH)"}
+GAP_WINDOW = (100.0, 5000.0)     # the two-body window of combinatorial_budget.py
+
+# ------------------------------------------------------------------ the catalogue's 46 spectra
+by_obs = collections.defaultdict(set)
+for m, obss in PUBLIC_OBS.items():
+    for o in obss:
+        by_obs[canon(o)].add(m)
+order = [o for o in CANON_ORDER if o == canon(o) and o in by_obs]
+order += [o for o in sorted(by_obs) if o not in order]
+
+missing = [o for o in order if o not in PAIR]
+if missing:
+    raise SystemExit(f"no object pair classified for {missing}; extend PAIR")
+stale = [o for o in PAIR if o not in order]
+if stale:
+    raise SystemExit(f"PAIR names a spectrum that is not in the catalogue: {stale}")
+
+def cell(a, b):
+    return tuple(sorted((a, b), key=KEYS.index))
+
+spent = collections.defaultdict(float)      # looks already spent on each pair
+axes = collections.defaultdict(list)
+for o in order:
+    if PAIR[o] is None:
+        continue
+    c = cell(*PAIR[o])
+    spent[c] += ns_scan(o)
+    axes[c].append(o)
+
+# ------------------------------------------------------------------ the price of a gap
+sigma = {k: 2.0 * res(SYM[k]) for k in KEYS}
+
+def gap_price(a, b):
+    r = 0.5 * math.sqrt((sigma[a] ** 2 + sigma[b] ** 2) / 2.0)
+    return n_s(*GAP_WINDOW, r)
+
+cells = [cell(a, b) for i, a in enumerate(KEYS) for b in KEYS[i:]]
+gaps = [c for c in cells if c not in spent]
+gap_total = sum(gap_price(*c) for c in gaps)
+n_now = sum(ns_scan(o) for o in order)
+
+# ------------------------------------------------------------------ the table
+label = dict(OBJ)
+with open(_p("results", "tex", "two_body_matrix.tex"), "w") as f:
+    f.write("% Generated by scripts/two_body_matrix.py. Do not edit: regenerate instead.\n")
+    f.write("\\begin{tabular}{l" + "r" * len(KEYS) + "}\n\\toprule\n")
+    f.write(" & " + " & ".join(label[k] for k in KEYS) + " \\\\\n\\midrule\n")
+    for i, a in enumerate(KEYS):
+        row = [label[a]]
+        row += [""] * i
+        for b in KEYS[i:]:
+            c = cell(a, b)
+            row.append(f"{spent[c]:.0f}" if c in spent
+                       else f"\\textit{{({gap_price(*c):.0f})}}")
+        f.write(" & ".join(row) + " \\\\\n")
+    f.write("\\bottomrule\n\\end{tabular}\n")
+
+# ------------------------------------------------------------------ the machine-readable form
+with open(_p("results", "tables", "two_body_matrix.csv"), "w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["object_1", "object_2", "status", "ns", "n_axes", "axes"])
+    for c in cells:
+        if c in spent:
+            w.writerow([c[0], c[1], "scanned", f"{spent[c]:.1f}", len(axes[c]),
+                        "; ".join(sorted(axes[c]))])
+        else:
+            w.writerow([c[0], c[1], "gap", f"{gap_price(*c):.1f}", 0, ""])
+
+print(f"wrote results/tex/two_body_matrix.tex, results/tables/two_body_matrix.csv")
+print(f"{len(cells)} pairs: {len(spent)} scanned, {len(gaps)} with no axis in the catalogue")
+print(f"gaps: {sorted('-'.join(c) for c in gaps)}")
+print(f"closing every gap: N {n_now:,.0f} -> {n_now + gap_total:,.0f} "
+      f"(+{gap_total:,.0f}), Z {z5(n_now):.2f} -> {z5(n_now + gap_total):.2f}")

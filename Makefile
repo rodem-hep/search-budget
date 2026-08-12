@@ -24,6 +24,7 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md \
           $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md \
           $(X)/model_map_appendix.tex $(T)/model_spectrum_map.csv \
+          $(X)/two_body_matrix.tex $(T)/two_body_matrix.csv \
           $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md
 
 AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png
@@ -66,6 +67,9 @@ $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md &: $(S)/
 $(X)/model_map_appendix.tex $(T)/model_spectrum_map.csv &: $(S)/export_model_map_tex.py $(MOD) \
                                                  $(S)/obs_labels.py
 	$(PY) $(S)/export_model_map_tex.py
+# The two-body object grid, priced in trials: arXiv:1907.06659 Table 14 with prices for marks.
+$(X)/two_body_matrix.tex $(T)/two_body_matrix.csv &: $(S)/two_body_matrix.py $(MOD)
+	$(PY) $(S)/two_body_matrix.py
 # The observed excesses, mined from the census abstracts. fetch_census_abstracts.py refreshes
 # data/census_abstracts.csv from the arXiv API and, like the metadata fetch, is NOT a prerequisite.
 $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md &: $(S)/reported_excesses.py $(MOD) \
