@@ -127,6 +127,14 @@ N = 285,962, Z_local = 7.08
 the lenses cost nothing in coverage: axes and lens views together still fit the budget, and 4,686 further views are ruled out by statistics alone
 
 dataset scaled (the anchor is Run 2, 140 fb-1): spectra, N, Z_local, mass reach
-  Run 2, 140 fb-1      x1     3,603 of 21,644 histograms, N =   161,020, Z_local = 7.00, x1.00 in mass; with lenses  6,611 histograms, N =   285,962, Z_local = 7.08
-  Run 2+3, ~400 fb-1   x3     4,438 of 21,644 histograms, N =   201,136, Z_local = 7.03, x1.20 in mass; with lenses  8,211 histograms, N =   362,815, Z_local = 7.11
+  Run 2, 140 fb-1 (x1 the anchor, x1.00 in mass reach)
+    five objects      712 of  1,502 histograms, N =    34,837, Z_local = 6.78
+    ten objects     3,603 of 21,644 histograms, N =   161,020, Z_local = 7.00
+    with lenses     6,611 histograms, N =   285,962, Z_local = 7.08
+    motivated once     43 spectra in 36 categories over 36 compositions, N =     2,679, Z_local = 6.39
+  Run 2+3, ~400 fb-1 (x3 the anchor, x1.20 in mass reach)
+    five objects      755 of  1,502 histograms, N =    39,423, Z_local = 6.79
+    ten objects     4,438 of 21,644 histograms, N =   201,136, Z_local = 7.03
+    with lenses     8,211 histograms, N =   362,815, Z_local = 7.11
+    motivated once     45 spectra in 37 categories over 37 compositions, N =     2,921, Z_local = 6.40
 

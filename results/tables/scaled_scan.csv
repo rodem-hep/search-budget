@@ -6,3 +6,7 @@ scan,types,K_max,objects_per_category,trigger,categories,spectra,compositions,N_
 ... prioritised to N <= 5e+05,10,4,4,any,844,3603,217,161020,7.00,6.90,7.10
 "ten objects, with selection lenses",10,4,4,any,2412,6611,217,285962,7.08,6.98,7.18
 "... prioritised to N <= 5e+05, lenses included",10,4,4,any,844,6611,217,285962,7.08,6.98,7.18
+"five objects, lepton trigger (Run 2+3, ~400 fb-1)",5,4,4,lepton,204,755,53,39423,6.79,6.69,6.90
+"ten objects, any trigger (Run 2+3, ~400 fb-1)",10,4,4,any,2412,4438,258,201136,7.03,6.93,7.13
+"ten objects, with selection lenses (Run 2+3, ~400 fb-1)",10,4,4,any,2412,8211,258,362815,7.11,7.02,7.21
+"... model-motivated axes once each (Run 2+3, ~400 fb-1)",10,4,4,any,37,45,37,2921,6.40,6.29,6.51

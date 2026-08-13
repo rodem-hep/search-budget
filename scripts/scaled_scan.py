@@ -399,19 +399,34 @@ else:
 print()
 
 # The yield anchor is a Run-2 dataset, so a larger one enters exactly as the band above does. It buys
-# little reach per spectrum, the one-event mass going as luminosity^(1/(P-1)).
+# little reach per spectrum, the one-event mass going as luminosity^(1/(P-1)). Every variant of the
+# headline table is repriced per dataset, so the Run 2+3 table rows come from here.
+dataset_rows = []
 print(f"dataset scaled (the anchor is {DATASETS[0][0]}): spectra, N, Z_local, mass reach")
 for _label, _s in DATASETS:
     YM.N_REF = _n_ref * _s
+    _b = CB.enumerate_scan(**BASE)
     _r = CB.enumerate_scan(**WIDE_ARGS)
     _sp = [x for x in _r.rows if x.n_s > 0]
     _lv = [(_sp[i].split, lns) for i, _lk, _li, lns, fits in lens_views(_sp) if fits]
-    print(f"  {_label:20s} x{_s:<4g} {_r.n_hist:6,d} of {_r.n_hist + _r.n_thin:6,d} histograms, "
-          f"N = {_r.N:9,.0f}, Z_local = {z_local_for_global5(_r.N):.2f}, "
-          f"x{_s ** (1.0 / (YM.P - 1.0)):.2f} in mass; with lenses "
-          f"{_r.n_hist + sum(n for n, _ in _lv):6,d} histograms, "
-          f"N = {_r.N + sum(x for _, x in _lv):9,.0f}, "
-          f"Z_local = {z_local_for_global5(_r.N + sum(x for _, x in _lv)):.2f}")
+    _best = {}
+    for x in _sp:
+        _k = canon(x.group)
+        if _k in MOTIVATED_COMPS and (_k not in _best or x.w > _best[_k].w):
+            _best[_k] = x
+    _ln, _lN = _r.n_hist + sum(n for n, _ in _lv), _r.N + sum(x for _, x in _lv)
+    _t0_n, _t0_N = sum(x.split for x in _best.values()), sum(x.n_s for x in _best.values())
+    dataset_rows.append((_label, _s, _b, _r, _ln, _lN, _best))
+    print(f"  {_label} (x{_s:g} the anchor, x{_s ** (1.0 / (YM.P - 1.0)):.2f} in mass reach)")
+    print(f"    five objects   {_b.n_hist:6,d} of {_b.n_hist + _b.n_thin:6,d} histograms, "
+          f"N = {_b.N:9,.0f}, Z_local = {z_local_for_global5(_b.N):.2f}")
+    print(f"    ten objects    {_r.n_hist:6,d} of {_r.n_hist + _r.n_thin:6,d} histograms, "
+          f"N = {_r.N:9,.0f}, Z_local = {z_local_for_global5(_r.N):.2f}")
+    print(f"    with lenses    {_ln:6,d} histograms, "
+          f"N = {_lN:9,.0f}, Z_local = {z_local_for_global5(_lN):.2f}")
+    print(f"    motivated once {_t0_n:6,d} spectra in {len({x.cat for x in _best.values()})} "
+          f"categories over {len(_best)} compositions, "
+          f"N = {_t0_N:9,.0f}, Z_local = {z_local_for_global5(_t0_N):.2f}")
 YM.N_REF = _n_ref
 print()
 
@@ -437,6 +452,18 @@ with open(os.path.join(ROOT, "results", "tables", "scaled_scan.csv"), "w", newli
                    len(full.by_type), lensed_N))
     w.writerow(row(f"... prioritised to N <= {TRIALS_BUDGET:.0e}, lenses included",
                    VARIANTS[-1][1], len(L_cats), L_views, len(L_comps), L_N))
+    for _label, _s, _b, _r, _ln, _lN, _best in dataset_rows:
+        if _s == 1.0:
+            continue
+        w.writerow(row(f"five objects, lepton trigger ({_label})", VARIANTS[0][1], _b.n_cat,
+                       _b.n_hist, len(_b.by_type), _b.N))
+        w.writerow(row(f"ten objects, any trigger ({_label})", VARIANTS[-1][1], _r.n_cat,
+                       _r.n_hist, len(_r.by_type), _r.N))
+        w.writerow(row(f"ten objects, with selection lenses ({_label})", VARIANTS[-1][1],
+                       _r.n_cat, _ln, len(_r.by_type), _lN))
+        w.writerow(row(f"... model-motivated axes once each ({_label})", VARIANTS[-1][1],
+                       len({x.cat for x in _best.values()}), sum(x.split for x in _best.values()),
+                       len(_best), sum(x.n_s for x in _best.values())))
 
 with open(os.path.join(ROOT, "results", "tables", "priority_scan.csv"), "w", newline="") as f:
     w = csv.writer(f)
@@ -455,6 +482,7 @@ with open(os.path.join(ROOT, "results", "tables", "lens_scan.csv"), "w", newline
         w.writerow([label, rule, "" if cap is None else f"{cap:.0f}", lens_n[key],
                     f"{lens_N[key]:.0f}", L_lens_n[key], f"{L_lens_N[key]:.0f}"])
 
-print(f"\nwrote results/tables/scaled_scan.csv ({len(runs) + 4} rows), priority_scan.csv "
+print(f"\nwrote results/tables/scaled_scan.csv "
+      f"({len(runs) + 4 + 4 * (len(DATASETS) - 1)} rows), priority_scan.csv "
       f"({len(full.by_type)} compositions) and lens_scan.csv ({len(LENSES)} lenses)",
       file=sys.stderr)
