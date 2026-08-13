@@ -144,6 +144,45 @@ an unmotivated composition. 5842 of 36906 spectra survive, on 41 of 1990 composi
 axis, but the rare ones survive *only* through those: boosted H only in `m(HH)`, `m(Vh)`, `m(Ht)`, and
 MET only in the three transverse masses.
 
+### Selection lenses
+
+A lens is an extra event-level requirement laid over an unchanged mass axis: one more view of the same
+spectrum, one more histogram, one more look. Of the eight handles a wide search would reach for, four
+are **already inside the enumeration** and would be double counted: high MET is the category's met flag
+and an ingredient of the masses, high jet or lepton multiplicity is exactly what the exclusive
+categories are, and b-tag and tau enrichment are the `b` and `T` types of the alphabet. The four that
+are orthogonal to both the object content and the mass axis are priced:
+
+| lens | applies when | views added | looks added |
+|---|---|---|---|
+| high HT or Meff | the category holds an object outside the mass | 33288 | 1.81e6 |
+| displaced activity | the mass has two reconstructed objects | 32466 | 1.80e6 |
+| forward jet pair (VBF) | two of the four slots are free for the tag jets | 305 | 1.6e4 |
+| ISR jet | one slot free, and the window reaches below 200 GeV | 2950 | 2.4e4 |
+
+Every rule is deliberately conservative:
+
+* **one lens at a time**, never a product of two. Pairs would square the count;
+* a lens **leaves the axis, its resolution and its window alone**, so a lensed view costs the same
+  looks as its inclusive parent. The one exception is the ISR lens, which buys acceptance only at the
+  low-mass end and is therefore capped at 200 GeV, i.e. costs a fraction of a look;
+* the objects a lens needs **count against the same four-object ceiling**, which is what makes the VBF
+  lens rare: a forward tag pair fits only in a two-object category;
+* an HT or Meff threshold on a mass with nothing else in the event is a cut on the resonance mass
+  itself, not an independent look, so the lens requires activity outside the mass;
+* a displaced vertex needs something to displace, so the one-object-plus-MET transverse masses are
+  excluded.
+
+That is **2.9 histograms per spectrum**, taking the full ten-object scan to 105915 histograms and
+`N = 5.6e6` (`Z_local = 7.49`).
+
+Under the budget the lens views inherit their parent's tier and rate and rank immediately behind it, so
+the ordering of the previous section is unchanged and each spectrum is simply followed by its lenses.
+`N` is pinned at the budget, so `Z_local` stays at **7.16** and the lenses are paid for in **coverage**:
+2221 spectra with 4841 lens views (7062 histograms, 534 categories) instead of 5842 inclusive spectra
+over 1307 categories. Ordering all inclusive spectra ahead of every lens instead buys no lens at all,
+since the inclusive list alone leaves 23 of the 5e5 looks unspent.
+
 `composition_gap.py` then asks which of those flavour compositions any published ATLAS bump hunt
 has ever scanned. The coverage mapping is deliberately **generous** — a composition counts as
 covered if any published search scans a mass built from those object types, allowing a published

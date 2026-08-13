@@ -24,6 +24,11 @@ budget of TRIALS_BUDGET and asks which spectra survive it. Priority is, in order
 Expected rate is a declared order-of-magnitude weight per object type, multiplied over a category's
 content. Only the ordering of those weights matters for the ranking, not their values.
 
+The last part adds selection lenses: an extra event-level requirement on an unchanged mass axis, which
+is one more view of the same spectrum and one more look. Half the handles a wide search would use are
+already in the enumeration (high MET, object multiplicity, b-tag and tau enrichment) and would be
+double counted; the four that are not are priced one at a time, never in combination.
+
 Resolutions are not new inputs: each object's fractional sigma is read back out of the published
 resolution of its own symmetric channel, sigma = 2 r, as two_body_matrix.py does. Missing energy has
 no symmetric channel and is read out of mT(e,v) instead.
@@ -31,13 +36,14 @@ no symmetric channel and is read out of mT(e,v) instead.
 Reads  scripts/bump_observables.py (published resolutions), scripts/combinatorial_budget.py (rules).
 Writes results/tables/scaled_scan.csv    (one row per scan variant)
        results/tables/priority_scan.csv  (per composition: tier, spectra and looks, kept or dropped)
+       results/tables/lens_scan.csv      (per lens: what it adds, and what the budget keeps of it)
 Prints the report the Makefile captures as results/tables/scaled_scan.txt.
 """
 import os, sys, math, csv, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-from bump_observables import res, z_local_for_global5
+from bump_observables import res, n_s, z_local_for_global5
 import combinatorial_budget as CB
 
 TRIALS_BUDGET = 5.0e5
@@ -242,6 +248,84 @@ for c in sorted(kept_looks, key=lambda c: -kept_looks[c])[:15]:
     tag = "motivated" if c in MOTIVATED_COMPS else "by rate"
     print(f"  {c:6s} {kept_n[c]:6,d} of {full.by_type[c]:6,d} spectra, "
           f"{kept_looks[c]:9,.0f} looks   ({tag})")
+print()
+
+# ------------------------------------------------------------------ selection lenses
+# An extra event-level requirement on an unchanged mass axis is another view of the same spectrum, and
+# another look. Four of the handles a wide search would reach for are already inside this enumeration
+# and must not be counted twice: high MET is the category's met flag and an ingredient of the masses,
+# high jet or lepton multiplicity is what the exclusive categories are, and b-tag and tau enrichment
+# are the b and T types of the alphabet. The four below are orthogonal to the object content and to
+# the mass axis. Conservative on every count: one lens at a time and never a product of two, the lens
+# leaves the axis, its resolution and its window alone, and the objects a lens needs count against the
+# same four-object ceiling. k is the objects in the mass (MET excluded), n the objects in the category.
+ISR_MAX = 200.0                       # an ISR-recoil view buys acceptance only at the low-mass end
+LENSES = [
+    ("ht",   "high HT or Meff",    "activity outside the mass",
+     lambda k, n, lo: n > k, None),
+    ("disp", "displaced activity", "a mass of two reconstructed objects",
+     lambda k, n, lo: k >= 2, None),
+    ("vbf",  "forward jet pair",   "two free slots for the tag jets",
+     lambda k, n, lo: n <= 2, None),
+    ("isr",  "ISR jet",            "one free slot, and a low-mass end",
+     lambda k, n, lo: n <= 3 and lo < ISR_MAX, ISR_MAX),
+]
+
+items = []
+lens_n, lens_N = collections.Counter(), collections.Counter()
+for i, (cat, group, nh, rr, lo, hi, ns, rate, ncat) in enumerate(full.rows):
+    key, kobj = canon(group), len(group) - group.count(MET_KEY)
+    tier = 0 if i in once else 1 if key in MOTIVATED_COMPS else 2
+    items.append((tier, -rate, 0, ns, key, cat, nh, ""))
+    for li, (lk, _label, _rule, ok, cap) in enumerate(LENSES, 1):
+        if not ok(kobj, ncat, lo):
+            continue
+        lns = ns if cap is None else n_s(lo, min(hi, cap), rr) * nh
+        items.append((max(tier, 1), -rate, li, lns, key, cat, nh, lk))
+        lens_n[lk] += nh
+        lens_N[lk] += lns
+items.sort(key=lambda x: (x[0], x[1], x[2], x[3]))
+lensed_n, lensed_N = full.n_hist + sum(lens_n.values()), full.N + sum(lens_N.values())
+
+L_N, L_views, L_spec, L_stop = 0.0, 0, 0, False
+L_comps, L_cats = set(), set()
+L_lens_n, L_lens_N = collections.Counter(), collections.Counter()
+for tier, negrate, li, ns, key, cat, nh, lk in items:
+    if L_stop or L_N + ns > TRIALS_BUDGET:
+        L_stop = True
+        continue
+    L_N += ns
+    L_views += nh
+    L_comps.add(key)
+    L_cats.add(cat)
+    if li == 0:
+        L_spec += nh
+    else:
+        L_lens_n[lk] += nh
+        L_lens_N[lk] += ns
+
+print("selection lenses on the same axes, one at a time:")
+for key, label, rule, _ok, cap in LENSES:
+    print(f"  {label:20s} {rule:38s} {lens_n[key]:7,d} views {lens_N[key]:10,.0f} looks"
+          f"{'' if cap is None else f'  (window capped at {cap:.0f} GeV)'}")
+print(f"  {'all four':20s} {'':38s} {sum(lens_n.values()):7,d} views "
+      f"{sum(lens_N.values()):10,.0f} looks")
+print(f"the ten-object scan with lenses: {lensed_n:,} histograms "
+      f"({lensed_n/full.n_hist:.1f} per spectrum), N = {lensed_N:,.0f}, "
+      f"Z_local = {z_local_for_global5(lensed_N):.2f}")
+print()
+print(f"=== priority prefix with lenses that fits N <= {TRIALS_BUDGET:,.0f}")
+print(f"selected {L_spec:,} of {full.n_hist:,} spectra ({100*L_spec/full.n_hist:.1f} %) plus "
+      f"{L_views - L_spec:,} lens views of them: {L_views:,} histograms "
+      f"({100*L_views/lensed_n:.1f} % of the lensed scan) over {len(L_comps)} compositions and "
+      f"{len(L_cats):,} of {full.n_cat:,} categories")
+print(f"N = {L_N:,.0f}, Z_local = {z_local_for_global5(L_N):.2f}")
+for key, label, _rule, _ok, _cap in LENSES:
+    print(f"  {label:20s} {L_lens_n[key]:7,d} of {lens_n[key]:7,d} views kept "
+          f"({100*L_lens_n[key]/lens_n[key]:4.1f} %), {L_lens_N[key]:9,.0f} looks")
+print(f"the same budget with no lens at all reaches {n_sel:,} spectra, so the lenses are paid for in "
+      f"coverage: {n_sel - L_spec:,} fewer axes-in-categories for {L_views - L_spec:,} lens views of "
+      f"the ones that remain")
 
 # ------------------------------------------------------------------ tables
 hdr = ("scan", "types", "K_max", "objects_per_category", "MET_in_mass", "trigger", "categories",
@@ -261,6 +345,10 @@ with open(os.path.join(ROOT, "results", "tables", "scaled_scan.csv"), "w", newli
                    len(MOTIVATED_COMPS & set(full.by_type)), tierA_N))
     w.writerow(row(f"... prioritised to N <= {TRIALS_BUDGET:.0e}", VARIANTS[-1][1], len(kept_cats),
                    n_sel, len(kept_n), N_sel))
+    w.writerow(row("ten objects, with selection lenses", VARIANTS[-1][1], full.n_cat, lensed_n,
+                   len(full.by_type), lensed_N))
+    w.writerow(row(f"... prioritised to N <= {TRIALS_BUDGET:.0e}, lenses included",
+                   VARIANTS[-1][1], len(L_cats), L_views, len(L_comps), L_N))
 
 with open(os.path.join(ROOT, "results", "tables", "priority_scan.csv"), "w", newline="") as f:
     w = csv.writer(f)
@@ -271,5 +359,14 @@ with open(os.path.join(ROOT, "results", "tables", "priority_scan.csv"), "w", new
                     full.by_type[c], kept_n.get(c, 0), f"{full.looks[c]:.0f}",
                     f"{kept_looks.get(c, 0.0):.0f}"])
 
-print(f"\nwrote results/tables/scaled_scan.csv ({len(runs) + 2} rows) and priority_scan.csv "
-      f"({len(full.by_type)} compositions)", file=sys.stderr)
+with open(os.path.join(ROOT, "results", "tables", "lens_scan.csv"), "w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["lens", "requirement", "window_cap_GeV", "views_added", "looks_added", "views_kept",
+                "looks_kept"])
+    for key, label, rule, _ok, cap in LENSES:
+        w.writerow([label, rule, "" if cap is None else f"{cap:.0f}", lens_n[key],
+                    f"{lens_N[key]:.0f}", L_lens_n[key], f"{L_lens_N[key]:.0f}"])
+
+print(f"\nwrote results/tables/scaled_scan.csv ({len(runs) + 4} rows), priority_scan.csv "
+      f"({len(full.by_type)} compositions) and lens_scan.csv ({len(LENSES)} lenses)",
+      file=sys.stderr)

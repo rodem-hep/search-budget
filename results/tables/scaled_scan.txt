@@ -127,3 +127,20 @@ costliest compositions that are kept:
   bm        248 of    254 spectra,    12,272 looks   (motivated)
   Xe        302 of    507 spectra,    11,814 looks   (motivated)
   mm        151 of    254 spectra,    11,814 looks   (motivated)
+
+selection lenses on the same axes, one at a time:
+  high HT or Meff      activity outside the mass               33,288 views  1,809,119 looks
+  displaced activity   a mass of two reconstructed objects     32,466 views  1,803,398 looks
+  forward jet pair     two free slots for the tag jets            305 views     15,999 looks
+  ISR jet              one free slot, and a low-mass end        2,950 views     24,111 looks  (window capped at 200 GeV)
+  all four                                                     69,009 views  3,652,627 looks
+the ten-object scan with lenses: 105,915 histograms (2.9 per spectrum), N = 5,608,113, Z_local = 7.49
+
+=== priority prefix with lenses that fits N <= 500,000
+selected 2,221 of 36,906 spectra (6.0 %) plus 4,841 lens views of them: 7,062 histograms (6.7 % of the lensed scan) over 41 compositions and 534 of 2,412 categories
+N = 499,785, Z_local = 7.16
+  high HT or Meff        2,135 of  33,288 views kept ( 6.4 %),   159,026 looks
+  displaced activity     1,968 of  32,466 views kept ( 6.1 %),   157,071 looks
+  forward jet pair         115 of     305 views kept (37.7 %),     8,138 looks
+  ISR jet                  623 of   2,950 views kept (21.1 %),     8,802 looks
+the same budget with no lens at all reaches 5,842 spectra, so the lenses are paid for in coverage: 3,621 fewer axes-in-categories for 4,841 lens views of the ones that remain

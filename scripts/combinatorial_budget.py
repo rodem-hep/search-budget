@@ -116,7 +116,8 @@ def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, kmax=KMAX, co
                     looks[key] += ns
                     if collect:
                         rows.append(("".join(f"{t}{c.n[t]}" for t in order) + f"_{c.met}met",
-                                     "".join(group), c.os_ss, r, lo, hi, ns, w))
+                                     "".join(group), c.os_ss, r, lo, hi, ns, w,
+                                     sum(c.n.values())))
     # Two category counts, and they differ by the OS/SS split of the same-flavour dilepton cases:
     # quote them together, since N_trials counts an OS and an SS look separately.
     return Scan(rows, N_trials, len(cats), sum(c.os_ss for c in cats), n_hist, by_size, by_type,

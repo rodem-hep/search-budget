@@ -22,7 +22,7 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(P)/search_budget.png $(P)/budget_waterfall.png $(P)/excess_counting.png \
           $(T)/combinatorial_budget.csv $(T)/composition_gap.txt \
           $(X)/composition_appendix.tex \
-          $(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/scaled_scan.txt \
+          $(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv $(T)/scaled_scan.txt \
           $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md \
           $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md \
           $(X)/model_map_appendix.tex $(T)/model_spectrum_map.csv \
@@ -85,8 +85,9 @@ $(T)/composition_gap.txt $(X)/composition_appendix.tex &: $(T)/combinatorial_bud
                                                  $(S)/composition_gap.py $(S)/obs_labels.py
 	$(PY) $(S)/composition_gap.py > $(T)/composition_gap.txt
 # The same scan over the wider object alphabet (hadronic taus, photons, boosted W/Z, H and top, MET
-# in the masses), and the priority order that fits it into a fixed trials budget.
-$(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/scaled_scan.txt &: $(S)/scaled_scan.py \
+# in the masses), the selection lenses on top of it, and the priority order that fits a trials budget.
+$(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv $(T)/scaled_scan.txt &: \
+                                                 $(S)/scaled_scan.py \
                                                  $(S)/combinatorial_budget.py $(MOD)
 	$(PY) $(S)/scaled_scan.py > $(T)/scaled_scan.txt
 
