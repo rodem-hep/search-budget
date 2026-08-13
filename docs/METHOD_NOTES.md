@@ -85,9 +85,9 @@ implementation:
   `j0j1`, `j0j2`, `j1j2` are three groups.
 
 That gives **150** multiplicity categories (204 after the OS/SS split) and **1094**
-(category, mass-group) combinations, 1502 histograms after the same split. `N` counts the
-OS/SS-split histograms, so quote the two together — the pairing of an unsplit category count with a
-split `N` is the easy mistake here.
+(category, mass-group) combinations, 1502 histograms after the same split, of which **712** hold
+enough events to be fitted (next section). `N` counts the OS/SS-split histograms, so quote the two
+together — the pairing of an unsplit category count with a split `N` is the easy mistake here.
 
 Per-group resolution comes from the object composition, `r = ½·sqrt(⟨sigma_i²⟩)` with fractional
 p_T resolutions `sigma(e/mu/Z) = 0.04`, `sigma(j) = 0.10`, `sigma(b) = 0.20`; this reproduces the
@@ -97,6 +97,53 @@ Note the ½ prefactor is an empirical calibration to those channels, not textboo
 independent of group size — a 4-body mass is assumed as sharp as a 2-body one. Both choices only
 move `ln N`.
 
+### Only fittable histograms are counted
+
+A trials count may contain only histograms a search could actually fit, so `yield_model.py` imposes
+one requirement wherever a spectrum is hypothetical: **at least 100 events, and at least 25 bins
+holding one event or more**, with one bin = one resolution element, the unit `n_s` is built from.
+
+The yield model behind it is declared and order-of-magnitude. Every background here is a steeply
+falling mass spectrum, so
+
+```
+n(m) = N_REF · W · (m/M_REF)^(1-P) · (r/R_REF)     events in one resolution element
+```
+
+with `N_REF = 1e6` events per element in the light-jet pair spectrum at `M_REF = 1 TeV` for a Run-2
+dataset, `R_REF = 0.05` the resolution that anchor is quoted at, `P = 7`, and `W` the product of a
+per-object factor `F` relative to a light jet. A sharper channel has narrower bins and therefore
+fewer events in each, which is the `r/R_REF`.
+
+`F` is **statistics, not signal cross section**: a histogram's content is its background, so a tagged
+hadronic object costs its mistag rate and a lepton or genuine MET costs the price of an electroweak
+process against QCD. The factors (`j` 1, `b` 0.1, `V`/`t` 0.02, `H` 0.01, `γ` 4e-3, `τ_h` 3.5e-3,
+`e`/`μ`/MET 3e-3, leptonic `Z` 1e-5) are set so the model reproduces the published symmetric channel
+of each type to an order of magnitude: run `python3 scripts/yield_model.py` for that table.
+
+Because `n(m)` falls, the populated part of a window is a prefix of it, so the requirement acts by
+**truncating each window at the one-event mass** and dropping the spectrum when fewer than 25 elements
+survive. The 25-element test is what binds; at this slope a spectrum with 25 populated elements holds
+far more than 100 events.
+
+Three honest caveats, and all three err towards more looks rather than fewer:
+
+* a single power law overestimates yields below a few hundred GeV, where real spectra turn over, which
+  can only make the 100-event test easier;
+* it puts the one-event mass of the dijet spectrum at 10 TeV against a published fit stopping near 8;
+* the factorised form charges every object the full price of its own production, while real objects
+  arrive in pairs from one boson, so it *under*-counts high-multiplicity leptonic categories. This is
+  the one caveat in the other direction, and the yield-anchor band below is the answer to it.
+
+**Published windows are never gated**: a published search demonstrates its own feasibility. The size
+of that exemption is printed — applied to the 42 published axes this alphabet can form, the
+requirement would leave 31 of them and `N = 2566` of 3573.
+
+The requirement is a large cut on the enumeration and a small one on the bar. Scaling the yield anchor
+by ×100 and ×0.01 moves the ten-object scan over `1284 … 7768` fittable spectra out of 21644 and
+`Z_local` over `6.84 … 7.12`, i.e. four orders of magnitude in assumed statistics for ±0.14σ. Breadth
+enters through `ln N`, and that is why the answer survives a model this crude.
+
 ### The scaled-up scan and its trials budget
 
 `scaled_scan.py` runs the same enumeration over the alphabet a general search would actually have,
@@ -105,60 +152,58 @@ scan, all of them design choices:
 
 * **ten object types** — e, mu, hadronic tau, photon, light jet, b-jet, boosted top, boosted W/Z,
   boosted H, leptonic Z — with **no per-type ceiling**, since those describe one particular grid;
-* **strictly at most four objects per category**, and **MET does not count against that four**: it
-  may be a fifth ingredient of a mass, so one object plus MET is already a transverse mass. MET does
-  count as one constituent when picking the window class, and four is the widest class;
+* **strictly at most four objects per category**, MET excluded, since MET splits every category but is
+  **never an ingredient of a mass**: no transverse mass is formed, so the `mT` axes of the model-driven
+  budget are outside this scan's reach. A category requiring MET carries its yield factor;
 * **any trigger**: a category needs no lepton;
 * resolutions are **derived, not declared**: `sigma = 2r` of each object's own symmetric published
   channel (`m(ee)` → 0.030, `m(tautau)` → 0.24, `m(gammagamma)` → 0.02, ...), which is the inversion
-  `two_body_matrix.py` uses. MET has no symmetric channel and is read out of `mT(ev)` instead, giving
-  `sigma(MET) = 0.28`; that value reproduces `mT(muv)` at 0.105 against a published 0.15, i.e. it
-  errs towards more looks rather than fewer.
+  `two_body_matrix.py` uses.
 
-That scan is **2.0e6 looks**, which nobody would run, so the budget: `TRIALS_BUDGET = 5e5`. Spectra
-are ordered by priority and the scan is the longest prefix that fits, stopping at the first spectrum
-that does not (rather than topping up with whatever cheap spectrum still fits the remainder). The
-priority is:
+The enumeration is 2412 categories and 21644 possible histograms; **3603** of them can be fitted, at
+`N = 1.6e5` and `Z_local = 7.00`. The priority order below is the policy for cutting a scan down to
+`TRIALS_BUDGET = 5e5`: spectra are ordered and the scan is the longest prefix that fits, stopping at the
+first spectrum that does not (rather than topping up with whatever cheap spectrum still fits the
+remainder).
 
 0. **every model-motivated axis once**, in the best-populated category it appears in, so no motivated
    axis can be lost to the budget. `MOTIVATED` maps each of the 46 observables of the model-driven
-   budget onto the composition(s) a scan would build it from; 45 of them have one, `m(multi)` has no
-   fixed composition, and they collapse onto **41 distinct compositions**;
-1. **those same axes in their remaining categories**, highest expected rate first;
-2. **everything else**, highest expected rate first.
+   budget onto the composition(s) a scan would build it from; 42 of them have one (`m(multi)` has no
+   fixed composition, and the three `mT` axes need MET in the mass), and they collapse onto **38
+   distinct compositions**, of which 36 can be fitted somewhere (`m(tautau)` and `m(Zt)` cannot);
+1. **those same axes in their remaining categories**, highest yield first;
+2. **everything else**, highest yield first.
 
-Expected rate is a declared **order-of-magnitude weight per object type**, multiplied over the
-category's content (`j` 1, `b` 0.1, MET 0.3, photon 1e-3, e/mu 1e-4, boosted V 1e-4, tau_had 3e-5,
-boosted top 3e-5, leptonic Z 1e-5, boosted H 1e-6). Only their **ordering** matters to the ranking,
-not the values. Tier 0 costs 4.2e3 looks, within 15 % of the 3.7e3 of the model-driven budget, which
-is the one place the two prescriptions can be checked against each other.
+Yield is `yield_model.F` multiplied over the category's content, i.e. the same model that decides
+fittability, so "best-populated first" means most background events. Tier 0 costs 2.7e3 looks against
+the 3.7e3 of the model-driven budget, which is the one place the two prescriptions can be checked
+against each other.
 
 Counting basis: a *spectrum* here is one axis in one category, i.e. one fitted histogram, and an
 OS/SS-split category holds two of them. `charge_split` is therefore the weight in every spectrum count
-below, exactly as in `N` — mixing the row count (30030 `(category, mass-group)` pairs) with the
-histogram count (36906) is the easy mistake.
+below, exactly as in `N` — mixing the row count (17600 `(category, mass-group)` pairs) with the
+histogram count is the easy mistake.
 
-The outcome: **tiers 0 and 1 together are 7.1e5, already 1.4x the budget**, so the scan never reaches
-an unmotivated composition. 5842 of 36906 spectra survive, on 41 of 1990 compositions, at
-`Z_local = 7.16`. No object type is dropped outright, because each appears in at least one motivated
-axis, but the rare ones survive *only* through those: boosted H only in `m(HH)`, `m(Vh)`, `m(Ht)`, and
-MET only in the three transverse masses.
+**The outcome is that the budget never binds.** The whole fittable scan is 1.6e5 looks, and with the
+lenses of the next section 2.9e5, both inside 5e5, so no spectrum has to be dropped and the priority
+order is never applied. What limits a scaled-up scan is statistics, not the trials factor: 18041 of the
+21644 histograms cannot be fitted, while the 3603 that can cost a bar of `Z_local = 7.00`.
 
 ### Selection lenses
 
 A lens is an extra event-level requirement laid over an unchanged mass axis: one more view of the same
 spectrum, one more histogram, one more look. Of the eight handles a wide search would reach for, four
-are **already inside the enumeration** and would be double counted: high MET is the category's met flag
-and an ingredient of the masses, high jet or lepton multiplicity is exactly what the exclusive
-categories are, and b-tag and tau enrichment are the `b` and `T` types of the alphabet. The four that
-are orthogonal to both the object content and the mass axis are priced:
+are **already inside the enumeration** and would be double counted: high MET is the category's met
+split, high jet or lepton multiplicity is exactly what the exclusive categories are, and b-tag and tau
+enrichment are the `b` and `T` types of the alphabet. The four that are orthogonal to both the object
+content and the mass axis are priced:
 
-| lens | applies when | views added | looks added |
-|---|---|---|---|
-| high HT or Meff | the category holds an object outside the mass | 33288 | 1.81e6 |
-| displaced activity | the mass has two reconstructed objects | 32466 | 1.80e6 |
-| forward jet pair (VBF) | two of the four slots are free for the tag jets | 305 | 1.6e4 |
-| ISR jet | one slot free, and the window reaches below 200 GeV | 2950 | 2.4e4 |
+| lens | applies when | efficiency | views | looks | ruled out by statistics |
+|---|---|---|---|---|---|
+| high HT or Meff | the category holds an object outside the mass | 0.1 | 2134 | 9.0e4 | 1145 |
+| displaced activity | any reconstructed mass | 1e-3 | 743 | 2.9e4 | 2860 |
+| forward jet pair (VBF) | two of the four slots are free for the tag jets | 0.02 | 53 | 2.7e3 | 29 |
+| ISR jet | one slot free, and the window reaches below 200 GeV | 0.2 | 78 | 4.0e3 | 652 |
 
 Every rule is deliberately conservative:
 
@@ -170,18 +215,13 @@ Every rule is deliberately conservative:
   lens rare: a forward tag pair fits only in a two-object category;
 * an HT or Meff threshold on a mass with nothing else in the event is a cut on the resonance mass
   itself, not an independent look, so the lens requires activity outside the mass;
-* a displaced vertex needs something to displace, so the one-object-plus-MET transverse masses are
-  excluded.
+* a lens **costs the statistics of its own requirement** (`yield_model.LENS_EFF`) and the view then has
+  to pass the same fittability test, which is what removes most of them: 4686 of the 7694 possible views
+  are ruled out by statistics, the displaced lens worst of all at an efficiency of 1e-3.
 
-That is **2.9 histograms per spectrum**, taking the full ten-object scan to 105915 histograms and
-`N = 5.6e6` (`Z_local = 7.49`).
-
-Under the budget the lens views inherit their parent's tier and rate and rank immediately behind it, so
-the ordering of the previous section is unchanged and each spectrum is simply followed by its lenses.
-`N` is pinned at the budget, so `Z_local` stays at **7.16** and the lenses are paid for in **coverage**:
-2221 spectra with 4841 lens views (7062 histograms, 534 categories) instead of 5842 inclusive spectra
-over 1307 categories. Ordering all inclusive spectra ahead of every lens instead buys no lens at all,
-since the inclusive list alone leaves 23 of the 5e5 looks unspent.
+What survives is **1.8 histograms per spectrum**, taking the ten-object scan to 6611 histograms and
+`N = 2.9e5` (`Z_local = 7.08`), still inside the 5e5 budget. Lens views inherit their parent's tier and
+yield and rank immediately behind it, so with nothing to cut the ordering never matters here either.
 
 `composition_gap.py` then asks which of those flavour compositions any published ATLAS bump hunt
 has ever scanned. The coverage mapping is deliberately **generous** — a composition counts as

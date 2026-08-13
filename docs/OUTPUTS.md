@@ -27,7 +27,7 @@ the only ones that are not part of `make all`.
 |---|---|
 | `search_budget.csv` | `search_budget.py` — one row per spectrum: `r`, floor, window, `n_s`, envelope, models, selections |
 | `search_budget_selections.csv` | `search_budget.py` — the event-selection multiplicity per spectrum |
-| `combinatorial_budget.csv` | `combinatorial_budget.py` — 1094 (category, mass-group) rows |
+| `combinatorial_budget.csv` | `combinatorial_budget.py` — 1094 (category, mass-group) rows, with the window truncated at its one-event mass and `n_s = 0` where the histogram cannot be fitted |
 | `published_census.csv` | `published_census.py` |
 | `reported_excesses.csv` | `reported_excesses.py` — per paper: largest quoted local/global significance and the abstract sentence behind it |
 | `composition_gap.txt` | `composition_gap.py` (also writes the LaTeX fragment below) |
@@ -77,5 +77,6 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 |---|---|
 | `bump_observables.py` | observables, resolutions, analyzable floors, published scan windows + sources, same-axis merges, the lepton-flavour split, the LEE math |
 | `public_obs_map.py` | public model → spectrum map, published event-selection counts (`NSEL`) |
+| `yield_model.py` | the fittability requirement (≥100 events, ≥25 elements of ≥1 event), the declared background-yield model behind it and the per-lens efficiencies. Run it for the calibration table |
 | `plot_style.py` | the shared palette and axis style of the statistics figures |
 | `obs_labels.py` | the observable keys rendered as physics, shared by the figures and the LaTeX tables (standard library only) |

@@ -82,14 +82,21 @@ print()
 
 # Same coverage question weighted by what the scan actually histograms, and by what it costs:
 # a composition is one final state, but it recurs across categories and object indices.
+# Only histograms the scan could fit count as spectra: a row with no looks is one the rate cannot fill.
 sp   = collections.Counter(); spc = collections.Counter()
 lk   = collections.Counter(); lkc = collections.Counter()
+thin = collections.Counter()
 for r in rows:
     k, w, ns = len(r["group"]), int(r["charge_split"]), float(r["n_s"])
+    if ns == 0.0:
+        thin[k] += w
+        continue
     sp[k] += w; lk[k] += ns
     if norm(r["group"]) in covered_set:
         spc[k] += w; lkc[k] += ns
 pc = lambda a, b: 100.0 * a / b if b else 0.0
+print("too thin to fit (no window with 25 elements of >=1 event): %d histograms"
+      % sum(thin.values()))
 print("covered fraction  compositions / spectra / looks")
 for k in sorted(sp):
     print("  K=%d : %3d/%3d = %3.0f%%   %4d/%4d = %3.0f%%   %6.0f/%6.0f = %3.0f%%"
@@ -147,7 +154,8 @@ those object types. This is the row-by-row form of Table~\\ref{{tab:compgap}}: t
 so its counts can be checked rather than taken on trust.
 
 \\emph{{cat.}} is the number of exclusive multiplicity categories the composition occurs in, and
-\\emph{{looks}} the independent looks the scan spends on it, summed over those categories. Coverage
+\\emph{{looks}} the independent looks the scan spends on it, summed over those categories; zero looks
+means no category of it holds a histogram with the events to support a fit. Coverage
 is assigned as generously as can be defended: any published ATLAS search scanning a mass of those
 object types counts, and a published $V$ may stand for a $Z$, a $jj$ pair or an $\\ell\\ell$ pair. The
 uncovered set is therefore a lower bound on the gap. Two entries are covered only by an $8\\TeV$

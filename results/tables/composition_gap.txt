@@ -7,11 +7,12 @@ K : uncovered / total
   K=3 :  21 /  28
   K=4 :  36 /  40
 
+too thin to fit (no window with 25 elements of >=1 event): 790 histograms
 covered fraction  compositions / spectra / looks
-  K=2 :  14/ 14 = 100%    886/ 886 = 100%    96712/ 96712 = 100%
-  K=3 :   7/ 28 =  25%     88/ 506 =  17%     9811/ 39845 =  25%
-  K=4 :   4/ 40 =  10%     14/ 110 =  13%      939/  6510 =  14%
-  all :  25/ 82 =  30%    988/1502 =  66%   107462/143067 =  75%
+  K=2 :  14/ 14 = 100%    479/ 479 = 100%    25398/ 25398 = 100%
+  K=3 :   7/ 28 =  25%     22/ 201 =  11%      860/  8280 =  10%
+  K=4 :   4/ 40 =  10%     13/  32 =  41%      481/  1158 =  42%
+  all :  25/ 82 =  30%    514/ 712 =  72%    26740/ 34836 =  77%
 
 === K=2 compositions with NO published ATLAS bump hunt ===
 

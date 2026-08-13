@@ -1,9 +1,8 @@
-scan,types,K_max,objects_per_category,MET_in_mass,trigger,categories,spectra,compositions,N_trials,Z_local,Z_lo,Z_hi
-"five objects, lepton trigger",5,4,4,no,lepton,204,1502,82,143077,6.98,6.88,7.08
-"five objects, derived sigma",5,4,4,no,lepton,204,1502,82,121291,6.96,6.86,7.06
-"ten objects, MET a split only",10,4,4,no,any,2412,21644,990,1480538,7.31,7.21,7.40
-"ten objects, MET in the masses",10,4,4,yes,any,2412,36906,1990,1955486,7.35,7.25,7.44
-... model-motivated axes only,10,4,4,yes,any,41,49,41,706970,7.21,7.11,7.30
-... prioritised to N <= 5e+05,10,4,4,yes,any,1307,5842,41,499977,7.16,7.06,7.25
-"ten objects, with selection lenses",10,4,4,yes,any,2412,105915,1990,5608113,7.49,7.40,7.58
-"... prioritised to N <= 5e+05, lenses included",10,4,4,yes,any,534,7062,41,499785,7.16,7.06,7.25
+scan,types,K_max,objects_per_category,trigger,categories,spectra,compositions,N_trials,Z_local,Z_lo,Z_hi
+"five objects, lepton trigger",5,4,4,lepton,204,712,51,34837,6.78,6.67,6.88
+"five objects, derived sigma",5,4,4,lepton,204,663,49,29877,6.75,6.65,6.86
+"ten objects, any trigger",10,4,4,any,2412,3603,217,161020,7.00,6.90,7.10
+... model-motivated axes once each,10,4,4,any,36,43,36,2679,6.39,6.28,6.49
+... prioritised to N <= 5e+05,10,4,4,any,844,3603,217,161020,7.00,6.90,7.10
+"ten objects, with selection lenses",10,4,4,any,2412,6611,217,285962,7.08,6.98,7.18
+"... prioritised to N <= 5e+05, lenses included",10,4,4,any,844,6611,217,285962,7.08,6.98,7.18

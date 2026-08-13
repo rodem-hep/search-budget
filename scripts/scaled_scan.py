@@ -3,14 +3,12 @@
 
 The five-object scan of combinatorial_budget.py reaches e, mu, light jets, b-jets and a leptonic Z. A
 scan built on today's reconstruction would also form masses from hadronic taus, photons and the
-boosted large-R candidates for W/Z, H and top, and it would use missing energy as an ingredient of
-transverse masses rather than only as a category split. Rules:
+boosted large-R candidates for W/Z, H and top. Rules:
 
   * ten object types, no per-type ceiling, and STRICTLY at most four objects per category;
-  * missing energy does not count against those four and may be a fifth ingredient of a mass, so one
-    object plus it is already a transverse mass;
-  * every 2-to-4-object subset of a category is its own spectrum, as is every 1-to-4-object subset
-    with missing energy added;
+  * missing energy splits every category and is never an ingredient of a mass, so the transverse-mass
+    axes of the model-driven budget are outside this scan's reach;
+  * every 2-to-4-object subset of a category is its own spectrum;
   * any trigger: a category needs no lepton;
   * same-flavour dilepton categories still split OS/SS.
 
@@ -43,43 +41,39 @@ import os, sys, math, csv, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-from bump_observables import res, n_s, z_local_for_global5
+from bump_observables import res, n_s, scan_segments, z_local_for_global5
 import combinatorial_budget as CB
+import yield_model as YM
 
 TRIALS_BUDGET = 5.0e5
 
 # ------------------------------------------------------------------ the wider alphabet
-# key -> (label, symmetric channel the resolution comes from, mass-floor contribution in GeV,
-#         order-of-magnitude rate weight relative to a light jet)
+# key -> (label, mass-floor contribution in GeV). The symmetric channel each resolution is read from
+# and the yield factor each object carries are yield_model.SYM and yield_model.F.
 WIDE = {
-    "e": ("e",             "m(ee)",         None,  1e-4),   # W/Z leptonic decay x acceptance
-    "m": ("mu",            "m(mumu)",       None,  1e-4),
-    "T": ("tau_had",       "m(tautau)",     None,  3e-5),   # ... x hadronic BR x tau ID
-    "g": ("gamma",         "m(gammagamma)", None,  1e-3),   # prompt photon vs jet production
-    "j": ("light jet",     "m(jj)",         None,  1.0),    # the reference
-    "b": ("b-jet",         "m(bb)",         None,  0.1),    # b fraction of a jet sample
-    "t": ("boosted top",   "m(tt)",         173.0, 3e-5),   # top pair x boost x large-R tagging
-    "V": ("boosted W/Z",   "m(VV)",          91.2, 1e-4),   # hadronic V x boost
-    "H": ("boosted H",     "m(HH)",         125.0, 1e-6),   # Higgs production x H->bb x boost
-    "Z": ("leptonic Z",     None,            91.2, 1e-5),   # Z x BR(ll)
-    "X": ("MET",           "mT(ev)",        None,  0.3),    # events with significant MET
+    "e": ("e",           None),
+    "m": ("mu",          None),
+    "T": ("tau_had",     None),
+    "g": ("gamma",       None),
+    "j": ("light jet",   None),
+    "b": ("b-jet",       None),
+    "t": ("boosted top", 173.0),
+    "V": ("boosted W/Z",  91.2),
+    "H": ("boosted H",   125.0),
+    "Z": ("leptonic Z",   91.2),
+    "X": ("MET",         None),
 }
-MET_KEY    = "X"
+MET_KEY    = "X"                                 # a category split and a yield factor, never a mass
 ORDER_WIDE = "emTgjbtVHZ"                        # MET is not an entry: it is the category's met flag
 KMAX_WIDE  = 4                                   # objects per mass combination, MET excluded
 NOBJ_WIDE  = 4                                   # objects per category, strictly
 NMAX_WIDE  = {k: NOBJ_WIDE for k in ORDER_WIDE}  # no per-type ceiling
-MASS_WIDE  = {k: m for k, (_, _, m, _) in WIDE.items() if m is not None}
-WEIGHT     = {k: w for k, (_, _, _, w) in WIDE.items()}
+MASS_WIDE  = {k: m for k, (_, m) in WIDE.items() if m is not None}
 LEPTON_WIDE = "emT"                              # hadronic taus are charged: they split OS/SS too
 
-# sigma = 2 r of the symmetric channel; MET from mT(e,v) with the electron's share taken out
-SIGMA_WIDE = {}
-for _k, (_lab, _ch, _m, _w) in WIDE.items():
-    if _k == MET_KEY:
-        continue
-    SIGMA_WIDE[_k] = CB.SIGMA["Z"] if _ch is None else 2.0 * res(_ch)
-SIGMA_WIDE[MET_KEY] = math.sqrt(max(2.0 * (2.0 * res("mT(ev)")) ** 2 - SIGMA_WIDE["e"] ** 2, 0.0))
+# sigma = 2 r of the symmetric channel. Missing energy needs none: it never enters a mass.
+SIGMA_WIDE = {_k: (CB.SIGMA["Z"] if _ch is None else 2.0 * res(_ch))
+              for _k, _ch in YM.SYM.items() if _k != MET_KEY}
 
 # five object types with resolutions from the same inversion: separates the alphabet from the
 # prescription, since the five-object scan declares its sigma per object instead of deriving it
@@ -105,22 +99,41 @@ MOTIVATED = {
     "m(tt)": ("tt",),              "m(tt)/m(jj)": ("tt", "jj"),
     "m(tb)": ("bt",),              "m(tW)": ("Vt",),         "m(Wb)": ("Vb",),
     "m(Ht)": ("Ht",),              "m(ttZ)/m(Zt)": ("Vt", "Zt"),
-    "mT(ev)": ("Xe",),             "mT(muv)": ("Xm",),       "mT(taunu)": ("TX",),
     "multilepton": ("eee", "eem", "emm", "mmm"),
     "m(multi)": None,              # a many-object mass with no fixed composition
+    "mT(ev)": None, "mT(muv)": None, "mT(taunu)": None,   # no mass carries missing energy
 }
 canon = lambda c: "".join(sorted(c))
 MOTIVATED_COMPS = {canon(c) for cs in MOTIVATED.values() if cs for c in cs}
 
-print("object alphabet: resolution from the published symmetric channel, rate weight declared")
-for k in ORDER_WIDE + MET_KEY:
-    label, ch, _, w = WIDE[k]
-    src = "mT(e,v), electron share removed" if k == MET_KEY else \
-          "baseline value, no symmetric channel" if ch is None else ch
-    print(f"  {k}  {label:12s} sigma = {SIGMA_WIDE[k]:.3f}  rate {w:8.1e}   ({src})")
+print("object alphabet: resolution and yield factor from the published symmetric channel")
+for k in ORDER_WIDE:
+    ch = YM.SYM[k]
+    print(f"  {k}  {WIDE[k][0]:12s} sigma = {SIGMA_WIDE[k]:.3f}  yield {YM.F[k]:8.1e}   "
+          f"({ch if ch else 'baseline value, no symmetric channel'})")
+print(f"  {MET_KEY}  {WIDE[MET_KEY][0]:12s} {'':14s} yield {YM.F[MET_KEY]:8.1e}   "
+      f"(a category split, never a mass)")
 print(f"\nmodel-motivated compositions: {len(MOTIVATED_COMPS)} from "
       f"{sum(1 for v in MOTIVATED.values() if v)} of the {len(MOTIVATED)} axes "
-      f"({', '.join(k for k, v in MOTIVATED.items() if v is None)} has no fixed composition)")
+      f"(no composition for {', '.join(k for k, v in MOTIVATED.items() if v is None)})")
+
+# The size of one exemption: published windows are never gated, because a published search
+# demonstrates its own feasibility. This is what the requirement would do to them if they were.
+pub_axes = {a: cs for a, cs in MOTIVATED.items() if cs}
+pub_N, pub_N_gated, pub_ok = 0.0, 0.0, 0
+for _a, _cs in pub_axes.items():
+    _r, _w = res(_a), max(YM.weight(c) for c in _cs)
+    _full = sum(n_s(lo, hi, _r) for lo, hi in scan_segments(_a))
+    _gated = 0.0
+    for lo, hi in scan_segments(_a):
+        _hs, _ns, _ev, _fits = YM.gate(lo, hi, _r, _w)
+        _gated += _ns if _fits else 0.0
+    pub_N += _full
+    pub_N_gated += _gated
+    pub_ok += _gated > 0
+print(f"the requirement is never applied to a published window. On the {len(pub_axes)} published axes "
+      f"this alphabet can form it would leave {pub_ok} of them and N = {pub_N_gated:,.0f} of "
+      f"{pub_N:,.0f}, so exempting them is the conservative choice")
 print()
 
 # ------------------------------------------------------------------ price the variants
@@ -130,10 +143,9 @@ WIDE_ARGS = dict(order=ORDER_WIDE, nmax=NMAX_WIDE, sigma=SIGMA_WIDE, mass=MASS_W
                  lepton=LEPTON_WIDE, kmax=KMAX_WIDE, nobj=NOBJ_WIDE, trig="")
 
 VARIANTS = [
-    ("five objects, lepton trigger",   BASE),
-    ("five objects, derived sigma",    {**BASE, "sigma": SIGMA_BASE_DERIVED}),
-    ("ten objects, MET a split only",  WIDE_ARGS),
-    ("ten objects, MET in the masses", {**WIDE_ARGS, "met_key": MET_KEY, "weight": WEIGHT}),
+    ("five objects, lepton trigger", BASE),
+    ("five objects, derived sigma",  {**BASE, "sigma": SIGMA_BASE_DERIVED}),
+    ("ten objects, any trigger",     WIDE_ARGS),
 ]
 
 runs = []
@@ -156,16 +168,18 @@ full = runs[-1][2]
 #   2  everything else.
 # The budget then takes the priority-ordered prefix that fits. It stops at the first spectrum that
 # does not, rather than topping up with whatever cheap spectrum happens to fit in the remainder.
-# composition, rate, looks, category, histograms (an OS/SS-split row is two of them, and its looks
-# already count both, so the two bases must not be mixed: everything below counts histograms)
-spectra = [(canon(r[1]), r[7], r[6], r[0], r[2]) for r in full.rows]
+# Rows that cannot be fitted score no looks and are not spectra: they never enter the priority order.
+# An OS/SS-split row is two histograms and its looks already count both, so the two bases must not be
+# mixed: everything below counts histograms.
+spectra = [r for r in full.rows if r.n_s > 0]
 best = {}
-for i, (key, rate, ns, cat, nh) in enumerate(spectra):
-    if key in MOTIVATED_COMPS and (key not in best or rate > spectra[best[key]][1]):
+for i, r in enumerate(spectra):
+    key = canon(r.group)
+    if key in MOTIVATED_COMPS and (key not in best or r.w > spectra[best[key]].w):
         best[key] = i
 once = set(best.values())
-ranked = sorted(((0 if i in once else 1 if key in MOTIVATED_COMPS else 2, -rate, ns, key, cat, nh)
-                 for i, (key, rate, ns, cat, nh) in enumerate(spectra)),
+ranked = sorted(((0 if i in once else 1 if canon(r.group) in MOTIVATED_COMPS else 2,
+                  -r.w, r.n_s, canon(r.group), r.cat, r.split) for i, r in enumerate(spectra)),
                 key=lambda x: (x[0], x[1], x[2]))
 
 kept_looks, kept_n = collections.Counter(), collections.Counter()
@@ -194,7 +208,7 @@ for tier, negrate, ns, key, cat, nh in ranked:
 tierA_N = tier_N[0] + tier_N[1]
 tierA_n = tier_n[0] + tier_n[1]
 
-print(f"=== full ten-object scan with MET in the masses")
+print(f"=== full ten-object scan")
 print(f"spectra {full.n_hist:,}   N = {full.N:,.0f}   Z_local = {z_local_for_global5(full.N):.2f}")
 print(f"tier 0, every motivated axis once : {tier_n[0]:6,d} spectra, N = {tier_N[0]:10,.0f} "
       f"({100*tier_N[0]/full.N:4.1f} % of the scan), Z_local = {z_local_for_global5(tier_N[0]):.2f}")
@@ -203,26 +217,53 @@ print(f"tier 1, those axes elsewhere      : {tier_n[1]:6,d} spectra, N = {tier_N
 print(f"tier 2, the rest                  : {tier_n[2]:6,d} spectra, N = {tier_N[2]:10,.0f} "
       f"({100*tier_N[2]/full.N:4.1f} %)")
 print(f"tiers 0+1 together: N = {tierA_N:,.0f}, which is "
-      f"{tierA_N/TRIALS_BUDGET:.1f} times the budget on its own")
+      f"{tierA_N/TRIALS_BUDGET:.2f} times the budget on its own")
+NEW_TYPES = "TgtVH"                                  # what the wider alphabet adds to the five
+_nn = sum(v for c, v in full.by_type.items() if any(k in c for k in NEW_TYPES))
+_nl = sum(v for c, v in full.looks.items() if any(k in c for k in NEW_TYPES))
+print(f"spectra reaching a new object type: {_nn:,} of {full.n_hist:,} "
+      f"({100*_nn/full.n_hist:.0f} %), carrying {100*_nl/full.N:.0f} % of N; "
+      f"two-body groups are {100*full.by_size[2]/full.n_hist:.0f} % of the spectra")
+_lost = sorted(MOTIVATED_COMPS - set(full.by_type))
+print(f"motivated compositions with no fittable histogram in any category: "
+      f"{', '.join(_lost) if _lost else 'none'}")
 print()
 print(f"=== priority prefix that fits N <= {TRIALS_BUDGET:,.0f}")
 print(f"selected {n_sel:,} of {full.n_hist:,} spectra ({100*n_sel/full.n_hist:.1f} %) over "
       f"{len(kept_n)} of {len(full.by_type)} compositions and {len(kept_cats):,} of "
       f"{full.n_cat:,} categories")
 print(f"tier 0 is {tier_axes[0]} axes in {len(tier0_cats)} categories, {tier_n[0]} histograms")
-print(f"of the {tier_n[1]:,} tier-1 spectra, {n_sel - tier_n[0]:,} fit "
-      f"({100*(n_sel - tier_n[0])/tier_n[1]:.0f} %)")
+if stopped:
+    print(f"of the {tier_n[1]:,} tier-1 spectra, {n_sel - tier_n[0]:,} fit "
+          f"({100*(n_sel - tier_n[0])/tier_n[1]:.0f} %)")
+    print(f"the cut lands at a category yield of {cut_rate:.1e}: thinner categories are dropped")
+else:
+    print(f"nothing is cut: every fittable spectrum fits inside the budget, so the statistics "
+          f"requirement binds first and the priority order never has to be applied")
 print(f"N = {N_sel:,.0f} ({100*N_sel/full.N:.1f} % of the full scan), "
       f"Z_local = {z_local_for_global5(N_sel):.2f} "
       f"(band {z_local_for_global5(N_sel*0.5):.2f}-{z_local_for_global5(N_sel*2):.2f})")
-print(f"the cut lands at a category rate weight of {cut_rate:.1e}: rarer categories are dropped")
 print(f"a local 5 sigma is then worth Z_global = "
       f"{math.sqrt(max(25.0 - 2*math.log(N_sel), 0)):.2f} sigma")
 print()
 
+# How hard the requirement bites depends on the yield anchor, which is the least certain input: a
+# factorised per-object model prices every object at the full cost of its own production, and real
+# objects arrive in pairs from one boson, so it under-counts high-multiplicity categories. Two orders
+# of magnitude either way is the honest band.
+print("yield anchor scaled (the model's own uncertainty): spectra, N, Z_local")
+_n_ref = YM.N_REF
+for _s in (0.01, 1.0, 100.0):
+    YM.N_REF = _n_ref * _s
+    _r = CB.enumerate_scan(**WIDE_ARGS, collect=False)
+    print(f"  x{_s:<6g} {_r.n_hist:7,d} of {_r.n_hist + _r.n_thin:7,d} histograms, "
+          f"N = {_r.N:11,.0f}, Z_local = {z_local_for_global5(_r.N):.2f}")
+YM.N_REF = _n_ref
+print()
+
 # which object types survive, and through which compositions
 print("object type    spectra in scan  selected   kept looks   what survives")
-for k in ORDER_WIDE + MET_KEY:
+for k in ORDER_WIDE:
     tot = sum(v for c, v in full.by_type.items() if k in c)
     sel = sum(v for c, v in kept_n.items() if k in c)
     lk = sum(v for c, v in kept_looks.items() if k in c)
@@ -253,18 +294,20 @@ print()
 # ------------------------------------------------------------------ selection lenses
 # An extra event-level requirement on an unchanged mass axis is another view of the same spectrum, and
 # another look. Four of the handles a wide search would reach for are already inside this enumeration
-# and must not be counted twice: high MET is the category's met flag and an ingredient of the masses,
-# high jet or lepton multiplicity is what the exclusive categories are, and b-tag and tau enrichment
-# are the b and T types of the alphabet. The four below are orthogonal to the object content and to
-# the mass axis. Conservative on every count: one lens at a time and never a product of two, the lens
-# leaves the axis, its resolution and its window alone, and the objects a lens needs count against the
-# same four-object ceiling. k is the objects in the mass (MET excluded), n the objects in the category.
+# and must not be counted twice: high MET is the category's met split, high jet or lepton multiplicity
+# is what the exclusive categories are, and b-tag and tau enrichment are the b and T types of the
+# alphabet. The four below are orthogonal to the object content and to the mass axis. Conservative on
+# every count: one lens at a time and never a product of two, the lens leaves the axis, its resolution
+# and its window alone, the objects a lens needs count against the same four-object ceiling, and the
+# view has to pass the statistics requirement at its own efficiency (yield_model.LENS_EFF), so a lens
+# on a thinly populated spectrum is not available at all. k is the objects in the mass, n those in the
+# category.
 ISR_MAX = 200.0                       # an ISR-recoil view buys acceptance only at the low-mass end
 LENSES = [
     ("ht",   "high HT or Meff",    "activity outside the mass",
      lambda k, n, lo: n > k, None),
-    ("disp", "displaced activity", "a mass of two reconstructed objects",
-     lambda k, n, lo: k >= 2, None),
+    ("disp", "displaced activity", "any reconstructed mass",
+     lambda k, n, lo: True, None),
     ("vbf",  "forward jet pair",   "two free slots for the tag jets",
      lambda k, n, lo: n <= 2, None),
     ("isr",  "ISR jet",            "one free slot, and a low-mass end",
@@ -273,16 +316,22 @@ LENSES = [
 
 items = []
 lens_n, lens_N = collections.Counter(), collections.Counter()
-for i, (cat, group, nh, rr, lo, hi, ns, rate, ncat) in enumerate(full.rows):
-    key, kobj = canon(group), len(group) - group.count(MET_KEY)
+lens_thin = collections.Counter()
+for i, r in enumerate(spectra):
+    key = canon(r.group)
     tier = 0 if i in once else 1 if key in MOTIVATED_COMPS else 2
-    items.append((tier, -rate, 0, ns, key, cat, nh, ""))
+    items.append((tier, -r.w, 0, r.n_s, key, r.cat, r.split, ""))
     for li, (lk, _label, _rule, ok, cap) in enumerate(LENSES, 1):
-        if not ok(kobj, ncat, lo):
+        if not ok(len(r.group), r.ncat, r.lo):
             continue
-        lns = ns if cap is None else n_s(lo, min(hi, cap), rr) * nh
-        items.append((max(tier, 1), -rate, li, lns, key, cat, nh, lk))
-        lens_n[lk] += nh
+        hi = r.hi if cap is None else min(r.hi, cap)
+        _hs, lns, _ev, fits = YM.gate(r.lo, hi, r.r, r.w * YM.LENS_EFF[lk])
+        if not fits:
+            lens_thin[lk] += r.split
+            continue
+        lns *= r.split
+        items.append((max(tier, 1), -r.w, li, lns, key, r.cat, r.split, lk))
+        lens_n[lk] += r.split
         lens_N[lk] += lns
 items.sort(key=lambda x: (x[0], x[1], x[2], x[3]))
 lensed_n, lensed_N = full.n_hist + sum(lens_n.values()), full.N + sum(lens_N.values())
@@ -306,10 +355,11 @@ for tier, negrate, li, ns, key, cat, nh, lk in items:
 
 print("selection lenses on the same axes, one at a time:")
 for key, label, rule, _ok, cap in LENSES:
-    print(f"  {label:20s} {rule:38s} {lens_n[key]:7,d} views {lens_N[key]:10,.0f} looks"
-          f"{'' if cap is None else f'  (window capped at {cap:.0f} GeV)'}")
-print(f"  {'all four':20s} {'':38s} {sum(lens_n.values()):7,d} views "
-      f"{sum(lens_N.values()):10,.0f} looks")
+    print(f"  {label:20s} {rule:34s} eff {YM.LENS_EFF[key]:5.3f} {lens_n[key]:7,d} views "
+          f"{lens_N[key]:9,.0f} looks, {lens_thin[key]:6,d} too thin"
+          f"{'' if cap is None else f' (window capped at {cap:.0f} GeV)'}")
+print(f"  {'all four':20s} {'':34s} {'':9s} {sum(lens_n.values()):7,d} views "
+      f"{sum(lens_N.values()):9,.0f} looks, {sum(lens_thin.values()):6,d} too thin")
 print(f"the ten-object scan with lenses: {lensed_n:,} histograms "
       f"({lensed_n/full.n_hist:.1f} per spectrum), N = {lensed_N:,.0f}, "
       f"Z_local = {z_local_for_global5(lensed_N):.2f}")
@@ -321,17 +371,22 @@ print(f"selected {L_spec:,} of {full.n_hist:,} spectra ({100*L_spec/full.n_hist:
       f"{len(L_cats):,} of {full.n_cat:,} categories")
 print(f"N = {L_N:,.0f}, Z_local = {z_local_for_global5(L_N):.2f}")
 for key, label, _rule, _ok, _cap in LENSES:
+    frac = 100.0 * L_lens_n[key] / lens_n[key] if lens_n[key] else 0.0
     print(f"  {label:20s} {L_lens_n[key]:7,d} of {lens_n[key]:7,d} views kept "
-          f"({100*L_lens_n[key]/lens_n[key]:4.1f} %), {L_lens_N[key]:9,.0f} looks")
-print(f"the same budget with no lens at all reaches {n_sel:,} spectra, so the lenses are paid for in "
-      f"coverage: {n_sel - L_spec:,} fewer axes-in-categories for {L_views - L_spec:,} lens views of "
-      f"the ones that remain")
+          f"({frac:4.1f} %), {L_lens_N[key]:9,.0f} looks")
+if L_spec < n_sel:
+    print(f"the same budget with no lens at all reaches {n_sel:,} spectra, so the lenses are paid for "
+          f"in coverage: {n_sel - L_spec:,} fewer axes-in-categories for {L_views - L_spec:,} lens "
+          f"views of the ones that remain")
+else:
+    print(f"the lenses cost nothing in coverage: axes and lens views together still fit the budget, "
+          f"and {sum(lens_thin.values()):,} further views are ruled out by statistics alone")
 
 # ------------------------------------------------------------------ tables
-hdr = ("scan", "types", "K_max", "objects_per_category", "MET_in_mass", "trigger", "categories",
+hdr = ("scan", "types", "K_max", "objects_per_category", "trigger", "categories",
        "spectra", "compositions", "N_trials", "Z_local", "Z_lo", "Z_hi")
 row = lambda label, kw, cats, nsp, ncomp, N: [
-    label, len(kw["order"]), kw["kmax"], kw["nobj"], "yes" if kw.get("met_key") else "no",
+    label, len(kw["order"]), kw["kmax"], kw["nobj"],
     "lepton" if kw.get("trig", CB.TRIG) else "any", cats, nsp, ncomp, f"{N:.0f}",
     f"{z_local_for_global5(N):.2f}", f"{z_local_for_global5(N*0.5):.2f}",
     f"{z_local_for_global5(N*2):.2f}"]
@@ -341,8 +396,8 @@ with open(os.path.join(ROOT, "results", "tables", "scaled_scan.csv"), "w", newli
     w.writerow(hdr)
     for label, kw, s in runs:
         w.writerow(row(label, kw, s.n_cat, s.n_hist, len(s.by_type), s.N))
-    w.writerow(row("... model-motivated axes only", VARIANTS[-1][1], len(tier0_cats), tier_n[0],
-                   len(MOTIVATED_COMPS & set(full.by_type)), tierA_N))
+    w.writerow(row("... model-motivated axes once each", VARIANTS[-1][1], len(tier0_cats),
+                   tier_n[0], len(MOTIVATED_COMPS & set(full.by_type)), tier_N[0]))
     w.writerow(row(f"... prioritised to N <= {TRIALS_BUDGET:.0e}", VARIANTS[-1][1], len(kept_cats),
                    n_sel, len(kept_n), N_sel))
     w.writerow(row("ten objects, with selection lenses", VARIANTS[-1][1], full.n_cat, lensed_n,

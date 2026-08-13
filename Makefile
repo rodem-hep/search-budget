@@ -17,6 +17,7 @@ X  := results/tex
 
 # the two data-free modules every budget number derives from
 MOD := $(S)/bump_observables.py $(S)/public_obs_map.py
+YM  := $(S)/yield_model.py
 
 BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_BUDGET.md \
           $(P)/search_budget.png $(P)/budget_waterfall.png $(P)/excess_counting.png \
@@ -70,7 +71,7 @@ $(X)/model_map_appendix.tex $(T)/model_spectrum_map.csv &: $(S)/export_model_map
                                                  $(S)/obs_labels.py
 	$(PY) $(S)/export_model_map_tex.py
 # The two-body object grid, priced in trials: arXiv:1907.06659 Table 14 with prices for marks.
-$(X)/two_body_matrix.tex $(T)/two_body_matrix.csv &: $(S)/two_body_matrix.py $(MOD)
+$(X)/two_body_matrix.tex $(T)/two_body_matrix.csv &: $(S)/two_body_matrix.py $(MOD) $(YM)
 	$(PY) $(S)/two_body_matrix.py
 # The observed excesses, mined from the census abstracts. fetch_census_abstracts.py refreshes
 # data/census_abstracts.csv from the arXiv API and, like the metadata fetch, is NOT a prerequisite.
@@ -79,16 +80,16 @@ $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md &: $(S)/reported_excesses.p
                         data/published_spectra.csv $(T)/search_budget.csv
 	$(PY) $(S)/reported_excesses.py
 
-$(T)/combinatorial_budget.csv: $(S)/combinatorial_budget.py $(S)/bump_observables.py
+$(T)/combinatorial_budget.csv: $(S)/combinatorial_budget.py $(S)/bump_observables.py $(YM)
 	$(PY) $(S)/combinatorial_budget.py
 $(T)/composition_gap.txt $(X)/composition_appendix.tex &: $(T)/combinatorial_budget.csv \
                                                  $(S)/composition_gap.py $(S)/obs_labels.py
 	$(PY) $(S)/composition_gap.py > $(T)/composition_gap.txt
-# The same scan over the wider object alphabet (hadronic taus, photons, boosted W/Z, H and top, MET
-# in the masses), the selection lenses on top of it, and the priority order that fits a trials budget.
+# The same scan over the wider object alphabet (hadronic taus, photons, boosted W/Z, H and top), the
+# selection lenses on top of it, and the priority order that fits a trials budget.
 $(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv $(T)/scaled_scan.txt &: \
                                                  $(S)/scaled_scan.py \
-                                                 $(S)/combinatorial_budget.py $(MOD)
+                                                 $(S)/combinatorial_budget.py $(MOD) $(YM)
 	$(PY) $(S)/scaled_scan.py > $(T)/scaled_scan.txt
 
 # ---------------------------------------------------------------- two-stage A/B unblinding

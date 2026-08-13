@@ -24,6 +24,7 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from bump_observables import (canon, CANON_ORDER, ns_scan, n_s, res,
                               z_local_for_global5 as z5)
 from public_obs_map import PUBLIC_OBS
+import yield_model as YM
 
 def _p(*a): return os.path.join(ROOT, *a)
 
@@ -88,14 +89,21 @@ for o in order:
     axes[c].append(o)
 
 # ------------------------------------------------------------------ the price of a gap
+# A gap price is a hypothetical spectrum, so it has to hold enough events to be fitted: the window is
+# truncated where a resolution element falls below one event and the cell costs nothing if fewer than
+# 25 elements survive. Published cells keep their published window and are never gated.
 sigma = {k: 2.0 * res(SYM[k]) for k in KEYS}
+YKEY = {"e": "e", "mu": "m", "tau": "T", "j": "j", "b": "b", "t": "t", "ga": "g", "V": "V", "H": "H"}
 
 def gap_price(a, b):
     r = 0.5 * math.sqrt((sigma[a] ** 2 + sigma[b] ** 2) / 2.0)
-    return n_s(*GAP_WINDOW, r)
+    w = YM.weight(YKEY[a] + YKEY[b])
+    _hi, ns, _ev, fits = YM.gate(*GAP_WINDOW, r, w)
+    return ns if fits else 0.0
 
 cells = [cell(a, b) for i, a in enumerate(KEYS) for b in KEYS[i:]]
 gaps = [c for c in cells if c not in spent]
+thin = [c for c in gaps if gap_price(*c) == 0.0]
 gap_total = sum(gap_price(*c) for c in gaps)
 n_now = sum(ns_scan(o) for o in order)
 
@@ -110,8 +118,11 @@ with open(_p("results", "tex", "two_body_matrix.tex"), "w") as f:
         row += [""] * i
         for b in KEYS[i:]:
             c = cell(a, b)
-            row.append(f"{spent[c]:.0f}" if c in spent
-                       else f"\\textit{{({gap_price(*c):.0f})}}")
+            if c in spent:
+                row.append(f"{spent[c]:.0f}")
+            else:
+                p = gap_price(*c)
+                row.append(f"\\textit{{({p:.0f})}}" if p else "\\textit{(--)}")
         f.write(" & ".join(row) + " \\\\\n")
     f.write("\\bottomrule\n\\end{tabular}\n")
 
@@ -124,10 +135,13 @@ with open(_p("results", "tables", "two_body_matrix.csv"), "w", newline="") as f:
             w.writerow([c[0], c[1], "scanned", f"{spent[c]:.1f}", len(axes[c]),
                         "; ".join(sorted(axes[c]))])
         else:
-            w.writerow([c[0], c[1], "gap", f"{gap_price(*c):.1f}", 0, ""])
+            p = gap_price(*c)
+            w.writerow([c[0], c[1], "gap" if p else "gap, too thin to fit", f"{p:.1f}", 0, ""])
 
 print(f"wrote results/tex/two_body_matrix.tex, results/tables/two_body_matrix.csv")
-print(f"{len(cells)} pairs: {len(spent)} scanned, {len(gaps)} with no axis in the catalogue")
+print(f"{len(cells)} pairs: {len(spent)} scanned, {len(gaps)} with no axis in the catalogue, "
+      f"of which {len(thin)} cannot hold a fittable histogram")
 print(f"gaps: {sorted('-'.join(c) for c in gaps)}")
+print(f"too thin: {sorted('-'.join(c) for c in thin)}")
 print(f"closing every gap: N {n_now:,.0f} -> {n_now + gap_total:,.0f} "
       f"(+{gap_total:,.0f}), Z {z5(n_now):.2f} -> {z5(n_now + gap_total):.2f}")

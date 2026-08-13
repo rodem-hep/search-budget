@@ -1,5 +1,5 @@
 lens,requirement,window_cap_GeV,views_added,looks_added,views_kept,looks_kept
-high HT or Meff,activity outside the mass,,33288,1809119,2135,159026
-displaced activity,a mass of two reconstructed objects,,32466,1803398,1968,157071
-forward jet pair,two free slots for the tag jets,,305,15999,115,8138
-ISR jet,"one free slot, and a low-mass end",200,2950,24111,623,8802
+high HT or Meff,activity outside the mass,,2134,89633,2134,89633
+displaced activity,any reconstructed mass,,743,28651,743,28651
+forward jet pair,two free slots for the tag jets,,53,2700,53,2700
+ISR jet,"one free slot, and a low-mass end",200,78,3958,78,3958

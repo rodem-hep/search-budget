@@ -1,146 +1,127 @@
-object alphabet: resolution from the published symmetric channel, rate weight declared
-  e  e            sigma = 0.030  rate  1.0e-04   (m(ee))
-  m  mu           sigma = 0.100  rate  1.0e-04   (m(mumu))
-  T  tau_had      sigma = 0.240  rate  3.0e-05   (m(tautau))
-  g  gamma        sigma = 0.020  rate  1.0e-03   (m(gammagamma))
-  j  light jet    sigma = 0.100  rate  1.0e+00   (m(jj))
-  b  b-jet        sigma = 0.200  rate  1.0e-01   (m(bb))
-  t  boosted top  sigma = 0.160  rate  3.0e-05   (m(tt))
-  V  boosted W/Z  sigma = 0.120  rate  1.0e-04   (m(VV))
-  H  boosted H    sigma = 0.160  rate  1.0e-06   (m(HH))
-  Z  leptonic Z   sigma = 0.040  rate  1.0e-05   (baseline value, no symmetric channel)
-  X  MET          sigma = 0.281  rate  3.0e-01   (mT(e,v), electron share removed)
+object alphabet: resolution and yield factor from the published symmetric channel
+  e  e            sigma = 0.030  yield  3.0e-03   (m(ee))
+  m  mu           sigma = 0.100  yield  3.0e-03   (m(mumu))
+  T  tau_had      sigma = 0.240  yield  3.5e-03   (m(tautau))
+  g  gamma        sigma = 0.020  yield  4.0e-03   (m(gammagamma))
+  j  light jet    sigma = 0.100  yield  1.0e+00   (m(jj))
+  b  b-jet        sigma = 0.200  yield  1.0e-01   (m(bb))
+  t  boosted top  sigma = 0.160  yield  2.0e-02   (m(tt))
+  V  boosted W/Z  sigma = 0.120  yield  2.0e-02   (m(VV))
+  H  boosted H    sigma = 0.160  yield  1.0e-02   (m(HH))
+  Z  leptonic Z   sigma = 0.040  yield  1.0e-05   (baseline value, no symmetric channel)
+  X  MET                         yield  3.0e-03   (a category split, never a mass)
 
-model-motivated compositions: 41 from 45 of the 46 axes (m(multi) has no fixed composition)
+model-motivated compositions: 38 from 42 of the 46 axes (no composition for m(multi), mT(ev), mT(muv), mT(taunu))
+the requirement is never applied to a published window. On the 42 published axes this alphabet can form it would leave 31 of them and N = 2,566 of 3,573, so exempting them is the conservative choice
 
 === five objects, lepton trigger  (5 object types, K<=4 objects per mass, <=4 per category, lepton required)
 categories (exclusive, MET-split, >=2 objects)                       : 150
   ... after splitting same-flavour dilepton cases into OS and SS     : 204
 (category, mass-group) combinations                                  : 1,094
-mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 1,502
-  by group size: k=2: 886, k=3: 506, k=4: 110
-distinct object-type multisets (physics observables)                 : 82
+too thin to fit (25 elements of >=1 event, 100 events)                : 790 histograms
+mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 712
+  by group size: k=2: 479, k=3: 201, k=4: 32
+distinct object-type multisets (physics observables)                 : 51
 
-N_trials = 143,077    ln N = 11.87
-Z_local for 5 sigma global = 6.98
-  r band (x0.5..x2 -> N x2..x0.5): 6.88 - 7.08
-  a local 5 sigma is worth Z_global = 1.12 sigma
+N_trials = 34,837    ln N = 10.46
+Z_local for 5 sigma global = 6.78
+  r band (x0.5..x2 -> N x2..x0.5): 6.67 - 6.88
+  a local 5 sigma is worth Z_global = 2.02 sigma
 
 === five objects, derived sigma  (5 object types, K<=4 objects per mass, <=4 per category, lepton required)
 categories (exclusive, MET-split, >=2 objects)                       : 150
   ... after splitting same-flavour dilepton cases into OS and SS     : 204
 (category, mass-group) combinations                                  : 1,094
-mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 1,502
-  by group size: k=2: 886, k=3: 506, k=4: 110
-distinct object-type multisets (physics observables)                 : 82
+too thin to fit (25 elements of >=1 event, 100 events)                : 839 histograms
+mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 663
+  by group size: k=2: 451, k=3: 188, k=4: 24
+distinct object-type multisets (physics observables)                 : 49
 
-N_trials = 121,291    ln N = 11.71
-Z_local for 5 sigma global = 6.96
-  r band (x0.5..x2 -> N x2..x0.5): 6.86 - 7.06
-  a local 5 sigma is worth Z_global = 1.26 sigma
+N_trials = 29,877    ln N = 10.30
+Z_local for 5 sigma global = 6.75
+  r band (x0.5..x2 -> N x2..x0.5): 6.65 - 6.86
+  a local 5 sigma is worth Z_global = 2.10 sigma
 
-=== ten objects, MET a split only  (10 object types, K<=4 objects per mass, <=4 per category, any trigger)
+=== ten objects, any trigger  (10 object types, K<=4 objects per mass, <=4 per category, any trigger)
 categories (exclusive, MET-split, >=2 objects)                       : 1,980
   ... after splitting same-flavour dilepton cases into OS and SS     : 2,412
 (category, mass-group) combinations                                  : 17,600
-mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 21,644
-  by group size: k=2: 12,290, k=3: 7,588, k=4: 1,766
-distinct object-type multisets (physics observables)                 : 990
+too thin to fit (25 elements of >=1 event, 100 events)                : 18,041 histograms
+mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 3,603
+  by group size: k=2: 2,662, k=3: 831, k=4: 110
+distinct object-type multisets (physics observables)                 : 217
 
-N_trials = 1,480,538    ln N = 14.21
-Z_local for 5 sigma global = 7.31
-  r band (x0.5..x2 -> N x2..x0.5): 7.21 - 7.40
-  a local 5 sigma is worth Z_global = 0.00 sigma
+N_trials = 161,020    ln N = 11.99
+Z_local for 5 sigma global = 7.00
+  r band (x0.5..x2 -> N x2..x0.5): 6.90 - 7.10
+  a local 5 sigma is worth Z_global = 1.01 sigma
 
-=== ten objects, MET in the masses  (10 object types, K<=4 objects per mass, <=4 per category, any trigger)
-categories (exclusive, MET-split, >=2 objects)                       : 1,980
-  ... after splitting same-flavour dilepton cases into OS and SS     : 2,412
-(category, mass-group) combinations                                  : 30,030
-mass spectra (histograms, index-specific groups, k=2..4, OS/SS-split): 36,906
-  by group size: k=2: 16,730, k=3: 13,733, k=4: 5,560, k=5: 883
-distinct object-type multisets (physics observables)                 : 1990
-
-N_trials = 1,955,486    ln N = 14.49
-Z_local for 5 sigma global = 7.35
-  r band (x0.5..x2 -> N x2..x0.5): 7.25 - 7.44
-  a local 5 sigma is worth Z_global = 0.00 sigma
-
-=== full ten-object scan with MET in the masses
-spectra 36,906   N = 1,955,486   Z_local = 7.35
-tier 0, every motivated axis once :     49 spectra, N =      4,238 ( 0.2 % of the scan), Z_local = 6.46
-tier 1, those axes elsewhere      :  8,594 spectra, N =    702,732 (35.9 %)
-tier 2, the rest                  : 28,263 spectra, N =  1,248,516 (63.8 %)
-tiers 0+1 together: N = 706,970, which is 1.4 times the budget on its own
+=== full ten-object scan
+spectra 3,603   N = 161,020   Z_local = 7.00
+tier 0, every motivated axis once :     43 spectra, N =      2,679 ( 1.7 % of the scan), Z_local = 6.39
+tier 1, those axes elsewhere      :  2,023 spectra, N =    102,096 (63.4 %)
+tier 2, the rest                  :  1,537 spectra, N =     56,245 (34.9 %)
+tiers 0+1 together: N = 104,775, which is 0.21 times the budget on its own
+spectra reaching a new object type: 1,944 of 3,603 (54 %), carrying 54 % of N; two-body groups are 74 % of the spectra
+motivated compositions with no fittable histogram in any category: TT, Zt
 
 === priority prefix that fits N <= 500,000
-selected 5,842 of 36,906 spectra (15.8 %) over 41 of 1990 compositions and 1,307 of 2,412 categories
-tier 0 is 41 axes in 41 categories, 49 histograms
-of the 8,594 tier-1 spectra, 5,793 fit (67 %)
-N = 499,977 (25.6 % of the full scan), Z_local = 7.16 (band 7.06-7.25)
-the cut lands at a category rate weight of 9.0e-17: rarer categories are dropped
-a local 5 sigma is then worth Z_global = 0.00 sigma
+selected 3,603 of 3,603 spectra (100.0 %) over 217 of 217 compositions and 844 of 2,412 categories
+tier 0 is 36 axes in 36 categories, 43 histograms
+nothing is cut: every fittable spectrum fits inside the budget, so the statistics requirement binds first and the priority order never has to be applied
+N = 161,020 (100.0 % of the full scan), Z_local = 7.00 (band 6.90-7.10)
+a local 5 sigma is then worth Z_global = 1.01 sigma
+
+yield anchor scaled (the model's own uncertainty): spectra, N, Z_local
+  x0.01     1,284 of  21,644 histograms, N =      52,935, Z_local = 6.84
+  x1        3,603 of  21,644 histograms, N =     161,020, Z_local = 7.00
+  x100      7,768 of  21,644 histograms, N =     371,282, Z_local = 7.12
 
 object type    spectra in scan  selected   kept looks   what survives
-  e e                8,442     1,577      201,098   12 compositions: eg ee ej Ze em be ...  (all motivated)
-  m mu               8,442     1,577      111,419   12 compositions: gm jm em bm mm Xm ...  (all motivated)
-  T tau_had          8,442     1,140       42,444   6 compositions: Tj TX Tb Te Tm TT  (all motivated)
-  g gamma            7,107       927      187,060   5 compositions: gg eg gm gj Vg  (all motivated)
-  j light jet        7,107     1,375      105,466   9 compositions: ej gj jm jj Tj bj ...  (all motivated)
-  b b-jet            7,107     1,489       66,005   7 compositions: be bm bj Vb Tb bb ...  (all motivated)
-  t boosted top      7,107       453       17,325   5 compositions: bt Zt Vt tt Ht  (all motivated)
-  V boosted W/Z      7,107       598       33,785   5 compositions: Vg Vb VV Vt HV  (all motivated)
-  H boosted H        7,107       132        5,272   3 compositions: HV Ht HH  (all motivated)
-  Z leptonic Z       7,107       277       34,840   3 compositions: Ze Zm Zt  (all motivated)
-  X MET             15,262       892       31,628   3 compositions: Xe Xm TX  (all motivated)
+  e e                1,080     1,080       55,320   59 compositions: eg ee ej em Ve be ...  (+48 unmotivated)
+  m mu                 818       818       30,327   54 compositions: jm em gm mm bm Vm ...  (+43 unmotivated)
+  T tau_had            175       175        5,323   21 compositions: Tj Tjj Te Tm Tg Tej ...  (+17 unmotivated)
+  g gamma              939       939       52,002   63 compositions: gg eg gj gm Vg bg ...  (+58 unmotivated)
+  j light jet        2,040     2,040       87,423   138 compositions: ej jj gj jm Vj bj ...  (+129 unmotivated)
+  b b-jet              731       731       23,469   64 compositions: bj be bm bg bb Vb ...  (+57 unmotivated)
+  t boosted top        184       184        6,021   28 compositions: jt jjt gt et bjt gjt ...  (+24 unmotivated)
+  V boosted W/Z        631       631       22,598   58 compositions: Vj Ve Vg Vm Vb Vjj ...  (+53 unmotivated)
+  H boosted H          252       252        8,091   31 compositions: Hj Hg Hjj He Hb HV ...  (+28 unmotivated)
+  Z leptonic Z         119       119        4,642   15 compositions: Zj Zg Zjj Ze Zm Zgj ...  (+13 unmotivated)
 
 compositions dropped entirely, costliest first:
-  Zg        194 spectra,     44,667 looks
-  ZZ        194 spectra,     32,117 looks
-  Ve        254 spectra,     21,144 looks
-  Zj        194 spectra,     18,547 looks
-  Vm        254 spectra,     16,743 looks
-  Xg        417 spectra,     16,364 looks
-  Xj        417 spectra,     15,458 looks
-  XZ        417 spectra,     15,115 looks
-  He        254 spectra,     15,055 looks
-  VZ        194 spectra,     14,363 looks
-  VX        417 spectra,     14,042 looks
-  et        254 spectra,     13,928 looks
-  Xb        417 spectra,     13,370 looks
-  Hm        254 spectra,     12,989 looks
-  Vj        194 spectra,     12,788 looks
-  ... 1949 of 1990 compositions dropped entirely
+  ... 0 of 217 compositions dropped entirely
 
 costliest compositions that are kept:
-  gg        181 of    194 spectra,    70,808 looks   (motivated)
-  eg        197 of    254 spectra,    60,456 looks   (motivated)
-  ee        151 of    254 spectra,    39,381 looks   (motivated)
-  ej        253 of    254 spectra,    26,814 looks   (motivated)
-  Ze        104 of    254 spectra,    21,417 looks   (motivated)
-  gm        197 of    254 spectra,    21,374 looks   (motivated)
-  gj        194 of    194 spectra,    21,049 looks   (motivated)
-  jm        253 of    254 spectra,    19,795 looks   (motivated)
-  em        151 of    254 spectra,    16,003 looks   (motivated)
-  jj        194 of    194 spectra,    15,179 looks   (motivated)
-  be        248 of    254 spectra,    13,569 looks   (motivated)
-  Vg        158 of    194 spectra,    13,373 looks   (motivated)
-  bm        248 of    254 spectra,    12,272 looks   (motivated)
-  Xe        302 of    507 spectra,    11,814 looks   (motivated)
-  mm        151 of    254 spectra,    11,814 looks   (motivated)
+  gg        113 of    113 spectra,    11,519 looks   (motivated)
+  eg        147 of    147 spectra,    11,482 looks   (motivated)
+  ee        152 of    152 spectra,    10,968 looks   (motivated)
+  ej        199 of    199 spectra,    10,667 looks   (motivated)
+  jj        185 of    185 spectra,    10,648 looks   (motivated)
+  gj        154 of    154 spectra,     8,666 looks   (motivated)
+  jm        175 of    175 spectra,     7,560 looks   (motivated)
+  Vj        134 of    134 spectra,     5,525 looks   (by rate)
+  bj        142 of    142 spectra,     5,126 looks   (motivated)
+  em         97 of     97 spectra,     3,981 looks   (motivated)
+  gm         93 of     93 spectra,     3,643 looks   (motivated)
+  Hj         79 of     79 spectra,     2,735 looks   (by rate)
+  Ve         69 of     69 spectra,     2,553 looks   (by rate)
+  Vg         69 of     69 spectra,     2,525 looks   (motivated)
+  mm         67 of     67 spectra,     2,386 looks   (motivated)
 
 selection lenses on the same axes, one at a time:
-  high HT or Meff      activity outside the mass               33,288 views  1,809,119 looks
-  displaced activity   a mass of two reconstructed objects     32,466 views  1,803,398 looks
-  forward jet pair     two free slots for the tag jets            305 views     15,999 looks
-  ISR jet              one free slot, and a low-mass end        2,950 views     24,111 looks  (window capped at 200 GeV)
-  all four                                                     69,009 views  3,652,627 looks
-the ten-object scan with lenses: 105,915 histograms (2.9 per spectrum), N = 5,608,113, Z_local = 7.49
+  high HT or Meff      activity outside the mass          eff 0.100   2,134 views    89,633 looks,  1,145 too thin
+  displaced activity   any reconstructed mass             eff 0.001     743 views    28,651 looks,  2,860 too thin
+  forward jet pair     two free slots for the tag jets    eff 0.020      53 views     2,700 looks,     29 too thin
+  ISR jet              one free slot, and a low-mass end  eff 0.200      78 views     3,958 looks,    652 too thin (window capped at 200 GeV)
+  all four                                                            3,008 views   124,943 looks,  4,686 too thin
+the ten-object scan with lenses: 6,611 histograms (1.8 per spectrum), N = 285,962, Z_local = 7.08
 
 === priority prefix with lenses that fits N <= 500,000
-selected 2,221 of 36,906 spectra (6.0 %) plus 4,841 lens views of them: 7,062 histograms (6.7 % of the lensed scan) over 41 compositions and 534 of 2,412 categories
-N = 499,785, Z_local = 7.16
-  high HT or Meff        2,135 of  33,288 views kept ( 6.4 %),   159,026 looks
-  displaced activity     1,968 of  32,466 views kept ( 6.1 %),   157,071 looks
-  forward jet pair         115 of     305 views kept (37.7 %),     8,138 looks
-  ISR jet                  623 of   2,950 views kept (21.1 %),     8,802 looks
-the same budget with no lens at all reaches 5,842 spectra, so the lenses are paid for in coverage: 3,621 fewer axes-in-categories for 4,841 lens views of the ones that remain
+selected 3,603 of 3,603 spectra (100.0 %) plus 3,008 lens views of them: 6,611 histograms (100.0 % of the lensed scan) over 217 compositions and 844 of 2,412 categories
+N = 285,962, Z_local = 7.08
+  high HT or Meff        2,134 of   2,134 views kept (100.0 %),    89,633 looks
+  displaced activity       743 of     743 views kept (100.0 %),    28,651 looks
+  forward jet pair          53 of      53 views kept (100.0 %),     2,700 looks
+  ISR jet                   78 of      78 views kept (100.0 %),     3,958 looks
+the lenses cost nothing in coverage: axes and lens views together still fit the budget, and 4,686 further views are ruled out by statistics alone

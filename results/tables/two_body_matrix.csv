@@ -4,43 +4,43 @@ e,mu,scanned,220.9,2,m(emu) LFV; m(emu) SS
 e,tau,scanned,28.3,1,m(etau) LFV
 e,j,scanned,107.3,1,m(ej)
 e,b,scanned,57.6,1,m(eb)
-e,t,gap,68.0,0,
+e,t,gap,52.3,0,
 e,ga,scanned,214.6,1,m(egamma)
 e,V,scanned,79.9,1,m(eZ)
-e,H,gap,68.0,0,
+e,H,gap,50.3,0,
 mu,mu,scanned,486.1,3,m(mumu); m(mumu) (Zd); m(mumu) SS
 mu,tau,scanned,28.3,1,m(mutau) LFV
 mu,j,scanned,80.5,1,m(muj)
 mu,b,scanned,46.1,1,m(mub)
-mu,t,gap,58.6,0,
+mu,t,gap,45.5,0,
 mu,ga,scanned,107.3,1,m(mugamma)
 mu,V,scanned,59.9,1,m(muZ)
-mu,H,gap,58.6,0,
+mu,H,gap,43.7,0,
 tau,tau,scanned,42.9,1,m(tautau)
 tau,j,scanned,32.2,1,m(tauj)
 tau,b,scanned,19.2,1,m(taub)
-tau,t,gap,38.4,0,
-tau,ga,gap,45.9,0,
-tau,V,gap,41.2,0,
-tau,H,gap,38.4,0,
+tau,t,gap,30.7,0,
+tau,ga,gap,33.3,0,
+tau,V,gap,32.9,0,
+tau,H,gap,29.6,0,
 j,j,scanned,73.8,1,m(jj)
 j,b,scanned,134.9,2,m(bj); m(cb) dijet
 j,t,gap,58.6,0,
 j,ga,scanned,66.0,1,m(jgamma)
 j,V,gap,70.8,0,
-j,H,gap,58.6,0,
+j,H,gap,58.2,0,
 b,b,scanned,40.1,1,m(bb)
 b,t,scanned,43.8,1,m(tb)
-b,ga,gap,55.0,0,
+b,ga,gap,47.3,0,
 b,V,scanned,16.5,1,m(Wb)
-b,H,gap,43.2,0,
+b,H,gap,39.2,0,
 t,t,scanned,55.6,2,m(tt); m(tt)/m(jj)
-t,ga,gap,68.6,0,
+t,ga,gap,53.6,0,
 t,V,scanned,39.7,2,m(tW); m(ttZ)/m(Zt)
 t,H,scanned,13.7,1,m(Ht)
 ga,ga,scanned,401.7,1,m(gammagamma)
 ga,V,scanned,110.2,1,m(Vgamma)
-ga,H,gap,68.6,0,
+ga,H,gap,51.6,0,
 V,V,scanned,56.7,1,m(VV)
 V,H,scanned,53.6,1,m(Vh)
 H,H,scanned,39.7,1,m(HH)
