@@ -144,6 +144,24 @@ by ×100 and ×0.01 moves the ten-object scan over `1284 … 7768` fittable spec
 `Z_local` over `6.84 … 7.12`, i.e. four orders of magnitude in assumed statistics for ±0.14σ. Breadth
 enters through `ln N`, and that is why the answer survives a model this crude.
 
+**Which dataset the anchor describes: Run 2, 140 fb⁻¹.** That is the consistent choice, because every
+scan window in the budget comes from a published Run-2 search family, so gate and windows describe the
+same data. A larger dataset enters as a rescaling of `N_REF` (`scaled_scan.DATASETS`), and buys reach
+slowly, the one-event mass going as `lumi^(1/(P-1))`, the sixth root. Run 2 plus Run 3, taken as ×3 and
+ignoring the rise in high-mass cross sections from 13 to 13.6 TeV (which acts in the same direction),
+extends each window by a fifth in mass and gives
+
+| | fittable spectra | `N` | `Z_local` |
+|---|---|---|---|
+| ten objects, Run 2 | 3603 of 21644 | 1.6e5 | 7.00 |
+| ten objects, Run 2+3 | 4438 of 21644 | 2.0e5 | 7.03 |
+| … with the four lenses, Run 2 | 6611 histograms | 2.9e5 | 7.08 |
+| … with the four lenses, Run 2+3 | 8211 histograms | 3.6e5 | 7.11 |
+
+so the full dataset does not change the conclusion: the lensed scan still fits the `5e5` budget, and
+statistics still binds before the trials factor does. On the five-object grid the same ×3 leaves 755 of
+1502 histograms rather than 712, `N = 3.9e4`, `Z_local = 6.79`.
+
 ### The scaled-up scan and its trials budget
 
 `scaled_scan.py` runs the same enumeration over the alphabet a general search would actually have,

@@ -27,6 +27,9 @@ is one more view of the same spectrum and one more look. Half the handles a wide
 already in the enumeration (high MET, object multiplicity, b-tag and tau enrichment) and would be
 double counted; the four that are not are priced one at a time, never in combination.
 
+The statistics requirement every histogram has to pass is anchored on a Run-2 dataset, so the report
+closes by rescaling that anchor to Run 2 plus Run 3.
+
 Resolutions are not new inputs: each object's fractional sigma is read back out of the published
 resolution of its own symmetric channel, sigma = 2 r, as two_body_matrix.py does. Missing energy has
 no symmetric channel and is read out of mT(e,v) instead.
@@ -46,6 +49,10 @@ import combinatorial_budget as CB
 import yield_model as YM
 
 TRIALS_BUDGET = 5.0e5
+
+# Integrated luminosity relative to the Run-2 dataset the yield anchor is set on, ignoring the rise in
+# high-mass cross sections from 13 to 13.6 TeV, which acts in the same direction.
+DATASETS = [("Run 2, 140 fb-1", 1.0), ("Run 2+3, ~400 fb-1", 3.0)]
 
 # ------------------------------------------------------------------ the wider alphabet
 # key -> (label, mass-floor contribution in GeV). The symmetric channel each resolution is read from
@@ -314,25 +321,33 @@ LENSES = [
      lambda k, n, lo: n <= 3 and lo < ISR_MAX, ISR_MAX),
 ]
 
-items = []
+def lens_views(rows):
+    """(row index, lens key, its index in LENSES, looks it costs, does it fit) per available view."""
+    for i, r in enumerate(rows):
+        for li, (lk, _label, _rule, ok, cap) in enumerate(LENSES, 1):
+            if not ok(len(r.group), r.ncat, r.lo):
+                continue
+            hi = r.hi if cap is None else min(r.hi, cap)
+            _hs, lns, _ev, fits = YM.gate(r.lo, hi, r.r, r.w * YM.LENS_EFF[lk])
+            yield i, lk, li, lns * r.split, fits
+
+
+items, tier_of = [], {}
 lens_n, lens_N = collections.Counter(), collections.Counter()
 lens_thin = collections.Counter()
 for i, r in enumerate(spectra):
     key = canon(r.group)
     tier = 0 if i in once else 1 if key in MOTIVATED_COMPS else 2
+    tier_of[i] = (tier, key)
     items.append((tier, -r.w, 0, r.n_s, key, r.cat, r.split, ""))
-    for li, (lk, _label, _rule, ok, cap) in enumerate(LENSES, 1):
-        if not ok(len(r.group), r.ncat, r.lo):
-            continue
-        hi = r.hi if cap is None else min(r.hi, cap)
-        _hs, lns, _ev, fits = YM.gate(r.lo, hi, r.r, r.w * YM.LENS_EFF[lk])
-        if not fits:
-            lens_thin[lk] += r.split
-            continue
-        lns *= r.split
-        items.append((max(tier, 1), -r.w, li, lns, key, r.cat, r.split, lk))
-        lens_n[lk] += r.split
-        lens_N[lk] += lns
+for i, lk, li, lns, fits in lens_views(spectra):
+    r, (tier, key) = spectra[i], tier_of[i]
+    if not fits:
+        lens_thin[lk] += r.split
+        continue
+    items.append((max(tier, 1), -r.w, li, lns, key, r.cat, r.split, lk))
+    lens_n[lk] += r.split
+    lens_N[lk] += lns
 items.sort(key=lambda x: (x[0], x[1], x[2], x[3]))
 lensed_n, lensed_N = full.n_hist + sum(lens_n.values()), full.N + sum(lens_N.values())
 
@@ -381,6 +396,24 @@ if L_spec < n_sel:
 else:
     print(f"the lenses cost nothing in coverage: axes and lens views together still fit the budget, "
           f"and {sum(lens_thin.values()):,} further views are ruled out by statistics alone")
+print()
+
+# The yield anchor is a Run-2 dataset, so a larger one enters exactly as the band above does. It buys
+# little reach per spectrum, the one-event mass going as luminosity^(1/(P-1)).
+print(f"dataset scaled (the anchor is {DATASETS[0][0]}): spectra, N, Z_local, mass reach")
+for _label, _s in DATASETS:
+    YM.N_REF = _n_ref * _s
+    _r = CB.enumerate_scan(**WIDE_ARGS)
+    _sp = [x for x in _r.rows if x.n_s > 0]
+    _lv = [(_sp[i].split, lns) for i, _lk, _li, lns, fits in lens_views(_sp) if fits]
+    print(f"  {_label:20s} x{_s:<4g} {_r.n_hist:6,d} of {_r.n_hist + _r.n_thin:6,d} histograms, "
+          f"N = {_r.N:9,.0f}, Z_local = {z_local_for_global5(_r.N):.2f}, "
+          f"x{_s ** (1.0 / (YM.P - 1.0)):.2f} in mass; with lenses "
+          f"{_r.n_hist + sum(n for n, _ in _lv):6,d} histograms, "
+          f"N = {_r.N + sum(x for _, x in _lv):9,.0f}, "
+          f"Z_local = {z_local_for_global5(_r.N + sum(x for _, x in _lv)):.2f}")
+YM.N_REF = _n_ref
+print()
 
 # ------------------------------------------------------------------ tables
 hdr = ("scan", "types", "K_max", "objects_per_category", "trigger", "categories",

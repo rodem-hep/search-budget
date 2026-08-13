@@ -125,3 +125,8 @@ N = 285,962, Z_local = 7.08
   forward jet pair          53 of      53 views kept (100.0 %),     2,700 looks
   ISR jet                   78 of      78 views kept (100.0 %),     3,958 looks
 the lenses cost nothing in coverage: axes and lens views together still fit the budget, and 4,686 further views are ruled out by statistics alone
+
+dataset scaled (the anchor is Run 2, 140 fb-1): spectra, N, Z_local, mass reach
+  Run 2, 140 fb-1      x1     3,603 of 21,644 histograms, N =   161,020, Z_local = 7.00, x1.00 in mass; with lenses  6,611 histograms, N =   285,962, Z_local = 7.08
+  Run 2+3, ~400 fb-1   x3     4,438 of 21,644 histograms, N =   201,136, Z_local = 7.03, x1.20 in mass; with lenses  8,211 histograms, N =   362,815, Z_local = 7.11
+
