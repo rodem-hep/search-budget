@@ -67,6 +67,83 @@ PUBLIC_OBS = {
     "Toponium":                      ["m(tt)"],
 }
 
+# ---------------------------------------------------------------- resonance width
+# n_s counts detector resolution elements, which is the right step size only while the natural
+# width stays below r. WIDTH places every class of PUBLIC_OBS, with the Gamma/M its published
+# benchmark carries:
+#   narrow     Gamma/M below r on every axis the class populates
+#   benchmark  narrow at the benchmark ATLAS publishes, broad elsewhere in its own parameter space
+#   broad      Gamma/M already above r at the standard benchmark
+#   nonpeak    no Breit-Wigner peak at all: a threshold, a continuum, or a counting signature
+# A signal wider than r correlates neighbouring mass points, so counting resolution elements
+# OVER-counts independent looks. Every entry below therefore biases Z_local up, never down.
+WIDTH = {
+    "Hidden Abelian Higgs (HAHM)":   ("narrow",    "Gamma/M ~ eps^2, <<1e-3"),
+    "N2HDM / 2HDM+S (h->aa)":        ("narrow",    "light a, <<1%"),
+    "ALP":                           ("narrow",    "Gamma/M ~ (M/f)^2, <<1%"),
+    "Singlet scalar / SM+Scalars":   ("narrow",    "mixing-suppressed, <~1%"),
+    "Higgs portal":                  ("narrow",    "mixing-suppressed, <~1%"),
+    "TRSM (singlet/triplet)":        ("narrow",    "mixing-suppressed, <~1%"),
+    "Leptophilic gauge boson":       ("narrow",    "small g, <~1%"),
+    "Georgi-Machacek":               ("narrow",    "H++ 1e-3 to a few %"),
+    "Type-II seesaw":                ("narrow",    "H++ <~1%"),
+    "Excited quark (q*/b*)":         ("narrow",    "2-4% at f=1, Lambda=M"),
+    "Diquark / color-sextet":        ("narrow",    "1-5% for perturbative coupling"),
+    "Sgluon":                        ("narrow",    "<~2%"),
+    "Excited boson (W*/Z*)":         ("narrow",    "a few %"),
+    "Vector-like confinement":       ("narrow",    "bound states, <~1%"),
+    "Stop/scharm (RPV)":             ("narrow",    "lambda''-suppressed, <<1%"),
+    "LRSM / Alt-LRSM":               ("narrow",    "W_R 2-3%"),
+    "Heavy neutrino / HNL (prompt)": ("narrow",    "N itself <<1%"),
+    "RPV electroweakino (trilepton)":("narrow",    "electroweak width, <<1%"),
+    "Scalar leptoquark (S1)":        ("narrow",    "lambda^2/16pi ~ 2% at lambda=1"),
+    "Leptoquark NLO (mix/nomix)":    ("narrow",    "lambda^2/16pi ~ 2% at lambda=1"),
+    "Randall-Sundrum / Radion":      ("narrow",    "radion <~1%"),
+    "W'":                            ("narrow",    "SSM ~3%, below the mT and m(tb) resolutions"),
+
+    "Minimal Z' / U(1)":             ("benchmark", "SSM ~3% exceeds r=0.015 on m(ee); E6 0.5-1.2%"),
+    "Vector triplet (HVT)":          ("benchmark", "model A ~2%, B ~5%; broad scenarios published"),
+    "KK graviton (Gstar)":           ("benchmark", "0.014% at k/Mpl=0.01, ~6% for bulk RS"),
+    "Simplified DM (dijet mediator)":("benchmark", "1% to >30% over the coupling grid"),
+    "Vector-like quark (VLQ)":       ("benchmark", "pair narrow, single production 10-50%"),
+    "Vector leptoquark (U1)":        ("benchmark", "~20% at the lambda~3 flavour-anomaly point"),
+    "Technicolor / TC2":             ("benchmark", "technirho a few %, walking variants broad"),
+    "Excited lepton (l*)":           ("benchmark", "a few % against r=0.015-0.03 on the lgamma axes"),
+    "SILH / Little Higgs":           ("benchmark", "a few %, marginal on m(ee)"),
+    "MSSM/NMSSM/RPV SUSY":           ("benchmark", "A/H->tautau 10-20% at tanbeta~50, still under r"),
+    "2HDM (general/typeII/CPV)":     ("benchmark", "narrow on the scalar axes; see NONPEAK_ON"),
+    "HeavyHiggs THDM":               ("benchmark", "narrow on m(VV); see NONPEAK_ON"),
+    "Top-philic":                    ("benchmark", "see NONPEAK_ON"),
+
+    "KK gluon (RS)":                 ("broad",     "15-30%, 2-4x the m(tt) resolution"),
+    "Coloron / Axigluon":            ("broad",     "5-20% against r=0.05 on m(jj)"),
+    "Composite / NJL":               ("broad",     "10-50%, strongly coupled"),
+
+    "Quantum black hole":            ("nonpeak",   "threshold turn-on plus continuum, no peak"),
+    "Large ED / UED / HEIDI":        ("nonpeak",   "non-resonant high-mass tail / degenerate tower"),
+    "Type-III seesaw":               ("nonpeak",   "pair-produced triplets, a counting signature"),
+    "Vector-like lepton (VLL)":      ("nonpeak",   "pair-produced, a counting signature"),
+    "Toponium":                      ("nonpeak",   "threshold effect fixed at 2m_t, not scannable"),
+}
+
+# Axes on which an otherwise-peaking class does not produce a peak. Kept separate from WIDTH
+# because peaking-ness is a property of the (model, axis) pair, not of the model alone.
+NONPEAK_ON = {
+    "Heavy neutrino / HNL (prompt)": {"multilepton"},      # counted, not scanned, in multilepton
+    "2HDM (general/typeII/CPV)":     {"m(tt)"},            # interference with SM ttbar: peak-dip
+    "HeavyHiggs THDM":               {"m(tt)"},
+    "Top-philic":                    {"m(tt)"},
+}
+
+NONPEAK = {m for m, (c, _) in WIDTH.items() if c == "nonpeak"}
+
+def peaks(model, obs):
+    return model not in NONPEAK and obs not in NONPEAK_ON.get(model, ())
+
+def nonpeak_only(obs, models):
+    """True if no model motivating this axis produces a peak on it."""
+    return bool(models) and not any(peaks(m, obs) for m in models)
+
 # ---------------------------------------------------------------- event selections
 # NSEL[obs] = (n_channels, "the real analysis channels that scan this mass axis
 # separately"), anchored to PUBLISHED ATLAS search designs -- public information.
@@ -150,3 +227,9 @@ assert not _bad, f"flavour-inclusive label used where a leaf is required: {sorte
 _unknown = {o for objs in PUBLIC_OBS.values() for o in objs if o not in _SCAN} | \
            {o for o in NSEL if o not in _SCAN}
 assert not _unknown, f"observable with no SCAN window: {sorted(_unknown)}"
+
+assert set(WIDTH) == set(PUBLIC_OBS), \
+    f"WIDTH and PUBLIC_OBS disagree: {sorted(set(WIDTH) ^ set(PUBLIC_OBS))}"
+assert set(NONPEAK_ON) <= set(PUBLIC_OBS), f"NONPEAK_ON has no model: {sorted(NONPEAK_ON)}"
+_stray = {(m, o) for m, os_ in NONPEAK_ON.items() for o in os_ if o not in PUBLIC_OBS[m]}
+assert not _stray, f"NONPEAK_ON names an axis the model does not populate: {sorted(_stray)}"

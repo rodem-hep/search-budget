@@ -15,7 +15,7 @@ def _p(*a): return os.path.join(ROOT, *a)
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from bump_observables import (floor, res, canon, CANON_ORDER, scan_segments, scan_source,
                               ns_scan, ns_achievable, z_local_for_global5 as z5, SQRTS)
-from public_obs_map import PUBLIC_OBS, NSEL, NSEL_DEFAULT, nsel
+from public_obs_map import PUBLIC_OBS, NSEL, NSEL_DEFAULT, nsel, WIDTH, nonpeak_only
 
 # ---------------------------------------------------------------- the public channel set
 # One canonical observable per scanned mass axis; a model contributes to every axis it peaks in.
@@ -36,6 +36,11 @@ N_incl, n_incl = sum(incl.values()), len(order)
 N_sel,  n_sel  = sum(sel.values()),  sum(nsel(o) for o in order)
 N_env          = sum(env.values())
 N_full, N_full_lo, N_full_hi = 5e4, 1e4, 1e5                # full ATLAS BSM program (literature)
+
+# ---------------------------------------------------------------- the narrow-resonance assumption
+wclass = collections.Counter(c for c, _ in WIDTH.values())
+nonpeak_axes = [o for o in order if nonpeak_only(o, pub_models[o])]
+N_peak = N_incl - sum(incl[o] for o in nonpeak_axes)
 
 # ---------------------------------------------------------------- console
 def band(N):
@@ -160,6 +165,21 @@ budget is extremely robust to counting choices.
 - `n_s` ignores cross-channel correlations (conservative: slight over-count) and uses the
   fixed-resolution-element approximation of Gross-Vitells (the up-crossing refinement adds a mild
   Z-dependence).
+- **Narrow-resonance assumption.** `n_s` counts *detector* resolution elements, which is the right
+  step size only while the natural width stays below `r`. `public_obs_map.WIDTH` places all
+  {len(WIDTH)} public model classes: **{wclass['narrow']} narrow** on every axis they populate,
+  **{wclass['benchmark']}** narrow only at the benchmark ATLAS publishes (Z'_SSM at 3% against
+  `r`=0.015 on `m(ee)`, the DM-mediator coupling grid, single-VLQ, U1 at the flavour-anomaly point),
+  **{wclass['broad']}** already broader than `r` there (KK gluon 15-30% vs `r`=0.08, coloron/axigluon,
+  composite/NJL), and **{wclass['nonpeak']}** with no Breit-Wigner peak at all (QBH thresholds,
+  ADD/HEIDI continua, pair-produced Type-III/VLL, toponium at 2 m_t). A signal wider than `r`
+  correlates neighbouring mass points, so counting resolution elements **over**-counts independent
+  looks: the bias is conservative, `Z_local` too strict rather than too loose.
+  Only {len(nonpeak_axes)} axes are motivated *exclusively* by non-peaking models
+  ({', '.join(f'`{o}`' for o in nonpeak_axes)}); dropping both takes N from {N_incl:,.0f} to
+  {N_peak:,.0f} and `Z_local` from {z5(N_incl):.2f} to {z5(N_peak):.2f}, so the whole question is
+  worth {z5(N_incl)-z5(N_peak):.3f} sigma. `NONPEAK_ON` records the (model, axis) pairs where an
+  otherwise-narrow class does not peak, including the H/A interference with SM ttbar.
 
 Source: `scripts/search_budget.py` -> `results/tables/search_budget.csv`,
 `results/tables/search_budget_selections.csv`. Figures: `scripts/budget_plots.py`,

@@ -47,6 +47,37 @@ were made for it, and it ties a model-space quantity to one collaboration's prod
 model-independent envelope `[floor, sqrt(s)]` is kept as a reference upper bound, where the floor is
 `max(lowest trigger, kinematic 2·m_daughter, Z-peak)`.
 
+### The narrow-resonance assumption
+
+`n_s` counts **detector** resolution elements. That is the right step size only while the natural
+width of the signal stays below `r`; a resonance broader than the resolution correlates
+neighbouring mass points, so fewer of them are independent looks. The direction matters more than
+the size: counting resolution elements for a wide signal **over**-counts `N`, which makes `Z_local`
+too strict rather than too loose. Nothing in the budget can be made *easier* by a width correction.
+
+`public_obs_map.WIDTH` places all 43 public model classes in four bands, each with the Γ/M its
+published benchmark carries:
+
+| band | classes | what it means |
+|---|--:|---|
+| `narrow` | 22 | Γ/M below `r` on every axis the class populates (HAHM ~ε², LQ `λ²/16π` ≈ 2%, W_R 2–3%, q\* 2–4%) |
+| `benchmark` | 13 | narrow at the point ATLAS publishes, broad elsewhere in its own parameter space (Z′_SSM 3% against `r`=0.015 on `m(ee)`; the DM-mediator coupling grid spans 1% to >30%; single-VLQ 10–50%; U1 ~20% at the flavour-anomaly point) |
+| `broad` | 3 | already wider than `r` at the standard benchmark: KK gluon 15–30% against `r`=0.08 on `m(tt)`, coloron/axigluon, composite/NJL |
+| `nonpeak` | 5 | no Breit-Wigner peak at all: QBH is a threshold turn-on, ADD/HEIDI a non-resonant tail, Type-III seesaw and VLL are pair-produced counting signatures, toponium is a threshold effect pinned at 2·m_t |
+
+Peaking-ness belongs to the (model, axis) pair rather than to the model, so `NONPEAK_ON` records
+the exceptions: prompt HNL is a genuine `m(lljj)` resonance but a counting signature in
+`multilepton`, and 2HDM / heavy-Higgs / top-philic scalars interfere with the SM `tt̄` continuum,
+giving a peak-dip lineshape rather than a bump on `m(tt)`.
+
+**What it costs.** Only two axes are motivated *exclusively* by non-peaking models: `m(multi)`
+(ADD/HEIDI + QBH) and `multilepton` (HNL + Type-III + VLL). Dropping both takes `N` from 3685 to
+3620 and `Z_local` from 6.44 to 6.43. `search_budget.py` recomputes that sensitivity rather than
+quoting it, so it follows the map. The combinatorial scan is unaffected by construction: the four
+axes `scaled_scan.MOTIVATED` maps to `None` (`m(multi)` and the three transverse masses) are
+exactly the non-peak observables, so `m(multi)` never entered the 3603. `multilepton` is the one
+axis that counts as motivated in the scan while none of its models peaks there.
+
 ### Splitting the budget finer
 
 **Event selections** (`search_budget.py`, the `NSEL` column): real searches slice a final state much

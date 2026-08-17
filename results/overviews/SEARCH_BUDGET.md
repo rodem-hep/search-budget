@@ -119,6 +119,21 @@ budget is extremely robust to counting choices.
 - `n_s` ignores cross-channel correlations (conservative: slight over-count) and uses the
   fixed-resolution-element approximation of Gross-Vitells (the up-crossing refinement adds a mild
   Z-dependence).
+- **Narrow-resonance assumption.** `n_s` counts *detector* resolution elements, which is the right
+  step size only while the natural width stays below `r`. `public_obs_map.WIDTH` places all
+  43 public model classes: **22 narrow** on every axis they populate,
+  **13** narrow only at the benchmark ATLAS publishes (Z'_SSM at 3% against
+  `r`=0.015 on `m(ee)`, the DM-mediator coupling grid, single-VLQ, U1 at the flavour-anomaly point),
+  **3** already broader than `r` there (KK gluon 15-30% vs `r`=0.08, coloron/axigluon,
+  composite/NJL), and **5** with no Breit-Wigner peak at all (QBH thresholds,
+  ADD/HEIDI continua, pair-produced Type-III/VLL, toponium at 2 m_t). A signal wider than `r`
+  correlates neighbouring mass points, so counting resolution elements **over**-counts independent
+  looks: the bias is conservative, `Z_local` too strict rather than too loose.
+  Only 2 axes are motivated *exclusively* by non-peaking models
+  (`m(multi)`, `multilepton`); dropping both takes N from 3,685 to
+  3,620 and `Z_local` from 6.44 to 6.43, so the whole question is
+  worth 0.003 sigma. `NONPEAK_ON` records the (model, axis) pairs where an
+  otherwise-narrow class does not peak, including the H/A interference with SM ttbar.
 
 Source: `scripts/search_budget.py` -> `results/tables/search_budget.csv`,
 `results/tables/search_budget_selections.csv`. Figures: `scripts/budget_plots.py`,
