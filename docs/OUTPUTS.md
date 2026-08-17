@@ -16,6 +16,7 @@ the only ones that are not part of `make all`.
 | `SEARCH_BUDGET.md` | `search_budget.py` | **the headline**: spectra, `N_trials`, `Z_local(5σ global)`, per-spectrum table |
 | `BUDGET_UNCERTAINTY.md` | `budget_uncertainty.py` | what every declared input is worth on the bar, on both counted bases and on the difference between them |
 | `PUBLISHED_CENSUS.md` | `published_census.py` | the ATLAS resonance-search publication record: 86 spectra, 290 papers, recency and Run-3 coverage |
+| `CENSUS_BUDGET.md` | `census_budget.py` | the same census priced in trials: `N` and `Z_local` from the publication record, on both the published-search and the axes-scanned basis |
 | `CENSUS_REFERENCES.md` | `export_census_bib.py` | all 290 census papers written out in full, numbered, under the spectrum each is counted against |
 | `EXCESS_COUNTING.md` | hand-written | expected vs observed 3σ/5σ excesses — the external check on `N` |
 | `REPORTED_EXCESSES.md` | `reported_excesses.py` | the observed side made concrete: every excess ≥3σ reported in the 290 census abstracts |
@@ -31,6 +32,7 @@ the only ones that are not part of `make all`.
 | `search_budget_selections.csv` | `search_budget.py` — the event-selection multiplicity per spectrum |
 | `combinatorial_budget.csv` | `combinatorial_budget.py` — 1094 (category, mass-group) rows, with the window truncated at its one-event mass and `n_s = 0` where the histogram cannot be fitted |
 | `published_census.csv` | `published_census.py` |
+| `census_budget.csv` | `census_budget.py` — one row per (published search, axis): the range it scanned, where that range came from, `r` and `n_s` |
 | `reported_excesses.csv` | `reported_excesses.py` — per paper: largest quoted local/global significance and the abstract sentence behind it |
 | `composition_gap.txt` | `composition_gap.py` (also writes the LaTeX fragment below) |
 | `scaled_scan.csv`, `priority_scan.csv`, `lens_scan.csv`, `scaled_scan.txt` | `scaled_scan.py` — the ten-object scan with MET in the masses: one row per variant, per composition what the trials budget keeps or drops, per selection lens what it adds and what survives, and the report |

@@ -26,6 +26,7 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(X)/composition_appendix.tex \
           $(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv $(T)/scaled_scan.txt \
           $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md \
+          $(T)/census_budget.csv $(O)/CENSUS_BUDGET.md \
           $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md \
           $(X)/model_map_appendix.tex $(T)/model_spectrum_map.csv \
           $(X)/two_body_matrix.tex $(T)/two_body_matrix.csv \
@@ -64,6 +65,11 @@ $(P)/excess_counting.png: $(T)/search_budget.csv $(S)/excess_counting.py
 	$(PY) $(S)/excess_counting.py
 $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md &: $(S)/published_census.py data/published_spectra.csv
 	$(PY) $(S)/published_census.py
+# The same census priced in trials: every published search over the range it scanned. Depends on
+# search_budget.csv only to quote the model side beside it.
+$(T)/census_budget.csv $(O)/CENSUS_BUDGET.md &: $(S)/census_budget.py data/published_spectra.csv \
+                                                 $(S)/bump_observables.py $(T)/search_budget.csv
+	$(PY) $(S)/census_budget.py
 # The bibliography of the census. fetch_census_meta.py refreshes data/census_papers.csv from the
 # arXiv API and is deliberately NOT a prerequisite: its output is committed so this stays offline.
 $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md &: $(S)/export_census_bib.py \

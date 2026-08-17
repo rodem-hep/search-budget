@@ -1,0 +1,113 @@
+family,spectrum,status,budget_axis,window_GeV,window_from,r,n_s
+Jets & hadronic,"Dijet (inclusive, high mass)",ageing,m(jj),1800-8200,census,0.05,30.3
+Jets & hadronic,Photon + jet,stale,m(jgamma),500-7000,axis window,0.04,66.0
+Jets & hadronic,"Dijet (low mass, trigger-level)",current,m(jj),100-250,census,0.05,18.3
+Jets & hadronic,Dijet + ISR photon/jet,current,m(jj),200-650,census,0.05,23.6
+Jets & hadronic,"Dijet, b-tagged",ageing,m(bb),15-62+450-6000,axis window,0.1,40.1
+Jets & hadronic,"Dijet, b-tagged",ageing,m(bj),200-6000,axis window,0.06,56.7
+Jets & hadronic,Pair-produced dijet resonances (4 jets),stale,m(jj),200-8000,axis window,0.05,73.8
+Jets & hadronic,Three-jet / multijet (3-quark res.),stale,m(3j),200-1800,axis window,0.05,43.9
+Jets & hadronic,Z + light hadronic resonance (H decay),current,-,0.5-3.5,census,0.06,32.4
+Jets & hadronic,Dijet + isolated lepton,ageing,m(jj),250-6000,census,0.05,63.6
+Jets & hadronic,Dijet from dark quarks,ageing,m(jj),200-8000,axis window,0.05,73.8
+Jets & hadronic,Boosted light hadronic res. + photon,current,-,20-100,census,0.06,26.8
+Photons,Diphoton (high mass),ageing,m(gammagamma),160-2800,census,0.01,286.2
+Photons,Diphoton (low mass / boosted),current,m(gammagamma),66-110+150-5000,axis window,0.01,401.7
+Photons,"Diphoton, extra dimensions",stale,m(gammagamma),2520-3920,census,0.01,44.2
+Photons,Photon-jets (collimated gamma pairs),stale,-,2-10,census,0.06,26.8
+Photons,Diphoton + forward protons (ALP),ageing,m(gammagamma),150-1600,census,0.01,236.7
+Photons,Three photons,stale,-,,unpriced,0.06,0.0
+Photons,H -> Za -> ll gamgam,ageing,-,0.1-33,census,0.06,96.7
+Leptons,Ditau,current,m(tautau),20-85,census,0.12,12.1
+Leptons,"Dilepton (ee/mumu, high mass)",current,m(ee),150-8000,axis window,0.015,265.1
+Leptons,"Dilepton (ee/mumu, high mass)",current,m(mumu),150-8000,axis window,0.05,79.5
+Leptons,Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau),ageing,m(emu) LFV,100-8000,axis window,0.03,146.1
+Leptons,Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau),ageing,m(etau) LFV,100-3000,axis window,0.12,28.3
+Leptons,Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau),ageing,m(mutau) LFV,100-3000,axis window,0.12,28.3
+Leptons,Four leptons / 4mu,current,m(ee) (Zd),5-81,census,0.025,111.4
+Leptons,Four leptons / 4mu,current,m(mumu) (Zd),5-81,census,0.02,139.3
+Leptons,Lepton + MET (W-prime),ageing,mT(ev),150-7000,census,0.1,38.4
+Leptons,Lepton + MET (W-prime),ageing,mT(muv),150-7000,census,0.15,25.6
+Leptons,LFV Z decays,ageing,-,fixed,fixed,0.06,1.0
+Leptons,Dimuon (low / intermediate mass),current,m(mumu),35-75,census,0.05,15.2
+Leptons,SFOS dilepton + MET (edge),stale,m(ee),150-8000,axis window,0.015,265.1
+Leptons,SFOS dilepton + MET (edge),stale,m(mumu),150-8000,axis window,0.05,79.5
+Leptons,Same-sign dimuon (strong gravity),stale,m(mumu) SS,200-1300,axis window,0.04,46.8
+Leptons,Collimated / displaced lepton pairs,current,m(ee) (Zd),1-400,axis window,0.025,239.7
+Leptons,Collimated / displaced lepton pairs,current,m(mumu) (Zd),0.3-400,axis window,0.02,359.8
+Leptons,Tau + MET,current,mT(taunu),200-5000,axis window,0.12,26.8
+Leptons,Trilepton resonance,ageing,m(eZ),100-1100,census,0.03,79.9
+Leptons,Trilepton resonance,ageing,m(muZ),100-1100,census,0.04,59.9
+Leptons,Periodic signals in dielectron/diphoton,ageing,m(ee),150-8000,axis window,0.015,265.1
+Leptons,Periodic signals in dielectron/diphoton,ageing,m(gammagamma),66-110+150-5000,axis window,0.01,401.7
+Leptons,LFV tau -> 3 mu,current,-,fixed,fixed,0.06,1.0
+Diboson,"ZZ/ZW -> llqq, vvqq, 4l",ageing,m(VV),200-6000,axis window,0.06,56.7
+Diboson,WZ/WW fully leptonic,ageing,m(VV),200-6000,axis window,0.06,56.7
+Diboson,WW/WZ semileptonic (lvqq),ageing,m(VV),300-5000,census,0.06,46.9
+Diboson,Heavy Higgs -> ZZ / WW,stale,m(VV),200-6000,axis window,0.06,56.7
+Diboson,Diboson fully hadronic (boson-tagged jets),ageing,m(VV),1300-6000,census,0.06,25.5
+Diboson,Diboson combination,stale,m(VV),500-3000,census,0.06,29.9
+Diboson,WW -> e-mu,stale,m(VV),200-6000,axis window,0.06,56.7
+Diboson,Triboson WWW,stale,-,,unpriced,0.06,0.0
+Vector boson + X,"VH (llbb, lvbb, vvbb)",ageing,m(Vh),220-5000,census,0.06,52.1
+Vector boson + X,Z-gamma,ageing,m(Vgamma),220-3400,census,0.03,91.3
+Vector boson + X,"V-gamma, hadronic V",ageing,m(Vgamma),1000-6800,census,0.03,63.9
+Vector boson + X,H -> Z gamma,current,-,fixed,fixed,0.06,1.0
+Vector boson + X,VH fully hadronic,ageing,m(Vh),1500-5000,census,0.06,20.1
+Vector boson + X,Higgs + photon,ageing,-,700-4000,census,0.06,29.0
+Vector boson + X,High-pT Z + X resonances,ageing,-,,unpriced,0.06,0.0
+Top & heavy quarks,ttbar resonances,current,m(tt),400-5000,census,0.08,31.6
+Top & heavy quarks,Single VLQ: Wb / Ht / Zt / Hb,current,m(Wb),800-3000,axis window,0.08,16.5
+Top & heavy quarks,Single VLQ: Wb / Ht / Zt / Hb,current,m(Ht),1000-3000,axis window,0.08,13.7
+Top & heavy quarks,Single VLQ: Wb / Ht / Zt / Hb,current,m(ttZ)/m(Zt),1000-4000,axis window,0.08,17.3
+Top & heavy quarks,"tb resonances (W-prime, charged Higgs)",ageing,m(tb),500-6000,census,0.08,31.1
+Top & heavy quarks,"Fourth-generation / heavy quark -> Wq, Zq",stale,-,,unpriced,0.06,0.0
+Top & heavy quarks,Wt (excited/single VLQ),stale,m(tW),500-3000,axis window,0.08,22.4
+Top & heavy quarks,Resonant top + jet,stale,-,,unpriced,0.06,0.0
+Top & heavy quarks,Top-philic resonances,ageing,m(tt),350-6000,axis window,0.08,35.5
+Top & heavy quarks,Dark mesons -> tb,current,m(tb),180-6000,axis window,0.08,43.8
+Higgs pairs & extended scalars,H -> aa (exotic Higgs decays),current,m(bb),15-60,census,0.1,13.9
+Higgs pairs & extended scalars,H -> aa (exotic Higgs decays),current,m(tautau),15-60,census,0.12,11.6
+Higgs pairs & extended scalars,HH -> bbbb,current,m(HH),1000-5000,census,0.08,20.1
+Higgs pairs & extended scalars,X -> S H (scalar + Higgs),current,m(HH),300-6000,census,0.08,37.4
+Higgs pairs & extended scalars,A -> ZH,ageing,m(Vh),200-5000,axis window,0.06,53.6
+Higgs pairs & extended scalars,HH -> bb gamgam,ageing,m(HH),250-6000,axis window,0.08,39.7
+Higgs pairs & extended scalars,HH -> bbWW / WWWW / gamgamWW,stale,m(HH),250-6000,axis window,0.08,39.7
+Higgs pairs & extended scalars,HH -> bb tautau,ageing,m(HH),251-1600,census,0.08,23.2
+Higgs pairs & extended scalars,X -> H Y (anomaly detection / XH),ageing,m(HH),1500-6000,census,0.08,17.3
+Higgs pairs & extended scalars,Charged Higgs -> WZ / WH,current,m(VV),250-3000,census,0.06,41.4
+Higgs pairs & extended scalars,Charged Higgs -> WZ / WH,current,m(Vh),250-3000,census,0.06,41.4
+Higgs pairs & extended scalars,bbA -> bbbb (b-associated),current,m(bb),12-100,census,0.1,21.2
+Higgs pairs & extended scalars,HH + vector boson,ageing,m(HH),260-1000,census,0.08,16.8
+Higgs pairs & extended scalars,Triple Higgs (6b),current,-,,unpriced,0.06,0.0
+Higgs pairs & extended scalars,"t -> qX, X -> bb",ageing,m(bb),20-160,census,0.1,20.8
+Higgs pairs & extended scalars,HH + top quarks (ttHH),current,m(HH),250-6000,axis window,0.08,39.7
+"Leptoquarks, excited & heavy fermions",Leptoquark pair -> lepton + jet,ageing,m(ej),200-5000,axis window,0.03,107.3
+"Leptoquarks, excited & heavy fermions",Leptoquark pair -> lepton + jet,ageing,m(muj),200-5000,axis window,0.04,80.5
+"Leptoquarks, excited & heavy fermions",Leptoquark pair -> lepton + jet,ageing,m(tauj),200-5000,axis window,0.1,32.2
+"Leptoquarks, excited & heavy fermions",Third-generation LQ -> b tau / t tau,current,m(taub),1500-3000,census,0.12,5.8
+"Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)",ageing,m(egamma),200-5000,axis window,0.015,214.6
+"Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)",ageing,m(mugamma),200-5000,axis window,0.03,107.3
+"Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)",ageing,m(ej),200-5000,axis window,0.03,107.3
+"Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)",ageing,m(muj),200-5000,axis window,0.04,80.5
+"Leptoquarks, excited & heavy fermions",Heavy neutrino / right-handed W (lljj),ageing,m(eejj),400-7000,axis window,0.05,57.2
+"Leptoquarks, excited & heavy fermions",Heavy neutrino / right-handed W (lljj),ageing,m(mumujj),400-7000,axis window,0.07,40.9
+"Leptoquarks, excited & heavy fermions",Quantum black holes -> lepton + jet,current,m(ej),200-5000,axis window,0.03,107.3
+"Leptoquarks, excited & heavy fermions",Quantum black holes -> lepton + jet,current,m(muj),200-5000,axis window,0.04,80.5
+"Leptoquarks, excited & heavy fermions",Resonant single leptoquark,current,m(ej),200-5000,axis window,0.03,107.3
+"Leptoquarks, excited & heavy fermions",Resonant single leptoquark,current,m(muj),200-5000,axis window,0.04,80.5
+"Leptoquarks, excited & heavy fermions",Heavy lepton -> Z + lepton,stale,m(eZ),114-176,census,0.03,14.5
+"Leptoquarks, excited & heavy fermions",Heavy lepton -> Z + lepton,stale,m(muZ),114-176,census,0.04,10.9
+Generic & other,Quarkonium + photon (exclusive H/Z decays),current,-,fixed,fixed,0.06,1.0
+Generic & other,Doubly charged Higgs (same-sign ll / WW),ageing,m(ee) SS,200-1300,axis window,0.015,124.8
+Generic & other,Doubly charged Higgs (same-sign ll / WW),ageing,m(emu) SS,200-1300,axis window,0.025,74.9
+Generic & other,Doubly charged Higgs (same-sign ll / WW),ageing,m(mumu) SS,200-1300,axis window,0.04,46.8
+Generic & other,Heavy neutral lepton (displaced/prompt mass),current,-,8-65,census,0.06,34.9
+Generic & other,Anomaly detection (multilepton),current,-,,unpriced,0.06,0.0
+Generic & other,Generic multi-body invariant masses,ageing,-,,unpriced,0.06,0.0
+Generic & other,"Two-body masses, unsupervised anomaly detection",ageing,-,,unpriced,0.06,0.0
+Generic & other,Dark photon in rare Z decays,ageing,m(ee) (Zd),1-400,axis window,0.025,239.7
+Generic & other,Dark photon in rare Z decays,ageing,m(mumu) (Zd),0.3-400,axis window,0.02,359.8
+Generic & other,Displaced diphoton / dielectron,ageing,-,,unpriced,0.06,0.0
+Generic & other,B_s invariant mass structure (X(5568)),stale,-,,unpriced,0.06,0.0
+Generic & other,Xb -> Upsilon pi pi,stale,-,,unpriced,0.06,0.0

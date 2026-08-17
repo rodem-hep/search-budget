@@ -78,4 +78,5 @@ one extends the axis count rather than reusing it, and it is priced like any oth
 | Resonant single leptoquark | `m_lj` |
 | X -> S H (scalar + Higgs) | `m_SH` |
 
-Source: `scripts/published_census.py` from `data/published_spectra.csv`.
+Source: `scripts/published_census.py` from `data/published_spectra.csv`. What this record costs in
+trials, entry by entry: `results/overviews/CENSUS_BUDGET.md` (`scripts/census_budget.py`).

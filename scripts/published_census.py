@@ -10,10 +10,11 @@ summed.
 Scope matches the budget's: invariant-mass and transverse-mass bump hunts for new states.
 Hadron-spectroscopy measurements that happen to be bump hunts are out.
 
-For the spectra that have gone stale, the `budget_axis` column records which of the 46 canonical
-axes each one falls on, or "-" where it falls on none. That distinction is the whole point of the
-stale list: re-running a spectrum whose axis is already in N costs no trials, while re-running one
-that is not extends the axis count.
+The `budget_axis` column records which of the 46 canonical axes each entry scans, or "-" where it
+falls on none. For the stale spectra that distinction is the whole point of the list: re-running a
+spectrum whose axis is already in N costs no trials, while re-running one that is not extends the
+axis count. Read together with `scan_GeV`, the same two columns let `census_budget.py` price the
+whole census in trials.
 
 Reads data/published_spectra.csv (a committed input, not a derived table).
 Writes results/tables/published_census.csv and results/overviews/PUBLISHED_CENSUS.md.
@@ -130,7 +131,8 @@ for r in sorted(run3, key=lambda r: r["spectrum"]):
     md += f"| {r['spectrum']} | `{r['observable']}` |\n"
 
 md += """
-Source: `scripts/published_census.py` from `data/published_spectra.csv`.
+Source: `scripts/published_census.py` from `data/published_spectra.csv`. What this record costs in
+trials, entry by entry: `results/overviews/CENSUS_BUDGET.md` (`scripts/census_budget.py`).
 """
 open(_p("results", "overviews", "PUBLISHED_CENSUS.md"), "w").write(md)
 print("\nwrote results/tables/published_census.csv, results/overviews/PUBLISHED_CENSUS.md")

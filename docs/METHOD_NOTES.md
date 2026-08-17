@@ -288,20 +288,32 @@ uncovered list is a lower bound on the gap.
 ### The publication census is a different base
 
 `published_census.py` counts from the other end: not the spectra models motivate, but the searches
-ATLAS has actually published. **Its 86 entries and the budget's 46 spectra must never be summed or
-compared as if they measured the same thing.** The publication record keeps two analyses on a shared
-mass axis as separate entries when they are separate papers, so the 86 entries carry only 62 distinct
-observables; the budget merges everything onto one axis and counts resolution elements along it. The
-census is a recency and coverage instrument, not a second trials count.
+ATLAS has actually published. **Its 86 entries and the budget's 46 spectra must never be summed**, and
+a raw entry count is not a trials factor: the publication record keeps two analyses on a shared mass
+axis as separate entries when they are separate papers, so the 86 entries carry only 62 distinct
+observables, while the budget merges everything onto one axis and counts resolution elements along it.
 
 Scope is matched to the budget's on purpose: bump hunts for new states, so hadron-spectroscopy
 measurements are excluded even when they are literally bump hunts in a mass spectrum.
 
-One claim does cross between the two, so the crossing is recorded in the data rather than asserted:
-for each spectrum that has gone stale, `published_spectra.csv` carries a `budget_axis` giving the
-canonical axis it falls on, or `-` for none. Revisiting a stale spectrum is free in trials **only**
-when its axis is already in `N` (12 of the 17); the other 5 extend the axis count and are priced like
-any new spectrum.
+The crossing between the two bases is recorded in the data rather than asserted: every census row
+carries a `budget_axis` naming the canonical axis (or axes) it scans, `-` when it falls on none of
+the 46, and a `scan_GeV` transcribing the range that entry actually scanned (`fixed` for a
+single-mass search, empty where the census does not record one). Two things read it.
+
+**The stale list.** Revisiting a stale spectrum is free in trials **only** when its axis is already
+in `N` (12 of the 17); the other 5 extend the axis count and are priced like any new spectrum.
+
+**The census priced in trials** (`census_budget.py`). With an axis and a range per entry, the
+publication record can be run through the same rule as the model space, and the comparison stops
+being a category error: charging every published search for the range it scanned gives `N = 7,710`
+(`Z_local = 6.55`) over 100 (search, axis) looks, and counting each axis once over the union of every
+published range on it gives `N = 3,672` (`6.44`) — against the model side's 3,685 and 6.44, i.e. the
+two enumerations land on the same bar from opposite directions. Where the census records no range,
+the axis' own published window is the fallback, which is what separates the two bases; entries on no
+axis are priced at `RES_DEFAULT`, and the 12 that carry neither an axis nor a range (the generic
+multi-spectrum anomaly-detection scans and the displaced programs, whose trials belong in the
+combinatorial count instead) stay unpriced, so `N` is a lower bound by that much.
 
 ## Uncertainties
 
