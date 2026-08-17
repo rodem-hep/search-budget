@@ -132,9 +132,31 @@ dataset scaled (the anchor is Run 2, 140 fb-1): spectra, N, Z_local, mass reach
     ten objects     3,603 of 21,644 histograms, N =   161,020, Z_local = 7.00
     with lenses     6,611 histograms, N =   285,962, Z_local = 7.08
     motivated once     43 spectra in 36 categories over 36 compositions, N =     2,679, Z_local = 6.39
+    tier 0 / 1 / 2 spectra :     43  2,023  1,537
+    tier 0 / 1 / 2 looks   :     2,679   102,096    56,245
+    on a motivated axis    : 2,066 of 3,603 spectra (57 %), 65 % of N, over 36 of 217 object multisets
+    by group size          : k=2: 2,662 (74 %), k=3: 831 (23 %), k=4: 110 (3 %)
+    costliest compositions : gg 11,519, eg 11,482, ee 10,968, ej 10,667, jj 10,648, gj 8,666
+    lens high HT or Meff        2,134 views    89,633 looks,  1,145 too thin
+    lens displaced activity       743 views    28,651 looks,  2,860 too thin
+    lens forward jet pair          53 views     2,700 looks,     29 too thin
+    lens ISR jet                   78 views     3,958 looks,    652 too thin
+    published windows, if they were gated too: 31 of 42 axes, N = 2,566 of 3,573
+    yield anchor x0.01 / x100 (this dataset): 1,284 spectra Z = 6.84   7,768 spectra Z = 7.12   
   Run 2+3, ~400 fb-1 (x3 the anchor, x1.20 in mass reach)
     five objects      755 of  1,502 histograms, N =    39,423, Z_local = 6.79
     ten objects     4,438 of 21,644 histograms, N =   201,136, Z_local = 7.03
     with lenses     8,211 histograms, N =   362,815, Z_local = 7.11
     motivated once     45 spectra in 37 categories over 37 compositions, N =     2,921, Z_local = 6.40
+    tier 0 / 1 / 2 spectra :     45  2,366  2,027
+    tier 0 / 1 / 2 looks   :     2,921   123,231    74,984
+    on a motivated axis    : 2,411 of 4,438 spectra (54 %), 63 % of N, over 37 of 258 object multisets
+    by group size          : k=2: 3,251 (73 %), k=3: 1,045 (24 %), k=4: 142 (3 %)
+    costliest compositions : gg 13,981, eg 13,838, ee 12,894, ej 12,018, jj 11,234, gj 10,210
+    lens high HT or Meff        2,615 views   114,012 looks,  1,431 too thin
+    lens displaced activity       985 views    39,184 looks,  3,453 too thin
+    lens forward jet pair          68 views     3,381 looks,     24 too thin
+    lens ISR jet                  105 views     5,101 looks,    726 too thin
+    published windows, if they were gated too: 34 of 42 axes, N = 2,759 of 3,573
+    yield anchor x0.01 / x100 (this dataset): 1,729 spectra Z = 6.88   8,923 spectra Z = 7.14   
 

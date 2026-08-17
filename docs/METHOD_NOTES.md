@@ -228,6 +228,13 @@ fittability, so "best-populated first" means most background events. Tier 0 cost
 the 3.7e3 of the model-driven budget, which is the one place the two prescriptions can be checked
 against each other.
 
+The same split also measures how much of a combinatorial scan theory motivates at all, so the report
+prints it per dataset: the tier boundaries move with fittability. On Run 2 the tiers hold 43 / 2023 /
+1537 spectra, i.e. 2066 of 3603 (57 %) on a model-motivated axis over 36 of 217 fittable compositions;
+on Run 2 + Run 3, 45 / 2366 / 2027, i.e. 2411 of 4438 (54 %) over 37 of 258. The motivated set is
+bounded above by the 46 axes and the rest of the scan is not bounded at all, so the share falls as the
+dataset grows.
+
 Counting basis: a *spectrum* here is one axis in one category, i.e. one fitted histogram, and an
 OS/SS-split category holds two of them. `charge_split` is therefore the weight in every spectrum count
 below, exactly as in `N` — mixing the row count (17600 `(category, mass-group)` pairs) with the

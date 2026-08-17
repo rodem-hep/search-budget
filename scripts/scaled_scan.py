@@ -15,9 +15,12 @@ boosted large-R candidates for W/Z, H and top. Rules:
 That scan is far larger than anyone would run, so the second half of this script imposes a trials
 budget of TRIALS_BUDGET and asks which spectra survive it. Priority is, in order:
 
-  1. spectra whose object composition is one of the model-motivated axes of bump_observables (the 46
-     of the model-driven budget), highest expected rate first;
+  0. every object composition of the model-motivated axes of bump_observables (the 46 of the
+     model-driven budget) once, in the best-populated category that can form it;
+  1. those same compositions in their remaining categories, highest expected rate first;
   2. everything else, highest expected rate first.
+
+The split into tiers 0/1/2 also measures how much of the scan theory motivates at all.
 
 Expected rate is a declared order-of-magnitude weight per object type, multiplied over a category's
 content. Only the ordering of those weights matters for the ranking, not their values.
@@ -113,6 +116,25 @@ MOTIVATED = {
 canon = lambda c: "".join(sorted(c))
 MOTIVATED_COMPS = {canon(c) for cs in MOTIVATED.values() if cs for c in cs}
 
+
+def tiers(rows):
+    """Fittable spectra, the priority tier of each, and the best-populated category per composition.
+
+      0  every model-motivated composition once, in the best-populated category that can form it
+      1  those same compositions in their remaining categories
+      2  everything else
+    """
+    sp = [r for r in rows if r.n_s > 0]
+    best = {}
+    for i, r in enumerate(sp):
+        k = canon(r.group)
+        if k in MOTIVATED_COMPS and (k not in best or r.w > sp[best[k]].w):
+            best[k] = i
+    once = set(best.values())
+    tier = [0 if i in once else 1 if canon(r.group) in MOTIVATED_COMPS else 2
+            for i, r in enumerate(sp)]
+    return sp, tier, best
+
 print("object alphabet: resolution and yield factor from the published symmetric channel")
 for k in ORDER_WIDE:
     ch = YM.SYM[k]
@@ -127,17 +149,24 @@ print(f"\nmodel-motivated compositions: {len(MOTIVATED_COMPS)} from "
 # The size of one exemption: published windows are never gated, because a published search
 # demonstrates its own feasibility. This is what the requirement would do to them if they were.
 pub_axes = {a: cs for a, cs in MOTIVATED.items() if cs}
-pub_N, pub_N_gated, pub_ok = 0.0, 0.0, 0
-for _a, _cs in pub_axes.items():
-    _r, _w = res(_a), max(YM.weight(c) for c in _cs)
-    _full = sum(n_s(lo, hi, _r) for lo, hi in scan_segments(_a))
-    _gated = 0.0
-    for lo, hi in scan_segments(_a):
-        _hs, _ns, _ev, _fits = YM.gate(lo, hi, _r, _w)
-        _gated += _ns if _fits else 0.0
-    pub_N += _full
-    pub_N_gated += _gated
-    pub_ok += _gated > 0
+
+
+def gated_published():
+    """(axes that survive the requirement, their looks, the looks the published windows carry)."""
+    kept, N_gated, N_full = 0, 0.0, 0.0
+    for a, cs in pub_axes.items():
+        r, w = res(a), max(YM.weight(c) for c in cs)
+        N_full += sum(n_s(lo, hi, r) for lo, hi in scan_segments(a))
+        g = 0.0
+        for lo, hi in scan_segments(a):
+            _hs, ns, _ev, fits = YM.gate(lo, hi, r, w)
+            g += ns if fits else 0.0
+        N_gated += g
+        kept += g > 0
+    return kept, N_gated, N_full
+
+
+pub_ok, pub_N_gated, pub_N = gated_published()
 print(f"the requirement is never applied to a published window. On the {len(pub_axes)} published axes "
       f"this alphabet can form it would leave {pub_ok} of them and N = {pub_N_gated:,.0f} of "
       f"{pub_N:,.0f}, so exempting them is the conservative choice")
@@ -178,15 +207,10 @@ full = runs[-1][2]
 # Rows that cannot be fitted score no looks and are not spectra: they never enter the priority order.
 # An OS/SS-split row is two histograms and its looks already count both, so the two bases must not be
 # mixed: everything below counts histograms.
-spectra = [r for r in full.rows if r.n_s > 0]
-best = {}
-for i, r in enumerate(spectra):
-    key = canon(r.group)
-    if key in MOTIVATED_COMPS and (key not in best or r.w > spectra[best[key]].w):
-        best[key] = i
+spectra, tier_list, best = tiers(full.rows)
 once = set(best.values())
-ranked = sorted(((0 if i in once else 1 if canon(r.group) in MOTIVATED_COMPS else 2,
-                  -r.w, r.n_s, canon(r.group), r.cat, r.split) for i, r in enumerate(spectra)),
+ranked = sorted(((tier_list[i], -r.w, r.n_s, canon(r.group), r.cat, r.split)
+                 for i, r in enumerate(spectra)),
                 key=lambda x: (x[0], x[1], x[2]))
 
 kept_looks, kept_n = collections.Counter(), collections.Counter()
@@ -337,7 +361,7 @@ lens_n, lens_N = collections.Counter(), collections.Counter()
 lens_thin = collections.Counter()
 for i, r in enumerate(spectra):
     key = canon(r.group)
-    tier = 0 if i in once else 1 if key in MOTIVATED_COMPS else 2
+    tier = tier_list[i]
     tier_of[i] = (tier, key)
     items.append((tier, -r.w, 0, r.n_s, key, r.cat, r.split, ""))
 for i, lk, li, lns, fits in lens_views(spectra):
@@ -407,15 +431,22 @@ for _label, _s in DATASETS:
     YM.N_REF = _n_ref * _s
     _b = CB.enumerate_scan(**BASE)
     _r = CB.enumerate_scan(**WIDE_ARGS)
-    _sp = [x for x in _r.rows if x.n_s > 0]
-    _lv = [(_sp[i].split, lns) for i, _lk, _li, lns, fits in lens_views(_sp) if fits]
-    _best = {}
-    for x in _sp:
-        _k = canon(x.group)
-        if _k in MOTIVATED_COMPS and (_k not in _best or x.w > _best[_k].w):
-            _best[_k] = x
-    _ln, _lN = _r.n_hist + sum(n for n, _ in _lv), _r.N + sum(x for _, x in _lv)
-    _t0_n, _t0_N = sum(x.split for x in _best.values()), sum(x.n_s for x in _best.values())
+    _sp, _tier, _best_i = tiers(_r.rows)
+    _best = {canon(_sp[i].group): _sp[i] for i in _best_i.values()}
+    _tn, _tN = collections.Counter(), collections.Counter()
+    for i, x in enumerate(_sp):
+        _tn[_tier[i]] += x.split
+        _tN[_tier[i]] += x.n_s
+    _ln_n, _ln_N, _ln_thin = collections.Counter(), collections.Counter(), collections.Counter()
+    for i, lk, _li, lns, fits in lens_views(_sp):
+        if fits:
+            _ln_n[lk] += _sp[i].split
+            _ln_N[lk] += lns
+        else:
+            _ln_thin[lk] += _sp[i].split
+    _ln, _lN = _r.n_hist + sum(_ln_n.values()), _r.N + sum(_ln_N.values())
+    _t0_n, _t0_N = _tn[0], _tN[0]
+    _mot_n, _mot_N = _tn[0] + _tn[1], _tN[0] + _tN[1]
     dataset_rows.append((_label, _s, _b, _r, _ln, _lN, _best))
     print(f"  {_label} (x{_s:g} the anchor, x{_s ** (1.0 / (YM.P - 1.0)):.2f} in mass reach)")
     print(f"    five objects   {_b.n_hist:6,d} of {_b.n_hist + _b.n_thin:6,d} histograms, "
@@ -427,6 +458,28 @@ for _label, _s in DATASETS:
     print(f"    motivated once {_t0_n:6,d} spectra in {len({x.cat for x in _best.values()})} "
           f"categories over {len(_best)} compositions, "
           f"N = {_t0_N:9,.0f}, Z_local = {z_local_for_global5(_t0_N):.2f}")
+    print(f"    tier 0 / 1 / 2 spectra : {_tn[0]:6,d} {_tn[1]:6,d} {_tn[2]:6,d}")
+    print(f"    tier 0 / 1 / 2 looks   : {_tN[0]:9,.0f} {_tN[1]:9,.0f} {_tN[2]:9,.0f}")
+    print(f"    on a motivated axis    : {_mot_n:,} of {_r.n_hist:,} spectra "
+          f"({100*_mot_n/_r.n_hist:.0f} %), {100*_mot_N/_r.N:.0f} % of N, over "
+          f"{len(_best)} of {len(_r.by_type)} object multisets")
+    print(f"    by group size          : " + ", ".join(
+        f"k={_k}: {_v:,} ({100*_v/_r.n_hist:.0f} %)" for _k, _v in sorted(_r.by_size.items())))
+    print(f"    costliest compositions : " + ", ".join(
+        f"{_c} {_r.looks[_c]:,.0f}" for _c in sorted(_r.looks, key=lambda c: -_r.looks[c])[:6]))
+    for _key, _lab, _rule, _ok, _cap in LENSES:
+        print(f"    lens {_lab:20s} {_ln_n[_key]:7,d} views {_ln_N[_key]:9,.0f} looks, "
+              f"{_ln_thin[_key]:6,d} too thin")
+    _pk, _pg, _pf = gated_published()
+    print(f"    published windows, if they were gated too: {_pk} of {len(pub_axes)} axes, "
+          f"N = {_pg:,.0f} of {_pf:,.0f}")
+    print(f"    yield anchor x0.01 / x100 (this dataset): ", end="")
+    for _f in (0.01, 100.0):
+        YM.N_REF = _n_ref * _s * _f
+        _y = CB.enumerate_scan(**WIDE_ARGS, collect=False)
+        print(f"{_y.n_hist:,} spectra Z = {z_local_for_global5(_y.N):.2f}   ", end="")
+    print()
+    YM.N_REF = _n_ref * _s
 YM.N_REF = _n_ref
 print()
 
