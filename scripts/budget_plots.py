@@ -24,6 +24,8 @@ from plot_style import style, mathify, textsafe, MARK, MARK_PALE, INK, INK2, GRI
 OUT = os.path.join(ROOT, "results", "plots")
 os.makedirs(OUT, exist_ok=True)
 
+BUDGET_BAR = "#007E64"          # single-series mark of the budget-bars figure
+
 # ---- the public channel set (canonical observables predicted by >=1 public model)
 pub_models = collections.defaultdict(set)
 for m, obss in PUBLIC_OBS.items():
@@ -43,7 +45,7 @@ fig, ax = plt.subplots(figsize=(5.7, 7.0))
 style(ax, grid=False, minor="x")
 ax.tick_params(axis="y", right=False)   # 46 mirrored category ticks are just noise
 ax.grid(axis="x", color=GRID, lw=0.5, ls=":", alpha=0.9)
-ax.barh(np.arange(len(ranked)), [ns_scan(o) for o in ranked], color=MARK, edgecolor="none",
+ax.barh(np.arange(len(ranked)), [ns_scan(o) for o in ranked], color=BUDGET_BAR, edgecolor="none",
         height=0.72)
 ax.set_yticks(np.arange(len(ranked)))
 ax.set_yticklabels([mathify(o) for o in ranked], fontsize=7.5)

@@ -61,6 +61,7 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 | `ab_split_reach.png`, `ab_split_crossover.png` | `ab_split_budget.py` |
 | `ab_toys_background.png`, `ab_toys_power.png`, `ab_toys_spectrum.png` | `ab_split_toys.py` |
 | `ab_split_outliers.png`, `ab_outliers_mechanism.png`, `ab_outliers_spectrum.png` | `ab_split_outliers.py` |
+| `ab_spurious_guard.png` | `ab_spurious_guard.py` — the split acting as a spurious-signal guard, on two toy spectra |
 
 ### `results/plots/max_of_gaussians/` — figures of `MAX_OF_GAUSSIANS.md`
 

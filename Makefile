@@ -20,7 +20,8 @@ MOD := $(S)/bump_observables.py $(S)/public_obs_map.py
 YM  := $(S)/yield_model.py
 
 BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_BUDGET.md \
-          $(P)/search_budget.png $(P)/budget_waterfall.png $(P)/excess_counting.png \
+          $(P)/search_budget.png $(P)/scan_windows.png $(P)/model_observable_matrix.png \
+          $(P)/budget_waterfall.png $(P)/excess_counting.png \
           $(T)/combinatorial_budget.csv $(T)/composition_gap.txt \
           $(X)/composition_appendix.tex \
           $(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv $(T)/scaled_scan.txt \
@@ -30,7 +31,8 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(X)/two_body_matrix.tex $(T)/two_body_matrix.csv \
           $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md
 
-AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png
+AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png \
+      $(P)/ab_spurious_guard.png
 
 STATS := $(G)/max_of_gaussians_light.png $(G)/bh_scan.png $(G)/bh_zcut.png $(G)/bh_outliers.png
 
@@ -97,18 +99,25 @@ ab: $(AB)
 
 $(P)/ab_split_reach.png $(P)/ab_split_crossover.png &: $(S)/ab_split_budget.py $(MOD)
 	$(PY) $(S)/ab_split_budget.py
-$(P)/ab_toys_power.png: $(S)/ab_split_toys.py $(MOD)
+$(P)/ab_toys_power.png $(P)/ab_toys_background.png $(P)/ab_toys_spectrum.png &: \
+                                                 $(S)/ab_split_toys.py $(MOD)
 	$(PY) $(S)/ab_split_toys.py
-$(P)/ab_split_outliers.png: $(S)/ab_split_outliers.py $(MOD)
+$(P)/ab_split_outliers.png $(P)/ab_outliers_mechanism.png $(P)/ab_outliers_spectrum.png &: \
+                                                 $(S)/ab_split_outliers.py $(MOD)
 	$(PY) $(S)/ab_split_outliers.py
+$(P)/ab_spurious_guard.png: $(S)/ab_spurious_guard.py $(S)/plot_style.py
+	$(PY) $(S)/ab_spurious_guard.py
 
 # ---------------------------------------------------------------- selection-rule statistics
 # self-contained Monte Carlo; the slow scans are cached in results/tables/*.npz
 stats: $(STATS)
 
-$(G)/max_of_gaussians_light.png: $(S)/max_of_gaussians_plots.py $(S)/plot_style.py
+$(G)/max_of_gaussians_light.png $(G)/signal_wins_the_max.png $(G)/ab_confirmation.png \
+$(G)/threshold_scan.png $(G)/threshold_vs_argmax.png $(G)/roc_threshold_vs_argmax.png &: \
+                                                 $(S)/max_of_gaussians_plots.py $(S)/plot_style.py
 	$(PY) $(S)/max_of_gaussians_plots.py
-$(G)/bh_scan.png $(T)/bh_fdr_scan.csv &: $(S)/bh_fdr_ab.py $(S)/plot_style.py
+$(G)/bh_scan.png $(G)/bh_vs_argmax.png $(G)/roc_bh_vs_threshold.png $(T)/bh_fdr_scan.csv &: \
+                                                 $(S)/bh_fdr_ab.py $(S)/plot_style.py
 	$(PY) $(S)/bh_fdr_ab.py
 $(G)/bh_zcut.png $(T)/bh_zcut_per_pe.csv &: $(S)/bh_zcut.py $(S)/plot_style.py
 	$(PY) $(S)/bh_zcut.py
