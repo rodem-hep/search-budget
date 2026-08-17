@@ -30,7 +30,7 @@ sits on: its total band is +0.24/-0.32 against the scan's
 | background slope | P = 6 to 8 | +0.00/+0.00 | +0.01/-0.01 | +0.01/-0.01 |
 | fittability requirement | 30-300 events, 15-50 elements | +0.00/+0.00 | +0.04/-0.12 | +0.04/-0.12 |
 | the axis set | non-peaking axes and the dilepton overlap dropped; the 15 unscanned two-body pairs added | +0.03/-0.01 | +0.00/+0.00 | +0.01/-0.03 |
-| what counts as one look | N x0.5 to x Z/sqrt(2 pi) | +0.14/-0.11 | +0.15/-0.10 | +0.01/+0.00 |
+| the definition of one look | N x0.5 to x Z/sqrt(2 pi) | +0.14/-0.11 | +0.15/-0.10 | +0.01/+0.00 |
 | the closed-form LEE relation | exact Gaussian-tail solution instead | +0.00/-0.04 | +0.00/-0.05 | +0.00/-0.01 |
 | **total** | in quadrature | **+0.18/-0.16** | **+0.23/-0.31** | **+0.12/-0.23** |
 
@@ -46,14 +46,14 @@ combinatorial scan, Run 2+3, ~400 fb-1  : Z_local = 7.03 +0.23/-0.31
 the gap between the first two  : 0.59 +0.12/-0.23
 ```
 
-**What the two bases share cancels in the difference.** The resolution scale and the look convention,
+**The inputs the two bases share cancel in the difference.** The resolution scale and the look convention,
 the two largest terms, are worth +0.03/-0.08 and +0.01/+0.00 on the
-gap against up to 0.19 and 0.15 on the bars. What is left on the gap
-is the yield model of the hypothetical scan, which the model space never uses: the difference is
+gap against up to 0.19 and 0.15 on the bars. All the gap is left
+carrying is the yield model of the hypothetical scan, which the model space never uses: the difference is
 therefore better determined than the scan's bar and rests on entirely different inputs from either.
 Quote differences rather than bars wherever the argument allows it.
 
-## What each range is
+## The declared ranges
 
 - **mass resolution, scale.** `r` is propagated from ATLAS object performance rather than quoted per
   bump hunt, so it is known to a factor of a few; x2 either way is the band every headline
@@ -91,7 +91,7 @@ Quote differences rather than bars wherever the argument allows it.
   (`m(multi)`, `multilepton`) dropped, and the 88 looks the
   dark-photon axes double-count against the high-mass dilepton axes removed. Up: the 15 object
   pairs with no published axis added at 698 looks.
-- **what counts as one look.** The convention with no measurement behind it. A resonance spans more
+- **the definition of one look.** The convention with no measurement behind it. A resonance spans more
   than one element, which argues for fewer independent looks (x0.5); the up-crossing form of
   the Gross-Vitells estimate argues for more, by Z/sqrt(2 pi) = 2.57 at this
   Z, since Rice's formula counts (1/2 pi)(1/r) ln(M_hi/M_lo) exp(-Z^2/2) up-crossings against the

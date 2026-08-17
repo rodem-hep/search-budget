@@ -18,8 +18,8 @@ fittability requirement,"30-300 events, 15-50 elements",loose,systematic,,274915
 fittability requirement,"30-300 events, 15-50 elements",tight,systematic,,89485,149316,,-0.116,-0.126,-0.116
 the axis set,non-peaking axes and the dilepton overlap dropped; the 15 unscanned two-body pairs added,dropped,systematic,3532,,,-0.007,,,+0.007
 the axis set,non-peaking axes and the dilepton overlap dropped; the 15 unscanned two-body pairs added,added,systematic,4382,,,+0.027,,,-0.027
-what counts as one look,N x0.5 to x Z/sqrt(2 pi),x0.5,systematic,1842,100568,181408,-0.109,-0.099,-0.098,+0.009
-what counts as one look,N x0.5 to x Z/sqrt(2 pi),up-crossings,systematic,9461,564115,1029638,+0.145,+0.145,+0.145,+0.000
+the definition of one look,N x0.5 to x Z/sqrt(2 pi),x0.5,systematic,1842,100568,181408,-0.109,-0.099,-0.098,+0.009
+the definition of one look,N x0.5 to x Z/sqrt(2 pi),up-crossings,systematic,9461,564115,1029638,+0.145,+0.145,+0.145,+0.000
 the closed-form LEE relation,exact Gaussian-tail solution instead,exact,systematic,,,,-0.036,-0.045,-0.046,-0.009
 "mass resolution, scale",every r x2 either way,envelope,systematic,,,,+0.107/-0.109,+0.133/-0.191,+0.136/-0.195,+0.026/-0.083
 "mass resolution, per channel","each r independently, x2 per sigma (16-84%)",envelope,alternative,,,,+0.026/-0.023,+0.000/+0.000,+0.000/+0.000,+0.023/-0.026
@@ -30,7 +30,7 @@ yield anchor,N_ref x0.01 to x100,envelope,systematic,,,,+0.000/+0.000,+0.109/-0.
 background slope,P = 6 to 8,envelope,systematic,,,,+0.000/+0.000,+0.013/-0.012,+0.017/-0.018,+0.013/-0.012
 fittability requirement,"30-300 events, 15-50 elements",envelope,systematic,,,,+0.000/+0.000,+0.044/-0.116,+0.049/-0.126,+0.044/-0.116
 the axis set,non-peaking axes and the dilepton overlap dropped; the 15 unscanned two-body pairs added,envelope,systematic,,,,+0.027/-0.007,+0.000/+0.000,+0.000/+0.000,+0.007/-0.027
-what counts as one look,N x0.5 to x Z/sqrt(2 pi),envelope,systematic,,,,+0.145/-0.109,+0.145/-0.099,+0.145/-0.098,+0.009/+0.000
+the definition of one look,N x0.5 to x Z/sqrt(2 pi),envelope,systematic,,,,+0.145/-0.109,+0.145/-0.099,+0.145/-0.098,+0.009/+0.000
 the closed-form LEE relation,exact Gaussian-tail solution instead,envelope,systematic,,,,+0.000/-0.036,+0.000/-0.045,+0.000/-0.046,+0.000/-0.009
 total,quadrature over the systematic sources above,total,systematic,,,,+0.185/-0.163,+0.231/-0.308,+0.239/-0.319,+0.123/-0.232
 counting granularity,published event selections instead of inclusive spectra,alternative,convention,,,,6.53,,,

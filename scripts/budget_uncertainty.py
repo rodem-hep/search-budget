@@ -315,7 +315,7 @@ SOURCES = [
                                 extra=-overlap_looks()), None),
          Dir("added", N_model(extra=_gap), None)], "systematic", None,
         rf"non-peaking axes out, the {_ngap} unscanned pairs in"),
-    Src("what counts as one look", f"N x{LOOK_LO:g} to x Z/sqrt(2 pi)",
+    Src("the definition of one look", f"N x{LOOK_LO:g} to x Z/sqrt(2 pi)",
         [Dir(f"x{LOOK_LO:g}", N_MODEL * LOOK_LO, (N_SCAN * LOOK_LO, N_LSCAN * LOOK_LO)),
          Dir("up-crossings", N_MODEL * c_upcrossing(N_MODEL),
              (N_SCAN * c_upcrossing(N_SCAN), N_LSCAN * c_upcrossing(N_LSCAN)))],
@@ -560,17 +560,17 @@ combinatorial scan, {LUMI_LABEL}  : Z_local = {z5(N_SCAN):.2f} {TOT_SCAN[1]:+.2f
 the gap between the first two  : {z5(N_SCAN)-z5(N_MODEL):.2f} {TOT_GAP[1]:+.2f}/{TOT_GAP[0]:+.2f}
 ```
 
-**What the two bases share cancels in the difference.** The resolution scale and the look convention,
+**The inputs the two bases share cancel in the difference.** The resolution scale and the look convention,
 the two largest terms, are worth {per_src['mass resolution, scale'][2][1]:+.2f}/\
 {per_src['mass resolution, scale'][2][0]:+.2f} and \
-{per_src['what counts as one look'][2][1]:+.2f}/{per_src['what counts as one look'][2][0]:+.2f} on the
+{per_src['the definition of one look'][2][1]:+.2f}/{per_src['the definition of one look'][2][0]:+.2f} on the
 gap against up to {max(abs(x) for x in per_src['mass resolution, scale'][1]):.2f} and \
-{max(abs(x) for x in per_src['what counts as one look'][1]):.2f} on the bars. What is left on the gap
-is the yield model of the hypothetical scan, which the model space never uses: the difference is
+{max(abs(x) for x in per_src['the definition of one look'][1]):.2f} on the bars. All the gap is left
+carrying is the yield model of the hypothetical scan, which the model space never uses: the difference is
 therefore better determined than the scan's bar and rests on entirely different inputs from either.
 Quote differences rather than bars wherever the argument allows it.
 
-## What each range is
+## The declared ranges
 
 - **mass resolution, scale.** `r` is propagated from ATLAS object performance rather than quoted per
   bump hunt, so it is known to a factor of a few; x{R_FACTOR:g} either way is the band every headline
@@ -610,7 +610,7 @@ Quote differences rather than bars wherever the argument allows it.
   ({', '.join(f'`{o}`' for o in _nonpeak)}) dropped, and the {overlap_looks():.0f} looks the
   dark-photon axes double-count against the high-mass dilepton axes removed. Up: the {_ngap} object
   pairs with no published axis added at {_gap:,.0f} looks.
-- **what counts as one look.** The convention with no measurement behind it. A resonance spans more
+- **the definition of one look.** The convention with no measurement behind it. A resonance spans more
   than one element, which argues for fewer independent looks (x{LOOK_LO:g}); the up-crossing form of
   the Gross-Vitells estimate argues for more, by Z/sqrt(2 pi) = {c_upcrossing(N_MODEL):.2f} at this
   Z, since Rice's formula counts (1/2 pi)(1/r) ln(M_hi/M_lo) exp(-Z^2/2) up-crossings against the

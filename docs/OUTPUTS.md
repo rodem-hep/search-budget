@@ -52,7 +52,7 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 | `census_appendix.tex` | `export_census_bib.py` — the census spectrum by spectrum, citing every paper behind each |
 | `two_body_matrix.tex` | `two_body_matrix.py` — the two-body object grid priced in trials (a costed version of arXiv:1907.06659 Table 14); a bare `tabular`, so the consuming document supplies the float and caption |
 | `uncertainty_table.tex` | `budget_uncertainty.py` — the uncertainty budget as a bare `tabular` (needs `booktabs` and `array` in the consuming document) |
-| `model_map_appendix.tex` | `export_model_map_tex.py` — two tables: the model classes behind each spectrum, and the event selections that make the inclusive spectra into 94 channels |
+| `model_map_appendix.tex` | `export_model_map_tex.py` — one row per spectrum: the model classes behind it, and the event selections that make the inclusive spectra into 94 channels |
 
 ## Figures — `results/plots/`
 
