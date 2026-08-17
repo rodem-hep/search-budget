@@ -127,7 +127,12 @@ def analytic(dfc):
 
 
 def bh(dfc):
-    """MC over the M smallest reported p-values. E[false confirmations] and power per q."""
+    """MC over the M smallest reported p-values. E[false confirmations], power and its MC error per q.
+
+    The threshold and the argmax are quadrature integrals and carry no Monte Carlo error; BH needs the
+    joint law of the order statistics, so its power is a binomial fraction of T experiments and the
+    fourth return value is its standard error, sqrt(p(1-p)/T) scaled by the stage-2 factor.
+    """
     xq, ek = np.zeros(len(QGRID)), np.zeros(len(QGRID))
     for done in range(0, T, CHUNK):
         s = min(CHUNK, T - done)
@@ -140,7 +145,7 @@ def bh(dfc):
         ek += K.sum(axis=0)
     xq /= T; ek /= T
 
-    pw = {}
+    pw, pw_err = {}, {}
     for mu in MUS:
         psel = np.zeros(len(QGRID))
         for done in range(0, T, CHUNK):
@@ -150,8 +155,10 @@ def bh(dfc):
             rank = (bz > zs).sum(axis=1) + 1
             z = -np.sort(-np.hstack([bz, zs]), axis=1)[:, :M]
             psel += (rank[:, None] <= bh_K(sf(z))).sum(axis=0)
-        pw[mu] = psel / T * sf(tB - mu)
-    return xq, pw, ek
+        p = psel / T
+        pw[mu] = p * sf(tB - mu)
+        pw_err[mu] = np.sqrt(np.clip(p * (1.0 - p), 0.0, None) / T) * sf(tB - mu)
+    return xq, pw, ek, pw_err
 
 
 def at_budget(x, y, xt):
@@ -172,7 +179,10 @@ def fmt(v):
 print(f"n = {n:,} bins   stage-2 bar t_B = {tB:g}   {T:,} experiments per point", flush=True)
 print("power = P(signal selected in stage 1 AND confirmed in stage 2), in %", flush=True)
 print("all three rules compared at the SAME expected number of false confirmations "
-      "(the argmax's own budget under that contamination)\n", flush=True)
+      "(the argmax's own budget under that contamination)", flush=True)
+print(f"the argmax and threshold columns are quadrature integrals and carry no MC error; the BH "
+      f"column is a binomial fraction of {T:,} experiments and is quoted with its standard error\n",
+      flush=True)
 
 XREF = 1.35e-3          # the perfect-estimator argmax budget = 3.0 sigma global
 
@@ -186,7 +196,7 @@ CASES = [("PERFECT estimator (reproduces the original study)", Defect("glitch", 
 
 for label, dfc in ([] if "--figonly" in sys.argv else CASES):
     x_thr, y_thr, x_arg, y_arg, sel_arg = analytic(dfc)
-    x_bh, y_bh, ek = bh(dfc)
+    x_bh, y_bh, ek, e_bh = bh(dfc)
     print("=" * 100, flush=True)
     print(label)
     print(f"  argmax's own budget E[false conf.] = {x_arg:.3e}  (it has no knob; perfect "
@@ -194,15 +204,17 @@ for label, dfc in ([] if "--figonly" in sys.argv else CASES):
     print(f"  BH floor: smallest reachable budget = {x_bh.min():.2e} at q = {QGRID[0]:.0e}"
           f"   threshold floor = {x_thr.min():.2e}")
     print(f"  all three at the COMMON budget {XREF:.2e}:")
-    print(f"  {'mu':>4} {'argmax':>9} {'threshold':>11} {'BH':>9}   "
+    print(f"  {'mu':>4} {'argmax':>9} {'threshold':>11} {'BH':>16}   "
           f"{'thr - argmax':>13} {'thr - BH':>9}")
     for mu in MUS:
         pa = y_arg[mu] * 100 if abs(math.log(x_arg / XREF)) < 0.05 else float("nan")
         pt = at_budget(x_thr, y_thr[mu], XREF) * 100
         pb = at_budget(x_bh, y_bh[mu], XREF) * 100
+        eb = at_budget(x_bh, e_bh[mu], XREF) * 100
         d1 = pt - pa if np.isfinite(pa) else float("nan")
         d2 = pt - pb if np.isfinite(pb) else float("nan")
-        print(f"  {mu:>3}s {fmt(pa):>9} {fmt(pt):>11} {fmt(pb):>9}   "
+        bh_cell = "    n/a" if not np.isfinite(pb) else f"{pb:6.1f} +- {eb:.2f}%"
+        print(f"  {mu:>3}s {fmt(pa):>9} {fmt(pt):>11} {bh_cell:>16}   "
               f"{'    n/a' if not np.isfinite(d1) else f'{d1:+12.1f}':>13} "
               f"{'    n/a' if not np.isfinite(d2) else f'{d2:+8.1f}':>9}", flush=True)
     qa, ka = at_budget(x_bh, QGRID, XREF), at_budget(x_bh, ek, XREF)
@@ -233,7 +245,7 @@ else:
   for e in EPS:
     dg, db = Defect("glitch", e), Defect("bias", e)
     xt, yt, xa, ya, _ = analytic(dg)
-    xb, yb, _ = bh(dg)
+    xb, yb, _, _ = bh(dg)
     pw_arg.append(ya[MU_S] * 100 if abs(math.log(xa / XREF)) < 0.05 else np.nan)
     pw_thr.append(at_budget(xt, yt[MU_S], XREF) * 100)
     pw_bh.append(at_budget(xb, yb[MU_S], XREF) * 100)

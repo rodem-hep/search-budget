@@ -19,9 +19,10 @@ The trials count on every basis, narrowest first. Rows are counted differently a
 | what | the number | computed by | the list behind it |
 |---|---|---|---|
 | spectra the public model space populates | **46** | [`search_budget.py`](scripts/search_budget.py) | [`search_budget.csv`](results/tables/search_budget.csv), one row per spectrum with its window and source |
-| the trials factor and the discovery bar | `N ≈ 3.7k` → `Z_local = 6.44`, or `6.6k` → `6.53` at published event-selection granularity | [`search_budget.py`](scripts/search_budget.py) | [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) |
+| the trials factor and the discovery bar | `N ≈ 3.7k` → `Z_local = 6.44 +0.18/−0.16`, or `6.6k` → `6.53` at published event-selection granularity | [`search_budget.py`](scripts/search_budget.py) | [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) |
+| what that bar is uncertain by | every declared input varied over its own range: **`+0.18/−0.16` σ** on the model space, `+0.23/−0.31` on the combinatorial scan, but only `+0.12/−0.23` on the difference between them | [`budget_uncertainty.py`](scripts/budget_uncertainty.py) | [`BUDGET_UNCERTAINTY.md`](results/overviews/BUDGET_UNCERTAINTY.md), source by source |
 | the published ATLAS program, all searches | `N ~ 5e4` → `Z_local = 6.83`, taken from the literature rather than from this enumeration | [`search_budget.py`](scripts/search_budget.py) | [`EXCESS_COUNTING.md`](results/overviews/EXCESS_COUNTING.md), where the anchor and its sources are set out |
-| a fully combinatorial scan, Run 2+3 | every mass built from ≤4 of ten object types: **4438** fittable spectra of 21644, `N = 2.0e5` → `Z_local = 7.03` | [`scaled_scan.py`](scripts/scaled_scan.py) | [`scaled_scan.txt`](results/tables/scaled_scan.txt), the closing per-dataset block |
+| a fully combinatorial scan, Run 2+3 | every mass built from ≤4 of ten object types: **4438** fittable spectra of 21644, `N = 2.0e5` → `Z_local = 7.03 +0.23/−0.31` | [`scaled_scan.py`](scripts/scaled_scan.py) | [`scaled_scan.txt`](results/tables/scaled_scan.txt), the closing per-dataset block |
 | how much of that scan theory motivates | **2411 of 4438** spectra (54%) sit on a model-motivated mass axis, over 37 of the 258 fittable object compositions | [`scaled_scan.py`](scripts/scaled_scan.py) | [`priority_scan.csv`](results/tables/priority_scan.csv), per composition |
 | the published record | **86** catalogued spectra over **290** ATLAS papers; 19 not revisited since before 2019, of which 12 sit on an axis already counted | [`published_census.py`](scripts/published_census.py) | [`published_spectra.csv`](data/published_spectra.csv), one row per spectrum with its arXiv references |
 | observed against expected excesses | the published 3σ and 5σ count is what `N` predicts, with no adjustment | [`excess_counting.py`](scripts/excess_counting.py) | [`REPORTED_EXCESSES.md`](results/overviews/REPORTED_EXCESSES.md) |
@@ -47,9 +48,9 @@ library versions recorded in `requirements.txt`. Targets are file-level, so a re
 has gone stale. The three hand-written reports in `results/overviews/` are the only files under
 `results/` that no script produces, and [`docs/OUTPUTS.md`](docs/OUTPUTS.md) marks them.
 
-The budget itself, `search_budget.py`, `combinatorial_budget.py`, `scaled_scan.py` and
-`composition_gap.py`, is pure standard library and runs under any `python3`; only the figures and
-the Monte Carlo need the dependencies.
+The budget itself, `search_budget.py`, `combinatorial_budget.py`, `scaled_scan.py`,
+`budget_uncertainty.py` and `composition_gap.py`, is pure standard library and runs under any
+`python3`; only the figures and the Monte Carlo need the dependencies.
 
 Two scripts are outside `make all` because they need the network: `fetch_census_meta.py` and
 `fetch_census_abstracts.py` refresh the bibliographic details and abstracts of the census papers
@@ -82,7 +83,11 @@ and make the whole exercise circular.
 **The resolution is the one physics input, and carries a band.** `r` is known only to a factor of a
 few, so no result is quoted as a single number: each is given with the band that follows from
 scaling `r` by two in either direction, which moves `N` by a factor of two and `Z_local` by about
-0.1σ.
+0.1σ. That is one line of `budget_uncertainty.py`, which does the same for every other declared
+input — the windows, the yield model, the fittability thresholds — and for the one input with no
+measurement behind it, the convention that makes a resolution element an independent look. That last
+one is the largest term, and because it moves every basis together it cancels in every difference
+this study quotes.
 
 **A hypothetical spectrum has to hold enough events to fit.** Wherever a spectrum has not been
 published, `yield_model.py` requires at least 100 events and at least 25 resolution elements holding
@@ -93,8 +98,8 @@ search demonstrates its own feasibility. Run the module for its calibration tabl
 
 ## Where the definitions live
 
-`scripts/bump_observables.py`, `scripts/public_obs_map.py` and `scripts/yield_model.py` hold every
-definition the numbers rest on: the fractional resolution and analysable mass floor of each
+`scripts/bump_observables.py`, `scripts/public_obs_map.py`, `scripts/yield_model.py` and
+`scripts/scan_alphabet.py` hold every definition the numbers rest on: the fractional resolution and analysable mass floor of each
 spectrum, its published scan window together with the source that window came from, the map from
 public model classes to the spectra they populate, how many event selections each published search
 family scans on a given axis, and the yield model behind the statistics requirement. They also
@@ -117,14 +122,16 @@ quietly dropping out of a table.
 │   ├── tables/              machine-readable tables, and the cached Monte Carlo (.npz)
 │   ├── plots/               figures; plots/max_of_gaussians/ is the selection-rule study
 │   ├── tex/                 LaTeX fragments for a consuming document to \input
-│   └── overviews/           the written reports: four generated, three authored by hand
+│   └── overviews/           the written reports: five generated, three authored by hand
 └── docs/
     ├── METHOD_NOTES.md      the counting conventions and why each one is what it is
     └── OUTPUTS.md           every output file, and the script that writes it
 ```
 
-The four generated reports are [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md), the budget
-with its full per-spectrum table; [`PUBLISHED_CENSUS.md`](results/overviews/PUBLISHED_CENSUS.md),
+The five generated reports are [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md), the budget
+with its full per-spectrum table; [`BUDGET_UNCERTAINTY.md`](results/overviews/BUDGET_UNCERTAINTY.md),
+what each declared input is worth on the bar;
+[`PUBLISHED_CENSUS.md`](results/overviews/PUBLISHED_CENSUS.md),
 what the publication record contains, including the spectra that have gone stale;
 [`REPORTED_EXCESSES.md`](results/overviews/REPORTED_EXCESSES.md), every excess ≥3σ reported in the
 census abstracts; and [`CENSUS_REFERENCES.md`](results/overviews/CENSUS_REFERENCES.md), all 290

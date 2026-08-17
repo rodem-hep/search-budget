@@ -14,6 +14,7 @@ the only ones that are not part of `make all`.
 | file | producer | content |
 |---|---|---|
 | `SEARCH_BUDGET.md` | `search_budget.py` | **the headline**: spectra, `N_trials`, `Z_local(5σ global)`, per-spectrum table |
+| `BUDGET_UNCERTAINTY.md` | `budget_uncertainty.py` | what every declared input is worth on the bar, on both counted bases and on the difference between them |
 | `PUBLISHED_CENSUS.md` | `published_census.py` | the ATLAS resonance-search publication record: 86 spectra, 290 papers, recency and Run-3 coverage |
 | `CENSUS_REFERENCES.md` | `export_census_bib.py` | all 290 census papers written out in full, numbered, under the spectrum each is counted against |
 | `EXCESS_COUNTING.md` | hand-written | expected vs observed 3σ/5σ excesses — the external check on `N` |
@@ -26,6 +27,7 @@ the only ones that are not part of `make all`.
 | file | producer |
 |---|---|
 | `search_budget.csv` | `search_budget.py` — one row per spectrum: `r`, floor, window, `n_s`, envelope, models, selections |
+| `budget_uncertainty.csv` | `budget_uncertainty.py` — one row per source × direction: the varied `N` on each basis and the shift in `Z_local`, plus the per-source envelopes and the quadrature total |
 | `search_budget_selections.csv` | `search_budget.py` — the event-selection multiplicity per spectrum |
 | `combinatorial_budget.csv` | `combinatorial_budget.py` — 1094 (category, mass-group) rows, with the window truncated at its one-event mass and `n_s = 0` where the histogram cannot be fitted |
 | `published_census.csv` | `published_census.py` |
@@ -49,6 +51,7 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 | `census_refs.bib` | `export_census_bib.py` — a BibTeX entry per census paper, keyed `census:<arxiv-id>` |
 | `census_appendix.tex` | `export_census_bib.py` — the census spectrum by spectrum, citing every paper behind each |
 | `two_body_matrix.tex` | `two_body_matrix.py` — the two-body object grid priced in trials (a costed version of arXiv:1907.06659 Table 14); a bare `tabular`, so the consuming document supplies the float and caption |
+| `uncertainty_table.tex` | `budget_uncertainty.py` — the uncertainty budget as a bare `tabular` (needs `booktabs` and `array` in the consuming document) |
 | `model_map_appendix.tex` | `export_model_map_tex.py` — two tables: the model classes behind each spectrum, and the event selections that make the inclusive spectra into 94 channels |
 
 ## Figures — `results/plots/`
@@ -78,6 +81,7 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 |---|---|
 | `bump_observables.py` | observables, resolutions, analyzable floors, published scan windows + sources, same-axis merges, the lepton-flavour split, the LEE math |
 | `public_obs_map.py` | public model → spectrum map, published event-selection counts (`NSEL`) |
+| `scan_alphabet.py` | the ten object types of the hypothetical scan, their derived `sigma`, the datasets it is priced on, and the four selection lenses; shared by `scaled_scan.py` and `budget_uncertainty.py` so both price the same scan |
 | `yield_model.py` | the fittability requirement (≥100 events, ≥25 elements of ≥1 event), the declared background-yield model behind it and the per-lens efficiencies. Run it for the calibration table |
 | `plot_style.py` | the shared palette and axis style of the statistics figures |
 | `obs_labels.py` | the observable keys rendered as physics, shared by the figures and the LaTeX tables (standard library only) |

@@ -1,0 +1,40 @@
+source,varied_over,direction,kind,N_model_space,N_combinatorial_scan,N_scan_with_lenses,dZ_model_space,dZ_combinatorial_scan,dZ_scan_with_lenses,dZ_difference
+nominal,"published windows / Run 2+3, ~400 fb-1",nominal,nominal,3685,201136,362815,6.436,7.030,7.114,
+"mass resolution, scale",every r x2 either way,r x0.5,systematic,7370,515798,963600,+0.107,+0.133,+0.136,+0.026
+"mass resolution, scale",every r x2 either way,r x2,systematic,1842,53311,92381,-0.109,-0.191,-0.195,-0.083
+"mass resolution, per channel","each r independently, x2 per sigma (16-84%)",16%,alternative,3940,,,-0.023,,,+0.023
+"mass resolution, per channel","each r independently, x2 per sigma (16-84%)",84%,alternative,5428,,,+0.026,,,-0.026
+"mass resolution, shape",muon axes with r(M) rising to 0.10-0.20 at 3000 GeV,r(3 TeV) = 0.20,systematic,3685,,,-0.000,,,+0.000
+"mass resolution, shape",muon axes with r(M) rising to 0.10-0.20 at 3000 GeV,r(3 TeV) = 0.10,systematic,3722,,,+0.002,,,-0.002
+"mass resolution, prescription",worst leg / quadrature sum instead of the calibrated mean,worst leg,systematic,,145011,265722,,-0.047,-0.044,-0.047
+"mass resolution, prescription",worst leg / quadrature sum instead of the calibrated mean,quadrature,systematic,,98972,178151,,-0.102,-0.101,-0.102
+scan windows,"every edge x1.4 either way (published), x1.25 (generic)",narrower,systematic,2881,170540,296634,-0.038,-0.024,-0.028,+0.015
+scan windows,"every edge x1.4 either way (published), x1.25 (generic)",wider,systematic,4505,236346,440408,+0.031,+0.023,+0.027,-0.008
+yield anchor,N_ref x0.01 to x100,x0.01,systematic,,71833,120191,,-0.148,-0.157,-0.148
+yield anchor,N_ref x0.01 to x100,x100,systematic,,435378,855715,,+0.109,+0.120,+0.109
+background slope,P = 6 to 8,P = 6,systematic,,184790,320074,,-0.012,-0.018,-0.012
+background slope,P = 6 to 8,P = 8,systematic,,220443,410569,,+0.013,+0.017,+0.013
+fittability requirement,"30-300 events, 15-50 elements",loose,systematic,,274915,515062,,+0.044,+0.049,+0.044
+fittability requirement,"30-300 events, 15-50 elements",tight,systematic,,89485,149316,,-0.116,-0.126,-0.116
+the axis set,non-peaking axes and the dilepton overlap dropped; the 15 unscanned two-body pairs added,dropped,systematic,3532,,,-0.007,,,+0.007
+the axis set,non-peaking axes and the dilepton overlap dropped; the 15 unscanned two-body pairs added,added,systematic,4382,,,+0.027,,,-0.027
+what counts as one look,N x0.5 to x Z/sqrt(2 pi),x0.5,systematic,1842,100568,181408,-0.109,-0.099,-0.098,+0.009
+what counts as one look,N x0.5 to x Z/sqrt(2 pi),up-crossings,systematic,9461,564115,1029638,+0.145,+0.145,+0.145,+0.000
+the closed-form LEE relation,exact Gaussian-tail solution instead,exact,systematic,,,,-0.036,-0.045,-0.046,-0.009
+"mass resolution, scale",every r x2 either way,envelope,systematic,,,,+0.107/-0.109,+0.133/-0.191,+0.136/-0.195,+0.026/-0.083
+"mass resolution, per channel","each r independently, x2 per sigma (16-84%)",envelope,alternative,,,,+0.026/-0.023,+0.000/+0.000,+0.000/+0.000,+0.023/-0.026
+"mass resolution, shape",muon axes with r(M) rising to 0.10-0.20 at 3000 GeV,envelope,systematic,,,,+0.002/-0.000,+0.000/+0.000,+0.000/+0.000,+0.000/-0.002
+"mass resolution, prescription",worst leg / quadrature sum instead of the calibrated mean,envelope,systematic,,,,+0.000/+0.000,+0.000/-0.102,+0.000/-0.101,+0.000/-0.102
+scan windows,"every edge x1.4 either way (published), x1.25 (generic)",envelope,systematic,,,,+0.031/-0.038,+0.023/-0.024,+0.027/-0.028,+0.015/-0.008
+yield anchor,N_ref x0.01 to x100,envelope,systematic,,,,+0.000/+0.000,+0.109/-0.148,+0.120/-0.157,+0.109/-0.148
+background slope,P = 6 to 8,envelope,systematic,,,,+0.000/+0.000,+0.013/-0.012,+0.017/-0.018,+0.013/-0.012
+fittability requirement,"30-300 events, 15-50 elements",envelope,systematic,,,,+0.000/+0.000,+0.044/-0.116,+0.049/-0.126,+0.044/-0.116
+the axis set,non-peaking axes and the dilepton overlap dropped; the 15 unscanned two-body pairs added,envelope,systematic,,,,+0.027/-0.007,+0.000/+0.000,+0.000/+0.000,+0.007/-0.027
+what counts as one look,N x0.5 to x Z/sqrt(2 pi),envelope,systematic,,,,+0.145/-0.109,+0.145/-0.099,+0.145/-0.098,+0.009/+0.000
+the closed-form LEE relation,exact Gaussian-tail solution instead,envelope,systematic,,,,+0.000/-0.036,+0.000/-0.045,+0.000/-0.046,+0.000/-0.009
+total,quadrature over the systematic sources above,total,systematic,,,,+0.185/-0.163,+0.231/-0.308,+0.239/-0.319,+0.123/-0.232
+counting granularity,published event selections instead of inclusive spectra,alternative,convention,,,,6.53,,,
+the dataset,Run 2 alone instead of Run 2 + Run 3,alternative,convention,,,,,7.00,,
+the lens layer,the four lenses added to the scan,alternative,convention,,,,,7.11,,
+lens efficiency,every declared efficiency x0.1 to x10,alternative,convention,,,,,7.08 to 7.15,,
+the costliest single axis,the largest contributor removed,alternative,convention,,,,6.42,,,

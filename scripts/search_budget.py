@@ -148,6 +148,11 @@ enters through `ln N`, every level sits within ~0.1 sigma of 6.5 -- **breadth is
 budget is extremely robust to counting choices.
 
 ## Assumptions & caveats
+Each of these is varied and priced in `results/overviews/BUDGET_UNCERTAINTY.md`
+(`scripts/budget_uncertainty.py`), which carries the band on every number above and is where the
+`r` x0.5..x2 band quoted here is only one line: the largest term there is not a physics input but
+the convention that turns a resolution element into an independent look.
+
 - **Resolution dict `r` is coarse** (per-channel central values; headline carries the x0.5..x2
   band). A factor-2 error in `r` moves `Z_local` by ~+-0.1 sigma only (it enters via `ln N`).
 - **Scan windows are hand-curated** from published ATLAS search families (source column in the
@@ -185,6 +190,7 @@ Source: `scripts/search_budget.py` -> `results/tables/search_budget.csv`,
 `results/tables/search_budget_selections.csv`. Figures: `scripts/budget_plots.py`,
 `scripts/budget_waterfall.py`. Windows and their sources: `scripts/bump_observables.py` (SCAN).
 Excess bookkeeping: `results/overviews/EXCESS_COUNTING.md`.
+Uncertainty budget: `results/overviews/BUDGET_UNCERTAINTY.md`.
 """
 open(_p("results", "overviews", "SEARCH_BUDGET.md"), "w").write(md)
 print("\nwrote results/tables/search_budget.csv, results/tables/search_budget_selections.csv, "

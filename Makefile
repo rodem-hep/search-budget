@@ -29,7 +29,8 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md \
           $(X)/model_map_appendix.tex $(T)/model_spectrum_map.csv \
           $(X)/two_body_matrix.tex $(T)/two_body_matrix.csv \
-          $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md
+          $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md \
+          $(T)/budget_uncertainty.csv $(O)/BUDGET_UNCERTAINTY.md $(X)/uncertainty_table.tex
 
 AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png \
       $(P)/ab_spurious_guard.png
@@ -82,6 +83,14 @@ $(T)/reported_excesses.csv $(O)/REPORTED_EXCESSES.md &: $(S)/reported_excesses.p
                         data/published_spectra.csv $(T)/search_budget.csv
 	$(PY) $(S)/reported_excesses.py
 
+# What every declared input is worth on the bar: the resolutions, the windows, the yield model, the
+# fittability thresholds and the convention that makes a resolution element an independent look.
+$(T)/budget_uncertainty.csv $(O)/BUDGET_UNCERTAINTY.md $(X)/uncertainty_table.tex &: \
+                                                 $(S)/budget_uncertainty.py $(MOD) $(YM) \
+                                                 $(S)/scan_alphabet.py $(S)/combinatorial_budget.py \
+                                                 $(T)/two_body_matrix.csv
+	$(PY) $(S)/budget_uncertainty.py
+
 $(T)/combinatorial_budget.csv: $(S)/combinatorial_budget.py $(S)/bump_observables.py $(YM)
 	$(PY) $(S)/combinatorial_budget.py
 $(T)/composition_gap.txt $(X)/composition_appendix.tex &: $(T)/combinatorial_budget.csv \
@@ -90,7 +99,7 @@ $(T)/composition_gap.txt $(X)/composition_appendix.tex &: $(T)/combinatorial_bud
 # The same scan over the wider object alphabet (hadronic taus, photons, boosted W/Z, H and top), the
 # selection lenses on top of it, and the priority order that fits a trials budget.
 $(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv $(T)/scaled_scan.txt &: \
-                                                 $(S)/scaled_scan.py \
+                                                 $(S)/scaled_scan.py $(S)/scan_alphabet.py \
                                                  $(S)/combinatorial_budget.py $(MOD) $(YM)
 	$(PY) $(S)/scaled_scan.py > $(T)/scaled_scan.txt
 

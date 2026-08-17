@@ -303,6 +303,48 @@ canonical axis it falls on, or `-` for none. Revisiting a stale spectrum is free
 when its axis is already in `N` (12 of the 17); the other 5 extend the axis count and are priced like
 any new spectrum.
 
+## Uncertainties
+
+`budget_uncertainty.py` is the one place that says how well any of this is known. It moves each
+declared input over a stated range and **recomputes** the count rather than scaling `N`, which
+matters for every hypothetical spectrum: a coarser `r` costs looks per spectrum *and* fails the
+25-element test on windows that used to pass, so the two effects do not factorise. Its ranges live at
+the top of that file, one constant per input, and nothing else in the repository declares an
+uncertainty.
+
+Three rules keep the accounting honest.
+
+* **What counts as one look is priced, and it leads.** Counting elements of width `sigma_M` and
+  calling each an independent test is a convention, not a measurement. Adjacent elements are
+  correlated — a resonance lifts more than one — which argues for fewer looks; the up-crossing form of
+  Gross-Vitells argues for more. For a smooth unit-variance Gaussian process in `x = ln M` with
+  correlation length `r`, Rice's formula gives `<N_Z> = (1/2pi)(1/r) ln(M_hi/M_lo) exp(-Z^2/2)`
+  up-crossings of level `Z`, which is the element count times `Z/sqrt(2pi) ~ 2.6` once compared
+  against the Gaussian tail `p_local` that the Bonferroni step multiplies. The band taken is
+  `0.5 N` to `N Z/sqrt(2pi)`, worth `+0.15/-0.11 sigma`: more than the factor-two resolution band.
+* **Correlated sources cancel in differences.** Every input except the yield model enters both counted
+  bases the same way, so the report carries a third column, the shift in the *difference* between
+  them, computed variation by variation. The bars are known to `+0.18/-0.16` (model space) and
+  `+0.23/-0.31` (scan); the 0.59σ gap between them to `+0.12/-0.23`, and that residual is the yield
+  model, which the model space never uses. Quote differences, not bars, wherever the argument allows.
+* **Conventions are not uncertainties.** Granularity (46 spectra vs 94 channels), the dataset the
+  yields are priced on, the lens layer, and the shape of the hypothetical scan change *what* is
+  counted. They are reported as alternatives and never added to the band. The published-program row is
+  a literature count, so its band is the literature range `1e4` to `1e5`.
+
+Two by-products worth keeping in mind. The per-channel resolution scatter (each `r` drawn
+independently at a factor two per sigma) gives `±0.03σ`, so the correlated factor-two band is the
+pessimistic end and not a 1σ; and the window-averaged constant that stands in for the muon axes'
+rising `r(M)` reproduces the rising-resolution integral to 5% in effective `r`, so that
+approximation — once described as the largest modelling approximation here — is worth under 0.01σ.
+
+Monte Carlo results carry their own errors and are quoted with them: the BH power in
+`bh_fdr_outliers.py` is a binomial fraction of `T = 2e4` toy experiments (`±0.3` percentage points at
+`mu = 5`), while the threshold and argmax rules in the same table are quadrature integrals with no MC
+error at all. The A/B reach is analytic, reproduced by toys to 0.03σ, and `ab_split_budget.py` prints
+the price of the split over the `N` band and the window-widening factor `w`: `+0.32` to `+0.49σ`,
+essentially flat in `N`.
+
 ## Two-stage A/B unblinding
 
 Split the dataset into fractions `f` (A, exploration) and `1-f` (B, confirmation). Scan **all**

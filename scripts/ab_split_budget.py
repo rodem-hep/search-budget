@@ -275,6 +275,23 @@ b1, b2 = opt_box(reach, N), opt_box(reach_sym, N)
 print(f"best design in the practical box (Z_cut = 2-4.5): one-way {b1[0]:.2f} "
       f"({b1[0]-Z_single:+.2f}) at f={b1[2]:.2f}, Z_cut={b1[1]:.2f}   swapped {b2[0]:.2f} "
       f"({b2[0]-Z_single:+.2f}) at f={b2[2]:.2f}, Z_cut={b2[1]:.2f}")
+
+# ---------------------------------------------------------------- how well that price is known
+# The reach is an analytic function of two uncertain inputs: the trials count N, which carries the
+# band of results/overviews/BUDGET_UNCERTAINTY.md, and the widening factor w, the extra resolution
+# elements a pre-registered window is allowed to hold. Both enter logarithmically, so the price of the
+# split is quoted with the spread below rather than as a bare number. Same practical box throughout.
+print(f"\nhow well the price of the split is known: best design in the box, over the N band and w")
+print(f"{'N':>12} {'w':>4} {'single':>7} {'split':>7} {'cost':>7}   {'Z_cut':>5} {'f':>5}")
+costs = []
+for Nv, tag in ((N * 0.5, "N x0.5"), (N, "nominal"), (N * 2.0, "N x2")):
+    for w in (1.0, 3.0):
+        r, zc, f = opt_box(reach, Nv, widen=w)
+        costs.append(r - z5(Nv))
+        print(f"{Nv:12,.0f} {w:4.0f} {z5(Nv):7.2f} {r:7.2f} {r - z5(Nv):+7.2f}   {zc:5.2f} "
+              f"{f:5.2f}   {tag}")
+print(f"the price of the split is {min(costs):+.2f} to {max(costs):+.2f} sigma over that box: half a "
+      f"sigma is the round number, and it is known to {0.5*(max(costs)-min(costs)):.2f}")
 print(f"\nbest-design gap vs N (both schemes optimized in the same box; neither beats single-stage)")
 print(f"{'N':>12} {'single':>7} {'1-way':>7} {'swap':>7} {'gap':>7}")
 gaps = []
