@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""Toy Monte Carlo validating the two-stage A/B unblinding strategy.
-
-Public inputs only. Writes results/plots/ab_toys_{background,power,spectrum}.png (~1 min).
-Toy model and the three procedures compared: docs/METHOD_NOTES.md; report:
-results/overviews/TWO_STAGE_UNBLINDING.md.
-"""
 import os, math, sys
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
@@ -21,8 +15,8 @@ os.makedirs(OUT, exist_ok=True)
 rng = np.random.default_rng(20260703)
 
 obs = sorted({canon(o) for objs in PUBLIC_OBS.values() for o in objs})
-N = int(round(sum(nsel(o) * ns_scan(o) for o in obs)))   # event-selection-level budget
-P5 = 0.5 * math.erfc(5.0 / math.sqrt(2.0))               # one-sided 5-sigma tail
+N = int(round(sum(nsel(o) * ns_scan(o) for o in obs)))
+P5 = 0.5 * math.erfc(5.0 / math.sqrt(2.0))
 
 def p1(z): return 0.5 * math.erfc(z / math.sqrt(2.0))
 def zthr(k): return np.sqrt(25.0 + 2.0 * np.log(np.maximum(k, 1)))
@@ -31,7 +25,6 @@ Z_CUT, F_OPT = 3.0, 0.22
 Z_SINGLE = z5(N)
 K_BKG = N * p1(Z_CUT)
 
-# ================================================================ 1. background-only toys
 NTOY, CHUNK = 20000, 2000
 k_obs, zB_sel_max, p_two, p_one = [], [], [], []
 for start in range(0, NTOY, CHUNK):
@@ -39,9 +32,8 @@ for start in range(0, NTOY, CHUNK):
     gA = rng.standard_normal((n, N)); gB = rng.standard_normal((n, N))
     selm = gA >= Z_CUT
     k = selm.sum(axis=1); k_obs.append(k)
-    zB = np.where(selm, gB, -np.inf).max(axis=1)         # best confirmation significance
+    zB = np.where(selm, gB, -np.inf).max(axis=1)
     zB_sel_max.append(np.where(k > 0, zB, np.nan))
-    # corrected global p of each procedure (validity check: must be ~Uniform(0,1))
     p_two.append(np.where(k > 0, np.minimum(1.0, k * 0.5 *
                  np.vectorize(math.erfc)(zB / math.sqrt(2.0))), 1.0))
     zF = (math.sqrt(F_OPT) * gA + math.sqrt(1 - F_OPT) * gB).max(axis=1)
@@ -50,7 +42,6 @@ k_obs = np.concatenate(k_obs); zB_sel_max = np.concatenate(zB_sel_max)
 p_two = np.concatenate(p_two); p_one = np.concatenate(p_one)
 
 fig, axs = plt.subplots(1, 3, figsize=(6.2, 2.5))
-# (a) selections in A
 kmax = int(k_obs.max()) + 2
 axs[0].hist(k_obs, bins=np.arange(-0.5, kmax + 0.5), color="#0072b2", edgecolor="white",
             density=True, label="toys")
@@ -63,7 +54,6 @@ axs[0].set_xlabel(f"# windows selected in A  ($Z_A \\geq$ {Z_CUT:g})")
 axs[0].set_ylabel("fraction of toys")
 axs[0].set_title("Windows selected in A", loc="left")
 axs[0].legend(fontsize=8.5)
-# (b) best z_B among selected windows
 v = zB_sel_max[np.isfinite(zB_sel_max)]
 axs[1].hist(v, bins=60, color="#0072b2", edgecolor="white", density=True,
             label="best $Z_B$ of the unblinded windows")
@@ -73,7 +63,6 @@ axs[1].axvline(med_thr, color="#d55e00", ls="--", lw=1.2,
 axs[1].set_xlabel("best confirmation significance $Z_B$")
 axs[1].set_title("Best confirmation significance in B", loc="left")
 axs[1].legend(fontsize=8.5, loc="upper right")
-# (c) uniformity of the corrected global p
 for p, lbl, col in [(p_two, "two-stage: $k\\,p_1(Z_B^{best})$", "#0072b2"),
                     (p_one, "single-stage: $N\\,p_1(Z^{max})$", "#e69f00")]:
     q = np.sort(p)
@@ -89,9 +78,7 @@ fig.savefig(os.path.join(OUT, "ab_toys_background.png"), dpi=400)
 print(f"wrote ab_toys_background.png   (mean k = {k_obs.mean():.2f}, "
       f"predicted {K_BKG:.2f}; max z_B = {np.nanmax(v):.2f} vs threshold ~{med_thr:.2f})")
 
-# ================================================================ 2. power curves
 def toy_power(mu, f, zcut, ntoy=1500):
-    """Discovery probability: single-stage and two-stage on the same toys, signal at look 0."""
     gA = rng.standard_normal((ntoy, N)); gB = rng.standard_normal((ntoy, N))
     gA[:, 0] += math.sqrt(f) * mu; gB[:, 0] += math.sqrt(1 - f) * mu
     zF = math.sqrt(f) * gA + math.sqrt(1 - f) * gB
@@ -107,11 +94,9 @@ pw_single, pw_5050, pw_opt = [], [], []
 for mu in mus:
     s1, t5050 = toy_power(mu, 0.5, Z_CUT)
     s1b, topt = toy_power(mu, F_OPT, Z_CUT)
-    pw_single.append(0.5 * (s1 + s1b))       # single-stage is f-independent; average both runs
+    pw_single.append(0.5 * (s1 + s1b))
     pw_5050.append(t5050); pw_opt.append(topt)
 
-# analytic 50%-JOINT-power reach (same formula as ab_split_budget.py; exact-window toy world,
-# i.e. widen=1 -- the real-life note uses widen=3 for the +-2 sigma_M window freedom)
 k_eff = K_BKG + 1
 def Phi(x): return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
 def reach50(f):
@@ -147,11 +132,6 @@ print(f"  50%-power points (toys): single {z50['single']:.2f}, f=0.22 {z50['opt'
       f"50/50 {z50['50/50']:.2f}   (analytic reach {reach['single']:.2f} / "
       f"{reach['opt']:.2f} / {reach['50/50']:.2f})")
 
-# ================================================================ 2b. symmetrized swap (A<->B)
-# Run BOTH directions -- explore A confirm B, and explore B confirm A -- and claim on the union.
-# Both directions pre-register, so the bar is set by the TOTAL unblinded windows k_A + k_B: the
-# second chance is paid for with twice the coins. Validates the union formula of
-# ab_split_budget.py, which is the number TWO_STAGE_UNBLINDING.md quotes.
 def toy_power_sym(mu, f, zcut, ntoy=1500):
     gA = rng.standard_normal((ntoy, N)); gB = rng.standard_normal((ntoy, N))
     gA[:, 0] += math.sqrt(f) * mu; gB[:, 0] += math.sqrt(1 - f) * mu
@@ -181,14 +161,12 @@ print(f"  -> the swap rescues the naive 50/50 split by "
       f"{reach['50/50'] - reach50_sym(0.5):.2f} sigma, still "
       f"{reach50_sym(0.5) - Z_SINGLE:+.2f} vs the single stage")
 
-# ================================================================ 3. spectrum illustration
 SIGMA_REL, F_ILL = 0.05, 0.25
 edges = np.geomspace(200, 4000, 220)
 ctr = np.sqrt(edges[:-1] * edges[1:]); width = np.diff(edges)
-bkg_full = 3e6 * np.exp(-ctr / 350.0) * width / ctr      # falling toy background, ~2e5 events
+bkg_full = 3e6 * np.exp(-ctr / 350.0) * width / ctr
 
 def scan(counts, expect):
-    """Sliding +-1 sigma_M window counting significance z(m)."""
     z = np.zeros_like(ctr)
     for j, m in enumerate(ctr):
         w = np.abs(ctr - m) < SIGMA_REL * m
@@ -208,7 +186,6 @@ def split_toy(seed, sig_mass=None, sig_zfull=0.0):
     nB = r.poisson((1 - F_ILL) * (bkg_full + mu))
     return scan(nA, F_ILL * exp_full), scan(nB, (1 - F_ILL) * exp_full)
 
-# find a background-only toy whose A-half fluctuates above Z_cut somewhere
 seed = 0
 while True:
     zA, zB = split_toy(seed)

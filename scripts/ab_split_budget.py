@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""Two-stage A/B unblinding: discovery reach of the split strategy vs the single-stage scan.
-
-Public inputs only. Writes results/plots/ab_split_reach.png and prints the design table
-quoted in results/overviews/TWO_STAGE_UNBLINDING.md. Reach definition: docs/METHOD_NOTES.md.
-"""
 import os, math, sys, collections
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
@@ -16,17 +11,14 @@ from public_obs_map import PUBLIC_OBS, nsel
 from plot_style import style, BLUE, C_ARG, INK, GRID
 
 obs = sorted({canon(o) for objs in PUBLIC_OBS.values() for o in objs})
-N_incl = sum(ns_scan(o) for o in obs)                 # inclusive public budget
-N_sel  = sum(nsel(o) * ns_scan(o) for o in obs)      # with published event selections
+N_incl = sum(ns_scan(o) for o in obs)
+N_sel  = sum(nsel(o) * ns_scan(o) for o in obs)
 
 def p1(Z): return 0.5 * math.erfc(Z / math.sqrt(2.0))
 
-def k_eff(N, zcut): return N * p1(zcut) + 1.0        # bkg selections + the signal's window
+def k_eff(N, zcut): return N * p1(zcut) + 1.0
 
 def zB_req(N, zcut, widen=3.0, zglob=5.0):
-    """B-only local Z for a Z_glob-sigma GLOBAL result over the unblinded windows. widen = extra
-    resolution elements per window (the B peak can sit anywhere in the pre-registered
-    +-1-2 sigma_M window). zglob=5: discovery; zglob=3: evidence trigger."""
     return math.sqrt(zglob * zglob + 2.0 * math.log(widen * k_eff(N, zcut)))
 
 def reach_median(f, N, zcut, widen=3.0):
@@ -35,11 +27,9 @@ def reach_median(f, N, zcut, widen=3.0):
 def Phi(x): return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
 
 def power(mu, f, N, zcut, widen=3.0, zglob=5.0):
-    """Joint probability of a Z_glob-global B result for a signal of full-dataset local Z = mu."""
     return Phi(math.sqrt(f) * mu - zcut) * Phi(math.sqrt(1 - f) * mu - zB_req(N, zcut, widen, zglob))
 
 def reach(f, N, zcut, target=0.5, widen=3.0, zglob=5.0):
-    """Z_full at which the two-stage procedure reaches `target` power (bisection)."""
     lo, hi = 1.0, 20.0
     for _ in range(60):
         mid = 0.5 * (lo + hi)
@@ -47,7 +37,6 @@ def reach(f, N, zcut, target=0.5, widen=3.0, zglob=5.0):
         else: hi = mid
     return 0.5 * (lo + hi)
 
-# ---------------------------------------------------------------- table
 N = N_sel
 Z_single = z5(N)
 print(f"budget (public, event-selection level): N = {N:,.0f}   "
@@ -67,11 +56,6 @@ print(f"\n50/50 split, Z_cut=3: 50%-power reach = {reach(0.5, N, 3.0):.2f}  "
 print(f"optimum: Z_cut={opt[0]:.1f}, f={opt[1]:.2f} -> reach {opt[2]:.2f} "
       f"({opt[2]-Z_single:+.2f})  [two-stage always costs; the price of countable trials]")
 
-# ---------------------------------------------------------------- reach vs #unblinded regions
-# Equivalent "top-k" formulation: unblind the k best A-windows. The effective A-cut is z* with
-# N*p1(z*) = k, the B bar is sqrt(25 + 2 ln(widen*k)). k enters BOTH logarithmically and with
-# opposite signs (bigger k -> harder B bar but easier A selection), so after re-optimizing f the
-# reach is nearly flat in k across three orders of magnitude.
 def PhiInv(p):
     lo, hi = -10.0, 10.0
     for _ in range(80):
@@ -100,12 +84,6 @@ for k in (1, 3, 10, 30, 100, 300, 1000):
     mu, f, zc, zb = reach_topk(k)
     print(f"{k:6d} {zc:9.2f} {zb:8.2f} {f:7.2f} {mu:6.2f}  {mu-Z_single:+.2f}")
 
-# ---------------------------------------------------------------- B criterion: GLOBAL > 3 sigma
-# Working point: A flags multiple regions (Z_cut as above); B is unblinded in all of them and the
-# B result is quoted as a GLOBAL significance over the k_eff pre-registered windows (x widen for
-# the +-2sigma_M freedom):  Z_B,global >= 3  <=>  Z_B,local >= sqrt(9 + 2 ln(w*k_eff)).
-# By construction the background-only false-evidence rate per B opening is p1(3) = 1.35e-3,
-# whatever k came out of A. Discovery keeps the 5-global bar of the tables above (same A flags).
 Z_single3 = math.sqrt(9.0 + 2.0 * math.log(N))
 print(f"\nB criterion 'globally > 3 sigma' (evidence trigger; same A selection, w = 3):")
 print(f"single-stage 3sigma-global reference: Z_local = {Z_single3:.2f}")
@@ -121,19 +99,6 @@ print(f"ladder (Z_cut = 3, k_eff = {k_eff(N,3.0):.1f}): evidence Z_glob>=3 -> Z_
 print(f"false-evidence rate per B opening (background-only, by construction): "
       f"p1(3) = {p1(3.0):.2e}")
 
-# ---------------------------------------------------------------- BH-FDR flagging in A
-# Alternative A rule: flag by Benjamini-Hochberg at FDR level q over the N one-sided p-values
-# (largest j with p_(j) <= q*j/N; flag the top j). Properties in this setting:
-#   * background-only (global null): FDR = FWER = q -> P(flag ANYTHING) = q. B is opened only
-#     with probability q, instead of always (~9 background windows) as with a fixed Z_cut.
-#   * single isolated signal: BH degenerates to Bonferroni -- flagged iff p <= q/N, i.e.
-#     z_A >= PhiInv(1 - q/N) ~ 3.9-4.3: a HARDER A bar than Z_cut = 3.
-#   * c channels lit by the same model (Z'->ee AND mumu, VLQ multi-channel, ...): the step-up
-#     relaxes the bar to ~ q*c/N -- BH's adaptivity pays exactly when one model fires several
-#     of the 78 selection-level spectra.
-#   * the flagged set is data-dependent but exactly countable at pre-registration; the B ladder
-#     applies with k_obs. One-sided Gaussian looks are PRDS, so BH is valid under the (positive)
-#     window-overlap dependence.
 print(f"\nBH-FDR flagging in A (single isolated signal; B evidence bar Z_glob >= 3, w = 3):")
 r_fix = min(reach(f, N, 3.0, zglob=3.0) for f in np.linspace(0.02, 0.98, 481))
 print(f"fixed-Z_cut=3 reference reach: {r_fix:.2f}")
@@ -156,29 +121,8 @@ print("multi-channel adaptivity: with c channels above the bar the BH threshold 
 for c in (1, 2, 3, 5):
     print(f"  c = {c}: z_A >= {PhiInv(1.0 - 0.10 * c / N):.2f}   (q = 0.10)")
 
-# ---------------------------------------------------------------- crossover: does the split EVER win?
-# Trials-factorization identity. With the A cut z* set by N*p1(z*) = k and the B bar zB by
-# w*k*p1(zB) = p1(5), use the Gaussian tail p1(z) ~ phi(z)/z and add logs:
-#     z*^2/2  + ln(z* sqrt(2pi)) = ln(N/k)
-#     zB^2/2  + ln(zB sqrt(2pi)) = ln(w*k / alpha),  alpha = p1(5)
-#     mu1^2/2 + ln(mu1 sqrt(2pi)) = ln(N / alpha)     [single-stage threshold]
-# Adding the first two and subtracting the third, k CANCELS EXACTLY (N = (N/k) * k):
-#     mu2_med^2 - mu1^2 = 2 ln w - 2 ln( z* * zB * sqrt(2pi) / mu1 )
-# i.e. the LEE is conserved, never reduced: the split moves 2 ln(N/k) of it into the A-selection
-# cut and leaves 2 ln k in the B correction. The median-arithmetic reach is therefore a wash with
-# the single stage at ANY N (the two O(1) terms nearly cancel). The entire real cost is the
-# TWO-COIN penalty: both independent halves must succeed, so at 50% joint power each stage
-# carries a ~ +0.55 buffer, mu2^2 ~ (z*+a)^2 + (zB+b)^2 with Phi(a)Phi(b)=1/2 -> +~0.5 sigma,
-# positive at every N and growing ~ sqrt(2 ln N). Hence NO crossover: no number of trials makes
-# the split out-reach an exactly-corrected single-stage scan.
-# The split wins only when the single-stage trials factor cannot be defended exactly: it is the
-# more sensitive procedure iff the trials count you would otherwise have to defend exceeds
-#     N_equiv = exp((mu2^2 - 25)/2),  i.e.  N_def / N_true > R* = exp((mu2^2 - mu1^2)/2)
-# (~30 at this budget). That is the quantitative case for it in ML-driven scans, where the
-# effective number of looks (trainings, selections, hyperparameters) is genuinely uncountable.
 
 def reach2_opt(Nv, widen=3.0):
-    """Fully optimized two-stage 50%-power reach: min over (Z_cut, f). Coarse grid + refine."""
     best = (1e9, None, None)
     for zc in np.arange(1.0, 5.751, 0.25):
         for f in np.arange(0.04, 0.965, 0.04):
@@ -195,7 +139,7 @@ def reach_median_opt(Nv, widen=1.0):
     best = 1e9
     for zc in np.arange(0.5, 6.01, 0.05):
         zb = zB_req(Nv, zc, widen)
-        best = min(best, math.sqrt(zc * zc + zb * zb))   # balanced f = zc^2/(zc^2+zb^2)
+        best = min(best, math.sqrt(zc * zc + zb * zb))
     return best
 
 print(f"\ncrossover scan: fully optimized two-stage reach vs single-stage, as a function of N")
@@ -215,18 +159,6 @@ print("the joint-power cost never crosses zero -> the split never wins on raw se
 print(f"it wins iff the defendable single-stage trials count exceeds R* x N_true "
       f"(R* = {math.exp(0.5*(reach2_opt(N,3.0)[0]**2 - z5(N)**2)):.0f} at N = {N:,.0f}).")
 
-# ---------------------------------------------------------------- symmetrized swap (A->B AND B->A)
-# The obvious objection to the conservation identity: half the luminosity is idle at each stage, so
-# run BOTH directions -- explore A confirm B, and explore B confirm A -- and claim on the union.
-# Both directions pre-register, so the confirmation windows double (k -> 2k, i.e. 2 ln 2 on the B
-# bar); what is bought is a second chance at the same signal. Since zB > z_cut the two directions
-# coincide only where BOTH halves clear the claim bar, so the union power is
-#     P = Phi_c(A) Phi_r(B) + Phi_c(B) Phi_r(A) - Phi_r(A) Phi_r(B),
-# a factor 2 - Phi_r/Phi_c over one direction (up to x2). Geometrically: the Neyman-Pearson region
-# for a mean shift is the HALF-PLANE sqrt(f) z_A + sqrt(1-f) z_B > z5(N) -- that IS the single-stage
-# scan. One-way splitting approximates it with an L-shaped corner, the swap with a two-step
-# staircase: closer to the line, but every step multiplies the coins. Conservation of the LEE is
-# that staircase-vs-half-plane inefficiency, which is why no fold count crosses zero.
 
 def k_sym(Nv, zcut): return 2.0 * Nv * p1(zcut) + 1.0
 
@@ -245,10 +177,6 @@ def reach_sym(f, Nv, zcut, target=0.5, widen=3.0, zglob=5.0):
     return 0.5 * (lo + hi)
 
 def opt_box(fn, Nv, widen=3.0, zlo=2.0, zhi=4.5):
-    """Best (reach, Z_cut, f) inside the PRACTICAL working box. Unconstrained optimization runs
-    into the degenerate Z_cut -> -inf, f -> 0 limit where the split just becomes the single-stage
-    scan (and where the power-curve plateau argument of section 2 says not to sit); pinning
-    Z_cut to 2-4.5 keeps both schemes at designs one would actually pre-register."""
     best = (1e9, None, None)
     for zc in np.arange(zlo, zhi + 1e-9, 0.05):
         for f in np.arange(0.04, 0.965, 0.01):
@@ -276,11 +204,6 @@ print(f"best design in the practical box (Z_cut = 2-4.5): one-way {b1[0]:.2f} "
       f"({b1[0]-Z_single:+.2f}) at f={b1[2]:.2f}, Z_cut={b1[1]:.2f}   swapped {b2[0]:.2f} "
       f"({b2[0]-Z_single:+.2f}) at f={b2[2]:.2f}, Z_cut={b2[1]:.2f}")
 
-# ---------------------------------------------------------------- how well that price is known
-# The reach is an analytic function of two uncertain inputs: the trials count N, which carries the
-# band of results/overviews/BUDGET_UNCERTAINTY.md, and the widening factor w, the extra resolution
-# elements a pre-registered window is allowed to hold. Both enter logarithmically, so the price of the
-# split is quoted with the spread below rather than as a bare number. Same practical box throughout.
 print(f"\nhow well the price of the split is known: best design in the box, over the N band and w")
 print(f"{'N':>12} {'w':>4} {'single':>7} {'split':>7} {'cost':>7}   {'Z_cut':>5} {'f':>5}")
 costs = []
@@ -306,7 +229,6 @@ print("schemes are a WASH -- there is no clean crossover in N, only a swing in w
 print("Both stay 0.3-0.5 above the single stage: the staircase fits the Neyman-Pearson half-plane "
       "better than the corner, never equals it.")
 
-# crossover figure
 figc, (axr, axg) = plt.subplots(2, 1, figsize=(5.6, 4.7), sharex=True,
                                 gridspec_kw={"height_ratios": [2.0, 1.15], "hspace": 0.07})
 style(axr); style(axg)
@@ -334,11 +256,9 @@ os.makedirs(os.path.dirname(outc), exist_ok=True)
 figc.savefig(outc, dpi=400)
 print(f"wrote {outc}")
 
-# ---------------------------------------------------------------- plot
 fs = np.linspace(0.05, 0.95, 400)
 fig, ax = plt.subplots(figsize=(5.6, 3.65))
 style(ax)
-# ordered thresholds -> one hue, light to dark
 ramp = ["#c6dbef", "#9ecae1", "#4292c6", "#2171b5", "#08306b"]
 for zcut, col in zip((2.0, 2.5, 3.0, 3.5, 4.0), ramp):
     ax.plot(fs, [reach(f, N, zcut) for f in fs], color=col,
@@ -360,9 +280,6 @@ os.makedirs(os.path.dirname(out), exist_ok=True)
 fig.savefig(out, dpi=400)
 print(f"\nwrote {out}")
 
-# ---------------------------------------------------------------- priced on the combinatorial scan
-# Same design, N taken from the scaled scan (results/tables/scaled_scan.csv) instead of the model
-# space, since that is the scan the two-stage procedure would actually be run on.
 import csv
 SCALED = os.path.join(ROOT, "results", "tables", "scaled_scan.csv")
 scan_N = {r["scan"]: int(r["N_trials"]) for r in csv.DictReader(open(SCALED))}
@@ -399,7 +316,6 @@ for tag, Nv in list(N_SCAN.items()) + [("model space", N_sel)]:
               f"({rs2[i2]-Z1:+.2f})")
     print(f"  naive 50/50 at Z_cut = 3: reach {r_naive:.2f} ({r_naive-Z1:+.2f})")
     print(f"  break-even R* = {math.exp(0.5*(r_opt*r_opt - Z1*Z1)):.0f}")
-    # background-only check: k ~ Binomial(N, p1(Z_cut)); best confirmation = max of k normals
     for zc in (3.0, zc_opt):
         k = rng_s.binomial(Nv, p1(zc), size=20000)
         u = rng_s.random(20000)

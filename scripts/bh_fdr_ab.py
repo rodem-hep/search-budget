@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-"""Benjamini-Hochberg FDR control as a stage-1 selection rule, alongside the argmax and the fixed
-threshold (results/overviews/MAX_OF_GAUSSIANS.md, Part IV).
-
-Scans the nominal FDR q by Monte Carlo, cached in results/tables/bh_fdr_mc.npz (--refit to redo).
-Writes results/tables/bh_fdr_scan.csv and three figures into results/plots/max_of_gaussians/.
-Setup and the order-statistics trick behind the sampling: docs/METHOD_NOTES.md.
-"""
 import os, sys, math, csv
 import numpy as np
 from scipy.stats import norm
@@ -20,72 +13,62 @@ PLOTS = os.path.join(ROOT, "results", "plots", "max_of_gaussians")
 os.makedirs(PLOTS, exist_ok=True)
 sf, cdf = norm.sf, norm.cdf
 
-# ---------------------------------------------------------------- setup (identical to Part III)
 n, nb, tB = 30_000, 29_999, 3.0
-tstar = norm.isf(1.0 / nb)                     # threshold rule: lambda(t*) = 1
-x_arg = sf(tB)                                 # argmax fake budget = 1.35e-3  (3.0 sigma global)
+tstar = norm.isf(1.0 / nb)
+x_arg = sf(tB)
 MUS = [3, 4, 5, 6]
-M = 2500                                       # rank truncation
-T = 300_000                                    # experiments per configuration
-# q -> 1 is degenerate (BH rejects every bin, since p_(n) <= 1 always), so stop the scan at 0.8
+M = 2500
+T = 300_000
 QGRID = np.unique(np.concatenate([np.geomspace(1e-3, 0.8, 60), [0.05, 0.1, 0.2, 0.5]]))
 
 p_win = lambda mu: quad(lambda s: norm.pdf(s - mu) * cdf(s) ** nb, mu - 12, mu + 12, limit=400)[0]
-y_arg = lambda mu: p_win(mu) * sf(tB - mu) + (1 - p_win(mu)) * sf(tB)      # argmax power
-x_thr = lambda t: nb * sf(t) * sf(tB)                                      # threshold ROC
+y_arg = lambda mu: p_win(mu) * sf(tB - mu) + (1 - p_win(mu)) * sf(tB)
+x_thr = lambda t: nb * sf(t) * sf(tB)
 y_thr = lambda mu, t: cdf(mu - t) * cdf(mu - tB)
 
 rng = np.random.default_rng(20260713)
 
 
 def smallest_uniforms(size, ntot, m):
-    """Exact joint law of the m smallest order statistics of ntot iid U(0,1)."""
     g = np.cumsum(rng.exponential(size=(size, m)), axis=1)
     tot = g[:, -1] + rng.gamma(ntot + 1 - m, size=size)
     return g / tot[:, None]
 
 
 def bh_counts(p_sorted, qgrid):
-    """K(q) for the BH step-up, vectorized over experiments and over q.
-
-    R_k = n p_(k) / k is the q at which rank k alone would be rejectable; the suffix minimum
-    C_k = min_{j>=k} R_j is non-decreasing in k, and K(q) = #{k : C_k <= q}."""
     k = np.arange(1, p_sorted.shape[1] + 1)
     r = n * p_sorted / k
-    c = np.minimum.accumulate(r[:, ::-1], axis=1)[:, ::-1]          # suffix min -> sorted
-    return np.stack([(c <= q).sum(axis=1) for q in qgrid], axis=1)  # (T, nq)
+    c = np.minimum.accumulate(r[:, ::-1], axis=1)[:, ::-1]
+    return np.stack([(c <= q).sum(axis=1) for q in qgrid], axis=1)
 
 
 def run_null(T, chunk=8_000):
-    """H0: all n bins background. Returns E[K], P(K>=1), P(>=1 false confirmation)."""
     ek = np.zeros(len(QGRID)); p1 = np.zeros(len(QGRID)); pf = np.zeros(len(QGRID)); kmax = 0
     for done in range(0, T, chunk):
         s = min(chunk, T - done)
         K = bh_counts(smallest_uniforms(s, n, M), QGRID)
         ek += K.sum(axis=0); p1 += (K >= 1).sum(axis=0)
-        pf += (1.0 - (1.0 - sf(tB)) ** K).sum(axis=0)               # each candidate fakes z_B>3
+        pf += (1.0 - (1.0 - sf(tB)) ** K).sum(axis=0)
         kmax = max(kmax, K.max())
     assert kmax < M, f"rank truncation hit (K_max={kmax} >= M={M})"
     return ek / T, p1 / T, pf / T
 
 
 def run_signal(mu, T, chunk=8_000):
-    """n-1 background + one signal bin at mu. Returns P(signal selected), E[K_bkg selected]."""
     psel = np.zeros(len(QGRID)); ebkg = np.zeros(len(QGRID))
     for done in range(0, T, chunk):
         s = min(chunk, T - done)
-        b = smallest_uniforms(s, nb, M)                             # background order stats
-        ps = sf(rng.normal(mu, 1.0, size=s))[:, None]               # the signal's p-value
-        rank = (b < ps).sum(axis=1) + 1                             # its rank among all n
-        p = np.sort(np.hstack([b, ps]), axis=1)[:, :M]              # combined, truncated
+        b = smallest_uniforms(s, nb, M)
+        ps = sf(rng.normal(mu, 1.0, size=s))[:, None]
+        rank = (b < ps).sum(axis=1) + 1
+        p = np.sort(np.hstack([b, ps]), axis=1)[:, :M]
         K = bh_counts(p, QGRID)
-        sel = rank[:, None] <= K                                    # signal survives stage 1
+        sel = rank[:, None] <= K
         psel += sel.sum(axis=0)
         ebkg += (K - sel).sum(axis=0)
     return psel / T, ebkg / T
 
 
-# ---------------------------------------------------------------- run (cached: the MC is the slow part)
 CACHE = os.path.join(TABLES, "bh_fdr_mc.npz")
 if os.path.exists(CACHE) and "--refit" not in sys.argv:
     d = np.load(CACHE)
@@ -104,9 +87,8 @@ else:
     for mu in MUS:
         SEL[mu], BKG_ALT[mu] = run_signal(mu, T)
 
-    q_star = float(np.interp(1.0, EK0, QGRID))        # E[K|H0] = 1  <=> argmax's fake budget
+    q_star = float(np.interp(1.0, EK0, QGRID))
 
-    # BH at q*, evaluated on its own (a dedicated run at the single q)
     QG_SAVE = QGRID.copy()
     QGRID = np.array([q_star])
     EKs, _, PFs = run_null(T)
@@ -120,7 +102,7 @@ else:
              **{f"sel{mu}": SEL[mu] for mu in MUS}, **{f"bkg{mu}": BKG_ALT[mu] for mu in MUS},
              **{f"sels{mu}": SELs[mu] for mu in MUS}, **{f"bkgs{mu}": BKGs[mu] for mu in MUS})
 
-x_bh = EK0 * sf(tB)                                   # average false confirmations
+x_bh = EK0 * sf(tB)
 
 print(f"Daniels' theorem check (H0): P(BH makes >=1 rejection) should equal q")
 for q in (0.05, 0.2, 0.5):
@@ -159,12 +141,10 @@ with open(os.path.join(TABLES, "bh_fdr_scan.csv"), "w", newline="") as f:
                    + [f"{SEL[mu][i]*cdf(mu-tB):.4f}" for mu in MUS])
 print(f"\nwrote results/tables/bh_fdr_scan.csv")
 
-# ---------------------------------------------------------------- plots (style of Part III)
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from plot_style import (SURF as surf, INK as ink, INK2 as ink2, GRID as grid, BLUE,
                         C_BKG as c_bkg, C_ARG as c_fake, C_ARG as c_arg, C_THR as c_thr, style)
 
-# ============ FIGURE 1: the scan (analogue of threshold_scan.png) ============
 fig, (a0, a1) = plt.subplots(1, 2, figsize=(5.9, 2.7), facecolor=surf,
                              gridspec_kw=dict(wspace=0.22))
 for ax in (a0, a1): style(ax)
@@ -209,7 +189,6 @@ a1.set_title("Chance the signal bin passes BH",
              color=ink, pad=12, loc="left")
 fig.savefig(os.path.join(PLOTS, "bh_scan.png"), dpi=400, facecolor=surf, bbox_inches="tight")
 
-# ============ FIGURE 2: power & false alarm vs q (analogue of threshold_vs_argmax.png) ========
 fig, (b0, b1) = plt.subplots(1, 2, figsize=(5.9, 2.7), facecolor=surf,
                              gridspec_kw=dict(wspace=0.24))
 for ax in (b0, b1): style(ax)
@@ -252,7 +231,6 @@ b1.set_title("Global false-alarm rate it buys", color=ink,
              pad=12, loc="left")
 fig.savefig(os.path.join(PLOTS, "bh_vs_argmax.png"), dpi=400, facecolor=surf, bbox_inches="tight")
 
-# ============ FIGURE 3: the ROC (analogue of roc_threshold_vs_argmax.png) ============
 fig, (c0, c1) = plt.subplots(1, 2, figsize=(5.9, 2.7), facecolor=surf,
                              gridspec_kw=dict(width_ratios=[1.18, 1], wspace=0.24))
 for ax in (c0, c1): style(ax)
@@ -285,7 +263,6 @@ c0.set_ylabel("signal confirmed in B   [%]", color=ink2)
 c0.set_title("Power against false-alarm rate",
              color=ink, pad=12, loc="left")
 
-# right panel: the realized FDR of the surviving candidates, before and after stage B
 c1.grid(color=grid, lw=0.8, alpha=0.6)
 for m in MUS:
     fdr_A = BKG_ALT[m] / np.maximum(BKG_ALT[m] + SEL[m], 1e-12)

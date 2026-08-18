@@ -1,43 +1,4 @@
 #!/usr/bin/env python3
-"""How much the trials count and the discovery bar are uncertain by.
-
-Every number in this repository rests on a declared input: a fractional resolution, a scan window, a
-yield anchor, a fittability threshold, or the convention that turns a resolution element into an
-independent look. This script varies each of them over the range it is honestly known to and prices
-the result on both counted bases -- the 46 published-window spectra of the model space and the
-fully combinatorial scan -- so that no headline is quoted as a bare number.
-
-Three things it does that a single band cannot:
-
-  * it VARIES THE INPUT AND RECOMPUTES rather than scaling N. Scaling a resolution changes which
-    hypothetical histograms can be fitted as well as how many looks each carries, and the two
-    effects partly cancel;
-  * it separates the CORRELATED from the uncorrelated part. Almost every input shifts both bases the
-    same way, so the difference between two rows of the headline table is far better known than
-    either row. The last column of the table below is that difference;
-  * it prices WHAT COUNTS AS ONE LOOK, which is the one input with no measurement behind it at all.
-    Counting elements of width sigma_M and calling each an independent look is a convention. Adjacent
-    elements are correlated, since a resonance spans more than one, which argues for fewer looks;
-    the up-crossing form of the Gross-Vitells estimate argues for more. For a unit-variance Gaussian
-    process in x = ln M with correlation length r, Rice's formula gives an expected number of
-    up-crossings of level Z of (1/2pi)(1/r) ln(M_hi/M_lo) exp(-Z^2/2), which is the element count N
-    times Z/sqrt(2pi) ~ 2.6 at the Z of interest, once compared against the Gaussian tail the
-    element count is multiplied by here. The band taken below, 0.5 to Z/sqrt(2pi), brackets both
-    readings, and this term is the largest single uncertainty on the bar.
-
-Conventions are NOT uncertainties and are kept out of the total: which granularity a spectrum is
-counted at, which dataset the yields are priced on, and the design choices that fix the shape of the
-hypothetical scan (ten object types, at most four of them, one lens at a time). They are reported
-separately, as alternatives.
-
-Reads  scripts/bump_observables.py, scripts/public_obs_map.py (the model space and its windows),
-       scripts/scan_alphabet.py, scripts/combinatorial_budget.py, scripts/yield_model.py (the scan),
-       results/tables/two_body_matrix.csv (the price of the two-body pairs nobody has scanned).
-Writes results/tables/budget_uncertainty.csv  (one row per basis x source x direction)
-       results/overviews/BUDGET_UNCERTAINTY.md
-       results/tex/uncertainty_table.tex      (the appendix table, a bare tabular)
-Pure standard library.
-"""
 import collections, contextlib, csv, math, os, random, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,32 +12,25 @@ import yield_model as YM
 
 def _p(*a): return os.path.join(ROOT, *a)
 
-# ---------------------------------------------------------------- the ranges, and where each comes from
-R_FACTOR     = 2.0            # r is known to a factor of a few; two is the band every headline carries
-R_SCATTER    = 2.0            # the same factor, as an INDEPENDENT per-channel 1 sigma
-WINDOW_F     = 1.4            # published-window edges: how far the curated family edge could move
-GEN_WINDOW_F = 1.25           # the generic window a hypothetical spectrum is given
-ANCHOR_F     = 100.0          # the yield anchor of a factorised per-object rate model
-P_BAND       = (6.0, 8.0)     # the falling-background exponent
-EV_BAND      = (30.0, 300.0)  # events required in a fittable histogram (nominal 100)
-BIN_BAND     = (15, 50)       # resolution elements required of one event or more (nominal 25)
-LENS_EFF_F   = 10.0           # the declared order-of-magnitude lens efficiencies
-LOOK_LO      = 0.5            # a resonance spans about two elements: only every second is a new look
+R_FACTOR     = 2.0
+R_SCATTER    = 2.0
+WINDOW_F     = 1.4
+GEN_WINDOW_F = 1.25
+ANCHOR_F     = 100.0
+P_BAND       = (6.0, 8.0)
+EV_BAND      = (30.0, 300.0)
+BIN_BAND     = (15, 50)
+LENS_EFF_F   = 10.0
+LOOK_LO      = 0.5
 MC_DRAWS     = 20000
 SEED         = 20260817
 
-# The muon axes replace a resolution that rises with p_T by a window-averaged constant, which is the
-# largest modelling approximation in the resolution set. The rising form is anchored on the two values
-# bump_observables quotes for the sagitta-limited di-muon measurement, and the upper anchor is the one
-# that is uncertain.
 MU_AXES    = ("m(mumu)", "m(mumu) SS")
 MU_ANCHORS = ((200.0, 0.02), (3000.0, 0.15))
 MU_HI_BAND = (0.10, 0.20)
 
-# The dataset every headline is priced on: the last entry of scan_alphabet.DATASETS.
 LUMI_LABEL, LUMI = SA.DATASETS[-1]
 
-# ================================================================ basis 1: the model space
 pub_models = collections.defaultdict(set)
 for _model, _obss in PUBLIC_OBS.items():
     for _o in _obss:
@@ -86,7 +40,6 @@ AXES += [o for o in sorted(pub_models) if o not in AXES]
 
 
 def N_model(rfun=res, rscale=1.0, lo_f=1.0, hi_f=1.0, axes=None, extra=0.0):
-    """Trials over the published windows: 1/r ln(hi/lo) per scanned segment."""
     tot = extra
     for o in (AXES if axes is None else axes):
         r = rfun(o) * rscale
@@ -96,7 +49,6 @@ def N_model(rfun=res, rscale=1.0, lo_f=1.0, hi_f=1.0, axes=None, extra=0.0):
 
 
 def ns_rising(lo, hi, anchors, steps=4000):
-    """Looks over [lo, hi] for a resolution rising linearly in M between two anchors."""
     (m0, r0), (m1, r1) = anchors
     slope = (r1 - r0) / (m1 - m0)
     x0, x1 = math.log(lo), math.log(hi)
@@ -109,7 +61,6 @@ def ns_rising(lo, hi, anchors, steps=4000):
 
 
 def N_model_rising(r_hi):
-    """The muon axes counted with r(M) rising to r_hi at the upper anchor, the rest unchanged."""
     anchors = (MU_ANCHORS[0], (MU_ANCHORS[1][0], r_hi))
     tot = N_model(axes=[o for o in AXES if o not in MU_AXES])
     for o in MU_AXES:
@@ -118,7 +69,6 @@ def N_model_rising(r_hi):
 
 
 def r_effective(obs, r_hi):
-    """The flat r that reproduces the rising-resolution trials integral over this axis's window."""
     anchors = (MU_ANCHORS[0], (MU_ANCHORS[1][0], r_hi))
     seg = scan_segments(obs)
     ns = sum(ns_rising(lo, hi, anchors) for lo, hi in seg)
@@ -126,7 +76,6 @@ def r_effective(obs, r_hi):
 
 
 def scattered(seed=SEED, draws=MC_DRAWS, factor=R_SCATTER):
-    """Percentiles of N when every channel's r is drawn independently, a factor `factor` per sigma."""
     rng = random.Random(seed)
     sig = math.log(factor)
     seg = {o: [(lo, hi) for lo, hi in scan_segments(o)] for o in AXES}
@@ -142,11 +91,6 @@ def scattered(seed=SEED, draws=MC_DRAWS, factor=R_SCATTER):
 
 
 def overlap_looks():
-    """Looks the dark-photon axes double-count against the high-mass dilepton axes.
-
-    The (Zd) windows run to 400 GeV and the Drell-Yan windows start at 150, so 150-400 GeV is
-    scanned twice. Removing it from the finer-resolution axis is the de-duplicated count.
-    """
     tot = 0.0
     for zd, dy in (("m(ee) (Zd)", "m(ee)"), ("m(mumu) (Zd)", "m(mumu)")):
         lo = max(scan_segments(zd)[0][0], scan_segments(dy)[0][0])
@@ -156,7 +100,6 @@ def overlap_looks():
 
 
 def two_body_gap():
-    """Looks the object pairs with no published axis would cost, from two_body_matrix.py."""
     with open(_p("results", "tables", "two_body_matrix.csv")) as f:
         rows = [r for r in csv.DictReader(f) if r["status"].startswith("gap")]
     return len(rows), sum(float(r["ns"]) for r in rows)
@@ -165,10 +108,8 @@ def two_body_gap():
 N_MODEL = N_model()
 N_SEL = sum(nsel(o) * sum(n_s(lo, hi, res(o)) for lo, hi in scan_segments(o)) for o in AXES)
 
-# ================================================================ basis 2: the combinatorial scan
 @contextlib.contextmanager
 def yields(**over):
-    """yield_model globals (and combinatorial_budget's generic windows) held at other values."""
     keep = {k: getattr(YM, k) for k in over if k != "WINDOW"}
     win = CB.WINDOW
     try:
@@ -185,7 +126,6 @@ def yields(**over):
 
 
 def scan(sigma_scale=1.0, r_group=None, window_f=None, lumi=LUMI, lens_f=1.0, **over):
-    """(spectra, N, lensed histograms, lensed N) of the ten-object scan under one variation."""
     args = dict(SA.WIDE_ARGS)
     if sigma_scale != 1.0:
         args["sigma"] = {k: v * sigma_scale for k, v in SA.SIGMA_WIDE.items()}
@@ -213,20 +153,16 @@ def scan(sigma_scale=1.0, r_group=None, window_f=None, lumi=LUMI, lens_f=1.0, **
 
 
 def r_worst(comp, sigma):
-    """Model-space convention: a multi-object mass takes its worst leg."""
     return 0.5 * max(sigma[t] for t in comp)
 
 
 def r_quadrature(comp, sigma):
-    """Textbook propagation for a two-body mass, a factor sqrt(k) above the calibrated prescription."""
     return 0.5 * math.sqrt(sum(sigma[t] ** 2 for t in comp))
 
 
 N_SPEC, N_SCAN, N_LSPEC, N_LSCAN = scan()
 
-# ================================================================ what one look is
 def z_exact(N, zglob=5.0):
-    """Local Z solving N (1-Phi(Z)) = 1-Phi(zglob) exactly, instead of the closed-form LEE relation."""
     target = 0.5 * math.erfc(zglob / math.sqrt(2.0)) / N
     lo, hi = 1.0, 25.0
     for _ in range(200):
@@ -239,25 +175,13 @@ def z_exact(N, zglob=5.0):
 
 
 def c_upcrossing(N):
-    """Rice/Gross-Vitells up-crossings against element counting: the factor Z/sqrt(2 pi)."""
     return z5(N) / math.sqrt(2.0 * math.pi)
 
-# ================================================================ the uncertainty budget
-# One entry per source. `dirs` holds the variations of that source, aligned across the two bases so
-# that the difference between them is taken direction by direction: the correlated part cancels there.
-# `ref` overrides the nominal N a source's shifts are measured against, which the per-channel
-# resolution scatter needs: its band belongs around its own median, not around the nominal count.
-# `tex` is the same range written for the appendix table, since the plain form carries characters
-# LaTeX would choke on.
 Src = collections.namedtuple("Src", "label detail dirs kind ref tex", defaults=(None, None))
-# N_scan is a (scan, lensed scan) pair, or None where the source does not touch the scan: the lens
-# layer is a third basis and every source has to move it too, since a lens view inherits its parent's
-# window and resolution and faces the same statistics requirement.
 Dir = collections.namedtuple("Dir", "label N_model N_scan")
 
 
 def sc(**kw):
-    """(N, lensed N) of the ten-object scan under one variation."""
     _n, N, _nl, N_l = scan(**kw)
     return N, N_l
 
@@ -271,8 +195,6 @@ SOURCES = [
         [Dir(f"r x{1/R_FACTOR:g}", N_model(rscale=1 / R_FACTOR), sc(sigma_scale=1 / R_FACTOR)),
          Dir(f"r x{R_FACTOR:g}", N_model(rscale=R_FACTOR), sc(sigma_scale=R_FACTOR))],
         "systematic", None, rf"every $r \times {R_FACTOR:g}$ either way"),
-    # An alternative correlation assumption for the SAME input as the row above, so it is reported
-    # against its own median and never added: the two would double-count the resolution.
     Src("mass resolution, per channel",
         f"each r independently, x{R_SCATTER:g} per sigma (16-84%)",
         [Dir("16%", _p16, None), Dir("84%", _p84, None)], "alternative", _p50,
@@ -326,7 +248,6 @@ SOURCES = [
         "exact Gaussian-tail solution"),
 ]
 
-# conventions, reported but never added to the band
 ALTERNATIVES = [
     ("counting granularity", "published event selections instead of inclusive spectra",
      N_SEL, None),
@@ -338,7 +259,6 @@ ALTERNATIVES = [
      N_MODEL - max(sum(n_s(lo, hi, res(o)) for lo, hi in scan_segments(o)) for o in AXES), None),
 ]
 
-# ---------------------------------------------------------------- assemble
 def dz(N_nom, N_var):
     return None if N_var is None else z5(N_var) - z5(N_nom)
 
@@ -349,7 +269,7 @@ rows = []
 for s in SOURCES:
     for d in s.dirs:
         n_sc, n_ln = d.N_scan if d.N_scan is not None else (None, None)
-        if d.label == "exact":                     # the one direction that is not a change of input
+        if d.label == "exact":
             dm, ds = z_exact(N_MODEL) - z5(N_MODEL), z_exact(N_SCAN) - z5(N_SCAN)
             dl = z_exact(N_LSCAN) - z5(N_LSCAN)
         else:
@@ -361,7 +281,6 @@ for s in SOURCES:
 
 
 def envelope(vals):
-    """(down, up) envelope of a set of shifts, each side including zero."""
     v = [x for x in vals if x is not None]
     return (min([0.0] + v), max([0.0] + v))
 
@@ -386,7 +305,6 @@ TOT_SCAN = quad([per_src[s.label][1] for s in ADDED])
 TOT_GAP = quad([per_src[s.label][2] for s in ADDED])
 TOT_LENS = quad([per_src[s.label][3] for s in ADDED])
 
-# ---------------------------------------------------------------- console
 def pm(pair, w=6):
     return f"{pair[1]:+.2f}/{pair[0]:+.2f}".rjust(w + 6)
 
@@ -431,7 +349,6 @@ for label, detail, nm, nc in ALTERNATIVES:
         return f"{z5(v):.2f}"
     print(f"  {label:26s} {_fmt(nm):>14} {_fmt(nc):>14}   {detail}")
 
-# ---------------------------------------------------------------- CSV
 with open(_p("results", "tables", "budget_uncertainty.csv"), "w", newline="") as f:
     w = csv.writer(f)
     w.writerow(["source", "varied_over", "direction", "kind", "N_model_space",
@@ -472,13 +389,12 @@ with open(_p("results", "tables", "budget_uncertainty.csv"), "w", newline="") as
         w.writerow([label, detail, "alternative", "convention", "", "", "", vals[0], vals[1],
                     "", ""])
 
-# ---------------------------------------------------------------- LaTeX
 def tex_pm(pair):
     if pair == (0.0, 0.0):
         return "---"
     if max(abs(pair[0]), abs(pair[1])) < 0.005:
         return "$<0.01$"
-    if abs(pair[0]) < 0.005:                       # one-sided: a single signed number reads better
+    if abs(pair[0]) < 0.005:
         return f"${pair[1]:+.2f}$"
     if abs(pair[1]) < 0.005:
         return f"${pair[0]:+.2f}$"
@@ -487,7 +403,6 @@ def tex_pm(pair):
 
 with open(_p("results", "tex", "uncertainty_table.tex"), "w") as f:
     f.write("% Generated by scripts/budget_uncertainty.py. Do not edit: regenerate instead.\n")
-    # a wrapping second column: the ranges are too long for an l-column at this text width
     f.write("\\begin{tabular}{@{}l>{\\raggedright\\arraybackslash}p{0.30\\textwidth}ccc@{}}\n"
             "\\toprule\n")
     f.write("source & varied over & 46 spectra & scan & difference \\\\\n\\midrule\n")
@@ -500,7 +415,6 @@ with open(_p("results", "tex", "uncertainty_table.tex"), "w") as f:
             f"{tex_pm(TOT_GAP)} \\\\\n")
     f.write("\\bottomrule\n\\end{tabular}\n")
 
-# ---------------------------------------------------------------- report
 def md_row(s):
     m, c, g, _l = per_src[s.label]
     lbl = s.label + ("" if s.kind == "systematic" else " (&dagger;)")

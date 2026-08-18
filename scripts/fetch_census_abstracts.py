@@ -1,17 +1,4 @@
 #!/usr/bin/env python3
-"""Fetch the abstracts of the census papers from the arXiv API.
-
-Companion to fetch_census_meta.py and, like it, not part of `make all`: the output,
-data/census_abstracts.csv, is committed, so reported_excesses.py and every other consumer runs
-offline. Run it only when data/published_spectra.csv gains an arXiv ID.
-
-Resumes from the committed CSV and fetches only IDs missing from it. The arXiv API asks for no
-more than one request every three seconds; the batch size and delays here stay well inside that.
-
-Reads  data/published_spectra.csv (for the arXiv IDs) and data/census_abstracts.csv (as cache).
-Writes data/census_abstracts.csv.
-Pure standard library, but requires outbound HTTPS.
-"""
 import csv, os, re, sys, time, urllib.request, urllib.parse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -49,7 +36,7 @@ for start in range(0, len(todo), BATCH):
             xml = urllib.request.urlopen(
                 urllib.request.Request(f"{API}?{q}", headers=UA), timeout=120).read().decode()
             break
-        except Exception as e:                                   # 429/503 under load are routine
+        except Exception as e:
             wait = 20 * (attempt + 1)
             print(f"  retry {attempt + 1} in {wait}s: {e}")
             time.sleep(wait)

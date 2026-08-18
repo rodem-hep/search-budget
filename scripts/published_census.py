@@ -1,25 +1,4 @@
 #!/usr/bin/env python3
-"""The publication-side census: which mass spectra ATLAS has actually published a bump hunt in.
-
-The budget of search_budget.py is built from the model side -- the spectra public BSM models
-predict a peak in. This is the independent view from the publication record: every ATLAS
-resonance-search paper, grouped by the spectrum it scans, assembled from INSPIRE-HEP and curated
-by hand. The two are counted in different bases and are meant to be read against each other, not
-summed.
-
-Scope matches the budget's: invariant-mass and transverse-mass bump hunts for new states.
-Hadron-spectroscopy measurements that happen to be bump hunts are out.
-
-The `budget_axis` column records which of the 46 canonical axes each entry scans, or "-" where it
-falls on none. For the stale spectra that distinction is the whole point of the list: re-running a
-spectrum whose axis is already in N costs no trials, while re-running one that is not extends the
-axis count. Read together with `scan_GeV`, the same two columns let `census_budget.py` price the
-whole census in trials.
-
-Reads data/published_spectra.csv (a committed input, not a derived table).
-Writes results/tables/published_census.csv and results/overviews/PUBLISHED_CENSUS.md.
-Pure standard library.
-"""
 import os, csv, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

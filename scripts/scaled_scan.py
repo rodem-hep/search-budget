@@ -1,52 +1,4 @@
 #!/usr/bin/env python3
-"""What a scaled-up scan costs, and what fits inside a fixed trials budget.
-
-The five-object scan of combinatorial_budget.py reaches e, mu, light jets, b-jets and a leptonic Z. A
-scan built on today's reconstruction would also form masses from hadronic taus, photons and the
-boosted large-R candidates for W/Z, H and top. Rules:
-
-  * ten object types, no per-type ceiling, and STRICTLY at most four objects per category;
-  * missing energy splits every category and is never an ingredient of a mass, so the transverse-mass
-    axes of the model-driven budget are outside this scan's reach;
-  * every 2-to-4-object subset of a category is its own spectrum;
-  * any trigger: a category needs no lepton;
-  * same-flavour dilepton categories still split OS/SS.
-
-That scan is far larger than anyone would run, so the second half of this script imposes a trials
-budget of TRIALS_BUDGET and asks which spectra survive it. Priority is, in order:
-
-  0. every object composition of the model-motivated axes of bump_observables (the 46 of the
-     model-driven budget) once, in the best-populated category that can form it;
-  1. those same compositions in their remaining categories, highest expected rate first;
-  2. everything else, highest expected rate first.
-
-The split into tiers 0/1/2 also measures how much of the scan theory motivates at all.
-
-Expected rate is a declared order-of-magnitude weight per object type, multiplied over a category's
-content. Only the ordering of those weights matters for the ranking, not their values.
-
-The last part adds selection lenses: an extra event-level requirement on an unchanged mass axis, which
-is one more view of the same spectrum and one more look. Half the handles a wide search would use are
-already in the enumeration (high MET, object multiplicity, b-tag and tau enrichment) and would be
-double counted; the four that are not are priced one at a time, never in combination.
-
-The statistics requirement every histogram has to pass is anchored on a Run-2 dataset, so the report
-closes by rescaling that anchor to Run 2 plus Run 3.
-
-Resolutions are not new inputs: each object's fractional sigma is read back out of the published
-resolution of its own symmetric channel, sigma = 2 r, as two_body_matrix.py does. Missing energy has
-no symmetric channel and is read out of mT(e,v) instead.
-
-The alphabet itself and the two argument sets live in scan_alphabet.py, so budget_uncertainty.py can
-reprice exactly this scan without importing the report below.
-
-Reads  scripts/scan_alphabet.py (the alphabet), scripts/bump_observables.py (published
-       resolutions), scripts/combinatorial_budget.py (rules).
-Writes results/tables/scaled_scan.csv    (one row per scan variant)
-       results/tables/priority_scan.csv  (per composition: tier, spectra and looks, kept or dropped)
-       results/tables/lens_scan.csv      (per lens: what it adds, and what the budget keeps of it)
-Prints the report the Makefile captures as results/tables/scaled_scan.txt.
-"""
 import os, sys, math, csv, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -60,9 +12,6 @@ import yield_model as YM
 
 TRIALS_BUDGET = 5.0e5
 
-# ------------------------------------------------------------------ the model-motivated axes
-# Every observable of the model-driven budget, as the object composition(s) a scan would build it
-# from. A tuple where the axis spans several compositions, None where this alphabet cannot form it.
 MOTIVATED = {
     "m(gammagamma)": ("gg",),      "m(egamma)": ("eg",),     "m(mugamma)": ("gm",),
     "m(jgamma)": ("gj",),          "m(Vgamma)": ("Vg",),
@@ -81,20 +30,14 @@ MOTIVATED = {
     "m(tb)": ("bt",),              "m(tW)": ("Vt",),         "m(Wb)": ("Vb",),
     "m(Ht)": ("Ht",),              "m(ttZ)/m(Zt)": ("Vt", "Zt"),
     "multilepton": ("eee", "eem", "emm", "mmm"),
-    "m(multi)": None,              # a many-object mass with no fixed composition
-    "mT(ev)": None, "mT(muv)": None, "mT(taunu)": None,   # no mass carries missing energy
+    "m(multi)": None,
+    "mT(ev)": None, "mT(muv)": None, "mT(taunu)": None,
 }
 canon = lambda c: "".join(sorted(c))
 MOTIVATED_COMPS = {canon(c) for cs in MOTIVATED.values() if cs for c in cs}
 
 
 def tiers(rows):
-    """Fittable spectra, the priority tier of each, and the best-populated category per composition.
-
-      0  every model-motivated composition once, in the best-populated category that can form it
-      1  those same compositions in their remaining categories
-      2  everything else
-    """
     sp = [r for r in rows if r.n_s > 0]
     best = {}
     for i, r in enumerate(sp):
@@ -117,13 +60,10 @@ print(f"\nmodel-motivated compositions: {len(MOTIVATED_COMPS)} from "
       f"{sum(1 for v in MOTIVATED.values() if v)} of the {len(MOTIVATED)} axes "
       f"(no composition for {', '.join(k for k, v in MOTIVATED.items() if v is None)})")
 
-# The size of one exemption: published windows are never gated, because a published search
-# demonstrates its own feasibility. This is what the requirement would do to them if they were.
 pub_axes = {a: cs for a, cs in MOTIVATED.items() if cs}
 
 
 def gated_published():
-    """(axes that survive the requirement, their looks, the looks the published windows carry)."""
     kept, N_gated, N_full = 0, 0.0, 0.0
     for a, cs in pub_axes.items():
         r, w = res(a), max(YM.weight(c) for c in cs)
@@ -143,7 +83,6 @@ print(f"the requirement is never applied to a published window. On the {len(pub_
       f"{pub_N:,.0f}, so exempting them is the conservative choice")
 print()
 
-# ------------------------------------------------------------------ price the variants
 VARIANTS = [
     ("five objects, lepton trigger", BASE),
     ("five objects, derived sigma",  {**BASE, "sigma": SIGMA_BASE_DERIVED}),
@@ -162,17 +101,6 @@ for label, kw in VARIANTS:
 
 full = runs[-1][2]
 
-# ------------------------------------------------------------------ fit it into the budget
-# Three priority tiers, and inside each one the highest expected rate first:
-#   0  every model-motivated axis once, in the best-populated category it appears in, so that no
-#      motivated axis can be lost to the budget;
-#   1  the same axes in their remaining categories;
-#   2  everything else.
-# The budget then takes the priority-ordered prefix that fits. It stops at the first spectrum that
-# does not, rather than topping up with whatever cheap spectrum happens to fit in the remainder.
-# Rows that cannot be fitted score no looks and are not spectra: they never enter the priority order.
-# An OS/SS-split row is two histograms and its looks already count both, so the two bases must not be
-# mixed: everything below counts histograms.
 spectra, tier_list, best = tiers(full.rows)
 once = set(best.values())
 ranked = sorted(((tier_list[i], -r.w, r.n_s, canon(r.group), r.cat, r.split)
@@ -215,7 +143,7 @@ print(f"tier 2, the rest                  : {tier_n[2]:6,d} spectra, N = {tier_N
       f"({100*tier_N[2]/full.N:4.1f} %)")
 print(f"tiers 0+1 together: N = {tierA_N:,.0f}, which is "
       f"{tierA_N/TRIALS_BUDGET:.2f} times the budget on its own")
-NEW_TYPES = "TgtVH"                                  # what the wider alphabet adds to the five
+NEW_TYPES = "TgtVH"
 _nn = sum(v for c, v in full.by_type.items() if any(k in c for k in NEW_TYPES))
 _nl = sum(v for c, v in full.looks.items() if any(k in c for k in NEW_TYPES))
 print(f"spectra reaching a new object type: {_nn:,} of {full.n_hist:,} "
@@ -244,10 +172,6 @@ print(f"a local 5 sigma is then worth Z_global = "
       f"{math.sqrt(max(25.0 - 2*math.log(N_sel), 0)):.2f} sigma")
 print()
 
-# How hard the requirement bites depends on the yield anchor, which is the least certain input: a
-# factorised per-object model prices every object at the full cost of its own production, and real
-# objects arrive in pairs from one boson, so it under-counts high-multiplicity categories. Two orders
-# of magnitude either way is the honest band.
 print("yield anchor scaled (the model's own uncertainty): spectra, N, Z_local")
 _n_ref = YM.N_REF
 for _s in (0.01, 1.0, 100.0):
@@ -258,7 +182,6 @@ for _s in (0.01, 1.0, 100.0):
 YM.N_REF = _n_ref
 print()
 
-# which object types survive, and through which compositions
 print("object type    spectra in scan  selected   kept looks   what survives")
 for k in ORDER_WIDE:
     tot = sum(v for c, v in full.by_type.items() if k in c)
@@ -288,9 +211,6 @@ for c in sorted(kept_looks, key=lambda c: -kept_looks[c])[:15]:
           f"{kept_looks[c]:9,.0f} looks   ({tag})")
 print()
 
-# ------------------------------------------------------------------ selection lenses
-# The four lenses and the rule for which spectra each can reach are scan_alphabet.LENSES; what
-# follows is the priority order they enter, and what a fixed trials budget keeps of them.
 items, tier_of = [], {}
 lens_n, lens_N = collections.Counter(), collections.Counter()
 lens_thin = collections.Counter()
@@ -357,9 +277,6 @@ else:
           f"and {sum(lens_thin.values()):,} further views are ruled out by statistics alone")
 print()
 
-# The yield anchor is a Run-2 dataset, so a larger one enters exactly as the band above does. It buys
-# little reach per spectrum, the one-event mass going as luminosity^(1/(P-1)). Every variant of the
-# headline table is repriced per dataset, so the Run 2+3 table rows come from here.
 dataset_rows = []
 print(f"dataset scaled (the anchor is {DATASETS[0][0]}): spectra, N, Z_local, mass reach")
 for _label, _s in DATASETS:
@@ -418,7 +335,6 @@ for _label, _s in DATASETS:
 YM.N_REF = _n_ref
 print()
 
-# ------------------------------------------------------------------ tables
 hdr = ("scan", "types", "K_max", "objects_per_category", "trigger", "categories",
        "spectra", "compositions", "N_trials", "Z_local", "Z_lo", "Z_hi")
 row = lambda label, kw, cats, nsp, ncomp, N: [

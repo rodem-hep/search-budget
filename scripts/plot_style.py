@@ -1,39 +1,17 @@
 #!/usr/bin/env python3
-"""Shared figure style for the statistics plots (see docs/METHOD_NOTES.md).
-
-Conventions follow those of a published collider-physics figure rather than a report
-graphic, because that is where these end up: Computer Modern to match the LaTeX body
-text, a closed frame with major and minor ticks turned inward on all four sides, no
-grid, and no in-axes title -- the LaTeX caption carries the description.
-
-Figures are drawn at their *final printed size*. TEXTW is the \\textwidth of both
-documents in inches, so a figure included at 0.9\\textwidth should be 0.9*TEXTW wide
-and its labels come out at the point size set here. Drawing oversized and letting
-\\includegraphics shrink it is what makes axis text illegible.
-
-Colours: the categorical slots are Okabe--Ito, a published palette designed to stay
-separable under the common colour-vision deficiencies; the BLUE ramp is single-hue
-light-to-dark for magnitude. Keep them in those roles -- a sequential ramp used for
-identity, or a categorical hue used for magnitude, both misread.
-"""
 import matplotlib as mpl
 import matplotlib.ticker as mticker
 
-TEXTW = 6.2          # \textwidth of a4paper with the documents' margins, in inches
+TEXTW = 6.2
 
 SURF, INK, INK2, GRID = "#ffffff", "#000000", "#1a1a1a", "#d9d9d9"
 
-# sequential: one hue, light -> dark (ColorBrewer Blues)
 BLUE = {3: "#c6dbef", 4: "#6baed6", 5: "#2171b5", 6: "#08306b"}
 
-# categorical: Okabe-Ito. blue / vermillion / bluish-green / orange
 C_BKG, C_ARG, C_THR, C_ALT = "#0072b2", "#d55e00", "#009e73", "#e69f00"
 
-# single-series mark, and its pale partner for an "absent" cell
 MARK, MARK_PALE = "#0072b2", "#e8eef4"
 
-# The axes description belongs in the LaTeX caption, so title() draws nothing.
-# Set True when running a script standalone and the figure has to speak for itself.
 SHOW_TITLES = False
 
 mpl.rcParams.update({
@@ -43,11 +21,10 @@ mpl.rcParams.update({
     "savefig.bbox": "tight",
     "savefig.pad_inches": 0.02,
     "savefig.dpi": 400,
-    # Computer Modern, to match the body text of both documents
     "font.family": "serif",
     "font.serif": ["cmr10", "DejaVu Serif"],
     "mathtext.fontset": "cm",
-    "axes.unicode_minus": False,          # cmr10 has no U+2212
+    "axes.unicode_minus": False,
     "axes.formatter.use_mathtext": True,
     "font.size": 9,
     "axes.labelsize": 9.5,
@@ -79,17 +56,11 @@ mpl.rcParams.update({
 
 
 def size(frac=1.0, aspect=0.62):
-    """figsize for a figure included at `frac`*\\textwidth, height/width = aspect."""
     w = frac * TEXTW
     return (w, w * aspect)
 
 
 def style(ax, grid=False, minor="both"):
-    """Close the frame, turn the ticks inward, drop the grid.
-
-    minor: which axes carry minor ticks -- "both", "x", "y" or None. Categorical
-    axes want them off, since there is nothing between two adjacent categories.
-    """
     ax.set_facecolor(SURF)
     for s in ("top", "right", "bottom", "left"):
         ax.spines[s].set_visible(True)
@@ -127,7 +98,4 @@ def labels(ax, x=None, y=None):
         ax.set_ylabel(y, color=INK)
 
 
-# ---------------------------------------------------------------- observable labels
-# Shared with the LaTeX table generators, so a figure axis and an appendix row spell the
-# same spectrum the same way.
-from obs_labels import mathify, textsafe    # noqa: E402,F401  (re-exported)
+from obs_labels import mathify, textsafe

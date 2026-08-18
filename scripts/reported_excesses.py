@@ -1,23 +1,4 @@
 #!/usr/bin/env python3
-"""The observed side of the excess bookkeeping, mined from the census abstracts.
-
-Every census paper whose abstract quantifies its largest deviation from the background-only
-hypothesis is extracted here, with the local (and, where quoted, global) significance and the
-sentence it came from. The headline is the count of papers reporting a local excess at or above 3
-sigma, which is what EXCESS_COUNTING.md's background-only expectation predicts for the resonance
-subset. Two biases pull in opposite directions and are documented in the report: abstracts
-under-report (a sub-3 sigma maximum is often left to the body), and successive papers on one axis
-re-scan partially shared data, so the reports are not independent trials.
-
-Sentences that quote a significance for something other than an excess -- an exclusion, an
-expected Standard Model signal -- are filtered out by requiring excess/deviation context and
-rejecting exclusion language; the survivors are few enough to audit by eye in the report.
-
-Reads  data/census_abstracts.csv, data/census_papers.csv, data/published_spectra.csv,
-       results/tables/search_budget.csv (for the expected count).
-Writes results/tables/reported_excesses.csv, results/overviews/REPORTED_EXCESSES.md.
-Pure standard library, no network.
-"""
 import csv, math, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,14 +7,12 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 def p1(Z): return 0.5 * math.erfc(Z / math.sqrt(2.0))
 
-# ---------------------------------------------------------------- census joins
 paper_meta = {r["arxiv"]: r for r in csv.DictReader(open(_p("data", "census_papers.csv")))}
 spectrum_of = {}
 for r in csv.DictReader(open(_p("data", "published_spectra.csv"))):
     for a in r["arxiv"].split():
         spectrum_of[a] = r["spectrum"]
 
-# ---------------------------------------------------------------- sentence extraction
 NUM = r"\$?(\d+(?:\.\d+)?)\s*(?:σ|\\sigma)?\$?"
 SIG_UNIT = re.compile(rf"{NUM}\s*(?:σ|\\sigma|standard deviations?)")
 PAIRED = re.compile(rf"local\s*\(global\)\s*significance[s]? of {NUM}\s*\({NUM}\s*"
@@ -44,7 +23,6 @@ def sentences(text):
     return re.split(r"(?<=[.!?])\s+(?=[A-Z])", re.sub(r"\s+", " ", text))
 
 def extract(sentence):
-    """-> (local, global) significances quoted in the sentence, either possibly None."""
     m = PAIRED.search(sentence)
     if m:
         return float(m.group(1)), float(m.group(2))
@@ -86,8 +64,6 @@ for r in csv.DictReader(open(_p("data", "census_abstracts.csv"))):
             "sentence": s.strip(),
         })
 
-# one row per paper: the largest quoted local and global significances, whichever sentences
-# carried them, keeping the sentence behind the local one
 best = {}
 for row in rows:
     k = row["arxiv"]
@@ -108,12 +84,9 @@ with open(_p("results", "tables", "reported_excesses.csv"), "w", newline="") as 
     for row in rows:
         w.writerow(row)
 
-# ---------------------------------------------------------------- expectation
 with open(_p("results", "tables", "search_budget.csv")) as f:
     budget = list(csv.DictReader(f))
 N_inc = sum(float(r["ns_scan"]) for r in budget)
-# take the per-row product from the table rather than re-deriving it, so this report and
-# SEARCH_BUDGET.md cannot disagree in the last digit
 N_sel = sum(float(r["ns_with_selections"]) for r in budget)
 exp_inc, exp_sel = N_inc * p1(3.0), N_sel * p1(3.0)
 
@@ -121,7 +94,6 @@ n_papers = len({r["arxiv"] for r in csv.DictReader(open(_p("data", "census_abstr
 ge3 = [r for r in rows if r["z_local"] and float(r["z_local"]) >= 3.0]
 sub3 = [r for r in rows if r not in ge3]
 
-# ---------------------------------------------------------------- report
 with open(_p("results", "overviews", "REPORTED_EXCESSES.md"), "w") as f:
     f.write("# Reported excesses, mined from the census abstracts\n\n")
     f.write(f"The observed side of `EXCESS_COUNTING.md`, made concrete for the resonance subset: "

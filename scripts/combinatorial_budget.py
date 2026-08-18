@@ -1,21 +1,4 @@
 #!/usr/bin/env python3
-"""Search budget of a fully combinatorial scan: exclusive object-multiplicity categories x every
-2-to-4-object invariant mass they contain.
-
-The object budget below is the one this study fixes for a scan of that kind -- a single-lepton
-trigger, at most four objects, MET as a category split rather than a mass ingredient. It is a
-design choice, not a measurement: the point is to price a scan of this shape against the published
-program, and the answer moves only through ln N. Rules documented in docs/METHOD_NOTES.md.
-
-Only histograms that could be fitted are counted: yield_model.gate truncates every window where a
-resolution element falls below one event and drops the group entirely if fewer than 25 elements
-survive, so a combination the detector can form but the rate cannot fill costs nothing.
-
-scaled_scan.py reuses enumerate_scan() for the wider object alphabet, so the two scans differ only
-in their inputs.
-
-Writes results/tables/combinatorial_budget.csv.
-"""
 import os, sys, math, itertools, collections, csv
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,19 +6,17 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from bump_observables import n_s, z_local_for_global5
 import yield_model as YM
 
-# ------------------------------------------------------------------ inputs
-ORDER  = "emjbZ"                                    # object types, in category-label order
-NMAX   = {"e": 2, "m": 2, "j": 3, "b": 3, "Z": 1}   # per-type multiplicity ceiling
-NOBJ   = 4                                          # max objects per category (MET excluded)
-KMIN, KMAX = 2, 4                                   # mass-group sizes
-TRIG   = "emZ"                                      # one of these must be present (lepton trigger)
-LEPTON = "em"                                       # charged leptons, for the OS/SS category split
-MET_W  = "X"                                        # yield_model key for a category requiring MET
+ORDER  = "emjbZ"
+NMAX   = {"e": 2, "m": 2, "j": 3, "b": 3, "Z": 1}
+NOBJ   = 4
+KMIN, KMAX = 2, 4
+TRIG   = "emZ"
+LEPTON = "em"
+MET_W  = "X"
 
-SIGMA  = {"e": 0.04, "m": 0.04, "Z": 0.04, "j": 0.10, "b": 0.20}   # fractional pT resolution
-# scan window per group size k: [lo, hi] GeV (single-lepton-triggered turn-on -> stats ceiling)
+SIGMA  = {"e": 0.04, "m": 0.04, "Z": 0.04, "j": 0.10, "b": 0.20}
 WINDOW = {2: (100.0, 5000.0), 3: (150.0, 4000.0), 4: (200.0, 3000.0)}
-MASS   = {"Z": 91.2}       # object masses that set the low edge; everything else counts as LIGHT
+MASS   = {"Z": 91.2}
 LIGHT  = 40.0
 
 Cat  = collections.namedtuple("Cat", "n met os_ss")
@@ -45,24 +26,17 @@ Scan = collections.namedtuple("Scan",
 
 
 def r_group(comp, sigma):
-    """Fractional mass resolution of a k-body group from its object composition."""
     s2 = [sigma[t] ** 2 for t in comp]
     return 0.5 * math.sqrt(sum(s2) / len(s2))
 
 
 def window(comp, mass):
     lo, hi = WINDOW[len(comp)]
-    return max(lo, sum(mass.get(t, LIGHT) for t in comp)), hi     # object-mass floor
+    return max(lo, sum(mass.get(t, LIGHT) for t in comp)), hi
 
 
 def enumerate_categories(order, nmax, nobj=NOBJ, trig=TRIG, lepton=LEPTON):
-    """Exclusive multiplicity categories, MET-split, with a trigger object required.
-
-    nobj caps the objects in a category; KMAX caps the objects in one mass combination. They
-    coincide in the baseline scan and are separate knobs in scaled_scan.py.
-    """
     def vectors(i, left, acc):
-        """Multiplicity vectors with at most nobj objects, last type varying fastest."""
         if i == len(order):
             yield tuple(acc)
             return
@@ -78,7 +52,7 @@ def enumerate_categories(order, nmax, nobj=NOBJ, trig=TRIG, lepton=LEPTON):
             continue
         if trig and not any(n[t] for t in trig):
             continue
-        charge = 2 if sum(n[t] for t in lepton) == 2 else 1   # OS/SS split of the dilepton cases
+        charge = 2 if sum(n[t] for t in lepton) == 2 else 1
         for met in (0, 1):
             cats.append(Cat(n, met, charge))
     return cats
@@ -86,23 +60,13 @@ def enumerate_categories(order, nmax, nobj=NOBJ, trig=TRIG, lepton=LEPTON):
 
 def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, kmax=KMAX, collect=True,
                    weight=None, **kw):
-    """Every (category, mass group) of the scan, with the looks each group costs.
-
-    Missing energy splits every category and is never an ingredient of a mass, so no transverse mass
-    is formed here; a category requiring it carries its yield factor. collect=False keeps only the
-    aggregates, for ceilings where the row list would not fit. weight gives each row its category's
-    yield relative to a light-jet pair, the product over the objects present, which both orders the
-    priority of a budgeted scan and decides whether the histogram holds enough events to be fitted at
-    all (yield_model.gate): the window is truncated where a resolution element falls below one event,
-    and a group that cannot keep 25 of them scores no looks and is not counted as a spectrum.
-    """
     weight = YM.F if weight is None else weight
     cats = enumerate_categories(order, nmax, **kw)
     rows, N_trials, n_hist, n_thin = [], 0.0, 0, 0
     by_size, by_type = collections.Counter(), collections.Counter()
     looks = collections.Counter()
     for c in cats:
-        objs = [t for t in order for _ in range(c.n[t])]       # indexed objects of the category
+        objs = [t for t in order for _ in range(c.n[t])]
         w = math.prod([weight[t] for t in objs] + ([weight[MET_W]] if c.met else []))
         for k in range(KMIN, min(kmax, len(objs)) + 1):
             for idx in itertools.combinations(range(len(objs)), k):
@@ -110,7 +74,7 @@ def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, kmax=KMAX, co
                 lo, hi = window(group, mass)
                 r = r_group(group, sigma)
                 hi_scan, ns, _ev, ok = YM.gate(lo, hi, r, w)
-                ns = ns * c.os_ss if ok else 0.0               # OS and SS are two disjoint looks
+                ns = ns * c.os_ss if ok else 0.0
                 key = "".join(sorted(group))
                 N_trials += ns
                 if ok:
@@ -124,8 +88,6 @@ def enumerate_scan(order=ORDER, nmax=NMAX, sigma=SIGMA, mass=MASS, kmax=KMAX, co
                     rows.append(Row("".join(f"{t}{c.n[t]}" for t in order) + f"_{c.met}met",
                                     "".join(group), c.os_ss, r, lo, hi, hi_scan if ok else lo,
                                     ns, w, sum(c.n.values())))
-    # Two category counts, and they differ by the OS/SS split of the same-flavour dilepton cases:
-    # quote them together, since N_trials counts an OS and an SS look separately.
     return Scan(rows, N_trials, len(cats), sum(c.os_ss for c in cats), n_hist, n_thin, by_size,
                 by_type, looks)
 

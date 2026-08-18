@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""Expected vs observed 3-sigma / 5-sigma excesses across the ATLAS search program.
-
-Under background-only, N quasi-independent tests give N * p_1sided(Z) upward fluctuations above Z.
-Reads results/tables/search_budget.csv; writes results/plots/excess_counting.png.
-Anchors and their sources: results/overviews/EXCESS_COUNTING.md.
-"""
 import os, csv, math, sys
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
@@ -13,16 +7,15 @@ import matplotlib.pyplot as plt
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from plot_style import style, title, labels, MARK, GRID, INK2, C_ARG
-def p1(Z): return 0.5 * math.erfc(Z / math.sqrt(2.0))   # one-sided Gaussian tail
+def p1(Z): return 0.5 * math.erfc(Z / math.sqrt(2.0))
 P3, P5 = p1(3.0), p1(5.0)
 
-# our bump-hunt program: the budget headline, read live so it never goes stale
 try:
     with open(os.path.join(ROOT, "results", "tables", "search_budget.csv")) as f:
         N_res = sum(float(r["ns_scan"]) for r in csv.DictReader(f))
 except Exception:
-    N_res = 3.7e3           # fallback: last computed headline
-N_atlas = 5.0e4            # full ATLAS BSM program, central
+    N_res = 3.7e3
+N_atlas = 5.0e4
 
 N = np.logspace(3, 6, 400)
 exp3 = N * P3

@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""Figures and validation numbers for Parts I-III of results/overviews/MAX_OF_GAUSSIANS.md.
-
-Part IV (Benjamini-Hochberg) lives in bh_fdr_ab.py / bh_zcut.py.
-Writes results/plots/max_of_gaussians/{max_of_gaussians_light,signal_wins_the_max,
-ab_confirmation,threshold_scan,threshold_vs_argmax,roc_threshold_vs_argmax}.png
-"""
 import os, sys, math
 import numpy as np
 from scipy.stats import norm, gumbel_r, kstest, skew
@@ -35,7 +29,6 @@ y_thr = lambda mu, t: cdf(mu - t) * cdf(mu - tB)
 x_thr = lambda t: nb * sf(t) * sf(tB)
 x_arg = sf(tB)
 
-# ---------------------------------------------------------------- Part I: simulate the maxima
 rng = np.random.default_rng(0)
 maxima = np.empty(NPE)
 one_pe = None
@@ -64,7 +57,6 @@ for name, cdf_fn in (("exact Phi^n", lambda x: cdf(x) ** n),
     ks = kstest(maxima, cdf_fn)
     print(f"   {name:>18}   D = {ks.statistic:.4f}   p = {ks.pvalue:.2g}")
 
-# ---------------------------------------------------------------- FIGURE 1: the maximum
 fig, (a0, a1) = panels(figsize=(5.9, 2.6), wspace=0.20)
 
 a0.hist(one_pe, bins=90, color="#c9c8c4", lw=0)
@@ -91,7 +83,6 @@ title(a1, "Distribution of the maxima")
 fig.savefig(os.path.join(PLOTS, "max_of_gaussians_light.png"), dpi=400, facecolor=SURF,
             bbox_inches="tight")
 
-# ---------------------------------------------------------------- FIGURE 2: can the signal win?
 fig, (b0, b1) = panels(figsize=(5.9, 2.6), wspace=0.20)
 
 xs = np.linspace(1.0, 8.5, 900)
@@ -121,7 +112,6 @@ title(b1, "$p(\\mu) = P(\\,$signal wins the scan$\\,)$")
 fig.savefig(os.path.join(PLOTS, "signal_wins_the_max.png"), dpi=400, facecolor=SURF,
             bbox_inches="tight")
 
-# ---------------------------------------------------------------- FIGURE 3: A/B confirmation
 fig, (c0, c1) = panels(figsize=(5.9, 2.6), wspace=0.20)
 
 w, xpos = 0.36, np.arange(len(MUS))
@@ -158,7 +148,6 @@ title(c1, "Confirmation power")
 fig.savefig(os.path.join(PLOTS, "ab_confirmation.png"), dpi=400, facecolor=SURF,
             bbox_inches="tight")
 
-# ---------------------------------------------------------------- FIGURE 4: what the cut selects
 fig, (d0, d1) = panels(figsize=(5.9, 2.6), wspace=0.22)
 
 ts = np.linspace(3.0, 6.0, 600)
@@ -186,7 +175,6 @@ title(d1, "Chance the signal bin passes")
 fig.savefig(os.path.join(PLOTS, "threshold_scan.png"), dpi=400, facecolor=SURF,
             bbox_inches="tight")
 
-# ---------------------------------------------------------------- FIGURE 5: threshold vs argmax
 fig, (e0, e1) = panels(figsize=(5.9, 2.6), wspace=0.24)
 
 for m in MUS:
@@ -217,7 +205,6 @@ title(e1, "Global false-alarm rate it buys")
 fig.savefig(os.path.join(PLOTS, "threshold_vs_argmax.png"), dpi=400, facecolor=SURF,
             bbox_inches="tight")
 
-# ---------------------------------------------------------------- FIGURE 6: the ROC
 fig, (f0, f1) = panels(figsize=(5.9, 2.7), wspace=0.24, width_ratios=[1.12, 1])
 
 tr = np.linspace(2.6, 6.6, 800)

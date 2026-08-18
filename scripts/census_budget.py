@@ -1,28 +1,4 @@
 #!/usr/bin/env python3
-"""The publication record, priced in trials: what the searches ATLAS has actually published cost.
-
-`search_budget.py` counts from the model side -- the spectra public BSM models predict a peak in.
-This counts from the publication side: every entry of the census (`data/published_spectra.csv`),
-priced with the same resolution-element rule, `n_s = (1/r) ln(M_hi/M_lo)`.
-
-The bridge between the two bases is carried in the data, not asserted here: every census row now
-records the canonical budget axis it scans (`budget_axis`, several when the entry scans several,
-`-` when it falls on none of the 46) and the range it actually scanned (`scan_GeV`, transcribed
-from the published range the census already recorded; `fixed` for a single-mass search). The
-resolution comes from that axis; an off-axis entry is priced at `RES_DEFAULT`.
-
-Two bases, both reported, neither summed with the other:
-
-  published searches   every census entry is its own look, over the range it scanned. The
-                       publication-record analogue of the budget's event-selection level: two
-                       analyses that scan the same axis over different ranges are two searches.
-  axes scanned         the union of the scanned ranges on each axis, counted once. What the
-                       program has actually covered, with no double counting.
-
-Reads data/published_spectra.csv (and results/tables/search_budget.csv, if built, only to quote
-the model-side numbers alongside). Writes results/tables/census_budget.csv and
-results/overviews/CENSUS_BUDGET.md. Pure standard library.
-"""
 import os, csv, math, sys, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,8 +7,8 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from bump_observables import (res, canon, scan_segments, n_s, SCAN, RES_DEFAULT,
                               z_local_for_global5 as z5, fmt_range)
 
-FIXED = "fixed"          # a single-mass search: one look, no scan
-OFF = "-"                # falls on none of the 46 canonical axes
+FIXED = "fixed"
+OFF = "-"
 
 rows = list(csv.DictReader(open(_p("data", "published_spectra.csv"))))
 
@@ -40,13 +16,11 @@ def axes_of(row):
     return [] if row["budget_axis"] == OFF else [canon(a.strip())
                                                  for a in row["budget_axis"].split(";")]
 
-for r_ in rows:                                    # the data must name real axes
+for r_ in rows:
     for a in axes_of(r_):
         assert a in SCAN, f"{r_['spectrum']}: unknown axis {a!r}"
 
 def segments(row, axis):
-    """The (lo, hi) segments in GeV this entry scanned on `axis`: its own recorded range where
-    the census has one, else the axis' published window. Empty for a fixed-mass search."""
     s = row["scan_GeV"]
     if s == FIXED:
         return []
@@ -54,30 +28,27 @@ def segments(row, axis):
         return [tuple(float(x) for x in seg.split("-")) for seg in s.split("+")]
     return scan_segments(axis) if axis else []
 
-# ---------------------------------------------------------------- per entry (published searches)
-entries = []              # (row, axis or None, r, segments, n_s)
+entries = []
 for row in rows:
     axes = axes_of(row)
     for axis in (axes or [None]):
         r = res(axis) if axis else RES_DEFAULT
         segs = segments(row, axis)
         if row["scan_GeV"] == FIXED:
-            ns = 1.0                                # one mass hypothesis = one look
+            ns = 1.0
         else:
             ns = sum(n_s(lo, hi, r) for lo, hi in segs)
         entries.append((row, axis, r, segs, ns))
 
 priced   = [e for e in entries if e[4] > 0]
-unpriced = [e for e in entries if e[4] == 0]        # off-axis, and no range in the census
+unpriced = [e for e in entries if e[4] == 0]
 on_axis  = [e for e in priced if e[1]]
 off_axis = [e for e in priced if not e[1]]
 n_fixed  = sum(1 for e in priced if e[0]["scan_GeV"] == FIXED)
 
 N_entry = sum(e[4] for e in priced)
 
-# ---------------------------------------------------------------- per axis (union of the ranges)
 def merge(segs):
-    """Union of (lo, hi) intervals, so an axis scanned by several searches is counted once."""
     out = []
     for lo, hi in sorted(segs):
         if out and lo <= out[-1][1]:
@@ -92,10 +63,9 @@ for row, axis, _r, segs, _ns in priced:
         by_axis[axis] += segs
 union = {a: merge(s) for a, s in by_axis.items()}
 N_axes = sum(sum(n_s(lo, hi, res(a)) for lo, hi in segs) for a, segs in union.items())
-N_axes += sum(e[4] for e in off_axis)               # off-axis entries are their own spectra
+N_axes += sum(e[4] for e in off_axis)
 covered, uncovered = sorted(union), sorted(set(SCAN) - set(union))
 
-# ---------------------------------------------------------------- the model side, for comparison
 model = {}
 try:
     for r_ in csv.DictReader(open(_p("results", "tables", "search_budget.csv"))):
@@ -104,7 +74,6 @@ except FileNotFoundError:
     pass
 N_model = sum(model.values()) or None
 
-# ---------------------------------------------------------------- console
 def band(N):
     return (f"N = {N:,.0f}  (r x0.5..x2 -> {N*0.5:,.0f}-{N*2:,.0f});  "
             f"Z_local(5s global) = {z5(N):.2f}  ({z5(N*0.5):.2f}-{z5(N*2):.2f})")
@@ -121,7 +90,6 @@ for row, axis, r, segs, ns in sorted(priced, key=lambda e: -e[4])[:8]:
     print(f"  {row['spectrum'][:46]:46s} {str(axis):16s} r={r:5.3f}  n_s={ns:5.0f}")
 print(f"\naxes with no published search ({len(uncovered)}): {', '.join(uncovered)}")
 
-# ---------------------------------------------------------------- CSV
 def segstr(segs): return "+".join(f"{lo:g}-{hi:g}" for lo, hi in segs) or FIXED
 
 with open(_p("results", "tables", "census_budget.csv"), "w", newline="") as f:
@@ -136,7 +104,6 @@ with open(_p("results", "tables", "census_budget.csv"), "w", newline="") as f:
                     segstr(segs) if segs or row["scan_GeV"] == FIXED else "",
                     src, f"{r:g}", f"{ns:.1f}"])
 
-# ---------------------------------------------------------------- markdown
 def md_entries():
     lines = ["| family | published search | axis | window [GeV] | from | r | n_s |",
              "|---|---|---|---|---|--:|--:|"]

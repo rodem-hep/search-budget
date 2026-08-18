@@ -1,13 +1,4 @@
 #!/usr/bin/env python3
-"""The search budget: how many independent bump hunts the public BSM resonance space implies,
-and what local significance a 5 sigma GLOBAL discovery in that program therefore costs.
-
-Reads nothing but the two data-free modules (bump_observables.py, public_obs_map.py) -- no
-sample catalogue, no dataset identifiers. Pure standard library, so it runs anywhere.
-
-Writes results/tables/search_budget.csv, results/tables/search_budget_selections.csv and
-results/overviews/SEARCH_BUDGET.md (the headline). Figures: budget_plots.py, budget_waterfall.py.
-"""
 import os, csv, math, collections, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,8 +8,6 @@ from bump_observables import (floor, res, canon, CANON_ORDER, scan_segments, sca
                               ns_scan, ns_achievable, z_local_for_global5 as z5, SQRTS)
 from public_obs_map import PUBLIC_OBS, NSEL, NSEL_DEFAULT, nsel, WIDTH, nonpeak_only
 
-# ---------------------------------------------------------------- the public channel set
-# One canonical observable per scanned mass axis; a model contributes to every axis it peaks in.
 pub_models = collections.defaultdict(set)
 for model, obss in PUBLIC_OBS.items():
     for o in obss:
@@ -27,22 +16,19 @@ for model, obss in PUBLIC_OBS.items():
 order = [o for o in CANON_ORDER if o == canon(o) and o in pub_models]
 order += [o for o in sorted(pub_models) if o not in order]
 
-# ---------------------------------------------------------------- the three granularity levels
-incl = {o: ns_scan(o) for o in order}                       # published window, 1 look / spectrum
-sel  = {o: nsel(o) * incl[o] for o in order}                # x published event selections
-env  = {o: ns_achievable(o) for o in order}                 # reference: floor -> sqrt(s)
+incl = {o: ns_scan(o) for o in order}
+sel  = {o: nsel(o) * incl[o] for o in order}
+env  = {o: ns_achievable(o) for o in order}
 
 N_incl, n_incl = sum(incl.values()), len(order)
 N_sel,  n_sel  = sum(sel.values()),  sum(nsel(o) for o in order)
 N_env          = sum(env.values())
-N_full, N_full_lo, N_full_hi = 5e4, 1e4, 1e5                # full ATLAS BSM program (literature)
+N_full, N_full_lo, N_full_hi = 5e4, 1e4, 1e5
 
-# ---------------------------------------------------------------- the narrow-resonance assumption
 wclass = collections.Counter(c for c, _ in WIDTH.values())
 nonpeak_axes = [o for o in order if nonpeak_only(o, pub_models[o])]
 N_peak = N_incl - sum(incl[o] for o in nonpeak_axes)
 
-# ---------------------------------------------------------------- console
 def band(N):
     return (f"N = {N:,.0f}  (r x0.5..x2 -> {N*0.5:,.0f}-{N*2:,.0f});  "
             f"Z_local(5s global) = {z5(N):.2f}  ({z5(N*0.5):.2f}-{z5(N*2):.2f})")
@@ -55,7 +41,6 @@ print("\ntop contributors (inclusive n_s):")
 for o in sorted(order, key=lambda o: -incl[o])[:8]:
     print(f"  {o:16s} r={res(o):5.3f}  n_s={incl[o]:5.0f}  x{nsel(o)} selections")
 
-# ---------------------------------------------------------------- CSV: per spectrum
 def segs(o): return "+".join(f"{lo:g}-{hi:g}" for lo, hi in scan_segments(o))
 
 with open(_p("results", "tables", "search_budget.csv"), "w", newline="") as f:
@@ -66,7 +51,6 @@ with open(_p("results", "tables", "search_budget.csv"), "w", newline="") as f:
         w.writerow([o, res(o), f"{floor(o):g}", segs(o), f"{incl[o]:.1f}", f"{env[o]:.1f}",
                     len(pub_models[o]), nsel(o), f"{sel[o]:.1f}", scan_source(o)])
 
-# ---------------------------------------------------------------- CSV: event selections
 with open(_p("results", "tables", "search_budget_selections.csv"), "w", newline="") as f:
     w = csv.writer(f)
     w.writerow(["observable", "n_event_selections", "ns_inclusive", "ns_with_selections", "channels"])
@@ -74,7 +58,6 @@ with open(_p("results", "tables", "search_budget_selections.csv"), "w", newline=
         w.writerow([o, nsel(o), f"{incl[o]:.1f}", f"{sel[o]:.1f}",
                     NSEL.get(o, (NSEL_DEFAULT, "default"))[1]])
 
-# ---------------------------------------------------------------- markdown
 def md_spectra():
     lines = ["| # | spectrum (bump observable) | r | scan window [GeV] | n_s | n_s envelope | "
              "#models | #selections | n_s x sel |",

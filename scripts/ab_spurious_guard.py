@@ -1,12 +1,4 @@
 #!/usr/bin/env python3
-"""Two toy spectra showing the A/B split acting as a spurious-signal guard.
-
-Same falling-spectrum toy as ab_split_toys.py (spectrum section), shown as a
-two-panel figure: a background-only fluctuation is pre-registered in stage A and
-dies in stage B; an injected Z_full = 7 signal is pre-registered and confirmed.
-
-Public inputs only. Writes results/plots/ab_spurious_guard.png.
-"""
 import os, math
 import numpy as np
 import matplotlib; matplotlib.use("Agg")

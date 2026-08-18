@@ -1,18 +1,4 @@
 #!/usr/bin/env python3
-"""Refresh the bibliographic metadata of the census papers from the arXiv API.
-
-This is the one script here that needs the network, and it is not part of `make all`: its output,
-data/census_papers.csv, is committed, so every other step (and every consumer of the bibliography)
-runs offline. Run it only when data/published_spectra.csv gains an arXiv ID.
-
-Resumes from the committed CSV and fetches only IDs missing from it, so a re-run after adding one
-paper costs one request. The arXiv API asks for no more than one request every three seconds; the
-batch size and delays here stay well inside that.
-
-Reads  data/published_spectra.csv (for the arXiv IDs) and data/census_papers.csv (as cache).
-Writes data/census_papers.csv.
-Pure standard library, but requires outbound HTTPS.
-"""
 import csv, os, re, sys, time, urllib.request, urllib.parse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -50,7 +36,7 @@ for start in range(0, len(todo), BATCH):
             xml = urllib.request.urlopen(
                 urllib.request.Request(f"{API}?{q}", headers=UA), timeout=120).read().decode()
             break
-        except Exception as e:                                   # 429/503 under load are routine
+        except Exception as e:
             wait = 20 * (attempt + 1)
             print(f"  retry {attempt + 1} in {wait}s: {e}")
             time.sleep(wait)

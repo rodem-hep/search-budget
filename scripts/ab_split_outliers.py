@@ -1,33 +1,4 @@
 #!/usr/bin/env python3
-"""Does an IMPERFECT significance estimator change the A/B verdict?
-
-The two-stage study (scripts/ab_split_{budget,toys}.py) assumes a perfectly
-calibrated estimator: every look returns Z ~ N(0,1) under background. Then splitting can only
-lose, because the look-elsewhere effect is conserved. This script relaxes that assumption and
-adds three physically distinct classes of estimator defect, each with its own rate, and asks
-how much ROBUSTNESS the split buys in exchange for its 0.5 sigma of reach.
-
-The three defect classes differ only in how they correlate between the two halves, which is the
-only thing the split can see:
-
-  BIAS    a mismodelled background / detector artefact in that window. The pull grows with the
-          integrated luminosity exactly like a signal: Z = delta*B/sqrt(B) = delta*sqrt(wB).
-          Both halves see the SAME delta.                        -> split sees a signal
-  VAR     the look's uncertainty is underestimated by a factor s (bad fit, underestimated
-          systematic). The miscalibration is a property of the look and is shared, but what it
-          amplifies is the independent statistical fluctuation of each half.
-                                                                 -> split suppresses partially
-  GLITCH  a per-RUN failure: a fit that did not converge on this particular subsample, a network
-          artefact, a corrupted input. Redrawn independently every time the estimator is run.
-                                                                 -> split suppresses quadratically
-
-Everything is exact quadrature over the defect magnitude (per-look independence makes the claim
-probability 1-(1-p)^N); a toy MC at the end validates the mean-field k used for the stage-B bar.
-
-Public inputs only (bump_observables + public_obs_map). Writes
-results/plots/ab_split_outliers.png and prints the tables quoted in
-results/overviews/TWO_STAGE_UNBLINDING.md. Needs numpy/scipy.
-"""
 import os, math, sys
 import numpy as np
 from scipy.special import erfc
@@ -47,7 +18,7 @@ obs = sorted({canon(o) for objs in PUBLIC_OBS.values() for o in objs})
 N = int(round(sum(nsel(o) * ns_scan(o) for o in obs)))
 SQ2 = math.sqrt(2.0)
 
-Z_CUT, F_OPT, WIDEN = 3.0, 0.30, 3.0     # recommended working point (TWO_STAGE_UNBLINDING.md)
+Z_CUT, F_OPT, WIDEN = 3.0, 0.30, 3.0
 Z_SINGLE = z5(N)
 
 def Q(z):
@@ -56,17 +27,11 @@ def Q(z):
 _GX, _GW = np.polynomial.legendre.leggauss(600)
 
 def halfnormal(beta, zmax=10.0):
-    """Nodes/weights for |b|, b ~ N(0, beta^2): sum(w) = 1."""
     hi = zmax * beta
     b = 0.5 * hi * (_GX + 1.0)
     w = 0.5 * hi * _GW * math.sqrt(2.0 / math.pi) / beta * np.exp(-0.5 * (b / beta) ** 2)
     return b, w / w.sum()
 
-# ---------------------------------------------------------------- defect models
-# Each returns three per-look probabilities for a look whose TRUE full-dataset signal is mu:
-#   p_single(z)          reported full-data Z >= z
-#   p_selA(zc)           reported Z on the A-half >= zc
-#   p_joint(zc, zr)      selected in A AND confirmed in B (>= zr)
 
 class Clean:
     name = "perfectly calibrated"
@@ -76,7 +41,6 @@ class Clean:
         return Q(zc - math.sqrt(f) * mu) * Q(zr - math.sqrt(1 - f) * mu)
 
 class Bias:
-    """Coherent: a luminosity-scaling pull b, identical in both halves."""
     def __init__(self, eps, beta=2.0):
         self.eps, self.beta = eps, beta
         self.b, self.w = halfnormal(beta)
@@ -94,7 +58,6 @@ class Bias:
         return (1 - e) * cl + e * df
 
 class Var:
-    """Shared miscalibration by factor s; the amplified fluctuation is per-half independent."""
     def __init__(self, eps, s=2.0):
         self.eps, self.s = eps, s
         self.name = f"VAR    eps={eps:.1e} s={s:g}"
@@ -110,7 +73,6 @@ class Var:
                 + e * Q(zc / s - sf * mu) * Q(zr / s - sb * mu))
 
 class Glitch:
-    """Incoherent: an additive artefact redrawn independently at every estimator run."""
     def __init__(self, eps, beta=2.0):
         self.eps, self.beta = eps, beta
         self.t, self.w = halfnormal(beta)
@@ -124,7 +86,6 @@ class Glitch:
         return self._tail(zc, math.sqrt(f) * mu) * self._tail(zr, math.sqrt(1 - f) * mu)
 
 class Cocktail:
-    """Independent superposition (rates are small, so the mixtures simply add)."""
     def __init__(self, *parts):
         self.parts = parts
         self.name = "COCKTAIL " + " + ".join(p.name.split()[0] for p in parts)
@@ -138,9 +99,7 @@ class Cocktail:
         return self._mix(lambda p, *a: p.p_joint(*a), Clean().p_joint(zc, zr, mu, f),
                          zc, zr, mu, f)
 
-# ---------------------------------------------------------------- procedures
 def zreq(model, zc=Z_CUT, f=F_OPT, widen=WIDEN):
-    """Stage-B bar. Contamination floods the A-selection, which raises it by itself."""
     k = N * model.p_selA(zc, 0.0, f) + 1.0
     return math.sqrt(25.0 + 2.0 * math.log(widen * k)), k
 
@@ -170,25 +129,15 @@ def reach_split(model, zc=Z_CUT, f=F_OPT):
     return bisect(lambda m: claim_split(model, m, zc, f), 0.5, 1.0, 30.0)
 
 def matched_threshold(model, rate):
-    """Single-stage threshold whose spurious-claim rate equals `rate`."""
     return bisect(lambda z: -claim_single(model, z, 0.0), -rate, 3.0, 30.0)
 
 def gain(model, split_model=None, zc=Z_CUT, f=F_OPT):
-    """Matched-robustness advantage of the split, in sigma of full-dataset reach.
-
-    Positive = the split reaches a weaker signal than a single-stage scan whose bar has been
-    raised until it is EQUALLY unlikely to make a spurious claim. `split_model` differs from
-    `model` only for the cross-half-training case, where the split's estimator is clean by
-    construction while the single pass cannot be.  Returns NaN once the contamination is so
-    heavy that neither procedure controls the false-claim rate at all (spurious prob > 20%),
-    where the reach comparison is meaningless."""
     sm = split_model or model
     rate = claim_split(sm, 0.0, zc, f)
     if rate > 0.2: return float("nan")
     zm = matched_threshold(model, rate)
     return reach_single(model, zm) - reach_split(sm, zc, f)
 
-# ================================================================ 0. setup
 clean = Clean()
 zr0, k0 = zreq(clean)
 print(f"budget N = {N:,} looks    single-stage bar Z = {Z_SINGLE:.2f}")
@@ -199,7 +148,6 @@ print(f"perfect estimator:  single-stage reach {reach_single(clean):.2f}   "
 print(f"                    spurious-claim prob: single {claim_single(clean, Z_SINGLE):.2e}   "
       f"split {claim_split(clean):.2e}\n")
 
-# ================================================================ 1. per-class robustness
 print("=" * 108)
 print("1. how much spurious-claim protection does the split buy, per defect class?")
 print("   'artefacts>3' = expected # of looks per scan where the defect alone pushes the "
@@ -219,7 +167,6 @@ for beta_or_s, ctor, tag in ((2.0, Bias, "BIAS"), (2.0, Var, "VAR"), (2.0, Glitc
         print(f"{m.name:<26} {n3:>11.2f} {r1:>19.2e} {r2:>10.2e} "
               f"{r1 / max(r2, 1e-300):>8.1f}x {zm:>21.2f}")
 
-# ================================================================ 2. matched-robustness reach
 print("\n" + "=" * 108)
 print("2. THE COMPARISON THAT MATTERS: at EQUAL spurious-claim probability, who reaches lower?")
 print("   the single stage can always buy robustness by raising its bar -- the question is the "
@@ -235,21 +182,11 @@ for ctor in (Bias, Var, Glitch):
         print(f"{m.name:<26} {reach_split(m):>12.2f} {zm:>20.2f} "
               f"{reach_single(m, zm):>12.2f} {gain(m):>+12.2f}")
 
-# ---------------------------------------------------------------- cross-half training
-# The sharpest version of an incoherent defect: a background estimator TRAINED on the data
-# overfits its own fluctuations. A single pass cannot avoid it -- there is no held-out half.
-# The two-stage scheme trains on the complementary half at each stage, so the confirmation Z is
-# clean BY CONSTRUCTION: not eps^2, but zero.
 class CrossHalf:
-    """Variant 3: the background model is trained on A only. Stage A scores itself, so it still
-    overfits at rate eps and its candidate list is inflated; stage B is scored with that same
-    A-trained model, which never saw B, so the CONFIRMATION Z is overfit-free by construction --
-    not eps^2-suppressed, zero. Unlike full cross-training (train B / score A), nothing about B
-    enters the pre-registration, so the k-coin bookkeeping stays exact."""
     def __init__(self, eps, beta=2.0):
         self.g = Glitch(eps, beta)
         self.name = f"XHALF  eps={eps:.1e} beta={beta:g}"
-    def p_single(self, z, mu):      return self.g.p_single(z, mu)   # no held-out half in one pass
+    def p_single(self, z, mu):      return self.g.p_single(z, mu)
     def p_selA(self, zc, mu, f):    return self.g.p_selA(zc, mu, f)
     def p_joint(self, zc, zr, mu, f):
         return self.g.p_selA(zc, mu, f) * Q(zr - math.sqrt(1 - f) * mu)
@@ -267,7 +204,6 @@ for eps in (1e-5, 1e-4, 1e-3, 1e-2):
               f"{zreq(mdl)[1] - 1:>8.1f} {reach_split(mdl):>12.2f} {g:>+12.2f}   {tag}")
     print()
 
-# ================================================================ 3. coherence is the knob
 print("\n" + "=" * 108)
 print("3. THE DECIDING VARIABLE: what fraction of the outliers is COHERENT between the halves?")
 print("   total defect rate eps, of which rho is bias-type (survives the split) and 1-rho is")
@@ -297,7 +233,6 @@ for e in (1e-4, 1e-3, 1e-2):
     print(f"  eps = {e:.0e} ({n3:.1f} artefacts above 3 sigma per scan): "
           f"break-even at rho = {0.5 * (lo + hi):.2f}")
 
-# ================================================================ 4. a realistic cocktail
 print("\n" + "=" * 108)
 print("4. a realistic cocktail: rare hard bias + occasional bad fit + rare glitch")
 print("=" * 108)
@@ -315,7 +250,6 @@ for label, ck in (("optimistic", Cocktail(Bias(1e-4), Var(1e-4, 1.5), Glitch(1e-
         print(f"{'':<16}{p.name:<26} 1-stage {claim_single(p, Z_SINGLE):.2e} -> split "
               f"{claim_split(p):.2e}   = {100 * frac:5.1f}% of what the split still lets through")
 
-# ================================================================ 5. toy validation
 print("\n" + "=" * 108)
 print("5. toy MC check of the mean-field stage-B bar under contamination (GLITCH eps=1e-2)")
 print("=" * 108)
@@ -346,7 +280,6 @@ print(f"  P(spurious claim), split : toys {hits_split / NTOY:.2e} "
 print(f"  P(spurious claim), single: toys {hits_single / NTOY:.2e} "
       f"[+-{math.sqrt(max(hits_single,1))/NTOY:.1e}]   analytic {claim_single(m, Z_SINGLE):.2e}")
 
-# ================================================================ 6. figure
 fig, ax = plt.subplots(figsize=(5.7, 3.6))
 for e, col in ((1e-4, "#0072b2"), (1e-3, "#e69f00"), (1e-2, "#d55e00")):
     n3 = N * e * float(Glitch(1.0).w @ Q(3.0 - Glitch(1.0).t))
@@ -367,31 +300,25 @@ fig.tight_layout()
 fig.savefig(os.path.join(OUT, "ab_split_outliers.png"), dpi=400)
 print("\nwrote ab_split_outliers.png")
 
-# ================================================================ 7. mechanism + scaling figure
-# Why the split separates one kind of outlier and not the other, in one picture: in the
-# (Z_A, Z_B) plane a COHERENT pull sits on the locus Z_B = sqrt((1-f)/f) Z_A -- exactly where a
-# real signal sits -- while an incoherent one sits on the Z_B ~ 0 axis. The split is a cut that
-# separates the axis from the locus, and by construction cannot separate the locus from itself.
 SF, SB = math.sqrt(F_OPT), math.sqrt(1 - F_OPT)
 BETA = 2.0
 rng2 = np.random.default_rng(4711)
 
 def selected(kind, n_target, beta=BETA, zsig=7.5):
-    """Draw (Z_A, Z_B) for looks that PASS the stage-A cut, for each population."""
     out_a, out_b = [], []
     while len(out_a) < n_target:
         m = 200000
-        if kind == "glitch":                      # artefact in the A run only; B redrawn clean
+        if kind == "glitch":
             za = rng2.standard_normal(m) + np.abs(rng2.standard_normal(m)) * beta
             zb = rng2.standard_normal(m)
-        elif kind == "bias":                      # one pull b, seen by both halves as sqrt(w) b
+        elif kind == "bias":
             b = np.abs(rng2.standard_normal(m)) * beta
             za = SF * b + rng2.standard_normal(m)
             zb = SB * b + rng2.standard_normal(m)
         elif kind == "signal":
             za = SF * zsig + rng2.standard_normal(m)
             zb = SB * zsig + rng2.standard_normal(m)
-        else:                                     # clean background
+        else:
             za, zb = rng2.standard_normal(m), rng2.standard_normal(m)
         k = za >= Z_CUT
         out_a.append(za[k]); out_b.append(zb[k])
@@ -425,8 +352,6 @@ axL.legend(loc="lower right", fontsize=9, frameon=False)
 axL.grid(ls=":", alpha=0.3)
 
 eps_grid = np.logspace(-6, -1, 40)
-# the two defects have IDENTICAL single-stage tails by construction -- one curve, and that is
-# precisely the point: a single pass cannot tell them apart, the split is what separates them.
 axR.plot(eps_grid, [claim_single(Glitch(e), Z_SINGLE) for e in eps_grid], lw=1.3, color="#333333",
          label=f"single stage @ {Z_SINGLE:.2f}: either defect")
 axR.plot(eps_grid, [claim_split(Bias(e)) for e in eps_grid], lw=1.3, ls="--", color="#e08a1e",
@@ -448,8 +373,6 @@ fig.tight_layout()
 fig.savefig(os.path.join(OUT, "ab_outliers_mechanism.png"), dpi=400)
 print("wrote ab_outliers_mechanism.png")
 
-# ================================================================ 8. toy spectra
-# The same two failure modes on an actual falling spectrum, scored the way an analysis would.
 SIGMA_REL, M0 = 0.05, 1200.0
 edges = np.geomspace(200, 4000, 260)
 ctr = np.sqrt(edges[:-1] * edges[1:]); wid = np.diff(edges)
@@ -465,26 +388,21 @@ def scan(counts, expect):
         z[j] = (n - b) / math.sqrt(b) if b > 0 else 0.0
     return z
 
-# a fractional perturbation delta*gauss gives Z = delta * sqrt(w) * S/sqrt(B) inside the scan
-# window, with S the bkg-weighted Gaussian integral -- not delta*sqrt(wB), since the window
-# covers only +-1 sigma_M of a falling spectrum.
 BW, SW = bkg[inwin].sum(), (bkg * gauss)[inwin].sum()
 def delta_for(z_target, w=1.0): return z_target * math.sqrt(BW) / (math.sqrt(w) * SW)
 
-dA = delta_for(4.0, F_OPT)          # (a) the A-half background FIT undershoots locally
-dC = delta_for(7.5)                 # (b) the background is genuinely mismodelled, both halves
+dA = delta_for(4.0, F_OPT)
+dC = delta_for(7.5)
 true = bkg * (1 + dC * gauss)
 
 def toy(seed):
     r = np.random.default_rng(seed)
-    zA_g = scan(r.poisson(F_OPT * bkg), F_OPT * bkg * (1 - dA * gauss))   # wrong model in A only
-    zB_g = scan(r.poisson((1 - F_OPT) * bkg), (1 - F_OPT) * bkg)          # correct model in B
+    zA_g = scan(r.poisson(F_OPT * bkg), F_OPT * bkg * (1 - dA * gauss))
+    zB_g = scan(r.poisson((1 - F_OPT) * bkg), (1 - F_OPT) * bkg)
     zA_c = scan(r.poisson(F_OPT * true), F_OPT * bkg)
     zB_c = scan(r.poisson((1 - F_OPT) * true), (1 - F_OPT) * bkg)
     return zA_g, zB_g, zA_c, zB_c
 
-# Show a TYPICAL realisation of each, not an extreme one: both A-half peaks within ~0.5 of their
-# design values (4.0 and sqrt(f)*7.5 = 4.1). A single toy peak fluctuates by ~1 either way.
 for seed in range(300):
     zA_g, zB_g, zA_c, zB_c = toy(seed)
     if 3.7 <= zA_g.max() <= 4.5 and 3.7 <= zA_c.max() <= 4.6: break

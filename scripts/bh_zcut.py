@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""The z-cut BH actually applies, pseudo-experiment by pseudo-experiment: z_cut = Phi^-1(1-p_(K)).
-
-Samples its distribution under H0 and with a signal, against the nominal rank-1 bar and the fixed
-threshold matched on the same fake budget. Writes results/tables/bh_zcut_per_pe.csv and
-results/plots/max_of_gaussians/bh_zcut.png. Heavy -- run it on a batch node (docs/REPRODUCE.md).
-"""
 import os, csv
 import numpy as np
 from scipy.stats import norm
@@ -36,7 +30,6 @@ def bh_K(p_sorted, q):
 
 
 def zcuts(mu=None, chunk=8_000):
-    """Realized z_cut per PE (nan where BH rejects nothing), plus K, for every q."""
     Z = {q: [] for q in QS}
     K_ = {q: [] for q in QS}
     for done in range(0, T, chunk):
@@ -51,7 +44,7 @@ def zcuts(mu=None, chunk=8_000):
             K = bh_K(p, q)
             z = np.full(s, np.nan)
             hit = K >= 1
-            z[hit] = norm.isf(p[hit, K[hit] - 1])       # p_(K): the weakest accepted bin
+            z[hit] = norm.isf(p[hit, K[hit] - 1])
             Z[q].append(z); K_[q].append(K)
     return {q: np.concatenate(Z[q]) for q in QS}, {q: np.concatenate(K_[q]) for q in QS}
 
@@ -106,7 +99,6 @@ with open(out, "w", newline="") as f:
         w.writerow({k: (f"{v:.4f}" if isinstance(v, float) else v) for k, v in r.items()})
 print(f"\nwrote {os.path.relpath(out, ROOT)}")
 
-# ---------------------------------------------------------------- figure
 import sys
 import matplotlib
 matplotlib.use("Agg")
