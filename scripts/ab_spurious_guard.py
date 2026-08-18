@@ -54,7 +54,7 @@ while True:
     seed += 1
 zA_sig, zB_sig = split_toy(998, sig_mass=1200.0, sig_zfull=7.0)
 
-fig, axs = plt.subplots(1, 2, figsize=size(1.0, 0.36), sharey=True,
+fig, axs = plt.subplots(1, 2, figsize=size(0.92, 0.40), sharey=True,
                         gridspec_kw=dict(wspace=0.10))
 panels = [(axs[0], zA, zB, "background-only", "dies in B", C_BKG),
           (axs[1], zA_sig, zB_sig, "injected signal", "confirmed in B", C_ARG)]
@@ -90,7 +90,9 @@ axs[1].text(212, Z_CUT + 0.18, r"$Z_{\mathrm{cut}} = 3$", color=C_BKG, fontsize=
 axs[1].text(212, thr + 0.18, f"claim bar = {thr:.1f}", color=C_ARG, fontsize=8)
 axs[0].set_ylabel(r"local significance $Z(m)$")
 axs[0].set_ylim(-4.2, 7.9)
-axs[0].legend(loc="lower left", fontsize=7.5)
+handles, labels = axs[0].get_legend_handles_labels()
+fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(0.5, 0.01), ncol=3,
+           fontsize=8.5, handlelength=1.9, columnspacing=2.2)
 fig.savefig(OUT)
 print(f"wrote {OUT}")
 print(f"  bkg toy seed {seed}: max Z_A = {zA.max():.2f}, "
