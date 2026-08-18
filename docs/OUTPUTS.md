@@ -1,7 +1,12 @@
 # Output index
 
-Every file under `results/`, with the script that writes it. "hand-written" means a report authored
-against the generated tables, not a program output — edit it directly; nothing regenerates it.
+Every file under `results/`, with the script that writes it. One file outside `results/` is
+generated too: the "Every number in the paper" section of `README.md`, written by
+`paper_numbers.py` between the `<!-- paper-numbers -->` markers from the tables below. Edit the
+tables' producers, never that block.
+
+"hand-written" means a report authored against the generated tables, not a program output — edit it
+directly; nothing regenerates it.
 
 Three files under `data/` are inputs rather than outputs, and are committed: `published_spectra.csv`
 (the census, curated by hand), `census_papers.csv` (its bibliographic details) and
@@ -93,3 +98,4 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 | `yield_model.py` | the fittability requirement (≥100 events, ≥25 elements of ≥1 event), the declared background-yield model behind it and the per-lens efficiencies. Run it for the calibration table |
 | `plot_style.py` | the shared palette and axis style of the statistics figures |
 | `obs_labels.py` | the observable keys rendered as physics, shared by the figures and the LaTeX tables (standard library only) |
+| `paper_numbers.py` | no table of its own: it collects every number the paper quotes from the tables above and writes them into `README.md` (standard library only) |

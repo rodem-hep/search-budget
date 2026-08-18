@@ -37,14 +37,22 @@ STATS := $(G)/max_of_gaussians_light.png $(G)/bh_scan.png $(G)/bh_zcut.png \
 
 help:
 	@echo "targets:"
-	@echo "  all       budget + ab + stats  (everything; no external input of any kind)"
+	@echo "  all       budget + ab + stats + the README number block (everything)"
 	@echo "  budget    trials factor N, Z_local, the combinatorial scan and the excess bookkeeping"
 	@echo "  ab        two-stage A/B unblinding: reach, toy MC, the measured estimator defect rate"
 	@echo "  stats     selection rules: argmax vs threshold vs Benjamini-Hochberg (MC is cached)"
 	@echo "  clean     drop __pycache__"
 	@echo "PY = $(PY)"
 
-all: budget ab stats
+all: budget ab stats README.md
+
+README.md: $(S)/paper_numbers.py $(YM) $(S)/bump_observables.py \
+           $(T)/search_budget.csv $(T)/search_budget_selections.csv $(T)/published_census.csv \
+           $(T)/census_budget.csv $(T)/scan_summary.csv $(T)/lens_scan.csv \
+           $(T)/priority_scan.csv $(T)/budget_uncertainty.csv $(T)/two_body_matrix.csv \
+           $(T)/ab_split_scan.csv $(T)/ab_split_toys.csv $(T)/ab_guard_toys.csv \
+           $(T)/estimator_defects.csv $(T)/selection_rules.csv
+	$(PY) $(S)/paper_numbers.py
 
 budget: $(BUDGET)
 
