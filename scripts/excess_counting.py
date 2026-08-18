@@ -15,6 +15,11 @@ try:
         N_res = sum(float(r["ns_scan"]) for r in csv.DictReader(f))
 except Exception:
     N_res = 3.7e3
+try:
+    with open(os.path.join(ROOT, "results", "tables", "census_budget.csv")) as f:
+        N_cen = sum(float(r["n_s"]) for r in csv.DictReader(f))
+except Exception:
+    N_cen = 7.7e3
 N_atlas = 5.0e4
 
 N = np.logspace(3, 6, 400)
@@ -30,9 +35,13 @@ ax.axhspan(10, 70, color=C_ARG, alpha=0.09, lw=0,
            label=r"observed $\geq3\sigma$: order tens, none confirmed")
 
 ax.axvline(N_res, color=INK2, ls=":", lw=1.2)
-ax.plot([N_atlas], [N_atlas*P3], "o", ms=4, color=C_ARG, mec="white", mew=1.6, zorder=5)
-ax.plot([N_atlas], [N_atlas*P5], "o", ms=4, color=MARK, mec="white", mew=1.6, zorder=5)
-ax.annotate("this program", (N_res, 1.5e-4), textcoords="offset points", xytext=(6, 0),
+ax.axvline(N_cen, color=INK2, ls=":", lw=1.2)
+for Nv in (N_cen, N_atlas):
+    ax.plot([Nv], [Nv*P3], "o", ms=4, color=C_ARG, mec="white", mew=1.6, zorder=5)
+    ax.plot([Nv], [Nv*P5], "o", ms=4, color=MARK, mec="white", mew=1.6, zorder=5)
+ax.annotate("the model space", (N_res, 1.5e-4), textcoords="offset points", xytext=(-6, 0),
+            color=INK2, fontsize=9.5, va="bottom", ha="right")
+ax.annotate("the published record", (N_cen, 1.5e-4), textcoords="offset points", xytext=(6, 0),
             color=INK2, fontsize=9.5, va="bottom")
 ax.annotate("full ATLAS program", (N_atlas, N_atlas*P5), textcoords="offset points",
             xytext=(10, -4), color=INK2, fontsize=9.5, va="top")
@@ -49,4 +58,5 @@ fig.savefig(os.path.join(ROOT, "results", "plots", "excess_counting.png"), dpi=4
 print("wrote results/plots/excess_counting.png")
 print(f"N=5e4 -> expected >=3s = {N_atlas*P3:.0f}, >=5s = {N_atlas*P5:.3f}")
 print(f"N=1e4 -> {1e4*P3:.0f} / {1e4*P5:.4f} ;  N=1e5 -> {1e5*P3:.0f} / {1e5*P5:.3f}")
-print(f"resonance N={N_res:.0f} -> {N_res*P3:.1f} / {N_res*P5:.5f}")
+print(f"model space N={N_res:.0f} -> {N_res*P3:.1f} / {N_res*P5:.5f}")
+print(f"published record N={N_cen:.0f} -> {N_cen*P3:.1f} / {N_cen*P5:.5f}")

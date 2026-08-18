@@ -1,5 +1,9 @@
-lens,requirement,window_cap_GeV,views_added,looks_added,views_kept,looks_kept
-high HT or Meff,activity outside the mass,,2134,89633,2134,89633
-displaced activity,any reconstructed mass,,743,28651,743,28651
-forward jet pair,two free slots for the tag jets,,53,2700,53,2700
-ISR jet,"one free slot, and a low-mass end",200,78,3958,78,3958
+dataset,lens,requirement,window_cap_GeV,efficiency,spectra_reached,views_kept,views_too_thin,looks_kept
+"Run 2, 140 fb-1",high HT or Meff,activity outside the mass,,0.1,3279,2134,1145,89633
+"Run 2, 140 fb-1",displaced activity,any reconstructed mass,,0.001,3603,743,2860,28651
+"Run 2, 140 fb-1",forward jet pair,two free slots for the tag jets,,0.02,82,53,29,2700
+"Run 2, 140 fb-1",ISR jet,"one free slot, and a low-mass end",200,0.2,730,78,652,3958
+"Run 2+3, ~400 fb-1",high HT or Meff,activity outside the mass,,0.1,4046,2615,1431,114012
+"Run 2+3, ~400 fb-1",displaced activity,any reconstructed mass,,0.001,4438,985,3453,39184
+"Run 2+3, ~400 fb-1",forward jet pair,two free slots for the tag jets,,0.02,92,68,24,3381
+"Run 2+3, ~400 fb-1",ISR jet,"one free slot, and a low-mass end",200,0.2,831,105,726,5101

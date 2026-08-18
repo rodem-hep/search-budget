@@ -65,6 +65,10 @@ union = {a: merge(s) for a, s in by_axis.items()}
 N_axes = sum(sum(n_s(lo, hi, res(a)) for lo, hi in segs) for a, segs in union.items())
 N_axes += sum(e[4] for e in off_axis)
 covered, uncovered = sorted(union), sorted(set(SCAN) - set(union))
+no_axis_declared = [e for e in unpriced if e[0]["observable"].strip().lower().startswith("many")]
+no_range = [e for e in unpriced if e not in no_axis_declared]
+observables = len(covered) + len(off_axis) + len(unpriced)
+N_off = sum(e[4] for e in off_axis)
 
 model = {}
 try:
@@ -74,13 +78,27 @@ except FileNotFoundError:
     pass
 N_model = sum(model.values()) or None
 
+N_uncov = sum(model.get(a, 0.0) for a in uncovered)
+why_union = "" if not N_model else f"""**Why the union basis lands on the model space.** Counting each axis once gives {N_axes:,.0f}
+against the model space's {N_model:,.0f}, a gap of {abs(N_axes-N_model)/N_model:.1%} -- closer than
+it has any right to be, because two omissions cancel. The union misses the {len(uncovered)} model
+axes with no published search, worth {N_uncov:,.0f} looks on the
+model side, and it adds {len(off_axis)} scanned axes outside the 46, worth {N_off:,.0f}. Charging
+neither leaves {N_axes-N_off:,.0f} against {N_model - N_uncov:,.0f}
+on the same {len(covered)} axes. The robust statement is the ten-percent one, and it is not a
+tautology: the model space takes its windows from published searches but its axes from the models,
+so the agreement says the program scans almost exactly the axes the models motivate."""
+
 def band(N):
     return (f"N = {N:,.0f}  (r x0.5..x2 -> {N*0.5:,.0f}-{N*2:,.0f});  "
             f"Z_local(5s global) = {z5(N):.2f}  ({z5(N*0.5):.2f}-{z5(N*2):.2f})")
 
 print(f"census entries: {len(rows)}   priced looks: {len(priced)} "
       f"({len(on_axis)} on a budget axis, {len(off_axis)} off-axis, {n_fixed} fixed-mass)")
-print(f"unpriced      : {len(unpriced)} (no axis and no published range in the census)")
+print(f"unpriced      : {len(unpriced)} ({len(no_range)} publish no range, "
+      f"{len(no_axis_declared)} declare no single axis)")
+print(f"observables   : {observables} = {len(covered)} budget axes + {len(off_axis)} off-axis "
+      f"with a range + {len(unpriced)} unchargeable")
 print("published searches :", band(N_entry))
 print("axes scanned (union):", band(N_axes), f"[{len(covered)} of {len(SCAN)} axes covered]")
 if N_model:
@@ -177,8 +195,17 @@ The census reaches {len(covered)} of the {len(SCAN)} canonical axes. {len(uncove
 search at all: {', '.join(f'`{a}`' for a in uncovered)}.
 
 {len(off_axis)} published entries fall on no canonical axis and are priced on their own published range at
-`r = {RES_DEFAULT:g}`; {len(unpriced)} more fall on no axis **and** carry no published range in the census, so
-they are listed below as unpriced and are missing from `N` -- `N` is a lower bound by that much.
+`r = {RES_DEFAULT:g}`; {len(unpriced)} more fall on no axis **and** carry no chargeable range, so
+they are listed below as unpriced and are missing from `N` -- `N` is a lower bound by that much. Of
+those {len(unpriced)}, {len(no_range)} published no scanned range and {len(no_axis_declared)} declare
+no single axis to scan (the anomaly-detection and generic multi-body entries, whose observable is
+"many").
+
+The {observables} distinct bump observables the census scans are therefore
+{len(covered)} of the {len(SCAN)} budget axes, {len(off_axis)} scanned axes outside the 46, and
+{len(unpriced)} carrying nothing chargeable.
+
+{why_union}
 
 ## Per axis (union of every published range)
 {md_axes()}

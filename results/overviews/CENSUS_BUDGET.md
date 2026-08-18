@@ -40,8 +40,25 @@ The census reaches 40 of the 46 canonical axes. 6 carry no published
 search at all: `m(cb) dijet`, `m(eb)`, `m(mub)`, `m(multi)`, `m(tt)/m(jj)`, `multilepton`.
 
 10 published entries fall on no canonical axis and are priced on their own published range at
-`r = 0.06`; 12 more fall on no axis **and** carry no published range in the census, so
-they are listed below as unpriced and are missing from `N` -- `N` is a lower bound by that much.
+`r = 0.06`; 12 more fall on no axis **and** carry no chargeable range, so
+they are listed below as unpriced and are missing from `N` -- `N` is a lower bound by that much. Of
+those 12, 9 published no scanned range and 3 declare
+no single axis to scan (the anomaly-detection and generic multi-body entries, whose observable is
+"many").
+
+The 62 distinct bump observables the census scans are therefore
+40 of the 46 budget axes, 10 scanned axes outside the 46, and
+12 carrying nothing chargeable.
+
+**Why the union basis lands on the model space.** Counting each axis once gives 3,672
+against the model space's 3,685, a gap of 0.3% -- closer than
+it has any right to be, because two omissions cancel. The union misses the 6 model
+axes with no published search, worth 267 looks on the
+model side, and it adds 10 scanned axes outside the 46, worth 251. Charging
+neither leaves 3,422 against 3,418
+on the same 40 axes. The robust statement is the ten-percent one, and it is not a
+tautology: the model space takes its windows from published searches but its axes from the models,
+so the agreement says the program scans almost exactly the axes the models motivate.
 
 ## Per axis (union of every published range)
 | axis | scanned range(s) [GeV] | r | n_s | model-side n_s |

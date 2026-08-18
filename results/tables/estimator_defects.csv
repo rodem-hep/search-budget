@@ -1,0 +1,19 @@
+quantity,value,source
+"published rate, analytical-function histograms",0.048%,"BumpNet, JHEP 02 (2025) 122, arXiv:2501.05603"
+"published rate, simulated Standard Model histograms",0.129%,"BumpNet, JHEP 02 (2025) 122, arXiv:2501.05603"
+"application histograms, no signal injected","39,746","BumpNet, JHEP 02 (2025) 122, arXiv:2501.05603"
+spurious 5 sigma candidates returned,53 +/- 7,"BumpNet, JHEP 02 (2025) 122, arXiv:2501.05603"
+... implied rate per histogram,0.133%,derived
+resolution elements per histogram,15 to 60,"BumpNet, JHEP 02 (2025) 122, arXiv:2501.05603"
+looks the set holds,6.0e+05 to 2.4e+06,derived
+Gaussian expectation at 5 sigma,0.17 to 0.68,derived
+measured defect rate per look,2.2e-05 to 8.9e-05,derived
+inflation over the Gaussian tail,78 to 310,derived
+candidates surviving the correlation veto,27 of 53,"BumpNet, JHEP 02 (2025) 122, arXiv:2501.05603"
+coherent fraction,51 +/- 7 %,derived
+break-even inflation for the two-stage split,14,ab_split_scan.csv
+margin of the measured inflation over break-even,6 to 22,derived
+"pre-registered list at Z_cut = 3, nominal",490,ab_split_scan.csv
+... if the inflation persists at Z_cut,49000,derived
+"claim bar, nominal list",6.29,derived
+"claim bar, inflated list",6.99,derived

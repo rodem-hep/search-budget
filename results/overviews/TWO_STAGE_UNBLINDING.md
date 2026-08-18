@@ -2,25 +2,45 @@
 
 **Proposal under review:** split the dataset in two — half **A for exploration** (scan everything),
 half **B for confirmation** (unblind *only* the regions selected in A). The Look-Elsewhere penalty
-is then paid only on the handful of pre-registered B windows instead of on the full
-N ≈ 6,400-look program.
+is then paid only on the pre-registered B windows instead of on the whole program.
+
+**Which program.** The design is priced here on two bases, both in `ab_split_scan.csv`
+(`ab_split_budget.py`): the model space at event-selection granularity (**N = 6,597**), which is
+where the derivations below are worked out, and the **lensed combinatorial scan** of
+`scaled_scan.txt` (**N = 362,815**), which is the scan a network-driven hunt would actually run and
+therefore the headline. Every window is allowed `w = 3` resolution elements of mass freedom
+(≈ ±2σ_M) unless stated; `w = 1` pins it.
+
+| basis | N | single stage | optimised split | naive 50/50, Z_cut = 3 |
+|---|--:|--:|--:|--:|
+| model space, event selections | 6,597 | 6.53 | 7.01 (+0.49) | 7.98 (+1.45) |
+| **combinatorial scan + lenses** | **362,815** | **7.11** | **~7.6 (+0.47)** | **8.90 (+1.79)** |
 
 **Verdict up front.** The idea is sound and its *main* value is real — the trials factor in B
-becomes **exactly countable** (a handful of pre-registered windows, no Gross–Vitells modelling of
+becomes **exactly countable** (a pre-registered list, no Gross–Vitells modelling of
 a machine-generated scan) and the procedure is immune to human/procedural biases. But two things
 must be understood before adopting it:
 
 1. **The split costs sensitivity, and 50/50 costs a lot.** The LEE you avoid is logarithmic
    (cheap) while the luminosity you give up costs √2 on Z (expensive). At 50% discovery power
-   (toy-validated): single-stage full scan needs a **6.5σ**-strong signal; the optimized
-   asymmetric split (**f ≈ 0.2–0.3** exploration) needs **~7.0σ** (+0.5σ); the naive **50/50**
-   split needs **8.0σ** (+1.4σ). The ~0.5σ at the optimum is the honest, irreducible price of
-   the countable trials factor.
+   (toy-validated), on the combinatorial scan: a single stage exactly corrected needs a **7.11σ**
+   signal; the optimized asymmetric split (**f ≈ 0.2–0.3** exploration) needs **~7.6σ**
+   (+0.47σ at `w = 3`, +0.32σ with pinned windows); the naive **50/50** split needs **8.90σ**
+   (+1.79σ). The ~0.5σ at the optimum is the honest, irreducible price of the countable trials
+   factor, and it barely moves with N: a factor two in the trials count changes it by 0.01σ.
 2. **The split only kills *statistical* look-elsewhere.** A spurious bump from correlated
    systematics — background mis-modelling, and specifically a network that sculpts a fake
    peak — reproduces in **both** halves and will happily "confirm". A/B splitting must be
    combined with decorrelated ML trainings (train-on-A→predict-B and vice versa) to also attack
-   that failure mode.
+   that failure mode. That class is not hypothetical and its size is measured:
+   **51 ± 7 %** of one published scanner's spurious candidates are coherent
+   (`ESTIMATOR_DEFECTS.md`).
+
+**Why bother at all.** Because for a network-driven scan the single-stage correction is not merely
+awkward but *wrong by an unmeasured factor*. The one estimator whose failure rate has been published
+mis-estimates 10⁻⁵–10⁻⁴ of its looks, **78–310×** the Gaussian tail it is corrected against, while
+the split's break-even sits at **14×** (`ESTIMATOR_DEFECTS.md`, section 2b here). At that measured
+rate the split is not a concession to auditability — it is the more sensitive procedure outright.
 
 Numbers: `scripts/ab_split_budget.py` → `results/plots/ab_split_reach.png` and
 `ab_split_crossover.png` (reach vs N: no crossover at any trials count — section 2b); toy Monte
@@ -188,14 +208,24 @@ you would otherwise have to defend exceeds
 
     N_def  >  N_equiv = exp((μ₂² − 25)/2)  =  R*·N_true,    R* = exp((μ₂² − μ₁²)/2) ≈ 13
 
-at this budget (R\* ≈ 12–17 across all N). So the operational criterion is: **if honest
-accounting of analyst/ML freedom — NN trainings, selection variants, hyperparameter scans,
-binning choices — would inflate the defendable effective trials factor by more than ~an order of
-magnitude over the counted N ≈ 6,400, the split is not just more auditable but genuinely more
-sensitive.** For a fixed, classical scan-window program that inflation is implausible and the
-corrected single stage wins by ~0.5σ; for a DDP/NN-driven hunt, where "how many independent
-looks did the network effectively take" has no crisp answer, a factor >13 of conservatism is
-easy to imagine — and that, not the logarithm, is the quantitative case for two-stage unblinding.
+at this budget (R\* ≈ 12–17 across all N; **14 on the combinatorial scan**, and 5 if the
+pre-registered windows are pinned rather than given ±2σ_M). So the operational criterion is: **if
+honest accounting of analyst/ML freedom — NN trainings, selection variants, hyperparameter scans,
+binning choices — would inflate the defendable effective trials factor by more than ~14× the
+counted N, the split is not just more auditable but genuinely more sensitive.**
+
+**And that inflation has now been measured, not imagined.** For a fixed, classical scan-window
+program it is implausible and the corrected single stage wins by ~0.5σ. For a network-driven hunt it
+is not a matter of opinion: the published BumpNet application mis-estimates **10⁻⁵–10⁻⁴ of its
+looks**, i.e. **78–310×** the Gaussian tail — 6 to 22 times past the break-even, ~7× at the round
+10² (`ESTIMATOR_DEFECTS.md`). For an estimator of that class the split therefore *wins on
+sensitivity*, before any argument about auditability. Suppressing defects upstream is the way to
+overturn that, and it has to buy back a factor ~7 to do so.
+
+The split's own exposure to the same inflation is only logarithmic. If the mis-estimation persists
+at the selection cut, the pre-registered list grows from 490 to 4.9·10⁴ entries and the claim bar
+from 6.29 to 6.99 — 0.7σ for a hundredfold — and even that assumes the list length is *modelled*
+rather than simply read off the frozen document.
 
 ## 2bb. "Why not swap the halves?" — the symmetrised two-fold scheme
 
@@ -334,6 +364,26 @@ adaptivity**. A sensible hybrid keeps both: pre-register the union — the fixed
 step-up — since §2b guarantees that a few extra countable windows cost essentially nothing in
 the B correction (`2·ln(3·k)` moves by ~0.1 in Z per doubling of k).
 
+## 2e. The same design on the combinatorial scan
+
+The derivations above are worked on N = 6,597 because that is where the toys were run. The scan a
+network-driven hunt would face is the lensed combinatorial one, N = 362,815, and the design carries
+over unchanged (`ab_split_scan.csv`):
+
+| | model space (6,597) | scan + lenses (362,815) |
+|---|--:|--:|
+| single stage, exactly corrected | 6.53 | **7.11** |
+| optimised split (f ≈ 0.2–0.3, Z_cut = 2–3) | 7.01 (+0.49) | **7.58–7.65 (+0.47)** |
+| naive 50/50, Z_cut = 3 | 7.98 (+1.45) | 8.90 (+1.79) |
+| windows pre-registered at Z_cut = 3 | 9 | **490** |
+| claim bar √(25 + 2·ln(3k)) | 5.64 | **6.29** |
+| break-even R\* (w = 3 / w = 1) | 13 / 4 | **14 / 5** |
+
+Fifty times more looks moves the cost of the split by 0.02σ, which is the point: the split is priced
+in `ln k`, so it hardly cares how wide the scan behind it is. The background-only check scales the
+same way — in 2·10⁴ toys at Z_cut = 3 the best confirmation over the 490 windows reaches **5.30**
+against the **6.29** bar, so **zero false claims**, the same verdict as on the narrower basis.
+
 ## 3. What the split does NOT protect against
 
 - **Correlated systematics.** A background-model artefact — a turn-on, a trigger edge, and in
@@ -411,6 +461,12 @@ asymmetric optimum, and it forfeits procedural blindness. That half-sigma is the
 Its blind spot is correlated systematics, which for a NN-based bump hunt is exactly the
 dangerous axis — so it should be deployed *together with* cross-half trainings, signal
 injection, and the excess-counting sanity check, all of which exist in this project already.
+
+**One qualification to "not for sensitivity".** That verdict holds where the single-stage trials
+factor is honestly known. Where the estimator is a network it is not, and the measured defect rate
+of a published one puts the required conservatism 6–22× past the break-even — so on the
+combinatorial scan the split is *also* the more sensitive procedure, and the half-sigma is not a
+price but a saving (`ESTIMATOR_DEFECTS.md`).
 
 Sources: reach analytics `scripts/ab_split_budget.py` (+ plot
 `results/plots/ab_split_reach.png`); toys `scripts/ab_split_toys.py`; trials budget

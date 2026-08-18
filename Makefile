@@ -14,7 +14,8 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(P)/budget_waterfall.png $(P)/excess_counting.png \
           $(T)/combinatorial_budget.csv $(T)/composition_gap.txt \
           $(X)/composition_appendix.tex \
-          $(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv $(T)/scaled_scan.txt \
+          $(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv \
+          $(T)/scan_summary.csv $(T)/scaled_scan.txt \
           $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md \
           $(T)/census_budget.csv $(O)/CENSUS_BUDGET.md \
           $(X)/census_refs.bib $(X)/census_appendix.tex $(O)/CENSUS_REFERENCES.md \
@@ -24,9 +25,12 @@ BUDGET := $(T)/search_budget.csv $(T)/search_budget_selections.csv $(O)/SEARCH_B
           $(T)/budget_uncertainty.csv $(O)/BUDGET_UNCERTAINTY.md $(X)/uncertainty_table.tex
 
 AB := $(P)/ab_split_reach.png $(P)/ab_toys_power.png $(P)/ab_split_outliers.png \
-      $(P)/ab_spurious_guard.png
+      $(P)/ab_spurious_guard.png $(T)/ab_split_scan.csv $(T)/ab_split_toys.csv \
+      $(T)/ab_guard_toys.csv \
+      $(T)/estimator_defects.csv $(O)/ESTIMATOR_DEFECTS.md
 
-STATS := $(G)/max_of_gaussians_light.png $(G)/bh_scan.png $(G)/bh_zcut.png $(G)/bh_outliers.png
+STATS := $(G)/max_of_gaussians_light.png $(G)/bh_scan.png $(G)/bh_zcut.png \
+         $(G)/bh_outliers.png $(T)/selection_rules.csv
 
 .PHONY: help all budget ab stats clean
 .DELETE_ON_ERROR:
@@ -35,7 +39,7 @@ help:
 	@echo "targets:"
 	@echo "  all       budget + ab + stats  (everything; no external input of any kind)"
 	@echo "  budget    trials factor N, Z_local, the combinatorial scan and the excess bookkeeping"
-	@echo "  ab        two-stage A/B unblinding: reach, toy MC, imperfect-estimator robustness"
+	@echo "  ab        two-stage A/B unblinding: reach, toy MC, the measured estimator defect rate"
 	@echo "  stats     selection rules: argmax vs threshold vs Benjamini-Hochberg (MC is cached)"
 	@echo "  clean     drop __pycache__"
 	@echo "PY = $(PY)"
@@ -50,7 +54,7 @@ $(P)/search_budget.png $(P)/scan_windows.png $(P)/model_observable_matrix.png &:
 	$(PY) $(S)/budget_plots.py
 $(P)/budget_waterfall.png: $(T)/search_budget.csv $(T)/search_budget_selections.csv $(S)/budget_waterfall.py
 	$(PY) $(S)/budget_waterfall.py
-$(P)/excess_counting.png: $(T)/search_budget.csv $(S)/excess_counting.py
+$(P)/excess_counting.png: $(T)/search_budget.csv $(T)/census_budget.csv $(S)/excess_counting.py
 	$(PY) $(S)/excess_counting.py
 $(T)/published_census.csv $(O)/PUBLISHED_CENSUS.md &: $(S)/published_census.py data/published_spectra.csv
 	$(PY) $(S)/published_census.py
@@ -81,22 +85,29 @@ $(T)/combinatorial_budget.csv: $(S)/combinatorial_budget.py $(S)/bump_observable
 $(T)/composition_gap.txt $(X)/composition_appendix.tex &: $(T)/combinatorial_budget.csv \
                                                  $(S)/composition_gap.py $(S)/obs_labels.py
 	$(PY) $(S)/composition_gap.py > $(T)/composition_gap.txt
-$(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv $(T)/scaled_scan.txt &: \
+$(T)/scaled_scan.csv $(T)/priority_scan.csv $(T)/lens_scan.csv $(T)/scan_summary.csv \
+$(T)/scaled_scan.txt &: \
                                                  $(S)/scaled_scan.py $(S)/scan_alphabet.py \
                                                  $(S)/combinatorial_budget.py $(MOD) $(YM)
 	$(PY) $(S)/scaled_scan.py > $(T)/scaled_scan.txt
 
 ab: $(AB)
 
-$(P)/ab_split_reach.png $(P)/ab_split_crossover.png &: $(S)/ab_split_budget.py $(MOD)
+$(P)/ab_split_reach.png $(P)/ab_split_crossover.png $(T)/ab_split_scan.csv &: \
+                                                 $(S)/ab_split_budget.py $(MOD) \
+                                                 $(T)/scaled_scan.csv
 	$(PY) $(S)/ab_split_budget.py
-$(P)/ab_toys_power.png $(P)/ab_toys_background.png $(P)/ab_toys_spectrum.png &: \
-                                                 $(S)/ab_split_toys.py $(MOD)
+$(T)/estimator_defects.csv $(O)/ESTIMATOR_DEFECTS.md &: $(S)/estimator_defects.py \
+                                                 $(T)/ab_split_scan.csv
+	$(PY) $(S)/estimator_defects.py
+$(P)/ab_toys_power.png $(P)/ab_toys_background.png $(P)/ab_toys_spectrum.png \
+$(T)/ab_split_toys.csv &:                        $(S)/ab_split_toys.py $(MOD)
 	$(PY) $(S)/ab_split_toys.py
 $(P)/ab_split_outliers.png $(P)/ab_outliers_mechanism.png $(P)/ab_outliers_spectrum.png &: \
                                                  $(S)/ab_split_outliers.py $(MOD)
 	$(PY) $(S)/ab_split_outliers.py
-$(P)/ab_spurious_guard.png: $(S)/ab_spurious_guard.py $(S)/plot_style.py
+$(P)/ab_spurious_guard.png $(T)/ab_guard_toys.csv &: $(S)/ab_spurious_guard.py \
+                                                 $(S)/plot_style.py
 	$(PY) $(S)/ab_spurious_guard.py
 
 stats: $(STATS)
@@ -110,7 +121,7 @@ $(G)/bh_scan.png $(G)/bh_vs_argmax.png $(G)/roc_bh_vs_threshold.png $(T)/bh_fdr_
 	$(PY) $(S)/bh_fdr_ab.py
 $(G)/bh_zcut.png $(T)/bh_zcut_per_pe.csv &: $(S)/bh_zcut.py $(S)/plot_style.py
 	$(PY) $(S)/bh_zcut.py
-$(G)/bh_outliers.png: $(S)/bh_fdr_outliers.py $(S)/plot_style.py
+$(G)/bh_outliers.png $(T)/selection_rules.csv &: $(S)/bh_fdr_outliers.py $(S)/plot_style.py
 	$(PY) $(S)/bh_fdr_outliers.py
 
 clean:

@@ -58,9 +58,9 @@ Z_local for 5 sigma global = 7.00
 
 === full ten-object scan
 spectra 3,603   N = 161,020   Z_local = 7.00
-tier 0, every motivated axis once :     43 spectra, N =      2,679 ( 1.7 % of the scan), Z_local = 6.39
-tier 1, those axes elsewhere      :  2,023 spectra, N =    102,096 (63.4 %)
-tier 2, the rest                  :  1,537 spectra, N =     56,245 (34.9 %)
+tier 0, every motivated composition once:     43 spectra, N =      2,679 ( 1.7 % of the scan), Z_local = 6.39
+tier 1, those compositions elsewhere   :  2,023 spectra, N =    102,096 (63.4 %)
+tier 2, the rest                       :  1,537 spectra, N =     56,245 (34.9 %)
 tiers 0+1 together: N = 104,775, which is 0.21 times the budget on its own
 spectra reaching a new object type: 1,944 of 3,603 (54 %), carrying 54 % of N; two-body groups are 74 % of the spectra
 motivated compositions with no fittable histogram in any category: TT, Zt

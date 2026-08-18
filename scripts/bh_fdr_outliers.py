@@ -147,6 +147,7 @@ CASES = [("PERFECT estimator (reproduces the original study)", Defect("glitch", 
          ("BIAS    eps=1e-3", Defect("bias", 1e-3)),
          ("BIAS    eps=1e-2", Defect("bias", 1e-2))]
 
+sel_rows = []
 for label, dfc in ([] if "--figonly" in sys.argv else CASES):
     x_thr, y_thr, x_arg, y_arg, sel_arg = analytic(dfc)
     x_bh, y_bh, ek, e_bh = bh(dfc)
@@ -158,7 +159,7 @@ for label, dfc in ([] if "--figonly" in sys.argv else CASES):
           f"   threshold floor = {x_thr.min():.2e}")
     print(f"  all three at the COMMON budget {XREF:.2e}:")
     print(f"  {'mu':>4} {'argmax':>9} {'threshold':>11} {'BH':>16}   "
-          f"{'thr - argmax':>13} {'thr - BH':>9}")
+          f"{'thr - argmax':>13} {'thr - BH':>9} {'argmax=sig':>11}")
     for mu in MUS:
         pa = y_arg[mu] * 100 if abs(math.log(x_arg / XREF)) < 0.05 else float("nan")
         pt = at_budget(x_thr, y_thr[mu], XREF) * 100
@@ -169,8 +170,20 @@ for label, dfc in ([] if "--figonly" in sys.argv else CASES):
         bh_cell = "    n/a" if not np.isfinite(pb) else f"{pb:6.1f} +- {eb:.2f}%"
         print(f"  {mu:>3}s {fmt(pa):>9} {fmt(pt):>11} {bh_cell:>16}   "
               f"{'    n/a' if not np.isfinite(d1) else f'{d1:+12.1f}':>13} "
-              f"{'    n/a' if not np.isfinite(d2) else f'{d2:+8.1f}':>9}", flush=True)
+              f"{'    n/a' if not np.isfinite(d2) else f'{d2:+8.1f}':>9} "
+              f"{100*sel_arg[mu]:10.1f}%", flush=True)
+        sel_rows.append({"estimator": label.split("(")[0].strip(), "kind": dfc.kind,
+                         "eps": f"{dfc.eps:g}", "mu": mu,
+                         "argmax": "" if not np.isfinite(pa) else f"{pa:.1f}",
+                         "threshold": f"{pt:.1f}",
+                         "bh": "" if not np.isfinite(pb) else f"{pb:.1f}",
+                         "bh_mc_err": "" if not np.isfinite(pb) else f"{eb:.2f}",
+                         "thr_minus_argmax": "" if not np.isfinite(d1) else f"{d1:+.1f}",
+                         "argmax_is_signal": f"{100*sel_arg[mu]:.1f}",
+                         "argmax_budget": f"{x_arg:.3e}"})
     qa, ka = at_budget(x_bh, QGRID, XREF), at_budget(x_bh, ek, XREF)
+    for r in sel_rows[-len(MUS):]:
+        r["bh_nominal_q"] = "" if not np.isfinite(qa) else f"{qa:.2e}"
     if np.isfinite(qa):
         chk = ka * sf(tB) / XREF
         print(f"  BH needs nominal q = {qa:.2e} to buy that budget; "
@@ -181,6 +194,17 @@ for label, dfc in ([] if "--figonly" in sys.argv else CASES):
         print(f"  BH CANNOT reach that budget at any q: even q -> {QGRID[0]:.0e} leaves "
               f"E[K] = {ek[0]:.2f} rejections and {x_bh.min():.2e} false confirmations",
               flush=True)
+
+if sel_rows:
+    import csv
+    out_csv = os.path.join(ROOT, "results", "tables", "selection_rules.csv")
+    with open(out_csv, "w", newline="") as fh:
+        wr = csv.DictWriter(fh, fieldnames=["estimator", "kind", "eps", "mu", "argmax",
+                                            "threshold", "bh", "bh_mc_err", "thr_minus_argmax",
+                                            "argmax_is_signal", "bh_nominal_q", "argmax_budget"])
+        wr.writeheader()
+        wr.writerows(sel_rows)
+    print(f"\nwrote {out_csv}", flush=True)
 
 EPS = np.geomspace(1e-5, 3e-2, 10)
 MU_S = 5

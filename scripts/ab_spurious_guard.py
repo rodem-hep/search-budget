@@ -90,3 +90,15 @@ print(f"wrote {OUT}")
 print(f"  bkg toy seed {seed}: max Z_A = {zA.max():.2f}, "
       f"Z_B in window = {np.nanmax(np.where(zA >= Z_CUT, zB, np.nan)):.2f}")
 print(f"  signal toy: Z_A = {zA_sig.max():.2f} -> Z_B = {zB_sig.max():.2f}")
+
+import csv
+with open(os.path.join(ROOT, "results", "tables", "ab_guard_toys.csv"), "w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["toy", "Z_cut", "claim_bar", "Z_A", "Z_B", "outcome"])
+    zb_bkg = float(np.nanmax(np.where(zA >= Z_CUT, zB, np.nan)))
+    w.writerow(["background only", f"{Z_CUT:g}", f"{thr:.2f}", f"{zA.max():.2f}",
+                f"{zb_bkg:.2f}", "pre-registered, dies in stage B"])
+    w.writerow(["injected Z_full = 7", f"{Z_CUT:g}", f"{thr:.2f}", f"{zA_sig.max():.2f}",
+                f"{zB_sig.max():.2f}",
+                "confirms" if zB_sig.max() >= thr else "fails to confirm"])
+print("wrote results/tables/ab_guard_toys.csv")

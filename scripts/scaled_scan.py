@@ -135,11 +135,11 @@ tierA_n = tier_n[0] + tier_n[1]
 
 print(f"=== full ten-object scan")
 print(f"spectra {full.n_hist:,}   N = {full.N:,.0f}   Z_local = {z_local_for_global5(full.N):.2f}")
-print(f"tier 0, every motivated axis once : {tier_n[0]:6,d} spectra, N = {tier_N[0]:10,.0f} "
+print(f"tier 0, every motivated composition once: {tier_n[0]:6,d} spectra, N = {tier_N[0]:10,.0f} "
       f"({100*tier_N[0]/full.N:4.1f} % of the scan), Z_local = {z_local_for_global5(tier_N[0]):.2f}")
-print(f"tier 1, those axes elsewhere      : {tier_n[1]:6,d} spectra, N = {tier_N[1]:10,.0f} "
+print(f"tier 1, those compositions elsewhere   : {tier_n[1]:6,d} spectra, N = {tier_N[1]:10,.0f} "
       f"({100*tier_N[1]/full.N:4.1f} %)")
-print(f"tier 2, the rest                  : {tier_n[2]:6,d} spectra, N = {tier_N[2]:10,.0f} "
+print(f"tier 2, the rest                       : {tier_n[2]:6,d} spectra, N = {tier_N[2]:10,.0f} "
       f"({100*tier_N[2]/full.N:4.1f} %)")
 print(f"tiers 0+1 together: N = {tierA_N:,.0f}, which is "
       f"{tierA_N/TRIALS_BUDGET:.2f} times the budget on its own")
@@ -277,7 +277,7 @@ else:
           f"and {sum(lens_thin.values()):,} further views are ruled out by statistics alone")
 print()
 
-dataset_rows = []
+dataset_rows, summary_rows = [], []
 print(f"dataset scaled (the anchor is {DATASETS[0][0]}): spectra, N, Z_local, mass reach")
 for _label, _s in DATASETS:
     YM.N_REF = _n_ref * _s
@@ -299,7 +299,8 @@ for _label, _s in DATASETS:
     _ln, _lN = _r.n_hist + sum(_ln_n.values()), _r.N + sum(_ln_N.values())
     _t0_n, _t0_N = _tn[0], _tN[0]
     _mot_n, _mot_N = _tn[0] + _tn[1], _tN[0] + _tN[1]
-    dataset_rows.append((_label, _s, _b, _r, _ln, _lN, _best))
+    dataset_rows.append((_label, _s, _b, _r, _ln, _lN, _best,
+                         dict(_ln_n), dict(_ln_N), dict(_ln_thin)))
     print(f"  {_label} (x{_s:g} the anchor, x{_s ** (1.0 / (YM.P - 1.0)):.2f} in mass reach)")
     print(f"    five objects   {_b.n_hist:6,d} of {_b.n_hist + _b.n_thin:6,d} histograms, "
           f"N = {_b.N:9,.0f}, Z_local = {z_local_for_global5(_b.N):.2f}")
@@ -326,12 +327,37 @@ for _label, _s in DATASETS:
     print(f"    published windows, if they were gated too: {_pk} of {len(pub_axes)} axes, "
           f"N = {_pg:,.0f} of {_pf:,.0f}")
     print(f"    yield anchor x0.01 / x100 (this dataset): ", end="")
+    _anchor = {}
     for _f in (0.01, 100.0):
         YM.N_REF = _n_ref * _s * _f
         _y = CB.enumerate_scan(**WIDE_ARGS, collect=False)
+        _anchor[_f] = (_y.n_hist, z_local_for_global5(_y.N))
         print(f"{_y.n_hist:,} spectra Z = {z_local_for_global5(_y.N):.2f}   ", end="")
     print()
     YM.N_REF = _n_ref * _s
+    summary_rows.append({
+        "dataset": _label, "luminosity_scale": f"{_s:g}",
+        "mass_reach_scale": f"{_s ** (1.0 / (YM.P - 1.0)):.2f}",
+        "combinations": _r.n_hist + _r.n_thin, "categories": _r.n_cat,
+        "fittable_spectra": _r.n_hist, "N_trials": f"{_r.N:.0f}",
+        "Z_local": f"{z_local_for_global5(_r.N):.2f}",
+        "lensed_histograms": _ln, "lensed_N_trials": f"{_lN:.0f}",
+        "lensed_Z_local": f"{z_local_for_global5(_lN):.2f}",
+        "tier0_spectra": _tn[0], "tier1_spectra": _tn[1], "tier2_spectra": _tn[2],
+        "tier0_looks": f"{_tN[0]:.0f}", "tier1_looks": f"{_tN[1]:.0f}",
+        "tier2_looks": f"{_tN[2]:.0f}",
+        "tier0_Z_local": f"{z_local_for_global5(_tN[0]):.2f}",
+        "motivated_spectra": _mot_n, "motivated_frac": f"{_mot_n/_r.n_hist:.3f}",
+        "compositions_fittable": len(_r.by_type), "compositions_motivated": len(_best),
+        "k2_spectra": _r.by_size.get(2, 0), "k3_spectra": _r.by_size.get(3, 0),
+        "k4_spectra": _r.by_size.get(4, 0),
+        "published_axes_gated": _pk, "published_axes_total": len(pub_axes),
+        "published_looks_gated": f"{_pg:.0f}", "published_looks_total": f"{_pf:.0f}",
+        "anchor_x0.01_spectra": _anchor[0.01][0], "anchor_x0.01_Z": f"{_anchor[0.01][1]:.2f}",
+        "anchor_x100_spectra": _anchor[100.0][0], "anchor_x100_Z": f"{_anchor[100.0][1]:.2f}",
+        "costliest_compositions": "; ".join(
+            f"{_c}:{_r.looks[_c]:.0f}" for _c in
+            sorted(_r.looks, key=lambda c: -_r.looks[c])[:6])})
 YM.N_REF = _n_ref
 print()
 
@@ -348,7 +374,7 @@ with open(os.path.join(ROOT, "results", "tables", "scaled_scan.csv"), "w", newli
     w.writerow(hdr)
     for label, kw, s in runs:
         w.writerow(row(label, kw, s.n_cat, s.n_hist, len(s.by_type), s.N))
-    w.writerow(row("... model-motivated axes once each", VARIANTS[-1][1], len(tier0_cats),
+    w.writerow(row("... model-motivated compositions once each", VARIANTS[-1][1], len(tier0_cats),
                    tier_n[0], len(MOTIVATED_COMPS & set(full.by_type)), tier_N[0]))
     w.writerow(row(f"... prioritised to N <= {TRIALS_BUDGET:.0e}", VARIANTS[-1][1], len(kept_cats),
                    n_sel, len(kept_n), N_sel))
@@ -356,7 +382,7 @@ with open(os.path.join(ROOT, "results", "tables", "scaled_scan.csv"), "w", newli
                    len(full.by_type), lensed_N))
     w.writerow(row(f"... prioritised to N <= {TRIALS_BUDGET:.0e}, lenses included",
                    VARIANTS[-1][1], len(L_cats), L_views, len(L_comps), L_N))
-    for _label, _s, _b, _r, _ln, _lN, _best in dataset_rows:
+    for _label, _s, _b, _r, _ln, _lN, _best, _lnn, _lnN, _lnt in dataset_rows:
         if _s == 1.0:
             continue
         w.writerow(row(f"five objects, lepton trigger ({_label})", VARIANTS[0][1], _b.n_cat,
@@ -365,7 +391,7 @@ with open(os.path.join(ROOT, "results", "tables", "scaled_scan.csv"), "w", newli
                        _r.n_hist, len(_r.by_type), _r.N))
         w.writerow(row(f"ten objects, with selection lenses ({_label})", VARIANTS[-1][1],
                        _r.n_cat, _ln, len(_r.by_type), _lN))
-        w.writerow(row(f"... model-motivated axes once each ({_label})", VARIANTS[-1][1],
+        w.writerow(row(f"... model-motivated compositions once each ({_label})", VARIANTS[-1][1],
                        len({x.cat for x in _best.values()}), sum(x.split for x in _best.values()),
                        len(_best), sum(x.n_s for x in _best.values())))
 
@@ -380,13 +406,23 @@ with open(os.path.join(ROOT, "results", "tables", "priority_scan.csv"), "w", new
 
 with open(os.path.join(ROOT, "results", "tables", "lens_scan.csv"), "w", newline="") as f:
     w = csv.writer(f)
-    w.writerow(["lens", "requirement", "window_cap_GeV", "views_added", "looks_added", "views_kept",
-                "looks_kept"])
-    for key, label, rule, _ok, cap in LENSES:
-        w.writerow([label, rule, "" if cap is None else f"{cap:.0f}", lens_n[key],
-                    f"{lens_N[key]:.0f}", L_lens_n[key], f"{L_lens_N[key]:.0f}"])
+    w.writerow(["dataset", "lens", "requirement", "window_cap_GeV", "efficiency",
+                "spectra_reached", "views_kept", "views_too_thin", "looks_kept"])
+    for _label, _s, _b, _r, _ln, _lN, _best, _lnn, _lnN, _lnt in dataset_rows:
+        for key, label, rule, _ok, cap in LENSES:
+            kept, thin = _lnn.get(key, 0), _lnt.get(key, 0)
+            w.writerow([_label, label, rule, "" if cap is None else f"{cap:.0f}",
+                        f"{YM.LENS_EFF[key]:g}", kept + thin, kept, thin,
+                        f"{_lnN.get(key, 0.0):.0f}"])
+
+with open(os.path.join(ROOT, "results", "tables", "scan_summary.csv"), "w", newline="") as f:
+    w = csv.DictWriter(f, fieldnames=list(summary_rows[0]))
+    w.writeheader()
+    w.writerows(summary_rows)
 
 print(f"\nwrote results/tables/scaled_scan.csv "
       f"({len(runs) + 4 + 4 * (len(DATASETS) - 1)} rows), priority_scan.csv "
-      f"({len(full.by_type)} compositions) and lens_scan.csv ({len(LENSES)} lenses)",
+      f"({len(full.by_type)} compositions) and lens_scan.csv "
+      f"({len(LENSES) * len(DATASETS)} rows) and scan_summary.csv "
+      f"({len(summary_rows)} datasets)",
       file=sys.stderr)

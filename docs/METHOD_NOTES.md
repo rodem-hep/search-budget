@@ -215,12 +215,12 @@ The enumeration is 2412 categories and 21644 possible histograms; **3603** of th
 first spectrum that does not (rather than topping up with whatever cheap spectrum still fits the
 remainder).
 
-0. **every model-motivated axis once**, in the best-populated category it appears in, so no motivated
-   axis can be lost to the budget. `MOTIVATED` maps each of the 46 observables of the model-driven
+0. **every model-motivated composition once**, in the best-populated category that can form it, so
+   no motivated axis can be lost to the budget. `MOTIVATED` maps each of the 46 observables of the model-driven
    budget onto the composition(s) a scan would build it from; 42 of them have one (`m(multi)` has no
    fixed composition, and the three `mT` axes need MET in the mass), and they collapse onto **38
    distinct compositions**, of which 36 can be fitted somewhere (`m(tautau)` and `m(Zt)` cannot);
-1. **those same axes in their remaining categories**, highest yield first;
+1. **those same compositions in their remaining categories**, highest yield first;
 2. **everything else**, highest yield first.
 
 Yield is `yield_model.F` multiplied over the category's content, i.e. the same model that decides
@@ -254,12 +254,19 @@ split, high jet or lepton multiplicity is exactly what the exclusive categories 
 enrichment are the `b` and `T` types of the alphabet. The four that are orthogonal to both the object
 content and the mass axis are priced:
 
-| lens | applies when | efficiency | views | looks | ruled out by statistics |
-|---|---|---|---|---|---|
-| high HT or Meff | the category holds an object outside the mass | 0.1 | 2134 | 9.0e4 | 1145 |
-| displaced activity | any reconstructed mass | 1e-3 | 743 | 2.9e4 | 2860 |
-| forward jet pair (VBF) | two of the four slots are free for the tag jets | 0.02 | 53 | 2.7e3 | 29 |
-| ISR jet | one slot free, and the window reaches below 200 GeV | 0.2 | 78 | 4.0e3 | 652 |
+On Run 2 + Run 3, the dataset every headline is quoted on (`lens_scan.csv` carries both):
+
+| lens | applies when | efficiency | spectra it could reach | views | looks | ruled out by statistics |
+|---|---|---|---|---|---|---|
+| high HT or Meff | the category holds an object outside the mass | 0.1 | 4046 | 2615 | 1.1e5 | 1431 |
+| displaced activity | any reconstructed mass | 1e-3 | 4438 | 985 | 3.9e4 | 3453 |
+| forward jet pair (VBF) | two of the four slots are free for the tag jets | 0.02 | 92 | 68 | 3.4e3 | 24 |
+| ISR jet | one slot free, and the window reaches below 200 GeV | 0.2 | 831 | 105 | 5.1e3 | 726 |
+
+The four columns are four successive filters on the 4438 fittable spectra: what the lens could
+conceivably be applied to, the efficiency it multiplies into the yield, what survives the statistics
+requirement at that reduced yield, and what the survivors cost. Summed, 9407 conceivable views of
+which statistics rules out 5634.
 
 Every rule is deliberately conservative:
 
@@ -272,12 +279,20 @@ Every rule is deliberately conservative:
 * an HT or Meff threshold on a mass with nothing else in the event is a cut on the resonance mass
   itself, not an independent look, so the lens requires activity outside the mass;
 * a lens **costs the statistics of its own requirement** (`yield_model.LENS_EFF`) and the view then has
-  to pass the same fittability test, which is what removes most of them: 4686 of the 7694 possible views
+  to pass the same fittability test, which is what removes most of them: 5634 of the 9407 possible views
   are ruled out by statistics, the displaced lens worst of all at an efficiency of 1e-3.
 
-What survives is **1.8 histograms per spectrum**, taking the ten-object scan to 6611 histograms and
-`N = 2.9e5` (`Z_local = 7.08`), still inside the 5e5 budget. Lens views inherit their parent's tier and
-yield and rank immediately behind it, so with nothing to cut the ordering never matters here either.
+What survives is **0.85 extra histograms per spectrum**, taking the ten-object scan to 8211 histograms
+and `N = 3.6e5` (`Z_local = 7.11`), still inside the 5e5 budget. Lens views inherit their parent's tier
+and yield and rank immediately behind it, so with nothing to cut the ordering never matters here either.
+
+**Where this errs, and in which direction.** A lens view re-uses the events of its parent spectrum, and
+subsets sharing an object are correlated tests on the same events, so charging each as an independent
+look overstates the count rather than understating it. Requiring no trigger does the same, overfilling
+the all-jet channels at low mass. Both make the scan's bar, and every difference quoted against a
+published basis that carries less overlap, an upper bound by that convention. The one modelling choice
+that errs the other way is ignoring the rise in high-mass cross sections between 13 and 13.6 TeV, which
+under-fills the tail and admits fewer spectra.
 
 `composition_gap.py` then asks which of those flavour compositions any published ATLAS bump hunt
 has ever scanned. The coverage mapping is deliberately **generous** — a composition counts as
@@ -394,6 +409,13 @@ and Benjamini-Hochberg FDR. Two implementation notes:
   was never reached.
 * `K(q)` vectorises over experiments and over the `q`-grid by a suffix minimum: with
   `R_k = n·p_(k)/k` and `C_k = min_{j≥k} R_j` (non-decreasing in `k`), `K(q) = #{k : C_k ≤ q}`.
+
+The defect rates those studies run at are not invented: `estimator_defects.py` derives them from the
+published background-only performance of one network scanner, which mis-estimates 1e-5 to 1e-4 of its
+looks (78-310x the Gaussian tail it would be corrected against) and whose spurious flags are 51 +- 7 %
+coherent. `ESTIMATOR_DEFECTS.md` carries that arithmetic and what it does to each procedure; the
+`eps = 1e-4` and `1e-3` rows below span the measured 5 sigma rate and the value it plausibly reaches
+at the 3 sigma level where candidates are selected.
 
 `bh_fdr_outliers.py` and `ab_split_outliers.py` repeat the comparison with a deliberately
 *imperfect* significance estimator, under two defect classes: **glitch** (an incoherent artefact,

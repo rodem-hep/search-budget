@@ -283,31 +283,28 @@ print(f"\nwrote {out}")
 import csv
 SCALED = os.path.join(ROOT, "results", "tables", "scaled_scan.csv")
 scan_N = {r["scan"]: int(r["N_trials"]) for r in csv.DictReader(open(SCALED))}
-N_SCAN = {"unlensed": scan_N["ten objects, any trigger (Run 2+3, ~400 fb-1)"],
-          "lensed": scan_N["ten objects, with selection lenses (Run 2+3, ~400 fb-1)"]}
+N_SCAN = {"unlensed scan": scan_N["ten objects, any trigger (Run 2+3, ~400 fb-1)"],
+          "lensed scan": scan_N["ten objects, with selection lenses (Run 2+3, ~400 fb-1)"]}
 
 from scipy.special import ndtri
 rng_s = np.random.default_rng(20260818)
+
+ZCUTS = (2.0, 2.5, 3.0, 3.5, 4.0)
+rows = []
 
 print("\n" + "=" * 78)
 print("priced on the combinatorial scan instead of the model space")
 for tag, Nv in list(N_SCAN.items()) + [("model space", N_sel)]:
     Z1 = z5(Nv)
     r_opt, zc_opt, f_opt = opt_box(reach, Nv)
-    for w in (1.0, 3.0):
-        rg = min((min(reach(f, Nv, zc, widen=w) for f in np.linspace(0.02, 0.98, 481)), zc)
-                 for zc in (2.0, 2.5, 3.0, 3.5, 4.0))
-        rf, zf, ff = reach2_opt(Nv, widen=w)
-        print(f"  [w = {w:.0f}] grid optimum {rg[0]:.2f} ({rg[0]-Z1:+.2f}) at Z_cut = {rg[1]:.1f}; "
-              f"fine optimum {rf:.2f} ({rf-Z1:+.2f}) at Z_cut = {zf:.2f}, f = {ff:.2f}; "
-              f"R* = {math.exp(0.5*(rf*rf - Z1*Z1)):.0f} (grid {math.exp(0.5*(rg[0]**2 - Z1*Z1)):.0f})")
     r_naive = reach(0.5, Nv, 3.0)
     kb = Nv * p1(zc_opt)
-    print(f"\n{tag}: N = {Nv:,}   single-stage exactly corrected = {Z1:.2f}")
+
+    print(f"\n{tag}: N = {Nv:,.0f}   single-stage exactly corrected = {Z1:.2f}")
     print(f"  optimised split: Z_cut = {zc_opt:.2f}, f = {f_opt:.2f} -> reach {r_opt:.2f} "
           f"({r_opt-Z1:+.2f})   pre-registers {kb:.0f} windows, claim bar "
           f"{zB_req(Nv, zc_opt):.2f}")
-    for zc in (2.0, 2.5, 3.0, 3.5, 4.0):
+    for zc in ZCUTS:
         fs2 = np.linspace(0.02, 0.98, 481)
         rs2 = [reach(f, Nv, zc) for f in fs2]
         i2 = int(np.argmin(rs2))
@@ -316,11 +313,40 @@ for tag, Nv in list(N_SCAN.items()) + [("model space", N_sel)]:
               f"({rs2[i2]-Z1:+.2f})")
     print(f"  naive 50/50 at Z_cut = 3: reach {r_naive:.2f} ({r_naive-Z1:+.2f})")
     print(f"  break-even R* = {math.exp(0.5*(r_opt*r_opt - Z1*Z1)):.0f}")
+
+    wide = {}
+    for w in (1.0, 3.0):
+        rg = min((min(reach(f, Nv, zc, widen=w) for f in np.linspace(0.02, 0.98, 481)), zc)
+                 for zc in ZCUTS)
+        rf, zf, ff = reach2_opt(Nv, widen=w)
+        wide[w] = (rg[0], rf, math.exp(0.5 * (rf * rf - Z1 * Z1)))
+        print(f"  [w = {w:.0f}] grid optimum {rg[0]:.2f} ({rg[0]-Z1:+.2f}) at Z_cut = {rg[1]:.1f}; "
+              f"fine optimum {rf:.2f} ({rf-Z1:+.2f}) at Z_cut = {zf:.2f}, f = {ff:.2f}; "
+              f"R* = {math.exp(0.5*(rf*rf - Z1*Z1)):.0f} (grid {math.exp(0.5*(rg[0]**2 - Z1*Z1)):.0f})")
+
+    toys = {}
     for zc in (3.0, zc_opt):
         k = rng_s.binomial(Nv, p1(zc), size=20000)
         u = rng_s.random(20000)
         best = np.where(k > 0, ndtri(np.clip(u, 1e-300, 1) ** (1.0 / np.maximum(k, 1))), np.nan)
+        toys[zc] = (k.mean(), np.nanmax(best), int(np.nansum(best >= zB_req(Nv, zc))))
         print(f"  2e4 background-only toys at Z_cut = {zc:.2f}: k = {k.mean():.0f} +- "
               f"{k.std():.0f}, best confirmation max = {np.nanmax(best):.2f}, "
               f"99% = {np.nanpercentile(best, 99):.2f}, claim bar = {zB_req(Nv, zc):.2f}, "
               f"false claims = {int(np.nansum(best >= zB_req(Nv, zc)))}")
+
+    rows.append({"basis": tag, "N_trials": round(Nv), "Z_single_stage": round(Z1, 2),
+                 "Z_cut_opt": round(zc_opt, 2), "f_opt": round(f_opt, 2),
+                 "reach_opt": round(r_opt, 2), "cost_opt": round(r_opt - Z1, 2),
+                 "reach_5050_zcut3": round(r_naive, 2), "cost_5050": round(r_naive - Z1, 2),
+                 "k_zcut3": round(Nv * p1(3.0)), "claim_bar_zcut3": round(zB_req(Nv, 3.0), 2),
+                 "toy_best_zcut3": round(toys[3.0][1], 2), "toy_false_claims_zcut3": toys[3.0][2],
+                 "reach_w1": round(wide[1.0][0], 2), "reach_w3": round(wide[3.0][0], 2),
+                 "R_star_w1": round(wide[1.0][2]), "R_star_w3": round(wide[3.0][2])})
+
+out_csv = os.path.join(ROOT, "results", "tables", "ab_split_scan.csv")
+with open(out_csv, "w", newline="") as fh:
+    wr = csv.DictWriter(fh, fieldnames=list(rows[0]))
+    wr.writeheader()
+    wr.writerows(rows)
+print(f"\nwrote {out_csv}")

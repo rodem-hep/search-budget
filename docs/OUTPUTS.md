@@ -20,8 +20,9 @@ the only ones that are not part of `make all`.
 | `CENSUS_REFERENCES.md` | `export_census_bib.py` | all 290 census papers written out in full, numbered, under the spectrum each is counted against |
 | `EXCESS_COUNTING.md` | hand-written | expected vs observed 3σ/5σ excesses — the external check on `N` |
 | `REPORTED_EXCESSES.md` | `reported_excesses.py` | the observed side made concrete: every excess ≥3σ reported in the 290 census abstracts |
+| `ESTIMATOR_DEFECTS.md` | `estimator_defects.py` | the published defect rate of one network scanner, the trials inflation it implies, and what that does to each procedure |
 | `MAX_OF_GAUSSIANS.md` | hand-written | the statistics: argmax vs threshold vs Benjamini-Hochberg |
-| `TWO_STAGE_UNBLINDING.md` | hand-written | the A/B split strategy, reach and caveats |
+| `TWO_STAGE_UNBLINDING.md` | hand-written | the A/B split strategy, reach and caveats, priced on both the model space and the combinatorial scan |
 
 ## Tables — `results/tables/`
 
@@ -35,12 +36,17 @@ the only ones that are not part of `make all`.
 | `census_budget.csv` | `census_budget.py` — one row per (published search, axis): the range it scanned, where that range came from, `r` and `n_s` |
 | `reported_excesses.csv` | `reported_excesses.py` — per paper: largest quoted local/global significance and the abstract sentence behind it |
 | `composition_gap.txt` | `composition_gap.py` (also writes the LaTeX fragment below) |
-| `scaled_scan.csv`, `priority_scan.csv`, `lens_scan.csv`, `scaled_scan.txt` | `scaled_scan.py` — the ten-object scan with MET in the masses: one row per variant, per composition what the trials budget keeps or drops, per selection lens what it adds and what survives, and the report |
+| `scaled_scan.csv`, `priority_scan.csv`, `lens_scan.csv`, `scan_summary.csv`, `scaled_scan.txt` | `scaled_scan.py` — the ten-object scan with MET in the masses: one row per variant, per composition what the trials budget keeps or drops, per (dataset, selection lens) how many views it could reach, its efficiency, how many survive the statistics requirement and what they cost, one summary row per dataset (`scan_summary.csv`: combinations, categories, fittable spectra, tiers, motivated share, lens totals, the yield-anchor variations), and the report |
 | `two_body_matrix.csv` | `two_body_matrix.py` — every pair of grid objects: scanned or not, and the looks it costs either way |
 | `model_spectrum_map.csv` | `export_model_map_tex.py` — per spectrum: `n_s`, the model classes pointing at it, the event-selection multiplicity and what those selections are |
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh_fdr_ab.py` (the `.npz` is the Monte Carlo cache) |
 | `bh_zcut_per_pe.csv` | `bh_zcut.py` |
 | `bh_outliers_scan.npz` | `bh_fdr_outliers.py` (Monte Carlo cache) |
+| `selection_rules.csv` | `bh_fdr_outliers.py` — per (estimator defect, signal strength): the confirmation probability of each rule at the common false-alarm budget, the nominal FDR that buys it, and how often the argmax *is* the signal |
+| `ab_split_scan.csv` | `ab_split_budget.py` — the two-stage design priced on each basis: single-stage bar, optimised and 50/50 reach, the pre-registered list at `Z_cut = 3` with its claim bar and background-only toys, and the break-even trials inflation `R*` |
+| `estimator_defects.csv` | `estimator_defects.py` — the published defect rates, the looks behind them and everything derived from them |
+| `ab_split_toys.csv` | `ab_split_toys.py` — the 50%-power reach of each procedure, toys against the analytic formula |
+| `ab_guard_toys.csv` | `ab_spurious_guard.py` — the two toy spectra of the guard figure: what stage A flagged, what stage B showed, and the claim bar |
 
 ## LaTeX fragments — `results/tex/`
 

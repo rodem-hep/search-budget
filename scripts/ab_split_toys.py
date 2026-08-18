@@ -132,6 +132,17 @@ print(f"  50%-power points (toys): single {z50['single']:.2f}, f=0.22 {z50['opt'
       f"50/50 {z50['50/50']:.2f}   (analytic reach {reach['single']:.2f} / "
       f"{reach['opt']:.2f} / {reach['50/50']:.2f})")
 
+import csv as _csv
+with open(os.path.join(ROOT, "results", "tables", "ab_split_toys.csv"), "w", newline="") as _f:
+    _w = _csv.writer(_f)
+    _w.writerow(["procedure", "N_trials", "reach_analytic", "reach_toys", "toy_minus_analytic"])
+    for _k, _lbl in (("single", "single stage on the full dataset"),
+                     ("opt", f"optimised split, f = {F_OPT:g}, Z_cut = {Z_CUT:g}"),
+                     ("50/50", f"naive 50/50 split, Z_cut = {Z_CUT:g}")):
+        _w.writerow([_lbl, f"{N:.0f}", f"{reach[_k]:.2f}", f"{z50[_k]:.2f}",
+                     f"{z50[_k]-reach[_k]:+.2f}"])
+print("wrote results/tables/ab_split_toys.csv")
+
 def toy_power_sym(mu, f, zcut, ntoy=1500):
     gA = rng.standard_normal((ntoy, N)); gB = rng.standard_normal((ntoy, N))
     gA[:, 0] += math.sqrt(f) * mu; gB[:, 0] += math.sqrt(1 - f) * mu

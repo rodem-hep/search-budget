@@ -15,12 +15,16 @@ signal-region bins) across all ATLAS searches.
 
 | level | independent looks N | basis |
 |---|---:|---|
-| our bump-hunt budget (public channels, published windows) | ~2.5e3 | this study, `SEARCH_BUDGET.md` |
+| the model space, published windows | **3,685** | this study, `SEARCH_BUDGET.md` |
+| the published ATLAS record, priced entry by entry | **7,710** | this study, `CENSUS_BUDGET.md` |
 | ATLAS two-body invariant-mass searches | ~2-3e4 | lit. quotes **>50,000** two-body-mass looks LHC-wide (ATLAS ~ half) |
 | **full ATLAS BSM program (+SUSY/exotics SRs)** | **~5e4** | ~300-500 searches x ~O(100) effective looks each ("a typical search now has hundreds of signal regions") |
 
-Central **N ~ 5e4**, defensible range **1e4 - 1e5**. N is the dominant uncertainty (~x10), but the
-conclusion is robust across the whole span.
+The two counted rows are what this repository enumerates; the literature rows are a broader object
+(signal regions of counting experiments included) and are quoted only to show the enumeration lands
+in the same order of magnitude. The check below is run on the census row, **N = 7,710**, because
+that is the program whose excesses the record actually reports. N spans a factor ~10 across the
+whole ladder, and the conclusion is robust over all of it.
 
 ## 2. Expected under background-only
 One-sided Gaussian tail `p(>=Z) = 0.5*erfc(Z/sqrt2)`: `p(3s)=1.35e-3`, `p(5s)=2.87e-7`.
@@ -28,25 +32,29 @@ Expected count = `N * p`:
 
 | N_trials | expected >=3s | expected >=5s (spurious) |
 |---:|---:|---:|
+| **the model space (3,685)** | **5.0** | **0.0011** |
+| **the published record (7,710)** | **10.4** | **0.0022** |
+| the selection-level model space (6,597) | 8.9 | 0.0019 |
 | 1e4 | 14 | 0.003 |
-| **5e4 (central)** | **~67** | **~0.014** |
+| 5e4 (the literature's program-wide count) | ~67 | ~0.014 |
 | 1e5 | 135 | 0.029 |
-| resonance subset (2.5e3) | ~3.4 | 7e-4 |
 
-**Prediction: tens (~15-135) of >=3-sigma local excesses, and ~0.01 (i.e. none) spurious >=5-sigma.**
+**Prediction on the counted bases: 5 to 10 local >=3-sigma excesses over the resonance program, and
+~0.002 (i.e. none) spurious >=5-sigma.** Widened to the whole ATLAS program the first becomes tens.
 
 ## 3. Observed
 **For the resonance subset the observed side is now measured rather than anecdotal:**
 `REPORTED_EXCESSES.md` mines the abstracts of the 290 census papers and finds **6 reported local
-excesses >= 3 sigma** (every quoted global <= 2.1s), against 5.0 expected per background-only
-sweep of the 46-spectrum budget (8.9 at selection granularity).
+excesses >= 3 sigma** (every quoted global <= 2.1s), inside the **5 to 10** a background-only sweep
+expects -- 5.0 over the 46 axes of the model space, 10.4 over the census that produced those
+abstracts. Expected and observed agree with no adjustment of any kind.
 
 **Program-wide, take the number from the curated catalogue** rather than from a list of remembered
 excesses: the LHC BSM Working Group keeps the list of excesses currently open, grouped by signature,
 admitting anything above **2.4 sigma local** whatever the search type:
 <https://lhc-bsm-wg.docs.cern.ch/excesses/> (steering committee, updated ~6-monthly). Restricted to
 ATLAS, as the rest of this study is, it holds **~20 entries**, the largest at **3.5 sigma local**,
-**none reaching 5 sigma** and **no quoted global above ~2.5 sigma**. (Two independent reads of the
+**none reaching 5 sigma** and **none above 2.8 sigma global**. (Two independent reads of the
 page gave 18 and 21 entries and 3.5 / 3.6 sigma for the largest, so quote it as "about twenty" and
 "about 3.5 sigma" unless someone counts by hand.)
 
@@ -64,10 +72,25 @@ Scope differences to respect before comparing it with our numbers:
 exactly zero.
 
 ## 4. Verdict -- consistent with background
-| | expected (N~5e4) | observed |
+| | expected (census, N=7,710) | observed |
 |---|---:|---|
-| >=3s local | ~15-135 | ~tens, all faded  OK |
-| >=5s spurious | ~0.01 | 0  OK |
+| >=3s local | 10.4 | 6 in the abstracts, ~20 open in the WG catalogue, all faded  OK |
+| >=5s spurious | 0.0022 | 0  OK |
+
+## 4b. What a local 5 sigma is worth
+Turning the same relation round, `Z_global = sqrt(Z_local^2 - 2 ln N)` prices a fully agnostic
+find:
+
+| basis | N | a local 5s is globally |
+|---|---:|---|
+| the published record | 7,710 | **2.7 sigma** |
+| the combinatorial scan, Run 2+3 | 2.0e5 | 0.8 sigma |
+| ... with the selection lenses | 3.6e5 | **nothing at all**: `25 - 2 ln N < 0` |
+
+The lensed scan crosses `N = e^12.5 = 2.7e5`, past which no local significance whatever can be
+called a 5 sigma global discovery on this arithmetic, and 5 sigma global demands 7.1 sigma local.
+That is the threshold recommendation of arXiv:2605.24441 reached from the trials side rather than
+from the literature.
 
 The parade of 3-sigma "hints" that come and go is **not a mystery** -- it is the expected rate of
 statistical noise once ~1e4-1e5 looks are multiplied by the 3-sigma tail. The complete absence of a
