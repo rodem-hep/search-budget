@@ -93,7 +93,7 @@ def band(N):
     return (f"N = {N:,.0f}  (r x0.5..x2 -> {N*0.5:,.0f}-{N*2:,.0f});  "
             f"Z_local(5s global) = {z5(N):.2f}  ({z5(N*0.5):.2f}-{z5(N*2):.2f})")
 
-print(f"census entries: {len(rows)}   priced looks: {len(priced)} "
+print(f"census entries: {len(rows)}   priced pairs: {len(priced)} "
       f"({len(on_axis)} on a budget axis, {len(off_axis)} off-axis, {n_fixed} fixed-mass)")
 print(f"unpriced      : {len(unpriced)} ({len(no_range)} publish no range, "
       f"{len(no_axis_declared)} declare no single axis)")
@@ -132,7 +132,7 @@ def md_entries():
         lines.append(f"| {row['family']} | {row['spectrum']} | "
                      f"{'`'+axis+'`' if axis else '-'} | {win} | {src} | {r:g} | "
                      f"{ns:.0f} |")
-    lines.append(f"| | **total ({len(rows)} entries, {len(priced)} priced looks)** | | | | | "
+    lines.append(f"| | **total ({len(rows)} entries, {len(priced)} priced pairs)** | | | | | "
                  f"**{N_entry:,.0f}** |")
     return "\n".join(lines)
 

@@ -219,7 +219,7 @@ so the agreement says the program scans almost exactly the axes the models motiv
 | Generic & other | Displaced diphoton / dielectron | - | - | **unpriced** | 0.06 | 0 |
 | Generic & other | B_s invariant mass structure (X(5568)) | - | - | **unpriced** | 0.06 | 0 |
 | Generic & other | Xb -> Upsilon pi pi | - | - | **unpriced** | 0.06 | 0 |
-| | **total (86 entries, 100 priced looks)** | | | | | **7,710** |
+| | **total (86 entries, 100 priced pairs)** | | | | | **7,710** |
 
 ## Assumptions & caveats
 - **The axis assignment is a curated judgement**, recorded per row in `data/published_spectra.csv`
