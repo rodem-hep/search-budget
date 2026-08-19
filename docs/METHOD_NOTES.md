@@ -239,25 +239,29 @@ The enumeration is 2412 categories and 21644 possible histograms; **3603** of th
 first spectrum that does not (rather than topping up with whatever cheap spectrum still fits the
 remainder).
 
-0. **every model-motivated composition once**, in the best-populated category that can form it, so
-   no motivated axis can be lost to the budget. `MOTIVATED` maps each of the 56 observables of the model-driven
-   budget onto the composition(s) a scan would build it from; 52 of them have one (`m(multi)` has no
-   fixed composition, and the three `mT` axes need MET in the mass), and they collapse onto **48
-   distinct compositions**, of which 46 can be fitted somewhere (`m(tautau)` and `m(Zt)` cannot);
-1. **those same compositions in their remaining categories**, highest yield first;
+0. **the spectra a public model actually predicts**: the category is a final state some class
+   produces and the mass sits on the sub-system of it that resonates, declared per axis in
+   `FINAL_STATES` and applied by `predicted_axes`. On Run 2 that is 119 (final state, mass) pairs
+   in 69 categories, 162 histograms. `MOTIVATED` maps each of the 63 observables of the
+   model-driven budget onto the composition(s) a scan would build it from; 59 of them have one
+   (`m(multi)` has no fixed composition, and the three `mT` axes need MET in the mass), and they
+   collapse onto **55 distinct compositions**, of which 53 can be fitted somewhere (`m(tautau)`
+   and `m(Zt)` cannot);
+1. **those same mass compositions in categories no model produces**, highest yield first;
 2. **everything else**, highest yield first.
 
 Yield is `yield_model.F` multiplied over the category's content, i.e. the same model that decides
-fittability, so "best-populated first" means most background events. Tier 0 costs 3.4e3 looks against
-the 4.1e3 of the model-driven budget, which is the one place the two prescriptions can be checked
-against each other.
+fittability, so "best-populated first" means most background events. Tier 0 costs 8.5e3 looks on
+Run 2 against the 4.3e3 of the model-driven budget; the difference is the scan's own multiplicity,
+since a four-jet category offers six jet pairings and each of them is a histogram someone has to
+fit.
 
-The same split also measures how much of a combinatorial scan theory motivates at all, so the report
-prints it per dataset: the tier boundaries move with fittability. On Run 2 the tiers hold 53 / 2288 /
-1262 spectra, i.e. 2341 of 3603 (65 %) on a model-motivated axis over 46 of 217 fittable compositions;
-on Run 2 + Run 3, 55 / 2702 / 1681, i.e. 2757 of 4438 (62 %) over 47 of 258. The motivated set is
-bounded above by the 56 axes and the rest of the scan is not bounded at all, so the share falls as the
-dataset grows.
+Tier 0 is also what "theory motivated" means in the scan's units, and the report prints the split
+per dataset: the tier boundaries move with fittability. On Run 2 the tiers hold 162 / 2445 / 996
+spectra, so 162 of 3603 (4.5 %) are predicted; on Run 2 + Run 3, 164 / 2944 / 1330, so 164 of 4438
+(3.7 %). Tier 1 is not a weaker kind of motivation. `m(jj)` in a category that also holds two
+electrons and a photon is a mass nobody predicts, and counting tier 1 in would put the share above
+60 %, a number this repository no longer quotes anywhere.
 
 Counting basis: a *spectrum* here is one axis in one category, i.e. one fitted histogram, and an
 OS/SS-split category holds two of them. `charge_split` is therefore the weight in every spectrum count

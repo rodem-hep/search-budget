@@ -208,7 +208,7 @@ def main(options=None):
                   f"({ch if ch else 'baseline value, no symmetric channel'})")
         print(f"  {MET_KEY}  {WIDE[MET_KEY][0]:12s} {'':14s} yield {YM.F[MET_KEY]:8.1e}   "
               f"(a category split, never a mass)")
-        print(f"\nmodel-motivated compositions: {len(MOTIVATED_COMPS)} from "
+        print(f"\ncompositions that carry a catalogue mass axis: {len(MOTIVATED_COMPS)} from "
               f"{sum(1 for v in MOTIVATED.values() if v)} of the {len(MOTIVATED)} axes "
               f"(no composition for {', '.join(k for k, v in MOTIVATED.items() if v is None)})")
 
@@ -301,7 +301,7 @@ def main(options=None):
               f"({100*_nn/full.n_hist:.0f} %), carrying {100*_nl/full.N:.0f} % of N; "
               f"two-body groups are {100*full.by_size[2]/full.n_hist:.0f} % of the spectra")
         _lost = sorted(MOTIVATED_COMPS - set(full.by_type))
-        print(f"motivated compositions with no fittable histogram in any category: "
+        print(f"catalogue-axis compositions with no fittable histogram in any category: "
               f"{', '.join(_lost) if _lost else 'none'}")
         print()
         print(f"=== priority prefix that fits N <= {TRIALS_BUDGET:,.0f}")
@@ -348,7 +348,7 @@ def main(options=None):
             else:
                 what = f"{len(comps)} compositions: " + " ".join(comps[:6]) + \
                        (" ..." if len(comps) > 6 else "") + \
-                       (f"  (+{len(extra)} unmotivated)" if extra else "  (all motivated)")
+                       (f"  (+{len(extra)} off-catalogue)" if extra else "  (all on catalogue axes)")
             print(f"  {k} {WIDE[k][0]:12s} {tot:9,d} {sel:9,d} {lk:12,.0f}   {what}")
         print()
 
@@ -360,7 +360,7 @@ def main(options=None):
         print()
         print("costliest compositions that are kept:")
         for c in sorted(kept_looks, key=lambda c: -kept_looks[c])[:15]:
-            tag = "motivated" if c in MOTIVATED_COMPS else "by rate"
+            tag = "catalogue axis" if c in MOTIVATED_COMPS else "by rate alone"
             print(f"  {c:6s} {kept_n[c]:6,d} of {full.by_type[c]:6,d} spectra, "
                   f"{kept_looks[c]:9,.0f} looks   ({tag})")
         print()
@@ -558,8 +558,9 @@ def main(options=None):
 
     io.write_rows(
         paths.table("priority_scan.csv"),
-        ["composition", "K", "tier", "spectra_total", "spectra_kept", "looks_total", "looks_kept"],
-        [[c, len(c), "motivated" if c in MOTIVATED_COMPS else "rate", full.by_type[c],
+        ["composition", "K", "mass_axis", "spectra_total", "spectra_kept", "looks_total",
+         "looks_kept"],
+        [[c, len(c), "in catalogue" if c in MOTIVATED_COMPS else "none", full.by_type[c],
           kept_n.get(c, 0), f"{full.looks[c]:.0f}", f"{kept_looks.get(c, 0.0):.0f}"]
          for c in sorted(full.by_type, key=lambda c: (len(c), -full.looks[c]))])
 

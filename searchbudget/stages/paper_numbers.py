@@ -261,12 +261,6 @@ def main(options=None):
         ("tier (iii), no model points at the composition",
          f"{int(r23['tier2_spectra']):,} spectra, `N = {float(r23['tier2_looks']):,.0f}`",
          "`scan_summary.csv`"),
-        ("the share theory motivates",
-         f"{int(r23['motivated_spectra']):,} of {int(r23['fittable_spectra']):,} spectra "
-         f"(**{float(r23['motivated_frac']):.1%}**), over "
-         f"{int(r23['final_states_predicted'])} (final state, mass) pairs; the category has to be "
-         f"one the models produce, not just the mass observable",
-         "`scan_summary.csv`, per composition in `priority_scan.csv`"),
         ("selection lenses", f"{reach:,} conceivable views, {thin:,} ruled out by statistics, "
          f"{views:,} survive carrying {lens_looks:,.0f} looks", "`lens_scan.csv`"),
         ("the lensed scan", f"{int(r23['lensed_histograms']):,} histograms "

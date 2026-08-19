@@ -11,7 +11,7 @@ object alphabet: resolution and yield factor from the published symmetric channe
   Z  leptonic Z   sigma = 0.040  yield  1.0e-05   (baseline value, no symmetric channel)
   X  MET                         yield  3.0e-03   (a category split, never a mass)
 
-model-motivated compositions: 55 from 59 of the 63 axes (no composition for m(multi), mT(ev), mT(muv), mT(taunu))
+compositions that carry a catalogue mass axis: 55 from 59 of the 63 axes (no composition for m(multi), mT(ev), mT(muv), mT(taunu))
 the requirement is never applied to a published window. On the 59 published axes this alphabet can form it would leave 46 of them and N = 3,090 of 4,207, so exempting them is the conservative choice
 
 === five objects, lepton trigger  (5 object types, K<=4 objects per mass, <=4 per category, lepton required)
@@ -63,7 +63,7 @@ tier 1, those masses, other categories :  2,445 spectra, N =    116,612 (72.4 %)
 tier 2, the rest                       :    996 spectra, N =     35,908 (22.3 %)
 tiers 0+1 together: N = 125,112, which is 0.25 times the budget on its own
 spectra reaching a new object type: 1,944 of 3,603 (54 %), carrying 54 % of N; two-body groups are 74 % of the spectra
-motivated compositions with no fittable histogram in any category: TT, Zt
+catalogue-axis compositions with no fittable histogram in any category: TT, Zt
 
 === priority prefix that fits N <= 500,000
 selected 3,603 of 3,603 spectra (100.0 %) over 217 of 217 compositions and 844 of 2,412 categories
@@ -78,36 +78,36 @@ yield anchor scaled (the model's own uncertainty): spectra, N, Z_local
   x100      7,768 of  21,644 histograms, N =     371,282, Z_local = 7.12
 
 object type    spectra in scan  selected   kept looks   what survives
-  e e                1,080     1,080       55,320   59 compositions: eg ee ej em Ve be ...  (+45 unmotivated)
-  m mu                 818       818       30,327   54 compositions: jm em gm mm bm Vm ...  (+40 unmotivated)
-  T tau_had            175       175        5,323   21 compositions: Tj Tjj Te Tm Tg Tej ...  (+14 unmotivated)
-  g gamma              939       939       52,002   63 compositions: gg eg gj gm Vg bg ...  (+54 unmotivated)
-  j light jet        2,040     2,040       87,423   138 compositions: ej jj gj jm Vj bj ...  (+121 unmotivated)
-  b b-jet              731       731       23,469   64 compositions: bj be bm bg bb Vb ...  (+54 unmotivated)
-  t boosted top        184       184        6,021   28 compositions: jt jjt gt et bjt gjt ...  (+19 unmotivated)
-  V boosted W/Z        631       631       22,598   58 compositions: Vj Ve Vg Vm Vb Vjj ...  (+51 unmotivated)
-  H boosted H          252       252        8,091   31 compositions: Hj Hg Hjj He Hb HV ...  (+25 unmotivated)
-  Z leptonic Z         119       119        4,642   15 compositions: Zj Zg Zjj Ze Zm Zgj ...  (+12 unmotivated)
+  e e                1,080     1,080       55,320   59 compositions: eg ee ej em Ve be ...  (+45 off-catalogue)
+  m mu                 818       818       30,327   54 compositions: jm em gm mm bm Vm ...  (+40 off-catalogue)
+  T tau_had            175       175        5,323   21 compositions: Tj Tjj Te Tm Tg Tej ...  (+14 off-catalogue)
+  g gamma              939       939       52,002   63 compositions: gg eg gj gm Vg bg ...  (+54 off-catalogue)
+  j light jet        2,040     2,040       87,423   138 compositions: ej jj gj jm Vj bj ...  (+121 off-catalogue)
+  b b-jet              731       731       23,469   64 compositions: bj be bm bg bb Vb ...  (+54 off-catalogue)
+  t boosted top        184       184        6,021   28 compositions: jt jjt gt et bjt gjt ...  (+19 off-catalogue)
+  V boosted W/Z        631       631       22,598   58 compositions: Vj Ve Vg Vm Vb Vjj ...  (+51 off-catalogue)
+  H boosted H          252       252        8,091   31 compositions: Hj Hg Hjj He Hb HV ...  (+25 off-catalogue)
+  Z leptonic Z         119       119        4,642   15 compositions: Zj Zg Zjj Ze Zm Zgj ...  (+12 off-catalogue)
 
 compositions dropped entirely, costliest first:
   ... 0 of 217 compositions dropped entirely
 
 costliest compositions that are kept:
-  gg        113 of    113 spectra,    11,519 looks   (motivated)
-  eg        147 of    147 spectra,    11,482 looks   (motivated)
-  ee        152 of    152 spectra,    10,968 looks   (motivated)
-  ej        199 of    199 spectra,    10,667 looks   (motivated)
-  jj        185 of    185 spectra,    10,648 looks   (motivated)
-  gj        154 of    154 spectra,     8,666 looks   (motivated)
-  jm        175 of    175 spectra,     7,560 looks   (motivated)
-  Vj        134 of    134 spectra,     5,525 looks   (motivated)
-  bj        142 of    142 spectra,     5,126 looks   (motivated)
-  em         97 of     97 spectra,     3,981 looks   (motivated)
-  gm         93 of     93 spectra,     3,643 looks   (motivated)
-  Hj         79 of     79 spectra,     2,735 looks   (motivated)
-  Ve         69 of     69 spectra,     2,553 looks   (by rate)
-  Vg         69 of     69 spectra,     2,525 looks   (motivated)
-  mm         67 of     67 spectra,     2,386 looks   (motivated)
+  gg        113 of    113 spectra,    11,519 looks   (catalogue axis)
+  eg        147 of    147 spectra,    11,482 looks   (catalogue axis)
+  ee        152 of    152 spectra,    10,968 looks   (catalogue axis)
+  ej        199 of    199 spectra,    10,667 looks   (catalogue axis)
+  jj        185 of    185 spectra,    10,648 looks   (catalogue axis)
+  gj        154 of    154 spectra,     8,666 looks   (catalogue axis)
+  jm        175 of    175 spectra,     7,560 looks   (catalogue axis)
+  Vj        134 of    134 spectra,     5,525 looks   (catalogue axis)
+  bj        142 of    142 spectra,     5,126 looks   (catalogue axis)
+  em         97 of     97 spectra,     3,981 looks   (catalogue axis)
+  gm         93 of     93 spectra,     3,643 looks   (catalogue axis)
+  Hj         79 of     79 spectra,     2,735 looks   (catalogue axis)
+  Ve         69 of     69 spectra,     2,553 looks   (by rate alone)
+  Vg         69 of     69 spectra,     2,525 looks   (catalogue axis)
+  mm         67 of     67 spectra,     2,386 looks   (catalogue axis)
 
 selection lenses on the same axes, one at a time:
   high HT or Meff      activity outside the mass          eff 0.100   2,134 views    89,633 looks,  1,145 too thin
