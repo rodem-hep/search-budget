@@ -94,10 +94,13 @@ def main(options=None):
     reach = views + thin
     lens_looks = sum(float(x["looks_kept"]) for x in lenses)
 
-    gaps = [r for r in twobody if r["status"] != "scanned"]
+    gaps = [r for r in twobody if r["status"].startswith("gap")]
     gap_looks = sum(float(r["ns"]) for r in gaps)
     gap_lo = min(gaps, key=lambda r: float(r["ns"]))
     gap_hi = max(gaps, key=lambda r: float(r["ns"]))
+    unsc2b = [r for r in twobody if r["axes_unscanned"]]
+    unsc2b_axes = sum(len(r["axes_unscanned"].split("; ")) for r in unsc2b)
+    unsc2b_looks = sum(float(r["ns_unscanned"]) for r in unsc2b)
     ee = next(r for r in twobody if r["object_1"] == "e" and r["object_2"] == "e")
 
     lensed_ab = ab["lensed scan"]
@@ -269,6 +272,11 @@ def main(options=None):
          f"{float(gap_hi['ns']):.0f} (`{gap_hi['object_1']}{gap_hi['object_2']}`); closing all of them "
          f"takes `N` {N_model:,.0f} → {N_model+gap_looks:,.0f} and `Z_local` {z5(N_model):.2f} → "
          f"{z5(N_model+gap_looks):.2f}", "`two_body_matrix.csv`"),
+        ("two-body axes no published search scans",
+         f"{unsc2b_axes} axes over {len(unsc2b)} pairs ("
+         + ", ".join(f"`{r['object_1']}{r['object_2']}`" for r in unsc2b)
+         + f"), {unsc2b_looks:,.0f} looks already inside the model space's `N`",
+         "`two_body_matrix.csv`"),
         ("the costliest compositions", ", ".join(
             f"`{c.split(':')[0]}` ({float(c.split(':')[1]):,.0f})"
             for c in r23["costliest_compositions"].split("; ")[:4]),

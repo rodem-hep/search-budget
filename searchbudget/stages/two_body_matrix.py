@@ -46,10 +46,14 @@ GAP_WINDOW = (100.0, 5000.0)
     group="budget",
     summary="every pair of grid objects: scanned or not, and what the gap would cost",
     outputs=["tex/two_body_matrix.tex", "tables/two_body_matrix.csv"],
+    needs=["tables/census_budget.csv"],
 )
 def main(options=None):
     by_obs = models_by_spectrum()
     order = canonical_order(by_obs)
+
+    published = {r["budget_axis"] for r in io.read_rows(paths.table("census_budget.csv"))
+                 if r["budget_axis"] != "-" and float(r["n_s"]) > 0}
 
     missing = [o for o in order if o not in PAIR]
     if missing:
@@ -63,12 +67,18 @@ def main(options=None):
 
     spent = collections.defaultdict(float)
     axes = collections.defaultdict(list)
+    unscanned = collections.defaultdict(float)
+    unscanned_axes = collections.defaultdict(list)
     for o in order:
         if PAIR[o] is None:
             continue
         c = cell(*PAIR[o])
-        spent[c] += ns_scan(o)
-        axes[c].append(o)
+        if o in published:
+            spent[c] += ns_scan(o)
+            axes[c].append(o)
+        else:
+            unscanned[c] += ns_scan(o)
+            unscanned_axes[c].append(o)
 
     sigma = {k: 2.0 * res(SYM[k]) for k in KEYS}
 
@@ -79,7 +89,8 @@ def main(options=None):
         return ns if fits else 0.0
 
     cells = [cell(a, b) for i, a in enumerate(KEYS) for b in KEYS[i:]]
-    gaps = [c for c in cells if c not in spent]
+    gaps = [c for c in cells if c not in spent and c not in unscanned]
+    unscanned_only = [c for c in cells if c in unscanned and c not in spent]
     thin = [c for c in gaps if gap_price(*c) == 0.0]
     gap_total = sum(gap_price(*c) for c in gaps)
     n_now = sum(ns_scan(o) for o in order)
@@ -97,8 +108,12 @@ def main(options=None):
             row += [""] * i
             for b in KEYS[i:]:
                 c = cell(a, b)
-                if c in spent:
+                if c in spent and c in unscanned:
+                    row.append(f"{spent[c]:.0f}\\,\\textit{{[{unscanned[c]:.0f}]}}")
+                elif c in spent:
                     row.append(f"{spent[c]:.0f}")
+                elif c in unscanned:
+                    row.append(f"\\textit{{[{unscanned[c]:.0f}]}}")
                 else:
                     p = gap_price(*c)
                     row.append(f"\\textit{{({p:.0f})}}" if p else "\\textit{(--)}")
@@ -107,18 +122,28 @@ def main(options=None):
 
     table = []
     for c in cells:
+        extra = [f"{unscanned[c]:.1f}" if c in unscanned else "0.0",
+                 "; ".join(sorted(unscanned_axes[c]))]
         if c in spent:
             table.append([c[0], c[1], "scanned", f"{spent[c]:.1f}", len(axes[c]),
-                          "; ".join(sorted(axes[c]))])
+                          "; ".join(sorted(axes[c]))] + extra)
+        elif c in unscanned:
+            table.append([c[0], c[1], "axes unscanned", "0.0", 0, ""] + extra)
         else:
             p = gap_price(*c)
-            table.append([c[0], c[1], "gap" if p else "gap, too thin to fit", f"{p:.1f}", 0, ""])
+            table.append([c[0], c[1], "gap" if p else "gap, too thin to fit",
+                          f"{p:.1f}", 0, ""] + extra)
     io.write_rows(paths.table("two_body_matrix.csv"),
-                  ["object_1", "object_2", "status", "ns", "n_axes", "axes"], table)
+                  ["object_1", "object_2", "status", "ns", "n_axes", "axes",
+                   "ns_unscanned", "axes_unscanned"], table)
 
     print("wrote results/tex/two_body_matrix.tex, results/tables/two_body_matrix.csv")
-    print(f"{len(cells)} pairs: {len(spent)} scanned, {len(gaps)} with no axis in the catalogue, "
+    print(f"{len(cells)} pairs: {len(spent)} scanned, {len(unscanned_only)} priced in the budget "
+          f"with no published search, {len(gaps)} with no axis in the catalogue, "
           f"of which {len(thin)} cannot hold a fittable histogram")
+    print("unscanned axes: " + "; ".join(
+        f"{'-'.join(c)}: {', '.join(sorted(unscanned_axes[c]))} ({unscanned[c]:.0f} looks)"
+        for c in cells if c in unscanned))
     print(f"gaps: {sorted('-'.join(c) for c in gaps)}")
     print(f"too thin: {sorted('-'.join(c) for c in thin)}")
     print(f"closing every gap: N {n_now:,.0f} -> {n_now + gap_total:,.0f} "
