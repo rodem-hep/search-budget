@@ -267,7 +267,7 @@ def main(options=None):
          f"would keep {r23['published_axes_gated']} of {r23['published_axes_total']} axes and "
          f"{float(r23['published_looks_gated']):,.0f} of {float(r23['published_looks_total']):,.0f} "
          "looks, so exempting them is conservative", "`scan_summary.csv`"),
-        ("the two-body grid", f"{len(gaps)} unscanned pairs cost {gap_looks:,.0f} looks, from "
+        ("the two-body grid", f"{len(gaps)} pairs with no catalogue axis cost {gap_looks:,.0f} looks, from "
          f"{float(gap_lo['ns']):.0f} (`{gap_lo['object_1']}{gap_lo['object_2']}`) to "
          f"{float(gap_hi['ns']):.0f} (`{gap_hi['object_1']}{gap_hi['object_2']}`); closing all of them "
          f"takes `N` {N_model:,.0f} → {N_model+gap_looks:,.0f} and `Z_local` {z5(N_model):.2f} → "

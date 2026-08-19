@@ -227,8 +227,8 @@ def main(options=None):
              Dir("tight", None, sc(MIN_EVENTS=EV_BAND[1], MIN_BINS=BIN_BAND[1]))],
             "systematic", None,
             rf"{EV_BAND[0]:.0f}--{EV_BAND[1]:.0f} events, {BIN_BAND[0]}--{BIN_BAND[1]} elements"),
-        Src("the axis set", f"non-peaking axes and the dilepton overlap dropped; the {_ngap} unscanned "
-                            f"two-body pairs added",
+        Src("the axis set", f"non-peaking axes and the dilepton overlap dropped; the {_ngap} "
+                            f"two-body pairs with no catalogue axis added",
             [Dir("dropped", N_model(axes=[o for o in AXES if o not in _nonpeak],
                                     extra=-overlap_looks()), None),
              Dir("added", N_model(extra=_gap), None)], "systematic", None,

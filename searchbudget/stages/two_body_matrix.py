@@ -108,12 +108,10 @@ def main(options=None):
             row += [""] * i
             for b in KEYS[i:]:
                 c = cell(a, b)
-                if c in spent and c in unscanned:
-                    row.append(f"{spent[c]:.0f}\\,\\textit{{[{unscanned[c]:.0f}]}}")
-                elif c in spent:
+                if c in spent:
                     row.append(f"{spent[c]:.0f}")
                 elif c in unscanned:
-                    row.append(f"\\textit{{[{unscanned[c]:.0f}]}}")
+                    row.append(f"\\textit{{({unscanned[c]:.0f})}}")
                 else:
                     p = gap_price(*c)
                     row.append(f"\\textit{{({p:.0f})}}" if p else "\\textit{(--)}")

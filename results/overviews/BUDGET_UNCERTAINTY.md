@@ -29,7 +29,7 @@ sits on: its total band is +0.24/-0.32 against the scan's
 | yield anchor | N_ref x0.01 to x100 | +0.00/+0.00 | +0.11/-0.15 | +0.11/-0.15 |
 | background slope | P = 6 to 8 | +0.00/+0.00 | +0.01/-0.01 | +0.01/-0.01 |
 | fittability requirement | 30-300 events, 15-50 elements | +0.00/+0.00 | +0.04/-0.12 | +0.04/-0.12 |
-| the axis set | non-peaking axes and the dilepton overlap dropped; the 11 unscanned two-body pairs added | +0.02/-0.00 | +0.00/+0.00 | +0.00/-0.02 |
+| the axis set | non-peaking axes and the dilepton overlap dropped; the 11 two-body pairs with no catalogue axis added | +0.02/-0.00 | +0.00/+0.00 | +0.00/-0.02 |
 | the definition of one look | N x0.5 to x Z/sqrt(2 pi) | +0.14/-0.11 | +0.15/-0.10 | +0.01/+0.00 |
 | the closed-form LEE relation | exact Gaussian-tail solution instead | +0.00/-0.04 | +0.00/-0.05 | +0.00/-0.01 |
 | **total** | in quadrature | **+0.18/-0.16** | **+0.23/-0.31** | **+0.12/-0.23** |
