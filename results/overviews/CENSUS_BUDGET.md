@@ -26,7 +26,7 @@ A fixed-mass search (LFV `Z` and `tau` decays, exclusive `H`/`Z -> quarkonium + 
 |---|--:|--:|---|--:|---|
 | **published searches** (86 census entries) | 104 | **7,874** | 3,937-15,749 | **6.55** | 6.45-6.66 |
 | axes scanned (union of the ranges) | 54 | **3,837** | 1,918-7,674 | **6.44** | 6.33-6.55 |
-| model-motivated axes (reference, `SEARCH_BUDGET.md`) | 56 | **4,118** | 2,059-8,236 | **6.45** | 6.35-6.56 |
+| model-motivated axes (reference, `SEARCH_BUDGET.md`) | 63 | **4,319** | 2,160-8,638 | **6.46** | 6.35-6.57 |
 
 **Reading it.** Pricing every published ATLAS resonance search over the range it actually scanned
 gives **N = 7,874**, so a 5 sigma global discovery in the published program needs a local
@@ -36,8 +36,8 @@ it, gives **N = 3,837** and **6.44 sigma**. The two bases differ by a factor
 model side: the answer is nearly independent of how finely the program is sliced.
 
 ## Coverage
-The census reaches 44 of the 56 canonical axes. 12 carry no published
-search at all: `m(bgamma)`, `m(cb) dijet`, `m(eb)`, `m(gammajj)`, `m(mub)`, `m(mujj)`, `m(multi)`, `m(taugamma)`, `m(tbj)`, `m(tgamma)`, `m(tt)/m(jj)`, `multilepton`.
+The census reaches 44 of the 63 canonical axes. 19 carry no published
+search at all: `m(bgamma)`, `m(cb) dijet`, `m(eH)`, `m(eb)`, `m(et)`, `m(gammajj)`, `m(jH)`, `m(jV)`, `m(muH)`, `m(mub)`, `m(mujj)`, `m(multi)`, `m(mut)`, `m(tauV)`, `m(taugamma)`, `m(tbj)`, `m(tgamma)`, `m(tt)/m(jj)`, `multilepton`.
 
 10 published entries fall on no canonical axis and are priced on their own published range at
 `r = 0.06`; 10 more fall on no axis **and** carry no chargeable range, so
@@ -47,13 +47,13 @@ no single axis to scan (the anomaly-detection and generic multi-body entries, wh
 "many").
 
 The 64 distinct bump observables the census scans are therefore
-44 of the 56 budget axes, 10 scanned axes outside the 56, and
+44 of the 63 budget axes, 10 scanned axes outside the 56, and
 10 carrying nothing chargeable.
 
 **Why the union basis lands on the model space.** Counting each axis once gives 3,837
-against the model space's 4,118, a gap of 6.8% -- closer than
-it has any right to be, because two omissions cancel. The union misses the 12 model
-axes with no published search, worth 536 looks on the
+against the model space's 4,319, a gap of 11.2% -- closer than
+it has any right to be, because two omissions cancel. The union misses the 19 model
+axes with no published search, worth 737 looks on the
 model side, and it adds 10 scanned axes outside the 56, worth 251. Charging
 neither leaves 3,586 against 3,582
 on the same 44 axes. The robust statement is the ten-percent one, and it is not a

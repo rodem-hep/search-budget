@@ -81,6 +81,13 @@ FLOOR = {
     "m(tj)":         (200, "m_t + jet kin"),
     "m(gammajj)":    (200, "photon + dijet (ISR-style trigger)"),
     "m(tbj)":        (250, "m_t + b + jet kin"),
+    "m(jV)":         (200, "jet + boosted V (large-R V mass)"),
+    "m(jH)":         (250, "jet + boosted h (large-R h mass)"),
+    "m(eH)":         (200, "electron + h(bb) kin"),
+    "m(muH)":        (200, "muon + h(bb) kin"),
+    "m(tauV)":       (100, "hadronic tau + W/Z"),
+    "m(et)":         (200, "electron + m_t kin"),
+    "m(mut)":        (200, "muon + m_t kin"),
 }
 
 def floor(obs, default=FLOOR_DEFAULT):
@@ -109,6 +116,9 @@ RESOLUTION = {
     "m(bgamma)": 0.05, "m(tgamma)": 0.06, "m(taugamma)": 0.08,
     "m(ejj)": 0.05, "m(mujj)": 0.07, "m(taujj)": 0.10,
     "m(bZ)": 0.05, "m(tj)": 0.08, "m(gammajj)": 0.05, "m(tbj)": 0.10,
+    "m(jV)": 0.06, "m(jH)": 0.08,
+    "m(eH)": 0.08, "m(muH)": 0.08, "m(tauV)": 0.10,
+    "m(et)": 0.08, "m(mut)": 0.08,
 }
 
 RESOLUTION_SOURCE = {
@@ -193,6 +203,26 @@ SCAN = {
                                  "omega_T/a_T -> gamma pi_T (0706.2339): no search at any collider"),
     "m(tbj)":        (400, 3000, "MFV RPV gluino -> tbs (1111.1239): counting limits only, "
                                  "no mass scan anywhere"),
+    "m(jV)":         (500, 7000, "q* -> qW/qZ, the gauge decays of the same excited-quark "
+                                 "Lagrangian as the published q*->q gamma grid; no ATLAS search "
+                                 "(CMS light-flavour VLQ partners 1708.02510 cover 0.4-2 TeV)"),
+    "m(jH)":         (400, 3000, "single light-flavour vector-like quark Q -> qH; no search at "
+                                 "any collider (CMS 1708.02510 scans the qW/qZ modes 0.4-2 TeV)"),
+    "m(eH)":         (200, 1500, "vector-like lepton L -> e h and type-III seesaw Sigma -> e h; "
+                                 "no ATLAS search, the lZ partner mode scanned over 100-1100 "
+                                 "(1506.01291)"),
+    "m(muH)":        (200, 1500, "vector-like lepton L -> mu h and type-III seesaw Sigma -> mu h; "
+                                 "no ATLAS search, the lZ partner mode scanned over 100-1100 "
+                                 "(1506.01291)"),
+    "m(tauV)":       (100, 1100, "tau* -> tau Z/W, vector-like lepton and type-III seesaw in "
+                                 "the tau channel: the e/mu trilepton grid (1506.01291, "
+                                 "2011.10543); no ATLAS scan of the tau channel"),
+    "m(et)":         (200, 2000, "leptoquark -> t e (S1/S3/U1 with a third-generation quark leg), "
+                                 "on the lepton + heavy-quark LQ grid (2006.05872); no ATLAS "
+                                 "scan, the LQ3 search covering b tau / t tau only"),
+    "m(mut)":        (200, 2000, "leptoquark -> t mu, the R_K-motivated triplet component, on the "
+                                 "lepton + heavy-quark LQ grid (2006.05872); no ATLAS scan "
+                                 "(CMS covers mu b only)"),
 }
 
 def scan_segments(obs):

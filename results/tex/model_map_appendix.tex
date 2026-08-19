@@ -8,7 +8,7 @@ it, and the published event selections that scan it. Rows follow Figure~\ref{fig
 looks first. The model classes come from the public FeynRules
 database~\cite{feynrules,feynrules_db}, which distributes BSM Lagrangians in the UFO
 format~\cite{ufo} that the LHC generators read, together with the published search record and a
-sweep of the resonance-model literature beyond the database: the 13 classes the
+sweep of the resonance-model literature beyond the database: the 15 classes the
 database does not implement carry their defining references in the table, and a class with no
 reference behind it comes from the database, covered by that single
 reference~\cite{feynrules_db}. One
@@ -17,15 +17,15 @@ entry is a class of models sharing a decay topology rather than a single Lagrang
 implementations peaking in the same spectrum are tested by the same search. Classes whose only
 signature is non-resonant (mono-$X$, anomalous $\mathrm{d}E/\mathrm{d}x$, displaced-only decays)
 are absent, populating no mass spectrum and buying no trials. The map is many-to-many, and its
-off-diagonal weight is what makes breadth cheap: 56 classes make 176
-class--spectrum pairs over 56 spectra, 3.1 per spectrum on average and
+off-diagonal weight is what makes breadth cheap: 58 classes make 211
+class--spectrum pairs over 63 spectra, 3.3 per spectrum on average and
 13 on $m(VV)$.
 
 A channel $c_s$ is a distinct event selection producing its own bump spectrum: a $b$-tag category, a
 boost regime, a sub-decay mode, or an ambiguous object pairing the search histograms both ways. A fit
 category combined into a single limit does not count, and $c_s$ is a multiplicity \emph{within} one
-spectrum, never reaching across to a different final state. That column sums to 104 and
-$\Nsig = \sum_s c_s n_s = 7\,030$, the selections-level entry of
+spectrum, never reaching across to a different final state. That column sums to 111 and
+$\Nsig = \sum_s c_s n_s = 7\,231$, the selections-level entry of
 Table~\ref{tab:granularity}. If a search family does combine its channels, counting each as an
 independent scan over-counts the trials, which is why that level is an upper bracket on the inclusive
 count rather than a replacement for it.
@@ -34,10 +34,10 @@ count rather than a replacement for it.
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.145\textwidth}rrcc%
 >{\raggedright\arraybackslash}p{0.315\textwidth}%
 >{\raggedright\arraybackslash}p{0.28\textwidth}@{}}
-\caption{The 56 spectra of the budget, in the order of Figure~\ref{fig:budget}: the public
+\caption{The 63 spectra of the budget, in the order of Figure~\ref{fig:budget}: the public
 model classes predicting a resonance in each, and the published event selections counted against
 it. The pub.\ column marks the 44 axes at least one published ATLAS search already scans
-(Appendix~\ref{app:census}); the scan column marks the 52 the combinatorial catalogue of
+(Appendix~\ref{app:census}); the scan column marks the 59 the combinatorial catalogue of
 Section~\ref{sec:scaled} can form, the other 4 needing missing energy in
 the mass or, for $m(\mathrm{multi})$, having no fixed object composition.}\label{tab:modelmap}\\
 \toprule
@@ -50,16 +50,16 @@ spectrum & $n_s$ & $c_s$ & pub. & scan & public model classes & event selections
 \midrule
 \endhead
 \midrule
-\multicolumn{2}{@{}l}{total} & 104 & & & & \\
+\multicolumn{2}{@{}l}{total} & 111 & & & & \\
 \bottomrule
 \endlastfoot
-$m(\gamma\gamma)$ & 402 & 2 & yes & yes & ALP, KK graviton (Gstar), Large ED / UED / HEIDI, N2HDM / 2HDM+S (h$\to$aa), Randall-Sundrum / Radion, Vector-like confinement & spin-0 (ggF) + spin-2/VBF (converted/unconverted categories) \\
+$m(\gamma\gamma)$ & 402 & 2 & yes & yes & ALP, KK graviton (Gstar), Large ED / UED / HEIDI, N2HDM / 2HDM+S (h$\to$aa), Randall-Sundrum / Radion, Singlet scalar / SM+Scalars, Vector-like confinement & spin-0 (ggF) + spin-2/VBF (converted/unconverted categories) \\
 $m(\mu\mu)$ (Zd) & 360 & 1 & yes & yes & Dark Z (mass mixing)~\cite{lit:1203.2947,lit:1412.0018}, Hidden Abelian Higgs (HAHM), N2HDM / 2HDM+S (h$\to$aa) & prompt muon lepton-jet / $4\mu$ scan \\
 $m(ee)$ & 265 & 1 & yes & yes & KK graviton (Gstar), Large ED / UED / HEIDI, Leptophilic gauge boson, LRSM / Alt-LRSM, Minimal Z' / U(1), SILH / Little Higgs, Technicolor / TC2 & single dielectron scan (barrel/endcap are fit categories, combined) \\
 $m(ee)$ (Zd) & 240 & 1 & yes & yes & Dark Z (mass mixing)~\cite{lit:1203.2947,lit:1412.0018}, Hidden Abelian Higgs (HAHM) & prompt $e$ lepton-jet / $4e$ scan \\
 $m(e\gamma)$ & 215 & 1 & yes & yes & Excited lepton (l*) & excited electron $e^*$ \\
-$m(e\mu)$ LFV & 146 & 1 & yes & yes & Minimal Z' / U(1), Quantum black hole, Scalar leptoquark (S1), Vector leptoquark (U1) & LFV $e\mu$ \\
-$m(ee)$ SS & 125 & 1 & yes & yes & Georgi-Machacek, Type-II seesaw, Zee-Babu~\cite{lit:1402.4491,lit:2206.14833} & $H^{++}$ same-sign $ee$ \\
+$m(e\mu)$ LFV & 146 & 1 & yes & yes & Minimal Z' / U(1), Quantum black hole, RPV resonant slepton~\cite{lit:hep-ph/0001224,lit:1201.5014}, Scalar leptoquark (S1), Vector leptoquark (U1) & LFV $e\mu$ \\
+$m(ee)$ SS & 125 & 1 & yes & yes & Bilepton (331)~\cite{lit:1806.04536,lit:1812.02723}, Georgi-Machacek, Type-II seesaw, Zee-Babu~\cite{lit:1402.4491,lit:2206.14833} & $H^{++}$ same-sign $ee$ \\
 $m(V\gamma)$ & 110 & 2 & yes & yes & ALP, Excited boson (W*/Z*), Singlet scalar / SM+Scalars & $X \to Z\gamma$: $Z \to \ell\ell$ and boosted $Z \to qq$ (+ $W\gamma$) \\
 $m(ej)$ & 107 & 4 & yes & yes & Leptogluon (color-octet l)~\cite{lit:1211.6394,lit:2212.06178}, Leptoquark NLO (mix/nomix), Quantum black hole, Scalar leptoquark (S1) & LQ pair $\to eq$: all four lepton--jet pairings scanned (arXiv:2006.05872) \\
 $m(\mu \gamma)$ & 107 & 1 & yes & yes & Excited lepton (l*) & excited muon $\mu^*$ \\
@@ -67,11 +67,11 @@ $m(\mu j)$ & 80 & 4 & yes & yes & Leptogluon (color-octet l)~\cite{lit:1211.6394
 $m(eZ)$ & 80 & 1 & yes & yes & Excited lepton (l*), RPV electroweakino (trilepton), Type-III seesaw, Vector-like lepton (VLL) & trilepton $e+Z$ resonance \\
 $m(\mu\mu)$ & 80 & 1 & yes & yes & B-anomaly Z' (b-philic)~\cite{lit:1809.01158,lit:1403.1269,lit:1707.07016}, KK graviton (Gstar), Large ED / UED / HEIDI, Leptophilic gauge boson, LRSM / Alt-LRSM, Minimal Z' / U(1), SILH / Little Higgs, Technicolor / TC2 & single dimuon scan (combined charge/$\eta$ categories) \\
 $m(cb)$ dijet & 78 & 2 & -- & yes & 2HDM (general/typeII/CPV) & light $H^+ \to cb$ in $t\bar t$: hadronic + semileptonic tag \\
-$m(e\mu)$ SS & 75 & 1 & yes & yes & Georgi-Machacek, Type-II seesaw, Zee-Babu~\cite{lit:1402.4491,lit:2206.14833} & $H^{++}$ same-sign $e\mu$ \\
-$m(jj)$ & 74 & 2 & yes & yes & Coloron / Axigluon, Composite / NJL, Diquark / color-sextet, Excited quark (q*/b*), Minimal Z' / U(1), Simplified DM (dijet mediator), Vector-like confinement, W' & low-mass (TLA/ISR) + high-mass inclusive dijet \\
-$m(j\gamma)$ & 66 & 1 & yes & yes & Excited quark (q*/b*), Quantum black hole & $q^* \to q\gamma$ (single photon+jet SR) \\
+$m(e\mu)$ SS & 75 & 1 & yes & yes & Bilepton (331)~\cite{lit:1806.04536,lit:1812.02723}, Georgi-Machacek, Type-II seesaw, Zee-Babu~\cite{lit:1402.4491,lit:2206.14833} & $H^{++}$ same-sign $e\mu$ \\
+$m(jj)$ & 74 & 2 & yes & yes & Color-octet scalar (MW)~\cite{lit:hep-ph/0606172,lit:0710.3133}, Coloron / Axigluon, Composite / NJL, Diquark / color-sextet, Excited quark (q*/b*), KK graviton (Gstar), Minimal Z' / U(1), Simplified DM (dijet mediator), String / Regge resonance~\cite{lit:0808.0497,lit:0804.2013}, Vector-like confinement, W' & low-mass (TLA/ISR) + high-mass inclusive dijet \\
+$m(j\gamma)$ & 66 & 1 & yes & yes & Excited quark (q*/b*), Quantum black hole, String / Regge resonance~\cite{lit:0808.0497,lit:0804.2013} & $q^* \to q\gamma$ (single photon+jet SR) \\
 $m(b\gamma)$ & 64 & 1 & -- & yes & Excited quark (q*/b*) & $b^* \to b\gamma$: no ATLAS search at any energy \\
-$m(ejj)$ & 64 & 1 & yes & yes & Composite Majorana N~\cite{lit:1510.07988}, Excited lepton (l*), Excited neutrino (nu*)~\cite{lit:hep-ph/0401066,lit:2606.24486} & $e^*/\nu^* \to e\,qq$ (the $e^*$ system of the $eejj$ search) \\
+$m(ejj)$ & 64 & 1 & yes & yes & Composite Majorana N~\cite{lit:1510.07988}, Excited lepton (l*), Excited neutrino (nu*)~\cite{lit:hep-ph/0401066,lit:2606.24486}, Heavy neutrino / HNL (prompt), LRSM / Alt-LRSM & $e^*/\nu^* \to e\,qq$ (the $e^*$ system of the $eejj$ search) \\
 $m(\mu Z)$ & 60 & 1 & yes & yes & Excited lepton (l*), RPV electroweakino (trilepton), Type-III seesaw, Vector-like lepton (VLL) & trilepton $\mu+Z$ resonance \\
 $m(\gamma jj)$ & 60 & 1 & -- & yes & Technicolor / TC2, Warped KK cascade~\cite{lit:1612.00047,lit:1711.09920} & $\gamma$ + dijet cascade: no search at any collider \\
 $m(eb)$ & 58 & 2 & -- & yes & Leptoquark NLO (mix/nomix), Scalar leptoquark (S1), Stop/scharm (RPV) & RPV stop $\to be$ + $b$-tagged LQ leg (both pairings) \\
@@ -79,29 +79,36 @@ $m(eejj)$ & 57 & 1 & yes & yes & Heavy neutrino / HNL (prompt), LRSM / Alt-LRSM 
 $m(VV)$ & 57 & 9 & yes & yes & Composite / NJL, Excited boson (W*/Z*), Georgi-Machacek, HeavyHiggs THDM, KK graviton (Gstar), Randall-Sundrum / Radion, SILH / Little Higgs, Singlet scalar / SM+Scalars, Technicolor / TC2, TRSM (singlet/triplet), Type-II seesaw, Vector triplet (HVT), Warped KK cascade~\cite{lit:1612.00047,lit:1711.09920} & $WW/WZ/ZZ$ $\times$ $qqqq$ / $\ell\nu qq$ / $\ell\ell qq$ / $\nu\nu qq$ / $\ell\nu\ell\nu$, ggF+VBF \\
 $m(bj)$ & 57 & 2 & yes & yes & Excited quark (q*/b*) & $b^* \to bg$: $b$-tagged leading + subleading jet pairing \\
 $m(Vh)$ & 54 & 6 & yes & yes & 2HDM (general/typeII/CPV), Vector triplet (HVT) & $Wh/Zh$ $\times$ 0/1/2-lepton $\times$ $h \to bb$ resolved/boosted \\
-$m(\mu\mu)$ SS & 47 & 1 & yes & yes & Georgi-Machacek, Type-II seesaw, Zee-Babu~\cite{lit:1402.4491,lit:2206.14833} & $H^{++}$ same-sign $\mu\mu$ \\
+$m(\mu\mu)$ SS & 47 & 1 & yes & yes & Bilepton (331)~\cite{lit:1806.04536,lit:1812.02723}, Georgi-Machacek, Type-II seesaw, Zee-Babu~\cite{lit:1402.4491,lit:2206.14833} & $H^{++}$ same-sign $\mu\mu$ \\
 $m(\mu b)$ & 46 & 2 & -- & yes & Leptoquark NLO (mix/nomix), Scalar leptoquark (S1), Stop/scharm (RPV) & RPV stop $\to b\mu$ + $b$-tagged LQ leg (both pairings) \\
 $m(bZ)$ & 46 & 1 & yes & yes & Vector-like quark (VLQ) & VLQ $b'/B \to bZ(\ell\ell)$ (7/8 TeV scans only) \\
-$m(\mu j j)$ & 45 & 1 & -- & yes & Composite Majorana N~\cite{lit:1510.07988}, Excited lepton (l*), Excited neutrino (nu*)~\cite{lit:hep-ph/0401066,lit:2606.24486}, RPV resonant slepton~\cite{lit:hep-ph/0001224,lit:1201.5014} & $\mu^*/\nu^* \to \mu\,qq$: no ATLAS search \\
+$m(\mu j j)$ & 45 & 1 & -- & yes & Composite Majorana N~\cite{lit:1510.07988}, Excited lepton (l*), Excited neutrino (nu*)~\cite{lit:hep-ph/0401066,lit:2606.24486}, Heavy neutrino / HNL (prompt), LRSM / Alt-LRSM, RPV resonant slepton~\cite{lit:hep-ph/0001224,lit:1201.5014} & $\mu^*/\nu^* \to \mu\,qq$: no ATLAS search \\
 multilepton & 44 & 4 & -- & yes & Heavy neutrino / HNL (prompt), Leptophobic Z' (dark cascade)~\cite{lit:1111.0633}, Type-III seesaw, Vector-like lepton (VLL) & $3\ell$ / $4\ell$ signal regions by flavour and charge (axis deliberately unsplit) \\
+$m(jV)$ & 44 & 1 & -- & yes & Excited quark (q*/b*), Vector-like quark (VLQ) & $q^* \to qW/qZ$: no ATLAS search of the gauge decays \\
 $m(3j)$ & 44 & 1 & yes & yes & MSSM/NMSSM/RPV SUSY, Sgluon, Warped KK cascade~\cite{lit:1612.00047,lit:1711.09920} & RPV/sgluon three-jet resonance (single SR) \\
 $m(tb)$ & 44 & 3 & yes & yes & 2HDM (general/typeII/CPV), Vector-like quark (VLQ), W' & $W'/H^+ \to tb$: 0-lepton, 1-lepton $\times$ $b$-tag \\
-$m(\tau\tau)$ & 43 & 3 & yes & yes & 2HDM (general/typeII/CPV), MSSM/NMSSM/RPV SUSY, N2HDM / 2HDM+S (h$\to$aa), Vector leptoquark (U1) & $H/Z' \to \tau\tau$: $\tau_e\tau_h$, $\tau_\mu\tau_h$, $\tau_h\tau_h$ \\
+$m(\tau\tau)$ & 43 & 3 & yes & yes & 2HDM (general/typeII/CPV), Minimal Z' / U(1), MSSM/NMSSM/RPV SUSY, N2HDM / 2HDM+S (h$\to$aa), Vector leptoquark (U1) & $H/Z' \to \tau\tau$: $\tau_e\tau_h$, $\tau_\mu\tau_h$, $\tau_h\tau_h$ \\
 $m(\mu\mu jj)$ & 41 & 1 & yes & yes & Heavy neutrino / HNL (prompt), LRSM / Alt-LRSM, RPV resonant slepton~\cite{lit:hep-ph/0001224,lit:1201.5014} & $W_R \to \mu\mu jj$ \\
 $m(\tau \gamma)$ & 40 & 1 & -- & yes & Excited lepton (l*) & $\tau^* \to \tau\gamma$: no ATLAS search at any energy \\
 $m(bb)$ & 40 & 3 & yes & yes & 2HDM (general/typeII/CPV), B-anomaly Z' (b-philic)~\cite{lit:1809.01158,lit:1403.1269,lit:1707.07016}, Color-octet scalar (MW)~\cite{lit:hep-ph/0606172,lit:0710.3133}, Minimal Z' / U(1), MSSM/NMSSM/RPV SUSY, N2HDM / 2HDM+S (h$\to$aa), TRSM (singlet/triplet) & $h \to aa \to 4b$ low-mass + $A/Y \to bb$ resolved + boosted \\
-$m(HH)$ & 40 & 6 & yes & yes & Higgs portal, Randall-Sundrum / Radion, Singlet scalar / SM+Scalars, TRSM (singlet/triplet) & $bbbb$ resolved + boosted, $bb\tau\tau$, $bb\gamma\gamma$, $bbVV$, multilepton \\
+$m(HH)$ & 40 & 6 & yes & yes & 2HDM (general/typeII/CPV), Higgs portal, KK graviton (Gstar), MSSM/NMSSM/RPV SUSY, Randall-Sundrum / Radion, Singlet scalar / SM+Scalars, TRSM (singlet/triplet) & $bbbb$ resolved + boosted, $bb\tau\tau$, $bb\gamma\gamma$, $bbVV$, multilepton \\
 $m_{\mathrm{T}}(e\nu)$ & 38 & 1 & yes & -- & LRSM / Alt-LRSM, W' & $W' \to e\nu$ \\
 $m(t\gamma)$ & 38 & 1 & -- & yes & Excited top (t*)~\cite{lit:1208.5811,lit:1110.1565} & $t^* \to t\gamma$: no ATLAS search \\
 $m(tt)$ & 36 & 4 & yes & yes & 2HDM (general/typeII/CPV), Coloron / Axigluon, Diquark / color-sextet, HeavyHiggs THDM, KK gluon (RS), Minimal Z' / U(1), Sgluon, Top-philic, Toponium & $t\bar t$ resonance: $\ell$+jets resolved, $\ell$+jets boosted, all-hadronic, dilepton \\
 $m(\tau j)$ & 32 & 2 & yes & yes & Leptoquark NLO (mix/nomix), Scalar leptoquark (S1), Vector leptoquark (U1) & LQ $\to \tau q$: $\tau_{\mathrm{had}}$ + $\tau_{\mathrm{lep}}$ selections \\
-$m(e\tau)$ LFV & 28 & 1 & yes & yes & Minimal Z' / U(1), Quantum black hole, Scalar leptoquark (S1), Vector leptoquark (U1) & LFV $e\tau$ (hadronic $\tau$) \\
-$m(\mu\tau)$ LFV & 28 & 1 & yes & yes & Minimal Z' / U(1), Quantum black hole, Scalar leptoquark (S1), Vector leptoquark (U1) & LFV $\mu\tau$ (hadronic $\tau$) \\
+$m(et)$ & 29 & 1 & -- & yes & Scalar leptoquark (S1), Vector leptoquark (U1) & LQ $\to te$: no ATLAS search \\
+$m(\mu t)$ & 29 & 1 & -- & yes & Scalar leptoquark (S1), Vector leptoquark (U1) & LQ $\to t\mu$: no ATLAS search \\
+$m(e\tau)$ LFV & 28 & 1 & yes & yes & Minimal Z' / U(1), Quantum black hole, RPV resonant slepton~\cite{lit:hep-ph/0001224,lit:1201.5014}, Scalar leptoquark (S1), Vector leptoquark (U1) & LFV $e\tau$ (hadronic $\tau$) \\
+$m(\mu\tau)$ LFV & 28 & 1 & yes & yes & Minimal Z' / U(1), Quantum black hole, RPV resonant slepton~\cite{lit:hep-ph/0001224,lit:1201.5014}, Scalar leptoquark (S1), Vector leptoquark (U1) & LFV $\mu\tau$ (hadronic $\tau$) \\
 $m(\tau jj)$ & 28 & 1 & yes & yes & Excited lepton (l*) & $\tau^* \to \tau\,qq$ (contact interaction) \\
 $m(tj)$ & 27 & 1 & yes & yes & Excited top (t*)~\cite{lit:1208.5811,lit:1110.1565}, Flavoured W'/Z' (t-q)~\cite{lit:1102.0018,lit:0907.4112} & $W'/Z' \to t\,+$ jet (7 TeV scan only) \\
-$m_{\mathrm{T}}(\tau\nu)$ & 27 & 1 & yes & -- & W' & $W' \to \tau\nu$ (single hadronic-$\tau$ channel) \\
+$m_{\mathrm{T}}(\tau\nu)$ & 27 & 1 & yes & -- & 2HDM (general/typeII/CPV), W' & $W' \to \tau\nu$ (single hadronic-$\tau$ channel) \\
 $m_{\mathrm{T}}(\mu\nu)$ & 26 & 1 & yes & -- & LRSM / Alt-LRSM, W' & $W' \to \mu\nu$ \\
-$m(tW)$ & 22 & 2 & yes & yes & Excited quark (q*/b*) & $b^* \to tW$: leptonic + hadronic top \\
+$m(eH)$ & 25 & 1 & -- & yes & Type-III seesaw, Vector-like lepton (VLL) & $L/\Sigma \to e\,h$: no ATLAS search \\
+$m(\mu H)$ & 25 & 1 & -- & yes & Type-III seesaw, Vector-like lepton (VLL) & $L/\Sigma \to \mu\,h$: no ATLAS search \\
+$m(jH)$ & 25 & 1 & -- & yes & Vector-like quark (VLQ) & light-flavour VLQ $\to qh$: no search at any collider \\
+$m(\tau V)$ & 24 & 1 & -- & yes & Excited lepton (l*), Type-III seesaw, Vector-like lepton (VLL) & $\tau^*/L/\Sigma \to \tau Z/W$: no ATLAS search \\
+$m(tW)$ & 22 & 2 & yes & yes & Excited quark (q*/b*), Vector-like quark (VLQ) & $b^* \to tW$: leptonic + hadronic top \\
 $m(\mathrm{multi})$ & 21 & 1 & -- & -- & Large ED / UED / HEIDI, Quantum black hole & QBH / multijet (single high-multiplicity SR) \\
 $m(tbj)$ & 20 & 1 & -- & yes & MFV RPV gluino (tbs)~\cite{lit:1111.1239} & MFV RPV gluino $\to tbs$ (no mass scan anywhere) \\
 $m(tt)/m(jj)$ & 20 & 2 & -- & yes & Coloron / Axigluon, Stop/scharm (RPV) & coloron pair $\to tt$ or $jj$ decay legs; the scan targets the leg mass as $m(jj)$ in the $4j$ and $2t2j$ categories and as $m(tt)$ in $2t2j$ (the all-top pair category is too thin to fit) \\

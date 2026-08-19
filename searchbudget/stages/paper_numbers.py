@@ -16,6 +16,7 @@ from ..registry import stage
            "tables/published_census.csv", "tables/census_budget.csv",
            "tables/scan_summary.csv", "tables/lens_scan.csv", "tables/priority_scan.csv",
            "tables/model_independence.csv", "tables/unscanned_spectra.csv",
+           "tables/unscanned_scan_units.csv",
            "tables/model_classes.csv",
            "tables/budget_uncertainty.csv", "tables/two_body_matrix.csv",
            "tables/ab_split_scan.csv", "tables/ab_split_toys.csv",
@@ -46,6 +47,7 @@ def main(options=None):
     guard = load("ab_guard_toys.csv")
     mi_rows = load("model_independence.csv")
     gap_rows = load("unscanned_spectra.csv")
+    scan_units = {r["quantity"]: r for r in load("unscanned_scan_units.csv")}
     classes = load("model_classes.csv")
 
     ns = {r["observable"]: float(r["ns_scan"]) for r in budget}
@@ -193,11 +195,23 @@ def main(options=None):
          f"FeynRules/UFO database, "
          f"{sum(1 for r in classes if r['source'] == 'literature sweep')} from the literature "
          "sweep, referenced class by class", "`model_classes.csv`"),
-        ("model-motivated spectra with no ATLAS scan",
-         f"**{sum(1 for r in gap_rows if r['status'] == 'unscanned')}** in the scan's "
-         f"(category, mass-group) units, the pair-produced axis resolved into its legs; "
-         f"{sum(1 for r in gap_rows if r['status'] == 'unscanned' and r['fittable_in_scan'] == 'yes')} "
-         "of them fittable", "`unscanned_spectra.csv`"),
+        ("model-motivated spectra with no ATLAS scan the scan can fit",
+         f"**{sum(1 for r in gap_rows if r['status'] == 'unscanned' and r['fittable_in_scan'] == 'yes')}** "
+         f"in the scan's (category, mass-group) units, the pair-produced axis resolved into its "
+         f"legs; {sum(1 for r in gap_rows if r['status'] == 'unscanned')} counting the ones it "
+         "cannot fit", "`unscanned_spectra.csv`"),
+        ("**what the scan actually adds**: predicted spectra ATLAS has not scanned",
+         f"**{scan_units['new spectra: predicted, and on an axis ATLAS has not scanned']['spectra']}** of the "
+         f"{scan_units['... of the fittable spectra of the combinatorial scan']['spectra']} "
+         f"fittable spectra ({100 * float(scan_units['new spectra: predicted, and on an axis ATLAS has not scanned']['share_of_fittable']):.1f}%), "
+         f"over {scan_units['new spectra: predicted, and on an axis ATLAS has not scanned']['axes']} axes, listed one by one",
+         "`new_spectra.csv`"),
+        ("... for scale, predicted at all (the category one a model produces, the mass its "
+         "resonant sub-system)",
+         f"{scan_units['... of the predicted spectra, the category being one a model produces and the mass its resonant sub-system']['spectra']} of them "
+         f"({100 * float(scan_units['... of the predicted spectra, the category being one a model produces and the mass its resonant sub-system']['share_of_fittable']):.1f}%), over "
+         f"{scan_units['... of the predicted spectra, the category being one a model produces and the mass its resonant sub-system']['axes']} axes; the rest is territory no model points at",
+         "`unscanned_scan_units.csv`"),
     ))
 
     exp3, exp5 = N_census * p1(3.0), N_census * p1(5.0)
@@ -238,19 +252,20 @@ def main(options=None):
          "`scan_summary.csv`"),
         ("two-body share of the survivors",
          f"{int(r23['k2_spectra'])/int(r23['fittable_spectra']):.0%}", "`scan_summary.csv`"),
-        ("tier (i), every motivated composition once",
+        ("tier (i), the final states models predict",
          f"{int(r23['tier0_spectra'])} spectra, `N = {float(r23['tier0_looks']):,.0f}` → "
          f"`{r23['tier0_Z_local']}`", "`scan_summary.csv`"),
-        ("tier (ii), those compositions elsewhere",
+        ("tier (ii), those masses, in categories nothing predicts",
          f"{int(r23['tier1_spectra']):,} spectra, `N = {float(r23['tier1_looks']):,.0f}`",
          "`scan_summary.csv`"),
-        ("tier (iii), nothing motivates it",
+        ("tier (iii), no model points at the composition",
          f"{int(r23['tier2_spectra']):,} spectra, `N = {float(r23['tier2_looks']):,.0f}`",
          "`scan_summary.csv`"),
         ("the share theory motivates",
          f"{int(r23['motivated_spectra']):,} of {int(r23['fittable_spectra']):,} spectra "
-         f"({float(r23['motivated_frac']):.0%}), over {int(r23['compositions_motivated'])} of the "
-         f"{int(r23['compositions_fittable'])} fittable compositions",
+         f"(**{float(r23['motivated_frac']):.1%}**), over "
+         f"{int(r23['final_states_predicted'])} (final state, mass) pairs; the category has to be "
+         f"one the models produce, not just the mass observable",
          "`scan_summary.csv`, per composition in `priority_scan.csv`"),
         ("selection lenses", f"{reach:,} conceivable views, {thin:,} ruled out by statistics, "
          f"{views:,} survive carrying {lens_looks:,.0f} looks", "`lens_scan.csv`"),

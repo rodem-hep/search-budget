@@ -29,6 +29,7 @@ m(eejj),1,57.2,57.2,W_R->eejj
 m(VV),9,56.7,510.2,"WW/WZ/ZZ x qqqq / lvqq / llqq / vvqq / lvlv, ggF+VBF"
 m(Vh),6,53.6,321.9,Wh/Zh x 0/1/2-lepton x h->bb resolved/boosted
 m(bj),2,56.7,113.4,b* -> b g: b-tagged leading + subleading jet pairing
+m(jV),1,44.0,44.0,jet + boosted W/Z (no ATLAS search)
 m(bb),3,40.1,120.3,h->aa->4b low-mass + A/Y->bb resolved + boosted
 m(tgamma),1,38.4,38.4,top + photon (no ATLAS search)
 m(multi),1,20.9,20.9,QBH / multijet (single high-multiplicity SR)
@@ -42,11 +43,17 @@ m(mumujj),1,40.9,40.9,W_R->mumujj
 m(tb),3,43.8,131.5,"W'/H+->tb: 0-lepton, 1-lepton x b-tag"
 m(tt)/m(jj),2,20.1,40.2,coloron pair -> tt or jj decay legs
 m(tj),1,26.9,26.9,t(lep) + jet in ttbar+jet (7 TeV only)
+m(eH),1,25.2,25.2,electron + h (no ATLAS search)
+m(muH),1,25.2,25.2,muon + h (no ATLAS search)
+m(et),1,28.8,28.8,electron + top (no ATLAS search)
+m(mut),1,28.8,28.8,muon + top (no ATLAS search)
 m(HH),6,39.7,238.4,"bbbb resolved + boosted, bbtautau, bbgammagamma, bbVV, multilepton"
+m(jH),1,25.2,25.2,jet + boosted h (no search at any collider)
 m(tautau),3,42.9,128.6,"H/Z'->tautau: tau_e tau_h, tau_mu tau_h, tau_h tau_h"
 m(etau) LFV,1,28.3,28.3,LFV e-tau (hadronic tau)
 m(mutau) LFV,1,28.3,28.3,LFV mu-tau (hadronic tau)
 m(tW),2,22.4,44.8,b*->tW: leptonic + hadronic top
+m(tauV),1,24.0,24.0,hadronic-tau + W/Z (no ATLAS search)
 m(Ht),1,13.7,13.7,single VLQ T->Ht (h->bb tagged)
 m(taub),2,19.2,38.4,LQ3 -> tau b: tau_had + tau_lep
 mT(taunu),1,26.8,26.8,W'->tau nu (single hadronic-tau channel)

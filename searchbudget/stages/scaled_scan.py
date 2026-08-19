@@ -32,6 +32,9 @@ MOTIVATED = {
     "m(ejj)": ("ejj",),            "m(mujj)": ("jjm",),      "m(taujj)": ("Tjj",),
     "m(bZ)": ("bZ",),              "m(tj)": ("jt",),         "m(gammajj)": ("gjj",),
     "m(tbj)": ("bjt",),
+    "m(jV)": ("Vj",),            "m(jH)": ("Hj",),
+    "m(eH)": ("He",),            "m(muH)": ("Hm",),
+    "m(tauV)": ("TV",),          "m(et)": ("et",),         "m(mut)": ("mt",),
     "multilepton": ("eee", "eem", "emm", "mmm"),
     "m(multi)": None,
     "mT(ev)": None, "mT(muv)": None, "mT(taunu)": None,
@@ -41,21 +44,152 @@ MOTIVATED = {
 def canon(c):
     return "".join(sorted(c))
 
+# The final states the public models actually produce, per axis. A scan spectrum is one axis in one
+# category, and it is motivated only when the category IS a final state some model predicts and the
+# mass sits on the sub-system that resonates: m(jj) in a 2-jet category is the dijet resonance,
+# m(jj) in a 2-jet + 2-electron + photon category is nothing anyone predicts. Each entry is
+# (mass group, category content); "S" expands to the mass group itself (an s-channel resonance whose
+# decay products are the whole final state) and "P" to the group doubled (the resonance is
+# pair-produced and the mass is one leg). Anything else is written out: cascades, associated
+# production, and the VBF tag jets.
+def _S(g):  # s-channel: the final state is the resonance's own decay products
+    return (g, collections.Counter(g))
+
+
+def _P(g):  # pair-produced: the final state is two of them, the mass one leg
+    return (g, collections.Counter(g + g))
+
+
+def _C(g, cat):  # written out: cascade, association, or tag jets
+    return (g, collections.Counter(cat))
+
+
+FINAL_STATES = {
+    "m(gammagamma)": [_S("gg"), _C("gg", "ggjj")],          # + VBF tag jets
+    "m(ee)":         [_S("ee")],
+    "m(mumu)":       [_S("mm")],
+    "m(ee) (Zd)":    [_S("ee"), _C("ee", "eeee")],          # H -> ZdZd -> 4e
+    "m(mumu) (Zd)":  [_S("mm"), _C("mm", "mmmm")],
+    "m(ee) SS":      [_S("ee"), _P("ee")],                  # H++ single and pair
+    "m(emu) SS":     [_S("em"), _P("em")],
+    "m(mumu) SS":    [_S("mm"), _P("mm")],
+    "m(emu) LFV":    [_S("em")],
+    "m(etau) LFV":   [_S("eT")],
+    "m(mutau) LFV":  [_S("Tm")],
+    "m(tautau)":     [_S("TT")],
+    "m(egamma)":     [_S("eg"), _C("eg", "eeg")],           # pp -> e e*, e* -> e gamma
+    "m(mugamma)":    [_S("gm"), _C("gm", "mmg")],
+    "m(taugamma)":   [_S("Tg"), _C("Tg", "TTg")],
+    "m(jgamma)":     [_S("gj")],
+    "m(bgamma)":     [_S("bg")],
+    "m(tgamma)":     [_S("gt")],
+    "m(gammajj)":    [_S("gjj")],                           # KK cascade: gamma + radion(jj)
+    "m(Vgamma)":     [_S("Vg")],
+    "m(ej)":         [_S("ej"), _P("ej"), _C("ej", "eej")],  # QBH, LQ pair, single LQ
+    "m(muj)":        [_S("jm"), _P("jm"), _C("jm", "jmm")],
+    "m(tauj)":       [_S("Tj"), _P("Tj"), _C("Tj", "TTj")],
+    "m(eb)":         [_S("be"), _P("be")],
+    "m(mub)":        [_S("bm"), _P("bm")],
+    "m(taub)":       [_S("Tb"), _P("Tb")],
+    "m(et)":         [_S("et"), _P("et")],
+    "m(mut)":        [_S("mt"), _P("mt")],
+    "m(eZ)":         [_S("eZ"), _P("eZ")],                  # trilepton, and Type-III/VLL pair
+    "m(muZ)":        [_S("mZ"), _P("mZ")],
+    "m(tauV)":       [_S("TV"), _P("TV")],
+    "m(eH)":         [_S("He"), _P("He")],
+    "m(muH)":        [_S("Hm"), _P("Hm")],
+    "m(ejj)":        [_S("ejj"), _C("ejj", "eejj")],        # e*/nu*/N inside the eejj final state
+    "m(mujj)":       [_S("jjm"), _C("jjm", "jjmm")],
+    "m(taujj)":      [_S("Tjj"), _C("Tjj", "TTjj")],
+    "m(eejj)":       [_S("eejj")],
+    "m(mumujj)":     [_S("jjmm")],
+    "multilepton":   [_S("eee"), _S("eem"), _S("emm"), _S("mmm")],
+    "m(jj)":         [_S("jj")],
+    "m(bj)":         [_S("bj")],
+    "m(bb)":         [_S("bb"), _C("bb", "bbbb")],          # A -> bb, and h -> aa -> 4b
+    "m(cb) dijet":   [_C("bj", "bbjj")],                    # light H+ -> cb inside ttbar
+    "m(3j)":         [_S("jjj")],
+    "m(jV)":         [_S("Vj")],
+    "m(jH)":         [_S("Hj")],
+    "m(VV)":         [_S("VV"), _C("VV", "VVjj")],          # + VBF tag jets
+    "m(Vh)":         [_S("HV")],
+    "m(HH)":         [_S("HH")],
+    "m(tt)":         [_S("tt")],
+    "m(tb)":         [_S("bt")],
+    "m(tj)":         [_S("jt")],
+    "m(tW)":         [_S("Vt"), _P("Vt")],                  # b* -> tW, and X5/3 pair
+    "m(Wb)":         [_S("Vb"), _P("Vb")],
+    "m(bZ)":         [_S("bZ"), _P("bZ")],
+    "m(Ht)":         [_S("Ht"), _P("Ht")],
+    "m(ttZ)/m(Zt)":  [_S("Zt"), _P("Zt"), _S("Vt")],
+    "m(tbj)":        [_S("bjt"), _P("bjt")],                # MFV RPV gluino pair -> (tbs)(tbs)
+    "m(tt)/m(jj)":   [_C("jj", "jjjj"), _C("jj", "jjtt"),   # coloron pair, leg masses
+                      _C("tt", "jjtt"), _C("tt", "tttt")],
+    "m(multi)":      [],
+    "mT(ev)":        [], "mT(muv)": [], "mT(taunu)": [],
+}
+
+assert set(FINAL_STATES) == set(MOTIVATED), \
+    f"FINAL_STATES and MOTIVATED disagree: {sorted(set(FINAL_STATES) ^ set(MOTIVATED))}"
+_stray = {(o, g) for o, fs in FINAL_STATES.items() for g, _ in fs
+          if canon(g) not in {canon(c) for c in (MOTIVATED[o] or ())}}
+assert not _stray, f"FINAL_STATES names a mass group the axis does not carry: {sorted(_stray)}"
+
 
 MOTIVATED_COMPS = {canon(c) for cs in MOTIVATED.values() if cs for c in cs}
 
+# (mass group, category content) -> the axes whose models predict it
+PREDICTED = collections.defaultdict(set)
+for _o, _states in FINAL_STATES.items():
+    for _g, _cat in _states:
+        PREDICTED[(canon(_g), tuple(sorted(_cat.items())))].add(_o)
+del _o, _states, _g, _cat
+
+
+def cat_content(cat):
+    """The object multiplicities of a scan category, dropping the empty ones."""
+    out, core = {}, cat.split("_")[0]
+    for i in range(0, len(core), 2):
+        if int(core[i + 1]):
+            out[core[i]] = int(core[i + 1])
+    return out
+
+
+def predicted_axes(row):
+    """The axes whose models predict this spectrum: the category is a final state one of them
+    produces and the mass is the sub-system that resonates in it. Empty when none do. A predicted
+    final state is the objects it names and nothing else, so a category carrying missing energy on
+    top never matches."""
+    if row.cat.split("_")[1] != "0met":
+        return frozenset()
+    key = (canon(row.group), tuple(sorted(cat_content(row.cat).items())))
+    return frozenset(PREDICTED.get(key, ()))
+
 
 def tiers(rows):
+    """Three tiers, by how directly theory asks for the spectrum.
+
+    0: some public model predicts this final state and puts its resonance on this mass. This is
+       what "theory motivated" means in the scan's units -- the category matters, not just the
+       mass observable, so m(jj) in a two-jet category is the dijet resonance while m(jj) in a
+       category that also holds two electrons is nothing anyone predicts.
+    1: the mass composition is one models do point at, but in a category none of them produces.
+    2: no model points at the composition at all.
+
+    Returns the fittable rows, their tier, and the tier-0 rows grouped by (final state, mass)
+    pair. One key can hold several rows: a four-jet category offers six jet pairings, and the scan
+    counts each as its own spectrum, so tier 0 counts them the same way its 4,438 does.
+    """
     sp = [r for r in rows if r.n_s > 0]
-    best = {}
+    hit = collections.defaultdict(list)
+    tier = []
     for i, r in enumerate(sp):
-        k = canon(r.group)
-        if k in MOTIVATED_COMPS and (k not in best or r.w > sp[best[k]].w):
-            best[k] = i
-    once = set(best.values())
-    tier = [0 if i in once else 1 if canon(r.group) in MOTIVATED_COMPS else 2
-            for i, r in enumerate(sp)]
-    return sp, tier, best
+        if predicted_axes(r):
+            hit[(canon(r.group), tuple(sorted(cat_content(r.cat).items())))].append(i)
+            tier.append(0)
+        else:
+            tier.append(1 if canon(r.group) in MOTIVATED_COMPS else 2)
+    return sp, tier, dict(hit)
 
 
 @stage(
@@ -151,10 +285,10 @@ def main(options=None):
         print("=== full ten-object scan")
         print(f"spectra {full.n_hist:,}   N = {full.N:,.0f}   "
               f"Z_local = {z_local_for_global5(full.N):.2f}")
-        print(f"tier 0, every motivated composition once: {tier_n[0]:6,d} spectra, "
+        print(f"tier 0, the final states models predict : {tier_n[0]:6,d} spectra, "
               f"N = {tier_N[0]:10,.0f} ({100*tier_N[0]/full.N:4.1f} % of the scan), "
               f"Z_local = {z_local_for_global5(tier_N[0]):.2f}")
-        print(f"tier 1, those compositions elsewhere   : {tier_n[1]:6,d} spectra, "
+        print(f"tier 1, those masses, other categories : {tier_n[1]:6,d} spectra, "
               f"N = {tier_N[1]:10,.0f} ({100*tier_N[1]/full.N:4.1f} %)")
         print(f"tier 2, the rest                       : {tier_n[2]:6,d} spectra, "
               f"N = {tier_N[2]:10,.0f} ({100*tier_N[2]/full.N:4.1f} %)")
@@ -174,8 +308,8 @@ def main(options=None):
         print(f"selected {n_sel:,} of {full.n_hist:,} spectra ({100*n_sel/full.n_hist:.1f} %) over "
               f"{len(kept_n)} of {len(full.by_type)} compositions and {len(kept_cats):,} of "
               f"{full.n_cat:,} categories")
-        print(f"tier 0 is {tier_axes[0]} axes in {len(tier0_cats)} categories, "
-              f"{tier_n[0]} histograms")
+        print(f"tier 0 is {tier_axes[0]} (final state, mass) pairs in {len(tier0_cats)} "
+              f"categories, {tier_n[0]} histograms")
         if stopped:
             print(f"of the {tier_n[1]:,} tier-1 spectra, {n_sel - tier_n[0]:,} fit "
                   f"({100*(n_sel - tier_n[0])/tier_n[1]:.0f} %)")
@@ -306,7 +440,8 @@ def main(options=None):
             _b = CB.enumerate_scan(**BASE)
             _r = CB.enumerate_scan(**WIDE_ARGS)
             _sp, _tier, _best_i = tiers(_r.rows)
-            _best = {canon(_sp[i].group): _sp[i] for i in _best_i.values()}
+            _best = [_sp[i] for ids in _best_i.values() for i in ids]
+            _pairs = len(_best_i)
             _tn, _tN = collections.Counter(), collections.Counter()
             for i, x in enumerate(_sp):
                 _tn[_tier[i]] += x.split
@@ -321,7 +456,7 @@ def main(options=None):
                     _ln_thin[lk] += _sp[i].split
             _ln, _lN = _r.n_hist + sum(_ln_n.values()), _r.N + sum(_ln_N.values())
             _t0_n, _t0_N = _tn[0], _tN[0]
-            _mot_n, _mot_N = _tn[0] + _tn[1], _tN[0] + _tN[1]
+            _mot_n, _mot_N = _tn[0], _tN[0]
             dataset_rows.append((_label, _s, _b, _r, _ln, _lN, _best,
                                  dict(_ln_n), dict(_ln_N), dict(_ln_thin)))
             print(f"  {_label} (x{_s:g} the anchor, "
@@ -332,15 +467,15 @@ def main(options=None):
                   f"N = {_r.N:9,.0f}, Z_local = {z_local_for_global5(_r.N):.2f}")
             print(f"    with lenses    {_ln:6,d} histograms, "
                   f"N = {_lN:9,.0f}, Z_local = {z_local_for_global5(_lN):.2f}")
-            print(f"    motivated once {_t0_n:6,d} spectra in "
-                  f"{len({x.cat for x in _best.values()})} categories over {len(_best)} "
-                  f"compositions, N = {_t0_N:9,.0f}, "
+            print(f"    predicted      {_t0_n:6,d} spectra in "
+                  f"{len({x.cat for x in _best})} categories over {_pairs} "
+                  f"(final state, mass) pairs, N = {_t0_N:9,.0f}, "
                   f"Z_local = {z_local_for_global5(_t0_N):.2f}")
             print(f"    tier 0 / 1 / 2 spectra : {_tn[0]:6,d} {_tn[1]:6,d} {_tn[2]:6,d}")
             print(f"    tier 0 / 1 / 2 looks   : {_tN[0]:9,.0f} {_tN[1]:9,.0f} {_tN[2]:9,.0f}")
-            print(f"    on a motivated axis    : {_mot_n:,} of {_r.n_hist:,} spectra "
-                  f"({100*_mot_n/_r.n_hist:.0f} %), {100*_mot_N/_r.N:.0f} % of N, over "
-                  f"{len(_best)} of {len(_r.by_type)} object multisets")
+            print(f"    theory motivated       : {_mot_n:,} of {_r.n_hist:,} spectra "
+                  f"({100*_mot_n/_r.n_hist:.1f} %), {100*_mot_N/_r.N:.1f} % of N, over "
+                  f"{_pairs} (final state, mass) pairs")
             print(f"    by group size          : " + ", ".join(
                 f"k={_k}: {_v:,} ({100*_v/_r.n_hist:.0f} %)"
                 for _k, _v in sorted(_r.by_size.items())))
@@ -375,7 +510,7 @@ def main(options=None):
                 "tier2_looks": f"{_tN[2]:.0f}",
                 "tier0_Z_local": f"{z_local_for_global5(_tN[0]):.2f}",
                 "motivated_spectra": _mot_n, "motivated_frac": f"{_mot_n/_r.n_hist:.3f}",
-                "compositions_fittable": len(_r.by_type), "compositions_motivated": len(_best),
+                "compositions_fittable": len(_r.by_type), "final_states_predicted": _pairs,
                 "k2_spectra": _r.by_size.get(2, 0), "k3_spectra": _r.by_size.get(3, 0),
                 "k4_spectra": _r.by_size.get(4, 0),
                 "published_axes_gated": _pk, "published_axes_total": len(pub_axes),
@@ -395,7 +530,7 @@ def main(options=None):
                 f"{z_local_for_global5(N*2):.2f}"]
 
     scaled = [row(label, kw, s.n_cat, s.n_hist, len(s.by_type), s.N) for label, kw, s in runs]
-    scaled.append(row("... model-motivated compositions once each", VARIANTS[-1][1],
+    scaled.append(row("... the final states models predict", VARIANTS[-1][1],
                       len(tier0_cats), tier_n[0], len(MOTIVATED_COMPS & set(full.by_type)),
                       tier_N[0]))
     scaled.append(row(f"... prioritised to N <= {TRIALS_BUDGET:.0e}", VARIANTS[-1][1],
@@ -413,10 +548,10 @@ def main(options=None):
                           _r.n_hist, len(_r.by_type), _r.N))
         scaled.append(row(f"ten objects, with selection lenses ({_label})", VARIANTS[-1][1],
                           _r.n_cat, _ln, len(_r.by_type), _lN))
-        scaled.append(row(f"... model-motivated compositions once each ({_label})",
-                          VARIANTS[-1][1], len({x.cat for x in _best.values()}),
-                          sum(x.split for x in _best.values()), len(_best),
-                          sum(x.n_s for x in _best.values())))
+        scaled.append(row(f"... the final states models predict ({_label})",
+                          VARIANTS[-1][1], len({x.cat for x in _best}),
+                          sum(x.split for x in _best), _pairs,
+                          sum(x.n_s for x in _best)))
     io.write_rows(paths.table("scaled_scan.csv"),
                   ["scan", "types", "K_max", "objects_per_category", "trigger", "categories",
                    "spectra", "compositions", "N_trials", "Z_local", "Z_lo", "Z_hi"], scaled)

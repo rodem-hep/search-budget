@@ -105,14 +105,21 @@ def main(options=None):
         "m(tj)":         r"$W'/Z' \to t\,+$ jet (7 TeV scan only)",
         "m(gammajj)":    r"$\gamma$ + dijet cascade: no search at any collider",
         "m(tbj)":        r"MFV RPV gluino $\to tbs$ (no mass scan anywhere)",
+        "m(jV)":         r"$q^* \to qW/qZ$: no ATLAS search of the gauge decays",
+        "m(jH)":         r"light-flavour VLQ $\to qh$: no search at any collider",
+        "m(eH)":         r"$L/\Sigma \to e\,h$: no ATLAS search",
+        "m(muH)":        r"$L/\Sigma \to \mu\,h$: no ATLAS search",
+        "m(tauV)":       r"$\tau^*/L/\Sigma \to \tau Z/W$: no ATLAS search",
+        "m(et)":         r"LQ $\to te$: no ATLAS search",
+        "m(mut)":        r"LQ $\to t\mu$: no ATLAS search",
     }
 
     by_obs = models_by_spectrum()
     order = canonical_order(by_obs)
     ranked = sorted(order, key=lambda o: -ns_scan(o))
 
-    if len(ranked) != 56:
-        raise SystemExit(f"{len(ranked)} spectra carry a model, expected 56")
+    if len(ranked) != 63:
+        raise SystemExit(f"{len(ranked)} spectra carry a model, expected 63")
 
     published = {r["budget_axis"] for r in io.read_rows(paths.table("census_budget.csv"))
                  if r["budget_axis"] != "-" and float(r["n_s"]) > 0}
@@ -165,7 +172,7 @@ def main(options=None):
     n_sel = sum(nsel(o) for o in ranked)
     big_n = sum(nsel(o) * ns_scan(o) for o in ranked)
     big_n_tex = f"{big_n:,.0f}".replace(",", r"\,")
-    if n_sel != 104:
+    if n_sel != 111:
         raise SystemExit(f"event selections sum to {n_sel}, expected 104")
 
     with open(io.ensure(paths.tex("model_map_appendix.tex")), "w") as f:

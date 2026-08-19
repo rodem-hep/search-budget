@@ -11,8 +11,8 @@ object alphabet: resolution and yield factor from the published symmetric channe
   Z  leptonic Z   sigma = 0.040  yield  1.0e-05   (baseline value, no symmetric channel)
   X  MET                         yield  3.0e-03   (a category split, never a mass)
 
-model-motivated compositions: 48 from 52 of the 56 axes (no composition for m(multi), mT(ev), mT(muv), mT(taunu))
-the requirement is never applied to a published window. On the 52 published axes this alphabet can form it would leave 40 of them and N = 2,917 of 4,006, so exempting them is the conservative choice
+model-motivated compositions: 55 from 59 of the 63 axes (no composition for m(multi), mT(ev), mT(muv), mT(taunu))
+the requirement is never applied to a published window. On the 59 published axes this alphabet can form it would leave 46 of them and N = 3,090 of 4,207, so exempting them is the conservative choice
 
 === five objects, lepton trigger  (5 object types, K<=4 objects per mass, <=4 per category, lepton required)
 categories (exclusive, MET-split, >=2 objects)                       : 150
@@ -58,16 +58,16 @@ Z_local for 5 sigma global = 7.00
 
 === full ten-object scan
 spectra 3,603   N = 161,020   Z_local = 7.00
-tier 0, every motivated composition once:     53 spectra, N =      3,171 ( 2.0 % of the scan), Z_local = 6.41
-tier 1, those compositions elsewhere   :  2,288 spectra, N =    112,069 (69.6 %)
-tier 2, the rest                       :  1,262 spectra, N =     45,779 (28.4 %)
-tiers 0+1 together: N = 115,241, which is 0.23 times the budget on its own
+tier 0, the final states models predict :    162 spectra, N =      8,501 ( 5.3 % of the scan), Z_local = 6.56
+tier 1, those masses, other categories :  2,445 spectra, N =    116,612 (72.4 %)
+tier 2, the rest                       :    996 spectra, N =     35,908 (22.3 %)
+tiers 0+1 together: N = 125,112, which is 0.25 times the budget on its own
 spectra reaching a new object type: 1,944 of 3,603 (54 %), carrying 54 % of N; two-body groups are 74 % of the spectra
 motivated compositions with no fittable histogram in any category: TT, Zt
 
 === priority prefix that fits N <= 500,000
 selected 3,603 of 3,603 spectra (100.0 %) over 217 of 217 compositions and 844 of 2,412 categories
-tier 0 is 46 axes in 46 categories, 53 histograms
+tier 0 is 119 (final state, mass) pairs in 69 categories, 162 histograms
 nothing is cut: every fittable spectrum fits inside the budget, so the statistics requirement binds first and the priority order never has to be applied
 N = 161,020 (100.0 % of the full scan), Z_local = 7.00 (band 6.90-7.10)
 a local 5 sigma is then worth Z_global = 1.01 sigma
@@ -78,15 +78,15 @@ yield anchor scaled (the model's own uncertainty): spectra, N, Z_local
   x100      7,768 of  21,644 histograms, N =     371,282, Z_local = 7.12
 
 object type    spectra in scan  selected   kept looks   what survives
-  e e                1,080     1,080       55,320   59 compositions: eg ee ej em Ve be ...  (+47 unmotivated)
-  m mu                 818       818       30,327   54 compositions: jm em gm mm bm Vm ...  (+42 unmotivated)
-  T tau_had            175       175        5,323   21 compositions: Tj Tjj Te Tm Tg Tej ...  (+15 unmotivated)
+  e e                1,080     1,080       55,320   59 compositions: eg ee ej em Ve be ...  (+45 unmotivated)
+  m mu                 818       818       30,327   54 compositions: jm em gm mm bm Vm ...  (+40 unmotivated)
+  T tau_had            175       175        5,323   21 compositions: Tj Tjj Te Tm Tg Tej ...  (+14 unmotivated)
   g gamma              939       939       52,002   63 compositions: gg eg gj gm Vg bg ...  (+54 unmotivated)
-  j light jet        2,040     2,040       87,423   138 compositions: ej jj gj jm Vj bj ...  (+123 unmotivated)
+  j light jet        2,040     2,040       87,423   138 compositions: ej jj gj jm Vj bj ...  (+121 unmotivated)
   b b-jet              731       731       23,469   64 compositions: bj be bm bg bb Vb ...  (+54 unmotivated)
-  t boosted top        184       184        6,021   28 compositions: jt jjt gt et bjt gjt ...  (+21 unmotivated)
-  V boosted W/Z        631       631       22,598   58 compositions: Vj Ve Vg Vm Vb Vjj ...  (+53 unmotivated)
-  H boosted H          252       252        8,091   31 compositions: Hj Hg Hjj He Hb HV ...  (+28 unmotivated)
+  t boosted top        184       184        6,021   28 compositions: jt jjt gt et bjt gjt ...  (+19 unmotivated)
+  V boosted W/Z        631       631       22,598   58 compositions: Vj Ve Vg Vm Vb Vjj ...  (+51 unmotivated)
+  H boosted H          252       252        8,091   31 compositions: Hj Hg Hjj He Hb HV ...  (+25 unmotivated)
   Z leptonic Z         119       119        4,642   15 compositions: Zj Zg Zjj Ze Zm Zgj ...  (+12 unmotivated)
 
 compositions dropped entirely, costliest first:
@@ -100,11 +100,11 @@ costliest compositions that are kept:
   jj        185 of    185 spectra,    10,648 looks   (motivated)
   gj        154 of    154 spectra,     8,666 looks   (motivated)
   jm        175 of    175 spectra,     7,560 looks   (motivated)
-  Vj        134 of    134 spectra,     5,525 looks   (by rate)
+  Vj        134 of    134 spectra,     5,525 looks   (motivated)
   bj        142 of    142 spectra,     5,126 looks   (motivated)
   em         97 of     97 spectra,     3,981 looks   (motivated)
   gm         93 of     93 spectra,     3,643 looks   (motivated)
-  Hj         79 of     79 spectra,     2,735 looks   (by rate)
+  Hj         79 of     79 spectra,     2,735 looks   (motivated)
   Ve         69 of     69 spectra,     2,553 looks   (by rate)
   Vg         69 of     69 spectra,     2,525 looks   (motivated)
   mm         67 of     67 spectra,     2,386 looks   (motivated)
@@ -131,32 +131,32 @@ dataset scaled (the anchor is Run 2, 140 fb-1): spectra, N, Z_local, mass reach
     five objects      712 of  1,502 histograms, N =    34,837, Z_local = 6.78
     ten objects     3,603 of 21,644 histograms, N =   161,020, Z_local = 7.00
     with lenses     6,611 histograms, N =   285,962, Z_local = 7.08
-    motivated once     53 spectra in 46 categories over 46 compositions, N =     3,171, Z_local = 6.41
-    tier 0 / 1 / 2 spectra :     53  2,288  1,262
-    tier 0 / 1 / 2 looks   :     3,171   112,069    45,779
-    on a motivated axis    : 2,341 of 3,603 spectra (65 %), 72 % of N, over 46 of 217 object multisets
+    predicted         162 spectra in 69 categories over 75 (final state, mass) pairs, N =     8,501, Z_local = 6.56
+    tier 0 / 1 / 2 spectra :    162  2,445    996
+    tier 0 / 1 / 2 looks   :     8,501   116,612    35,908
+    theory motivated       : 162 of 3,603 spectra (4.5 %), 5.3 % of N, over 75 (final state, mass) pairs
     by group size          : k=2: 2,662 (74 %), k=3: 831 (23 %), k=4: 110 (3 %)
     costliest compositions : gg 11,519, eg 11,482, ee 10,968, ej 10,667, jj 10,648, gj 8,666
     lens high HT or Meff        2,134 views    89,633 looks,  1,145 too thin
     lens displaced activity       743 views    28,651 looks,  2,860 too thin
     lens forward jet pair          53 views     2,700 looks,     29 too thin
     lens ISR jet                   78 views     3,958 looks,    652 too thin
-    published windows, if they were gated too: 40 of 52 axes, N = 2,917 of 4,006
+    published windows, if they were gated too: 46 of 59 axes, N = 3,090 of 4,207
     yield anchor x0.01 / x100 (this dataset): 1,284 spectra Z = 6.84   7,768 spectra Z = 7.12   
   Run 2+3, ~400 fb-1 (x3 the anchor, x1.20 in mass reach)
     five objects      755 of  1,502 histograms, N =    39,423, Z_local = 6.79
     ten objects     4,438 of 21,644 histograms, N =   201,136, Z_local = 7.03
     with lenses     8,211 histograms, N =   362,815, Z_local = 7.11
-    motivated once     55 spectra in 47 categories over 47 compositions, N =     3,428, Z_local = 6.42
-    tier 0 / 1 / 2 spectra :     55  2,702  1,681
-    tier 0 / 1 / 2 looks   :     3,428   135,875    61,833
-    on a motivated axis    : 2,757 of 4,438 spectra (62 %), 69 % of N, over 47 of 258 object multisets
+    predicted         164 spectra in 70 categories over 76 (final state, mass) pairs, N =     9,178, Z_local = 6.58
+    tier 0 / 1 / 2 spectra :    164  2,944  1,330
+    tier 0 / 1 / 2 looks   :     9,178   143,036    48,922
+    theory motivated       : 164 of 4,438 spectra (3.7 %), 4.6 % of N, over 76 (final state, mass) pairs
     by group size          : k=2: 3,251 (73 %), k=3: 1,045 (24 %), k=4: 142 (3 %)
     costliest compositions : gg 13,981, eg 13,838, ee 12,894, ej 12,018, jj 11,234, gj 10,210
     lens high HT or Meff        2,615 views   114,012 looks,  1,431 too thin
     lens displaced activity       985 views    39,184 looks,  3,453 too thin
     lens forward jet pair          68 views     3,381 looks,     24 too thin
     lens ISR jet                  105 views     5,101 looks,    726 too thin
-    published windows, if they were gated too: 43 of 52 axes, N = 3,131 of 4,006
+    published windows, if they were gated too: 49 of 59 axes, N = 3,306 of 4,207
     yield anchor x0.01 / x100 (this dataset): 1,729 spectra Z = 6.88   8,923 spectra Z = 7.14   
 

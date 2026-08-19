@@ -1,57 +1,59 @@
 model_class,source,references,n_spectra,spectra
-2HDM (general/typeII/CPV),FeynRules/UFO database,,6,m(Vh); m(bb); m(cb) dijet; m(tautau); m(tb); m(tt)
+2HDM (general/typeII/CPV),FeynRules/UFO database,,8,m(HH); m(Vh); m(bb); m(cb) dijet; m(tautau); m(tb); m(tt); mT(taunu)
 ALP,FeynRules/UFO database,,2,m(Vgamma); m(gammagamma)
 B-anomaly Z' (b-philic),literature sweep,1809.01158 1403.1269 1707.07016,2,m(bb); m(mumu)
-Color-octet scalar (MW),literature sweep,hep-ph/0606172 0710.3133,1,m(bb)
+Bilepton (331),literature sweep,1806.04536 1812.02723,3,m(ee) SS; m(emu) SS; m(mumu) SS
+Color-octet scalar (MW),literature sweep,hep-ph/0606172 0710.3133,2,m(bb); m(jj)
 Coloron / Axigluon,FeynRules/UFO database,,3,m(jj); m(tt); m(tt)/m(jj)
 Composite / NJL,FeynRules/UFO database,,2,m(VV); m(jj)
 Composite Majorana N,literature sweep,1510.07988,2,m(ejj); m(mujj)
 Dark Z (mass mixing),literature sweep,1203.2947 1412.0018,2,m(ee) (Zd); m(mumu) (Zd)
 Diquark / color-sextet,FeynRules/UFO database,,2,m(jj); m(tt)
 Excited boson (W*/Z*),FeynRules/UFO database,,2,m(VV); m(Vgamma)
-Excited lepton (l*),FeynRules/UFO database,,8,m(eZ); m(egamma); m(ejj); m(muZ); m(mugamma); m(mujj); m(taugamma); m(taujj)
+Excited lepton (l*),FeynRules/UFO database,,9,m(eZ); m(egamma); m(ejj); m(muZ); m(mugamma); m(mujj); m(tauV); m(taugamma); m(taujj)
 Excited neutrino (nu*),literature sweep,hep-ph/0401066 2606.24486,2,m(ejj); m(mujj)
-Excited quark (q*/b*),FeynRules/UFO database,,5,m(bgamma); m(bj); m(jgamma); m(jj); m(tW)
+Excited quark (q*/b*),FeynRules/UFO database,,6,m(bgamma); m(bj); m(jV); m(jgamma); m(jj); m(tW)
 Excited top (t*),literature sweep,1208.5811 1110.1565,2,m(tgamma); m(tj)
 Flavoured W'/Z' (t-q),literature sweep,1102.0018 0907.4112,1,m(tj)
 Georgi-Machacek,FeynRules/UFO database,,4,m(VV); m(ee) SS; m(emu) SS; m(mumu) SS
-Heavy neutrino / HNL (prompt),FeynRules/UFO database,,3,m(eejj); m(mumujj); multilepton
+Heavy neutrino / HNL (prompt),FeynRules/UFO database,,5,m(eejj); m(ejj); m(mujj); m(mumujj); multilepton
 HeavyHiggs THDM,FeynRules/UFO database,,2,m(VV); m(tt)
 Hidden Abelian Higgs (HAHM),FeynRules/UFO database,,2,m(ee) (Zd); m(mumu) (Zd)
 Higgs portal,FeynRules/UFO database,,1,m(HH)
 KK gluon (RS),FeynRules/UFO database,,1,m(tt)
-KK graviton (Gstar),FeynRules/UFO database,,4,m(VV); m(ee); m(gammagamma); m(mumu)
+KK graviton (Gstar),FeynRules/UFO database,,6,m(HH); m(VV); m(ee); m(gammagamma); m(jj); m(mumu)
 Large ED / UED / HEIDI,FeynRules/UFO database,,4,m(ee); m(gammagamma); m(multi); m(mumu)
 Leptogluon (color-octet l),literature sweep,1211.6394 2212.06178,2,m(ej); m(muj)
 Leptophilic gauge boson,FeynRules/UFO database,,2,m(ee); m(mumu)
 Leptophobic Z' (dark cascade),literature sweep,1111.0633,1,multilepton
 Leptoquark NLO (mix/nomix),FeynRules/UFO database,,6,m(eb); m(ej); m(mub); m(muj); m(taub); m(tauj)
-LRSM / Alt-LRSM,FeynRules/UFO database,,6,m(ee); m(eejj); m(mumu); m(mumujj); mT(ev); mT(muv)
+LRSM / Alt-LRSM,FeynRules/UFO database,,8,m(ee); m(eejj); m(ejj); m(mujj); m(mumu); m(mumujj); mT(ev); mT(muv)
 MFV RPV gluino (tbs),literature sweep,1111.1239,1,m(tbj)
-Minimal Z' / U(1),FeynRules/UFO database,,8,m(bb); m(ee); m(emu) LFV; m(etau) LFV; m(jj); m(mumu); m(mutau) LFV; m(tt)
-MSSM/NMSSM/RPV SUSY,FeynRules/UFO database,,3,m(3j); m(bb); m(tautau)
+Minimal Z' / U(1),FeynRules/UFO database,,9,m(bb); m(ee); m(emu) LFV; m(etau) LFV; m(jj); m(mumu); m(mutau) LFV; m(tautau); m(tt)
+MSSM/NMSSM/RPV SUSY,FeynRules/UFO database,,4,m(3j); m(HH); m(bb); m(tautau)
 N2HDM / 2HDM+S (h->aa),FeynRules/UFO database,,4,m(bb); m(gammagamma); m(mumu) (Zd); m(tautau)
 Quantum black hole,FeynRules/UFO database,,7,m(ej); m(emu) LFV; m(etau) LFV; m(jgamma); m(muj); m(multi); m(mutau) LFV
 Randall-Sundrum / Radion,FeynRules/UFO database,,3,m(HH); m(VV); m(gammagamma)
 RPV electroweakino (trilepton),FeynRules/UFO database,,2,m(eZ); m(muZ)
-RPV resonant slepton,literature sweep,hep-ph/0001224 1201.5014,2,m(mujj); m(mumujj)
-Scalar leptoquark (S1),FeynRules/UFO database,,9,m(eb); m(ej); m(emu) LFV; m(etau) LFV; m(mub); m(muj); m(mutau) LFV; m(taub); m(tauj)
+RPV resonant slepton,literature sweep,hep-ph/0001224 1201.5014,5,m(emu) LFV; m(etau) LFV; m(mujj); m(mumujj); m(mutau) LFV
+Scalar leptoquark (S1),FeynRules/UFO database,,11,m(eb); m(ej); m(emu) LFV; m(et); m(etau) LFV; m(mub); m(muj); m(mut); m(mutau) LFV; m(taub); m(tauj)
 Sgluon,FeynRules/UFO database,,2,m(3j); m(tt)
 SILH / Little Higgs,FeynRules/UFO database,,3,m(VV); m(ee); m(mumu)
 Simplified DM (dijet mediator),FeynRules/UFO database,,1,m(jj)
-Singlet scalar / SM+Scalars,FeynRules/UFO database,,3,m(HH); m(VV); m(Vgamma)
+Singlet scalar / SM+Scalars,FeynRules/UFO database,,4,m(HH); m(VV); m(Vgamma); m(gammagamma)
 Stop/scharm (RPV),FeynRules/UFO database,,3,m(eb); m(mub); m(tt)/m(jj)
+String / Regge resonance,literature sweep,0808.0497 0804.2013,2,m(jgamma); m(jj)
 Technicolor / TC2,FeynRules/UFO database,,4,m(VV); m(ee); m(gammajj); m(mumu)
 Top-philic,FeynRules/UFO database,,1,m(tt)
 Toponium,FeynRules/UFO database,,1,m(tt)
 TRSM (singlet/triplet),FeynRules/UFO database,,3,m(HH); m(VV); m(bb)
 Type-II seesaw,FeynRules/UFO database,,4,m(VV); m(ee) SS; m(emu) SS; m(mumu) SS
-Type-III seesaw,FeynRules/UFO database,,3,m(eZ); m(muZ); multilepton
-Vector leptoquark (U1),FeynRules/UFO database,,6,m(emu) LFV; m(etau) LFV; m(mutau) LFV; m(taub); m(tauj); m(tautau)
+Type-III seesaw,FeynRules/UFO database,,6,m(eH); m(eZ); m(muH); m(muZ); m(tauV); multilepton
+Vector leptoquark (U1),FeynRules/UFO database,,8,m(emu) LFV; m(et); m(etau) LFV; m(mut); m(mutau) LFV; m(taub); m(tauj); m(tautau)
 Vector triplet (HVT),FeynRules/UFO database,,2,m(VV); m(Vh)
 Vector-like confinement,FeynRules/UFO database,,2,m(gammagamma); m(jj)
-Vector-like lepton (VLL),FeynRules/UFO database,,3,m(eZ); m(muZ); multilepton
-Vector-like quark (VLQ),FeynRules/UFO database,,5,m(Ht); m(Wb); m(bZ); m(tb); m(ttZ)/m(Zt)
+Vector-like lepton (VLL),FeynRules/UFO database,,6,m(eH); m(eZ); m(muH); m(muZ); m(tauV); multilepton
+Vector-like quark (VLQ),FeynRules/UFO database,,8,m(Ht); m(Wb); m(bZ); m(jH); m(jV); m(tW); m(tb); m(ttZ)/m(Zt)
 W',FeynRules/UFO database,,5,m(jj); m(tb); mT(ev); mT(muv); mT(taunu)
 Warped KK cascade,literature sweep,1612.00047 1711.09920,3,m(3j); m(VV); m(gammajj)
 Zee-Babu,literature sweep,1402.4491 2206.14833,3,m(ee) SS; m(emu) SS; m(mumu) SS

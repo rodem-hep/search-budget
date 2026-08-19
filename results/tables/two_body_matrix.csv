@@ -4,31 +4,31 @@ e,mu,scanned,220.9,2,m(emu) LFV; m(emu) SS,0.0,
 e,tau,scanned,28.3,1,m(etau) LFV,0.0,
 e,j,scanned,107.3,1,m(ej),0.0,
 e,b,axes unscanned,0.0,0,,57.6,m(eb)
-e,t,gap,52.3,0,,0.0,
+e,t,axes unscanned,0.0,0,,28.8,m(et)
 e,ga,scanned,214.6,1,m(egamma),0.0,
 e,V,scanned,79.9,1,m(eZ),0.0,
-e,H,gap,50.3,0,,0.0,
+e,H,axes unscanned,0.0,0,,25.2,m(eH)
 mu,mu,scanned,486.1,3,m(mumu); m(mumu) (Zd); m(mumu) SS,0.0,
 mu,tau,scanned,28.3,1,m(mutau) LFV,0.0,
 mu,j,scanned,80.5,1,m(muj),0.0,
 mu,b,axes unscanned,0.0,0,,46.1,m(mub)
-mu,t,gap,45.5,0,,0.0,
+mu,t,axes unscanned,0.0,0,,28.8,m(mut)
 mu,ga,scanned,107.3,1,m(mugamma),0.0,
 mu,V,scanned,59.9,1,m(muZ),0.0,
-mu,H,gap,43.7,0,,0.0,
+mu,H,axes unscanned,0.0,0,,25.2,m(muH)
 tau,tau,scanned,42.9,1,m(tautau),0.0,
 tau,j,scanned,32.2,1,m(tauj),0.0,
 tau,b,scanned,19.2,1,m(taub),0.0,
 tau,t,gap,30.7,0,,0.0,
 tau,ga,axes unscanned,0.0,0,,40.2,m(taugamma)
-tau,V,gap,32.9,0,,0.0,
+tau,V,axes unscanned,0.0,0,,24.0,m(tauV)
 tau,H,gap,29.6,0,,0.0,
 j,j,scanned,73.8,1,m(jj),0.0,
 j,b,scanned,56.7,1,m(bj),78.2,m(cb) dijet
 j,t,scanned,26.9,1,m(tj),0.0,
 j,ga,scanned,66.0,1,m(jgamma),0.0,
-j,V,gap,70.8,0,,0.0,
-j,H,gap,58.2,0,,0.0,
+j,V,axes unscanned,0.0,0,,44.0,m(jV)
+j,H,axes unscanned,0.0,0,,25.2,m(jH)
 b,b,scanned,40.1,1,m(bb),0.0,
 b,t,scanned,43.8,1,m(tb),0.0,
 b,ga,axes unscanned,0.0,0,,64.4,m(bgamma)

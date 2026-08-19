@@ -52,6 +52,8 @@ and `fetch-model-meta`, the only stages that need the network and the only ones 
 | `model_spectrum_map.csv` | `model-map` — per spectrum: `n_s`, the model classes pointing at it, the event-selection multiplicity and what those selections are, whether a published ATLAS search already scans the axis, and whether the combinatorial scan can form it |
 | `model_classes.csv` | `model-map` — one row per model class: whether it comes from the FeynRules/UFO database or the literature sweep, its defining arXiv references, and the spectra it points at |
 | `unscanned_spectra.csv` | `unscanned-spectra` — the model-motivated spectra no published ATLAS search scans, in the scan's (category, mass-group) units: the pair-produced axis resolved into its per-category legs, each flagged fittable or not |
+| `unscanned_scan_units.csv` | `unscanned-spectra` — the same question in the combinatorial scan's own units: of its 4,438 fittable spectra (one axis in one category, Run 2+3), how many are a final state some public model predicts with the mass on its resonant sub-system (`scaled_scan.FINAL_STATES`), and how many of those sit on an axis no published ATLAS search scans |
+| `new_spectra.csv` | `unscanned-spectra` — the headline list: every spectrum of the combinatorial scan that a public model predicts (final state and resonant sub-system) and no published ATLAS search scans, one row per (mass group, category) with its looks, the budget axes it sits on and the model classes behind it |
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh-fdr-ab` (the `.npz` is the Monte Carlo cache) |
 | `bh_zcut_per_pe.csv` | `bh-zcut` |
 | `bh_outliers_scan.npz` | `bh-fdr-outliers` (Monte Carlo cache) |
