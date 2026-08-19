@@ -7,7 +7,7 @@ the same rule, `n_s = (1/r) ln(M_hi/M_lo)`, `Z_local = sqrt(25 + 2 ln N)`.
 
 ## Method
 Every census entry carries the canonical budget axis it scans (`budget_axis`; several when the
-entry scans several; `-` when it falls on none of the 46) and the range it scanned (`scan_GeV`,
+entry scans several; `-` when it falls on none of the 56) and the range it scanned (`scan_GeV`,
 transcribed from the published range the census records). The resolution `r` is that axis' -- the
 budget's one physics input, unchanged here; an entry on no axis is priced at the default
 `r = 0.06`. **Where the census does not record a range, the axis' own published window is the
@@ -24,39 +24,39 @@ A fixed-mass search (LFV `Z` and `tau` decays, exclusive `H`/`Z -> quarkonium + 
 ## Summary
 | basis | units | N_trials | band (r x0.5..x2) | Z_local for 5s global | band |
 |---|--:|--:|---|--:|---|
-| **published searches** (86 census entries) | 100 | **7,710** | 3,855-15,420 | **6.55** | 6.44-6.65 |
-| axes scanned (union of the ranges) | 50 | **3,672** | 1,836-7,344 | **6.44** | 6.33-6.54 |
-| model-motivated axes (reference, `SEARCH_BUDGET.md`) | 46 | **3,685** | 1,842-7,369 | **6.44** | 6.33-6.54 |
+| **published searches** (86 census entries) | 104 | **7,874** | 3,937-15,749 | **6.55** | 6.45-6.66 |
+| axes scanned (union of the ranges) | 54 | **3,837** | 1,918-7,674 | **6.44** | 6.33-6.55 |
+| model-motivated axes (reference, `SEARCH_BUDGET.md`) | 56 | **4,118** | 2,059-8,236 | **6.45** | 6.35-6.56 |
 
 **Reading it.** Pricing every published ATLAS resonance search over the range it actually scanned
-gives **N = 7,710**, so a 5 sigma global discovery in the published program needs a local
+gives **N = 7,874**, so a 5 sigma global discovery in the published program needs a local
 **6.55 sigma**. Counting each axis once instead, over the union of everything published on
-it, gives **N = 3,672** and **6.44 sigma**. The two bases differ by a factor
+it, gives **N = 3,837** and **6.44 sigma**. The two bases differ by a factor
 2.1 in N and 0.11 sigma in the bar -- the same lesson as the
 model side: the answer is nearly independent of how finely the program is sliced.
 
 ## Coverage
-The census reaches 40 of the 46 canonical axes. 6 carry no published
-search at all: `m(cb) dijet`, `m(eb)`, `m(mub)`, `m(multi)`, `m(tt)/m(jj)`, `multilepton`.
+The census reaches 44 of the 56 canonical axes. 12 carry no published
+search at all: `m(bgamma)`, `m(cb) dijet`, `m(eb)`, `m(gammajj)`, `m(mub)`, `m(mujj)`, `m(multi)`, `m(taugamma)`, `m(tbj)`, `m(tgamma)`, `m(tt)/m(jj)`, `multilepton`.
 
 10 published entries fall on no canonical axis and are priced on their own published range at
-`r = 0.06`; 12 more fall on no axis **and** carry no chargeable range, so
+`r = 0.06`; 10 more fall on no axis **and** carry no chargeable range, so
 they are listed below as unpriced and are missing from `N` -- `N` is a lower bound by that much. Of
-those 12, 9 published no scanned range and 3 declare
+those 10, 7 published no scanned range and 3 declare
 no single axis to scan (the anomaly-detection and generic multi-body entries, whose observable is
 "many").
 
-The 62 distinct bump observables the census scans are therefore
-40 of the 46 budget axes, 10 scanned axes outside the 46, and
-12 carrying nothing chargeable.
+The 64 distinct bump observables the census scans are therefore
+44 of the 56 budget axes, 10 scanned axes outside the 56, and
+10 carrying nothing chargeable.
 
-**Why the union basis lands on the model space.** Counting each axis once gives 3,672
-against the model space's 3,685, a gap of 0.3% -- closer than
-it has any right to be, because two omissions cancel. The union misses the 6 model
-axes with no published search, worth 267 looks on the
-model side, and it adds 10 scanned axes outside the 46, worth 251. Charging
-neither leaves 3,422 against 3,418
-on the same 40 axes. The robust statement is the ten-percent one, and it is not a
+**Why the union basis lands on the model space.** Counting each axis once gives 3,837
+against the model space's 4,118, a gap of 6.8% -- closer than
+it has any right to be, because two omissions cancel. The union misses the 12 model
+axes with no published search, worth 536 looks on the
+model side, and it adds 10 scanned axes outside the 56, worth 251. Charging
+neither leaves 3,586 against 3,582
+on the same 44 axes. The robust statement is the ten-percent one, and it is not a
 tautology: the model space takes its windows from published searches but its axes from the models,
 so the agreement says the program scans almost exactly the axes the models motivate.
 
@@ -79,6 +79,7 @@ so the agreement says the program scans almost exactly the axes the models motiv
 | `m(eZ)` | 100-1100 | 0.03 | 80 | 80 |
 | `m(emu) SS` | 200-1300 | 0.025 | 75 | 75 |
 | `m(jgamma)` | 500-7000 | 0.04 | 66 | 66 |
+| `m(ejj)` | 250-6000 | 0.05 | 64 | 64 |
 | `m(muZ)` | 100-1100 | 0.04 | 60 | 60 |
 | `m(eejj)` | 400-7000 | 0.05 | 57 | 57 |
 | `m(bj)` | 200-6000 | 0.06 | 57 | 57 |
@@ -86,6 +87,7 @@ so the agreement says the program scans almost exactly the axes the models motiv
 | `m(Vh)` | 200-5000 | 0.06 | 54 | 54 |
 | `m(bb)` | 12-160+450-6000 | 0.1 | 52 | 40 |
 | `m(mumu) SS` | 200-1300 | 0.04 | 47 | 47 |
+| `m(bZ)` | 200-2000 | 0.05 | 46 | 46 |
 | `m(3j)` | 200-1800 | 0.05 | 44 | 44 |
 | `m(tb)` | 180-6000 | 0.08 | 44 | 44 |
 | `m(mumujj)` | 400-7000 | 0.07 | 41 | 41 |
@@ -95,6 +97,8 @@ so the agreement says the program scans almost exactly the axes the models motiv
 | `m(tauj)` | 200-5000 | 0.1 | 32 | 32 |
 | `m(etau) LFV` | 100-3000 | 0.12 | 28 | 28 |
 | `m(mutau) LFV` | 100-3000 | 0.12 | 28 | 28 |
+| `m(taujj)` | 300-5000 | 0.1 | 28 | 28 |
+| `m(tj)` | 350-3000 | 0.08 | 27 | 27 |
 | `mT(taunu)` | 200-5000 | 0.12 | 27 | 27 |
 | `mT(muv)` | 150-7000 | 0.15 | 26 | 26 |
 | `m(tW)` | 500-3000 | 0.08 | 22 | 22 |
@@ -169,9 +173,9 @@ so the agreement says the program scans almost exactly the axes the models motiv
 | Top & heavy quarks | Single VLQ: Wb / Ht / Zt / Hb | `m(Ht)` | 1000-3000 | axis | 0.08 | 14 |
 | Top & heavy quarks | Single VLQ: Wb / Ht / Zt / Hb | `m(ttZ)/m(Zt)` | 1000-4000 | axis | 0.08 | 17 |
 | Top & heavy quarks | tb resonances (W-prime, charged Higgs) | `m(tb)` | 500-6000 | census | 0.08 | 31 |
-| Top & heavy quarks | Fourth-generation / heavy quark -> Wq, Zq | - | - | **unpriced** | 0.06 | 0 |
+| Top & heavy quarks | Fourth-generation / heavy quark -> Wq, Zq | `m(bZ)` | 200-2000 | axis | 0.05 | 46 |
 | Top & heavy quarks | Wt (excited/single VLQ) | `m(tW)` | 500-3000 | axis | 0.08 | 22 |
-| Top & heavy quarks | Resonant top + jet | - | - | **unpriced** | 0.06 | 0 |
+| Top & heavy quarks | Resonant top + jet | `m(tj)` | 350-3000 | axis | 0.08 | 27 |
 | Top & heavy quarks | Top-philic resonances | `m(tt)` | 350-6000 | axis | 0.08 | 36 |
 | Top & heavy quarks | Dark mesons -> tb | `m(tb)` | 180-6000 | axis | 0.08 | 44 |
 | Higgs pairs & extended scalars | H -> aa (exotic Higgs decays) | `m(bb)` | 15-60 | census | 0.1 | 14 |
@@ -198,6 +202,8 @@ so the agreement says the program scans almost exactly the axes the models motiv
 | Leptoquarks, excited & heavy fermions | Excited leptons (e*, mu*, tau*) | `m(mugamma)` | 200-5000 | axis | 0.03 | 107 |
 | Leptoquarks, excited & heavy fermions | Excited leptons (e*, mu*, tau*) | `m(ej)` | 200-5000 | axis | 0.03 | 107 |
 | Leptoquarks, excited & heavy fermions | Excited leptons (e*, mu*, tau*) | `m(muj)` | 200-5000 | axis | 0.04 | 80 |
+| Leptoquarks, excited & heavy fermions | Excited leptons (e*, mu*, tau*) | `m(ejj)` | 250-6000 | axis | 0.05 | 64 |
+| Leptoquarks, excited & heavy fermions | Excited leptons (e*, mu*, tau*) | `m(taujj)` | 300-5000 | axis | 0.1 | 28 |
 | Leptoquarks, excited & heavy fermions | Heavy neutrino / right-handed W (lljj) | `m(eejj)` | 400-7000 | axis | 0.05 | 57 |
 | Leptoquarks, excited & heavy fermions | Heavy neutrino / right-handed W (lljj) | `m(mumujj)` | 400-7000 | axis | 0.07 | 41 |
 | Leptoquarks, excited & heavy fermions | Quantum black holes -> lepton + jet | `m(ej)` | 200-5000 | axis | 0.03 | 107 |
@@ -219,7 +225,7 @@ so the agreement says the program scans almost exactly the axes the models motiv
 | Generic & other | Displaced diphoton / dielectron | - | - | **unpriced** | 0.06 | 0 |
 | Generic & other | B_s invariant mass structure (X(5568)) | - | - | **unpriced** | 0.06 | 0 |
 | Generic & other | Xb -> Upsilon pi pi | - | - | **unpriced** | 0.06 | 0 |
-| | **total (86 entries, 100 priced pairs)** | | | | | **7,710** |
+| | **total (86 entries, 104 priced pairs)** | | | | | **7,874** |
 
 ## Assumptions & caveats
 - **The axis assignment is a curated judgement**, recorded per row in `data/published_spectra.csv`

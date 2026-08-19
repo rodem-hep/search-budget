@@ -113,7 +113,7 @@ def main(options=None):
         f.write(f"\nEvery quoted global significance above is <= 2.1 sigma, and none has since "
                 f"grown into a discovery.\n\n")
         f.write("## Against the background-only expectation\n\n")
-        f.write(f"A single background-only sweep of the 46-spectrum budget expects "
+        f.write(f"A single background-only sweep of the 56-spectrum budget expects "
                 f"`N x p(>=3 sigma)` = {N_inc:.0f} x 1.35e-3 = **{exp_inc:.1f}** reports "
                 f"(**{exp_sel:.1f}** at selection granularity, N = {N_sel:.0f}). The observed "
                 f"{len(ge3)} sits between the two.\n\n")

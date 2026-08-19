@@ -5,7 +5,7 @@ half **B for confirmation** (unblind *only* the regions selected in A). The Look
 is then paid only on the pre-registered B windows instead of on the whole program.
 
 **Which program.** The design is priced here on two bases, both in `ab_split_scan.csv`
-(`ab_split_budget.py`): the model space at event-selection granularity (**N = 6,597**), which is
+(`ab_split_budget.py`): the model space at event-selection granularity (**N = 7,030**), which is
 where the derivations below are worked out, and the **lensed combinatorial scan** of
 `scaled_scan.txt` (**N = 362,815**), which is the scan a network-driven hunt would actually run and
 therefore the headline. Every window is allowed `w = 3` resolution elements of mass freedom
@@ -13,7 +13,7 @@ therefore the headline. Every window is allowed `w = 3` resolution elements of m
 
 | basis | N | single stage | optimised split | naive 50/50, Z_cut = 3 |
 |---|--:|--:|--:|--:|
-| model space, event selections | 6,597 | 6.53 | 7.01 (+0.49) | 7.98 (+1.45) |
+| model space, event selections | 7,030 | 6.54 | 7.02 (+0.49) | 7.99 (+1.46) |
 | **combinatorial scan + lenses** | **362,815** | **7.11** | **~7.6 (+0.47)** | **8.90 (+1.79)** |
 
 **Verdict up front.** The idea is sound and its *main* value is real — the trials factor in B
@@ -65,7 +65,7 @@ Expected number of background selections (pure statistics, one-sided):
 
     k_bkg = N · p1(Z_cut),   p1(Z) = ½ erfc(Z/√2)
 
-| Z_cut | k_bkg (N = 6,597) |
+| Z_cut | k_bkg (N = 7,030) |
 |---:|---:|
 | 2.0 | 150.1 |
 | 2.5 | 41.0 |
@@ -85,7 +85,7 @@ Because the peak position jitters between halves by ~σ_M, each window must be w
 then **exact and tiny**:
 
     Z_B required for 5σ global  =  √(25 + 2·ln(3·k_eff))
-    Z_cut = 3  →  k_eff ≈ 9.9  →  Z_B ≥ 5.64     (vs 6.53 for the single-stage full scan)
+    Z_cut = 3  →  k_eff ≈ 9.5  →  Z_B ≥ 5.65     (vs 6.54 for the single-stage full scan)
 
 No Gross–Vitells toys, no up-crossing counting, no argument about what "independent look" means
 — the trials factor is the number of lines in a frozen document. That auditability is the
@@ -113,9 +113,9 @@ formula below reproduces the toys to 0.03σ.)
 
 | strategy | Z_full at 50% power (analytic) | toys | vs single-stage |
 |---|---:|---:|---:|
-| single-stage full-dataset scan (N = 6,597) | **6.53** | 6.52 | — |
-| A/B **50/50**, Z_cut = 3, B-only claim | **7.98** | 7.71* | **+1.45** |
-| A/B optimized: **f ≈ 0.2–0.3**, Z_cut = 2–3 | **7.01–7.09** | 7.06* | **+0.5** |
+| single-stage full-dataset scan (N = 7,030) | **6.54** | 6.52 | — |
+| A/B **50/50**, Z_cut = 3, B-only claim | **7.99** | 7.72* | **+1.46** |
+| A/B optimized: **f ≈ 0.2–0.3**, Z_cut = 2–3 | **7.02–7.10** | 7.14* | **+0.5** |
 
 *toy numbers use exact one-look windows (no ±2σ_M widening), worth ~0.1–0.3σ less than the
 analytic column which includes the factor-3 window freedom.
@@ -192,7 +192,7 @@ figure `results/plots/ab_split_crossover.png`):
 |--:|--:|--:|--:|--:|--:|--:|
 | 10 | 5.44 | 5.28 | 5.73 | 5.92 | +0.48 | 15 |
 | 10³ | 6.23 | 5.93 | 6.45 | 6.62 | +0.39 | 12 |
-| ~6.6·10³ (this program) | 6.53 | — | 6.80 | 7.01 | **+0.49\*** | **13** |
+| ~7.0·10³ (this program) | 6.54 | — | 6.86 | 7.02 | **+0.49\*** | **13** |
 | 10⁶ | 7.25 | 6.93 | 7.46 | 7.61 | +0.36 | 14 |
 | 10¹⁰ | 8.43 | 8.11 | 8.63 | 8.76 | +0.33 | 17 |
 
@@ -249,13 +249,13 @@ Z_cut = 3, toys give **7.11** against **7.12** analytic (`ab_split_toys.py`, exa
 when both directions have comparable power. But confirmation is the luminosity-hungry stage, so
 the one-way optimum is strongly asymmetric — and there the second direction is dead.
 
-| design (N = 6,597) | one-way | swapped | swap gain |
+| design (N = 7,030) | one-way | swapped | swap gain |
 |---|--:|--:|--:|
-| 50/50, Z_cut = 3 | 7.98 (+1.45) | **7.38 (+0.86)** | **+0.60** |
-| Z_cut = 2, f re-optimised (0.18) | 7.01 (+0.49) | 7.12 (+0.59) | −0.10 |
+| 50/50, Z_cut = 3 | 7.99 (+1.46) | **7.40 (+0.86)** | **+0.60** |
+| Z_cut = 2, f re-optimised (0.18) | 7.02 (+0.49) | 7.12 (+0.59) | −0.10 |
 | Z_cut = 3, f re-optimised (0.29) | 7.09 (+0.56) | 7.15 (+0.63) | −0.07 |
 | Z_cut = 4, f re-optimised | 7.36 (+0.83) | 7.06 (+0.54) | +0.30 |
-| **best design**, Z_cut ∈ [2, 4.5] | **7.01 (+0.49)** @ f = 0.18 | 7.03 (+0.51) @ f = 0.50 | −0.02 |
+| **best design**, Z_cut ∈ [2, 4.5] | **7.02 (+0.49)** @ f = 0.18 | 7.04 (+0.50) @ f = 0.50 | −0.02 |
 
 So the swap does not beat the asymmetric scheme — it **rescues the naive 50/50 one** (+1.45σ →
 +0.86σ), moving the optimum back to f = ½. Layered on top of the *recommended* working point
@@ -366,15 +366,15 @@ the B correction (`2·ln(3·k)` moves by ~0.1 in Z per doubling of k).
 
 ## 2e. The same design on the combinatorial scan
 
-The derivations above are worked on N = 6,597 because that is where the toys were run. The scan a
+The derivations above are worked on N = 7,030 because that is where the toys were run. The scan a
 network-driven hunt would face is the lensed combinatorial one, N = 362,815, and the design carries
 over unchanged (`ab_split_scan.csv`):
 
-| | model space (6,597) | scan + lenses (362,815) |
+| | model space (7,030) | scan + lenses (362,815) |
 |---|--:|--:|
-| single stage, exactly corrected | 6.53 | **7.11** |
-| optimised split (f ≈ 0.2–0.3, Z_cut = 2–3) | 7.01 (+0.49) | **7.58–7.65 (+0.47)** |
-| naive 50/50, Z_cut = 3 | 7.98 (+1.45) | 8.90 (+1.79) |
+| single stage, exactly corrected | 6.54 | **7.11** |
+| optimised split (f ≈ 0.2–0.3, Z_cut = 2–3) | 7.02 (+0.49) | **7.58–7.65 (+0.47)** |
+| naive 50/50, Z_cut = 3 | 7.99 (+1.46) | 8.90 (+1.79) |
 | windows pre-registered at Z_cut = 3 | 9 | **490** |
 | claim bar √(25 + 2·ln(3k)) | 5.64 | **6.29** |
 | break-even R\* (w = 3 / w = 1) | 13 / 4 | **14 / 5** |
@@ -423,7 +423,7 @@ against the **6.29** bar, so **zero false claims**, the same verdict as on the n
 
 ## 5. Toy validation (`searchbudget/stages/ab_split_toys.py`)
 
-The whole search program is modelled as its N = 6,597 effective independent looks (iid standard
+The whole search program is modelled as its N = 7,030 effective independent looks (iid standard
 normals under background-only), split per look into independent halves
 `z_A = √f·μ + g_A`, `z_B = √(1−f)·μ + g_B`, so the full-dataset scan is recovered exactly as
 `z_full = √f·z_A + √(1−f)·z_B`. 20,000 background-only toys and 1,500 signal toys per strength
@@ -439,7 +439,7 @@ point. Three figures in `results/plots/`:
   for discovery hugs the diagonal).
 - **`ab_toys_power.png`** — discovery power vs injected `Z_full` for the three procedures on
   the *same* toy data. The 50%-power crossings — single-stage **6.52**, optimized split
-  **7.11**, 50/50 **7.70** — match the Φ-product analytics (6.53 / 7.09 / 7.71) to 0.03σ.
+  **7.14**, 50/50 **7.72** — match the Φ-product analytics (6.54 / 7.10 / 7.72) to 0.04σ.
   This plot is also what killed the first draft's "median arithmetic" claim that the optimized
   split beats the single-stage scan. Note the sub-unity plateau of the two-stage curves at
   small f: even an arbitrarily strong signal is lost when its A-half fluctuates below Z_cut.

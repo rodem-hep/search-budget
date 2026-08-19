@@ -165,8 +165,10 @@ input but the convention that turns a resolution element into an independent loo
   ADD/HEIDI continua, pair-produced Type-III/VLL, toponium at 2 m_t). A signal wider than `r`
   correlates neighbouring mass points, so counting resolution elements **over**-counts independent
   looks: the bias is conservative, `Z_local` too strict rather than too loose.
-  Only {len(nonpeak_axes)} axes are motivated *exclusively* by non-peaking models
-  ({', '.join(f'`{o}`' for o in nonpeak_axes)}); dropping both takes N from {N_incl:,.0f} to
+  Only {len(nonpeak_axes)} {'axis is' if len(nonpeak_axes) == 1 else 'axes are'} motivated
+  *exclusively* by non-peaking models
+  ({', '.join(f'`{o}`' for o in nonpeak_axes)}); dropping {'it' if len(nonpeak_axes) == 1 else 'them'}
+  takes N from {N_incl:,.0f} to
   {N_peak:,.0f} and `Z_local` from {z5(N_incl):.2f} to {z5(N_peak):.2f}, so the whole question is
   worth {z5(N_incl)-z5(N_peak):.3f} sigma. `NONPEAK_ON` records the (model, axis) pairs where an
   otherwise-narrow class does not peak, including the H/A interference with SM ttbar.

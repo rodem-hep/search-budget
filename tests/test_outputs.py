@@ -30,10 +30,10 @@ def test_declared_outputs_are_committed(name):
 
 def test_the_headline_numbers_are_what_the_paper_quotes():
     rows = io.read_rows(paths.table("search_budget.csv"))
-    assert len(rows) == 46
+    assert len(rows) == 56
     N = sum(float(r["ns_scan"]) for r in rows)
-    assert round(N) == 3685
-    assert sum(int(r["n_event_selections"]) for r in rows) == 94
+    assert round(N) == 4118
+    assert sum(int(r["n_event_selections"]) for r in rows) == 104
 
     scan = {r["dataset"]: r for r in io.read_rows(paths.table("scan_summary.csv"))}
     run23 = scan["Run 2+3, ~400 fb-1"]
@@ -43,24 +43,24 @@ def test_the_headline_numbers_are_what_the_paper_quotes():
 
     census = io.read_rows(paths.table("census_budget.csv"))
     priced = [r for r in census if float(r["n_s"]) > 0]
-    assert len(priced) == 100
-    assert round(sum(float(r["n_s"]) for r in priced)) == 7710
+    assert len(priced) == 104
+    assert round(sum(float(r["n_s"]) for r in priced)) == 7875
 
 
 def test_the_uncertainty_total_is_quoted_on_every_basis():
     rows = {(r["source"], r["direction"]): r
             for r in io.read_rows(paths.table("budget_uncertainty.csv"))}
     total = rows[("total", "total")]
-    assert total["dZ_model_space"] == "+0.185/-0.163"
+    assert total["dZ_model_space"] == "+0.183/-0.162"
     assert total["dZ_combinatorial_scan"] == "+0.231/-0.308"
-    assert total["dZ_difference"] == "+0.123/-0.232"
+    assert total["dZ_difference"] == "+0.123/-0.231"
 
 
 def test_the_readme_block_is_generated_not_typed():
     text = open(paths.README).read()
     start = text.index("<!-- paper-numbers:start -->")
     block = text[start:text.index("<!-- paper-numbers:end -->")]
-    assert "N = 3,685" in block
+    assert "N = 4,118" in block
     assert "searchbudget/stages/paper_numbers.py" in block
 
 

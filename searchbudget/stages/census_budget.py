@@ -84,7 +84,7 @@ def main(options=None):
 against the model space's {N_model:,.0f}, a gap of {abs(N_axes-N_model)/N_model:.1%} -- closer than
 it has any right to be, because two omissions cancel. The union misses the {len(uncovered)} model
 axes with no published search, worth {N_uncov:,.0f} looks on the
-model side, and it adds {len(off_axis)} scanned axes outside the 46, worth {N_off:,.0f}. Charging
+model side, and it adds {len(off_axis)} scanned axes outside the 56, worth {N_off:,.0f}. Charging
 neither leaves {N_axes-N_off:,.0f} against {N_model - N_uncov:,.0f}
 on the same {len(covered)} axes. The robust statement is the ten-percent one, and it is not a
 tautology: the model space takes its windows from published searches but its axes from the models,
@@ -169,7 +169,7 @@ the same rule, `n_s = (1/r) ln(M_hi/M_lo)`, `Z_local = sqrt(25 + 2 ln N)`.
 
 ## Method
 Every census entry carries the canonical budget axis it scans (`budget_axis`; several when the
-entry scans several; `-` when it falls on none of the 46) and the range it scanned (`scan_GeV`,
+entry scans several; `-` when it falls on none of the 56) and the range it scanned (`scan_GeV`,
 transcribed from the published range the census records). The resolution `r` is that axis' -- the
 budget's one physics input, unchanged here; an entry on no axis is priced at the default
 `r = {RES_DEFAULT:g}`. **Where the census does not record a range, the axis' own published window is the
@@ -205,7 +205,7 @@ no single axis to scan (the anomaly-detection and generic multi-body entries, wh
 "many").
 
 The {observables} distinct bump observables the census scans are therefore
-{len(covered)} of the {len(SCAN)} budget axes, {len(off_axis)} scanned axes outside the 46, and
+{len(covered)} of the {len(SCAN)} budget axes, {len(off_axis)} scanned axes outside the 56, and
 {len(unpriced)} carrying nothing chargeable.
 
 {why_union}

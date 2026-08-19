@@ -23,7 +23,16 @@ Two rules decide what "distinct" means, and both are physical rather than bookke
   `mumu` pair is sharp while `ee` merges into one cluster, which is why the `(Zd)` electron channel
   starts at 1 GeV and the muon channel at 0.3 GeV. Because flavour is an axis, it is **not** also a
   multiplier in `NSEL` (`public_obs_map.py`); adding it back there would double-count it.
-  Cross-check: the selections-level channel count must stay at **94**.
+  Cross-check: the selections-level channel count must stay at **104**.
+
+**Where the model catalogue comes from.** `public_obs_map.PUBLIC_OBS` collapses the public BSM
+model classes onto the spectra they populate. Its sources are the FeynRules/UFO model database,
+the published search record, and a sweep of the resonance-model literature beyond the database
+(documented with per-model references in `docs/GAP_MODELS.md`); the catalogue does not distinguish
+between them — a class found in the literature sweep enters exactly like one with a UFO. Axes no
+published ATLAS search has scanned take their `SCAN` window from the closest published sibling
+grid or from the theory papers' own mass grids, with the source noted per axis, and are charged a
+single event selection in `NSEL` (the minimal scan) since no published selection exists to count.
 
 With a constant fractional resolution `sigma_M = r·M`, the effective independent looks over a
 scanned window are the Gross-Vitells resolution elements
@@ -55,28 +64,29 @@ neighbouring mass points, so fewer of them are independent looks. The direction 
 the size: counting resolution elements for a wide signal **over**-counts `N`, which makes `Z_local`
 too strict rather than too loose. Nothing in the budget can be made *easier* by a width correction.
 
-`public_obs_map.WIDTH` places all 43 public model classes in four bands, each with the Γ/M its
+`public_obs_map.WIDTH` places all 56 public model classes in four bands, each with the Γ/M its
 published benchmark carries:
 
 | band | classes | what it means |
 |---|--:|---|
-| `narrow` | 22 | Γ/M below `r` on every axis the class populates (HAHM ~ε², LQ `λ²/16π` ≈ 2%, W_R 2–3%, q\* 2–4%) |
-| `benchmark` | 13 | narrow at the point ATLAS publishes, broad elsewhere in its own parameter space (Z′_SSM 3% against `r`=0.015 on `m(ee)`; the DM-mediator coupling grid spans 1% to >30%; single-VLQ 10–50%; U1 ~20% at the flavour-anomaly point) |
+| `narrow` | 36 | Γ/M below `r` on every axis the class populates (HAHM ~ε², LQ `λ²/16π` ≈ 2%, W_R 2–3%, q\* 2–4%) |
+| `benchmark` | 14 | narrow at the point ATLAS publishes, broad elsewhere in its own parameter space (Z′_SSM 3% against `r`=0.015 on `m(ee)`; the DM-mediator coupling grid spans 1% to >30%; single-VLQ 10–50%; U1 ~20% at the flavour-anomaly point) |
 | `broad` | 3 | already wider than `r` at the standard benchmark: KK gluon 15–30% against `r`=0.08 on `m(tt)`, coloron/axigluon, composite/NJL |
-| `nonpeak` | 5 | no Breit-Wigner peak at all: QBH is a threshold turn-on, ADD/HEIDI a non-resonant tail, Type-III seesaw and VLL are pair-produced counting signatures, toponium is a threshold effect pinned at 2·m_t |
+| `nonpeak` | 3 | no Breit-Wigner peak at all: QBH is a threshold turn-on, ADD/HEIDI a non-resonant tail, toponium is a threshold effect pinned at 2·m_t |
 
 Peaking-ness belongs to the (model, axis) pair rather than to the model, so `NONPEAK_ON` records
 the exceptions: prompt HNL is a genuine `m(lljj)` resonance but a counting signature in
-`multilepton`, and 2HDM / heavy-Higgs / top-philic scalars interfere with the SM `tt̄` continuum,
+`multilepton`, Type-III seesaw and VLL peak on `m(lZ)` but are pair-produced counting signatures
+on `multilepton`, and 2HDM / heavy-Higgs / top-philic scalars interfere with the SM `tt̄` continuum,
 giving a peak-dip lineshape rather than a bump on `m(tt)`.
 
-**What it costs.** Only two axes are motivated *exclusively* by non-peaking models: `m(multi)`
-(ADD/HEIDI + QBH) and `multilepton` (HNL + Type-III + VLL). Dropping both takes `N` from 3685 to
-3620 and `Z_local` from 6.44 to 6.43. `search_budget.py` recomputes that sensitivity rather than
-quoting it, so it follows the map. The combinatorial scan is unaffected by construction: the four
-axes `scaled_scan.MOTIVATED` maps to `None` (`m(multi)` and the three transverse masses) are
-exactly the non-peak observables, so `m(multi)` never entered the 3603. `multilepton` is the one
-axis that counts as motivated in the scan while none of its models peaks there.
+**What it costs.** Only one axis is motivated *exclusively* by non-peaking models: `m(multi)`
+(ADD/HEIDI + QBH); `multilepton` left that set when the leptophobic dark-cascade Z' gave it a
+genuine peak. Dropping it takes `N` from 4118 to 4097 and `Z_local` from 6.45 to 6.45 (a
+thousandth of a sigma). `search_budget.py` recomputes that sensitivity rather than quoting it, so
+it follows the map. The combinatorial scan is unaffected by construction: the four axes
+`scaled_scan.MOTIVATED` maps to `None` (`m(multi)` and the three transverse masses) are exactly
+the observables the scan cannot form, so `m(multi)` never entered the 3603.
 
 ### Splitting the budget finer
 
@@ -216,23 +226,23 @@ first spectrum that does not (rather than topping up with whatever cheap spectru
 remainder).
 
 0. **every model-motivated composition once**, in the best-populated category that can form it, so
-   no motivated axis can be lost to the budget. `MOTIVATED` maps each of the 46 observables of the model-driven
-   budget onto the composition(s) a scan would build it from; 42 of them have one (`m(multi)` has no
-   fixed composition, and the three `mT` axes need MET in the mass), and they collapse onto **38
-   distinct compositions**, of which 36 can be fitted somewhere (`m(tautau)` and `m(Zt)` cannot);
+   no motivated axis can be lost to the budget. `MOTIVATED` maps each of the 56 observables of the model-driven
+   budget onto the composition(s) a scan would build it from; 52 of them have one (`m(multi)` has no
+   fixed composition, and the three `mT` axes need MET in the mass), and they collapse onto **48
+   distinct compositions**, of which 46 can be fitted somewhere (`m(tautau)` and `m(Zt)` cannot);
 1. **those same compositions in their remaining categories**, highest yield first;
 2. **everything else**, highest yield first.
 
 Yield is `yield_model.F` multiplied over the category's content, i.e. the same model that decides
-fittability, so "best-populated first" means most background events. Tier 0 costs 2.7e3 looks against
-the 3.7e3 of the model-driven budget, which is the one place the two prescriptions can be checked
+fittability, so "best-populated first" means most background events. Tier 0 costs 3.4e3 looks against
+the 4.1e3 of the model-driven budget, which is the one place the two prescriptions can be checked
 against each other.
 
 The same split also measures how much of a combinatorial scan theory motivates at all, so the report
-prints it per dataset: the tier boundaries move with fittability. On Run 2 the tiers hold 43 / 2023 /
-1537 spectra, i.e. 2066 of 3603 (57 %) on a model-motivated axis over 36 of 217 fittable compositions;
-on Run 2 + Run 3, 45 / 2366 / 2027, i.e. 2411 of 4438 (54 %) over 37 of 258. The motivated set is
-bounded above by the 46 axes and the rest of the scan is not bounded at all, so the share falls as the
+prints it per dataset: the tier boundaries move with fittability. On Run 2 the tiers hold 53 / 2288 /
+1262 spectra, i.e. 2341 of 3603 (65 %) on a model-motivated axis over 46 of 217 fittable compositions;
+on Run 2 + Run 3, 55 / 2702 / 1681, i.e. 2757 of 4438 (62 %) over 47 of 258. The motivated set is
+bounded above by the 56 axes and the rest of the scan is not bounded at all, so the share falls as the
 dataset grows.
 
 Counting basis: a *spectrum* here is one axis in one category, i.e. one fitted histogram, and an
@@ -303,9 +313,9 @@ uncovered list is a lower bound on the gap.
 ### The publication census is a different base
 
 `published_census.py` counts from the other end: not the spectra models motivate, but the searches
-ATLAS has actually published. **Its 86 entries and the budget's 46 spectra must never be summed**, and
+ATLAS has actually published. **Its 86 entries and the budget's 56 spectra must never be summed**, and
 a raw entry count is not a trials factor: the publication record keeps two analyses on a shared mass
-axis as separate entries when they are separate papers, so the 86 entries carry only 62 distinct
+axis as separate entries when they are separate papers, so the 86 entries carry only 64 distinct
 observables, while the budget merges everything onto one axis and counts resolution elements along it.
 
 Scope is matched to the budget's on purpose: bump hunts for new states, so hadron-spectroscopy
@@ -317,20 +327,20 @@ the 46, and a `scan_GeV` transcribing the range that entry actually scanned (`fi
 single-mass search, empty where the census does not record one). Two things read it.
 
 **The stale list.** Revisiting a stale spectrum is free in trials **only** when its axis is already
-in `N` (12 of the 17); the other 5 extend the axis count and are priced like any new spectrum.
+in `N` (14 of the 19); the other 5 extend the axis count and are priced like any new spectrum.
 
 **The census priced in trials** (`census_budget.py`). With an axis and a range per entry, the
 publication record can be run through the same rule as the model space, and the comparison stops
-being a category error: charging every published search for the range it scanned gives `N = 7,710`
-(`Z_local = 6.55`) over 100 (search, axis) looks, and counting each axis once over the union of every
-published range on it gives `N = 3,672` (`6.44`) — against the model side's 3,685 and 6.44, i.e. the
-two enumerations land on the same bar from opposite directions. Where the census records no range,
+being a category error: charging every published search for the range it scanned gives `N = 7,875`
+(`Z_local = 6.55`) over 104 (search, axis) looks, and counting each axis once over the union of every
+published range on it gives `N = 3,837` (`6.44`) — against the model side's 4,118 and 6.45, i.e. the
+two enumerations land within a hundredth of a sigma of each other from opposite directions. Where the census records no range,
 the axis' own published window is the fallback, which is what separates the two bases; entries on no
-axis are priced at `RES_DEFAULT`, and the 12 that carry neither an axis nor a range (the generic
+axis are priced at `RES_DEFAULT`, and the 10 that carry neither an axis nor a range (the generic
 multi-spectrum anomaly-detection scans and the displaced programs, whose trials belong in the
 combinatorial count instead) stay unpriced, so `N` is a lower bound by that much.
 
-**Model independence** (`model_independence.py`). Each of the 100 charged (search, axis) pairs is
+**Model independence** (`model_independence.py`). Each of the 104 charged (search, axis) pairs is
 classified by the papers' own abstracts: a pair counts as model independent when any of its search's
 papers states a model-independent result there — a generic Gaussian-shape limit, a model-agnostic or
 anomaly-detection scan, or a cross-section limit the search itself declares model independent. The
@@ -362,7 +372,7 @@ Three rules keep the accounting honest.
   them, computed variation by variation. The bars are known to `+0.18/-0.16` (model space) and
   `+0.23/-0.31` (scan); the 0.59σ gap between them to `+0.12/-0.23`, and that residual is the yield
   model, which the model space never uses. Quote differences, not bars, wherever the argument allows.
-* **Conventions are not uncertainties.** Granularity (46 spectra vs 94 channels), the dataset the
+* **Conventions are not uncertainties.** Granularity (56 spectra vs 104 channels), the dataset the
   yields are priced on, the lens layer, and the shape of the hypothetical scan change *what* is
   counted. They are reported as alternatives and never added to the band. The published-program row is
   a literature count, so its band is the literature range `1e4` to `1e5`.

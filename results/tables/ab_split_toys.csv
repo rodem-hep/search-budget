@@ -1,4 +1,4 @@
 procedure,N_trials,reach_analytic,reach_toys,toy_minus_analytic
-single stage on the full dataset,6597,6.53,6.51,-0.01
-"optimised split, f = 0.22, Z_cut = 3",6597,7.09,7.15,+0.06
-"naive 50/50 split, Z_cut = 3",6597,7.71,7.64,-0.07
+single stage on the full dataset,7030,6.54,6.52,-0.02
+"optimised split, f = 0.22, Z_cut = 3",7030,7.10,7.14,+0.04
+"naive 50/50 split, Z_cut = 3",7030,7.72,7.72,-0.00

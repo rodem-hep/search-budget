@@ -37,67 +37,77 @@ scan this axis separately (`public_obs_map.NSEL`).
 
 | # | spectrum (bump observable) | r | scan window [GeV] | n_s | n_s envelope | #models | #selections | n_s x sel |
 |--:|---|--:|---|--:|--:|--:|--:|--:|
-| 1 | `m(gammagamma)` | 0.01 | 66-110 + 150-5000 | 402 | 583 | 5 | 2 | 803 |
-| 2 | `m(mumu) (Zd)` | 0.02 | 0.3-400 | 360 | 536 | 2 | 1 | 360 |
-| 3 | `m(ee) SS` | 0.015 | 200-1300 | 125 | 454 | 2 | 1 | 125 |
-| 4 | `m(ee) (Zd)` | 0.025 | 1-400 | 240 | 381 | 1 | 1 | 240 |
+| 1 | `m(gammagamma)` | 0.01 | 66-110 + 150-5000 | 402 | 583 | 6 | 2 | 803 |
+| 2 | `m(mumu) (Zd)` | 0.02 | 0.3-400 | 360 | 536 | 3 | 1 | 360 |
+| 3 | `m(ee) SS` | 0.015 | 200-1300 | 125 | 454 | 3 | 1 | 125 |
+| 4 | `m(ee) (Zd)` | 0.025 | 1-400 | 240 | 381 | 2 | 1 | 240 |
 | 5 | `m(egamma)` | 0.015 | 200-5000 | 215 | 328 | 1 | 1 | 215 |
 | 6 | `m(ee)` | 0.015 | 150-8000 | 265 | 321 | 7 | 1 | 265 |
-| 7 | `m(emu) SS` | 0.025 | 200-1300 | 75 | 272 | 2 | 1 | 75 |
+| 7 | `m(emu) SS` | 0.025 | 200-1300 | 75 | 272 | 3 | 1 | 75 |
 | 8 | `m(emu) LFV` | 0.03 | 100-8000 | 146 | 234 | 4 | 1 | 146 |
-| 9 | `m(ej)` | 0.03 | 200-5000 | 107 | 234 | 3 | 4 | 429 |
-| 10 | `m(muj)` | 0.04 | 200-5000 | 80 | 176 | 3 | 4 | 322 |
-| 11 | `m(mumu) SS` | 0.04 | 200-1300 | 47 | 170 | 2 | 1 | 47 |
+| 9 | `m(ej)` | 0.03 | 200-5000 | 107 | 234 | 4 | 4 | 429 |
+| 10 | `m(muj)` | 0.04 | 200-5000 | 80 | 176 | 4 | 4 | 322 |
+| 11 | `m(mumu) SS` | 0.04 | 200-1300 | 47 | 170 | 3 | 1 | 47 |
 | 12 | `m(eb)` | 0.04 | 200-2000 | 58 | 170 | 3 | 2 | 115 |
-| 13 | `m(eZ)` | 0.03 | 100-1100 | 80 | 164 | 1 | 1 | 80 |
+| 13 | `m(eZ)` | 0.03 | 100-1100 | 80 | 164 | 4 | 1 | 80 |
 | 14 | `m(mugamma)` | 0.03 | 200-5000 | 107 | 164 | 1 | 1 | 107 |
 | 15 | `m(Vgamma)` | 0.03 | 220-6000 | 110 | 141 | 3 | 2 | 220 |
 | 16 | `m(cb) dijet` | 0.05 | 20-1000 | 78 | 136 | 1 | 2 | 156 |
 | 17 | `m(mub)` | 0.05 | 200-2000 | 46 | 136 | 3 | 2 | 92 |
-| 18 | `m(muZ)` | 0.04 | 100-1100 | 60 | 123 | 1 | 1 | 60 |
+| 18 | `m(muZ)` | 0.04 | 100-1100 | 60 | 123 | 4 | 1 | 60 |
 | 19 | `m(jgamma)` | 0.04 | 500-7000 | 66 | 113 | 2 | 1 | 66 |
-| 20 | `m(mumu)` | 0.05 | 150-8000 | 80 | 96 | 7 | 1 | 80 |
-| 21 | `m(jj)` | 0.05 | 200-8000 | 74 | 84 | 8 | 2 | 148 |
-| 22 | `m(3j)` | 0.05 | 200-1800 | 44 | 84 | 2 | 1 | 44 |
-| 23 | `m(eejj)` | 0.05 | 400-7000 | 57 | 76 | 2 | 1 | 57 |
-| 24 | `m(VV)` | 0.06 | 200-6000 | 57 | 74 | 12 | 9 | 510 |
-| 25 | `m(Vh)` | 0.06 | 200-5000 | 54 | 70 | 2 | 6 | 322 |
-| 26 | `m(bj)` | 0.06 | 200-6000 | 57 | 70 | 1 | 2 | 113 |
-| 27 | `m(bb)` | 0.1 | 15-62 + 450-6000 | 40 | 68 | 4 | 3 | 120 |
-| 28 | `m(multi)` | 0.06 | 3000-10500 | 21 | 64 | 2 | 1 | 21 |
-| 29 | `multilepton` | 0.12 | 50-10000 | 44 | 62 | 3 | 4 | 177 |
-| 30 | `m(Wb)` | 0.08 | 800-3000 | 17 | 61 | 1 | 1 | 17 |
-| 31 | `mT(ev)` | 0.1 | 150-7000 | 38 | 60 | 2 | 1 | 38 |
-| 32 | `m(tauj)` | 0.1 | 200-5000 | 32 | 56 | 3 | 2 | 64 |
-| 33 | `m(mumujj)` | 0.07 | 400-7000 | 41 | 54 | 2 | 1 | 41 |
-| 34 | `m(tb)` | 0.08 | 180-6000 | 44 | 54 | 3 | 3 | 131 |
-| 35 | `m(tt)/m(jj)` | 0.08 | 400-2000 | 20 | 53 | 2 | 2 | 40 |
-| 36 | `m(HH)` | 0.08 | 250-6000 | 40 | 50 | 4 | 6 | 238 |
-| 37 | `m(tautau)` | 0.12 | 35-6000 | 43 | 50 | 4 | 3 | 129 |
-| 38 | `m(etau) LFV` | 0.12 | 100-3000 | 28 | 50 | 4 | 1 | 28 |
-| 39 | `m(mutau) LFV` | 0.12 | 100-3000 | 28 | 50 | 4 | 1 | 28 |
-| 40 | `m(tW)` | 0.08 | 500-3000 | 22 | 49 | 1 | 2 | 45 |
-| 41 | `m(Ht)` | 0.08 | 1000-3000 | 14 | 48 | 1 | 1 | 14 |
-| 42 | `m(taub)` | 0.12 | 200-2000 | 19 | 47 | 3 | 2 | 38 |
-| 43 | `mT(taunu)` | 0.12 | 200-5000 | 27 | 47 | 1 | 1 | 27 |
-| 44 | `m(tt)` | 0.08 | 350-6000 | 36 | 46 | 9 | 4 | 142 |
-| 45 | `m(ttZ)/m(Zt)` | 0.08 | 1000-4000 | 17 | 43 | 1 | 2 | 35 |
-| 46 | `mT(muv)` | 0.15 | 150-7000 | 26 | 40 | 2 | 1 | 26 |
-| | **total (46 spectra)** | | | **3,685** | 6,442 | | **94** | **6,597** |
+| 20 | `m(bZ)` | 0.05 | 200-2000 | 46 | 98 | 1 | 1 | 46 |
+| 21 | `m(mumu)` | 0.05 | 150-8000 | 80 | 96 | 8 | 1 | 80 |
+| 22 | `m(bgamma)` | 0.05 | 200-5000 | 64 | 90 | 1 | 1 | 64 |
+| 23 | `m(jj)` | 0.05 | 200-8000 | 74 | 84 | 8 | 2 | 148 |
+| 24 | `m(3j)` | 0.05 | 200-1800 | 44 | 84 | 3 | 1 | 44 |
+| 25 | `m(gammajj)` | 0.05 | 200-4000 | 60 | 84 | 2 | 1 | 60 |
+| 26 | `m(ejj)` | 0.05 | 250-6000 | 64 | 80 | 3 | 1 | 64 |
+| 27 | `m(eejj)` | 0.05 | 400-7000 | 57 | 76 | 2 | 1 | 57 |
+| 28 | `m(VV)` | 0.06 | 200-6000 | 57 | 74 | 13 | 9 | 510 |
+| 29 | `m(Vh)` | 0.06 | 200-5000 | 54 | 70 | 2 | 6 | 322 |
+| 30 | `m(bj)` | 0.06 | 200-6000 | 57 | 70 | 1 | 2 | 113 |
+| 31 | `m(bb)` | 0.1 | 15-62 + 450-6000 | 40 | 68 | 7 | 3 | 120 |
+| 32 | `m(tgamma)` | 0.06 | 300-3000 | 38 | 67 | 1 | 1 | 38 |
+| 33 | `m(multi)` | 0.06 | 3000-10500 | 21 | 64 | 2 | 1 | 21 |
+| 34 | `multilepton` | 0.12 | 50-10000 | 44 | 62 | 4 | 4 | 177 |
+| 35 | `m(Wb)` | 0.08 | 800-3000 | 17 | 61 | 1 | 1 | 17 |
+| 36 | `m(taugamma)` | 0.08 | 200-5000 | 40 | 61 | 1 | 1 | 40 |
+| 37 | `mT(ev)` | 0.1 | 150-7000 | 38 | 60 | 2 | 1 | 38 |
+| 38 | `m(mujj)` | 0.07 | 250-6000 | 45 | 57 | 4 | 1 | 45 |
+| 39 | `m(tauj)` | 0.1 | 200-5000 | 32 | 56 | 3 | 2 | 64 |
+| 40 | `m(mumujj)` | 0.07 | 400-7000 | 41 | 54 | 3 | 1 | 41 |
+| 41 | `m(tb)` | 0.08 | 180-6000 | 44 | 54 | 3 | 3 | 131 |
+| 42 | `m(tt)/m(jj)` | 0.08 | 400-2000 | 20 | 53 | 2 | 2 | 40 |
+| 43 | `m(tj)` | 0.08 | 350-3000 | 27 | 53 | 2 | 1 | 27 |
+| 44 | `m(HH)` | 0.08 | 250-6000 | 40 | 50 | 4 | 6 | 238 |
+| 45 | `m(tautau)` | 0.12 | 35-6000 | 43 | 50 | 4 | 3 | 129 |
+| 46 | `m(etau) LFV` | 0.12 | 100-3000 | 28 | 50 | 4 | 1 | 28 |
+| 47 | `m(mutau) LFV` | 0.12 | 100-3000 | 28 | 50 | 4 | 1 | 28 |
+| 48 | `m(tW)` | 0.08 | 500-3000 | 22 | 49 | 1 | 2 | 45 |
+| 49 | `m(Ht)` | 0.08 | 1000-3000 | 14 | 48 | 1 | 1 | 14 |
+| 50 | `m(taub)` | 0.12 | 200-2000 | 19 | 47 | 3 | 2 | 38 |
+| 51 | `mT(taunu)` | 0.12 | 200-5000 | 27 | 47 | 1 | 1 | 27 |
+| 52 | `m(tt)` | 0.08 | 350-6000 | 36 | 46 | 9 | 4 | 142 |
+| 53 | `m(ttZ)/m(Zt)` | 0.08 | 1000-4000 | 17 | 43 | 1 | 2 | 35 |
+| 54 | `m(tbj)` | 0.1 | 400-3000 | 20 | 40 | 1 | 1 | 20 |
+| 55 | `mT(muv)` | 0.15 | 150-7000 | 26 | 40 | 2 | 1 | 26 |
+| 56 | `m(taujj)` | 0.1 | 300-5000 | 28 | 38 | 1 | 1 | 28 |
+| | **total (56 spectra)** | | | **4,118** | 7,111 | | **104** | **7,030** |
 
 ## Summary
 | granularity | # spectra | N_trials | band (r x0.5..x2) | Z_local for 5s global | band |
 |---|--:|--:|---|--:|---|
-| inclusive (1 spectrum / observable) | 46 | **3,685** | 1,842-7,370 | **6.44** | 6.33-6.54 |
-| **published event selections** | 94 | **6,597** | 3,298-13,193 | **6.53** | 6.42-6.63 |
-| kinematic envelope (reference bound) | 46 | **6,442** | 3,221-12,884 | **6.52** | 6.42-6.63 |
+| inclusive (1 spectrum / observable) | 56 | **4,118** | 2,059-8,236 | **6.45** | 6.35-6.56 |
+| **published event selections** | 104 | **7,030** | 3,515-14,059 | **6.54** | 6.43-6.64 |
+| kinematic envelope (reference bound) | 56 | **7,111** | 3,555-14,222 | **6.54** | 6.43-6.64 |
 | full ATLAS BSM program (literature) | - | **50,000** | 25,000-100,000 | **6.83** | 6.73-6.93 |
 
 **Reading it.** Covering every bump channel that public BSM models motivate costs
-**N_trials = 3,685** over 46 spectra: a local 5 sigma degrades to
+**N_trials = 4,118** over 56 spectra: a local 5 sigma degrades to
 ~2.9 sigma global, and a 5 sigma-global discovery
-needs local **~6.44 sigma**. Slicing at the granularity real searches actually use
-(94 event selections) raises N to 6,597 and the bar only to 6.53. Because N
+needs local **~6.45 sigma**. Slicing at the granularity real searches actually use
+(104 event selections) raises N to 7,030 and the bar only to 6.54. Because N
 enters through `ln N`, every level sits within ~0.1 sigma of 6.5 -- **breadth is cheap**, and the
 budget is extremely robust to counting choices.
 
@@ -126,18 +136,20 @@ input but the convention that turns a resolution element into an independent loo
   Z-dependence).
 - **Narrow-resonance assumption.** `n_s` counts *detector* resolution elements, which is the right
   step size only while the natural width stays below `r`. `public_obs_map.WIDTH` places all
-  43 public model classes: **22 narrow** on every axis they populate,
-  **13** narrow only at the benchmark ATLAS publishes (Z'_SSM at 3% against
+  56 public model classes: **36 narrow** on every axis they populate,
+  **14** narrow only at the benchmark ATLAS publishes (Z'_SSM at 3% against
   `r`=0.015 on `m(ee)`, the DM-mediator coupling grid, single-VLQ, U1 at the flavour-anomaly point),
   **3** already broader than `r` there (KK gluon 15-30% vs `r`=0.08, coloron/axigluon,
-  composite/NJL), and **5** with no Breit-Wigner peak at all (QBH thresholds,
+  composite/NJL), and **3** with no Breit-Wigner peak at all (QBH thresholds,
   ADD/HEIDI continua, pair-produced Type-III/VLL, toponium at 2 m_t). A signal wider than `r`
   correlates neighbouring mass points, so counting resolution elements **over**-counts independent
   looks: the bias is conservative, `Z_local` too strict rather than too loose.
-  Only 2 axes are motivated *exclusively* by non-peaking models
-  (`m(multi)`, `multilepton`); dropping both takes N from 3,685 to
-  3,620 and `Z_local` from 6.44 to 6.43, so the whole question is
-  worth 0.003 sigma. `NONPEAK_ON` records the (model, axis) pairs where an
+  Only 1 axis is motivated
+  *exclusively* by non-peaking models
+  (`m(multi)`); dropping it
+  takes N from 4,118 to
+  4,097 and `Z_local` from 6.45 to 6.45, so the whole question is
+  worth 0.001 sigma. `NONPEAK_ON` records the (model, axis) pairs where an
   otherwise-narrow class does not peak, including the H/A interference with SM ttbar.
 
 Source: `searchbudget/stages/search_budget.py` -> `results/tables/search_budget.csv`,

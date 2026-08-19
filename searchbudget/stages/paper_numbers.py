@@ -118,7 +118,7 @@ def main(options=None):
     blocks = []
 
     blocks.append("### The ladder (Table 1)\n\n" + rows(
-        ("spectra the public model space populates", "**46**", "`search_budget.csv`"),
+        ("spectra the public model space populates", f"**{len(budget)}**", "`search_budget.csv`"),
         ("the model space, published windows",
          f"`N = {N_model:,.0f}` → `Z_local = {z5(N_model):.2f}` "
          f"{env('total', 'dZ_model_space')}", "`search_budget.csv`, `budget_uncertainty.csv`"),

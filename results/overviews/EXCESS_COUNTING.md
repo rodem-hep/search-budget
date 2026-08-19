@@ -15,14 +15,14 @@ signal-region bins) across all ATLAS searches.
 
 | level | independent looks N | basis |
 |---|---:|---|
-| the model space, published windows | **3,685** | this study, `SEARCH_BUDGET.md` |
-| the published ATLAS record, priced entry by entry | **7,710** | this study, `CENSUS_BUDGET.md` |
+| the model space, published windows | **4,118** | this study, `SEARCH_BUDGET.md` |
+| the published ATLAS record, priced entry by entry | **7,875** | this study, `CENSUS_BUDGET.md` |
 | ATLAS two-body invariant-mass searches | ~2-3e4 | lit. quotes **>50,000** two-body-mass looks LHC-wide (ATLAS ~ half) |
 | **full ATLAS BSM program (+SUSY/exotics SRs)** | **~5e4** | ~300-500 searches x ~O(100) effective looks each ("a typical search now has hundreds of signal regions") |
 
 The two counted rows are what this repository enumerates; the literature rows are a broader object
 (signal regions of counting experiments included) and are quoted only to show the enumeration lands
-in the same order of magnitude. The check below is run on the census row, **N = 7,710**, because
+in the same order of magnitude. The check below is run on the census row, **N = 7,875**, because
 that is the program whose excesses the record actually reports. N spans a factor ~10 across the
 whole ladder, and the conclusion is robust over all of it.
 
@@ -32,21 +32,21 @@ Expected count = `N * p`:
 
 | N_trials | expected >=3s | expected >=5s (spurious) |
 |---:|---:|---:|
-| **the model space (3,685)** | **5.0** | **0.0011** |
-| **the published record (7,710)** | **10.4** | **0.0022** |
-| the selection-level model space (6,597) | 8.9 | 0.0019 |
+| **the model space (4,118)** | **5.6** | **0.0012** |
+| **the published record (7,875)** | **10.6** | **0.0023** |
+| the selection-level model space (7,030) | 9.5 | 0.0020 |
 | 1e4 | 14 | 0.003 |
 | 5e4 (the literature's program-wide count) | ~67 | ~0.014 |
 | 1e5 | 135 | 0.029 |
 
-**Prediction on the counted bases: 5 to 10 local >=3-sigma excesses over the resonance program, and
+**Prediction on the counted bases: 6 to 11 local >=3-sigma excesses over the resonance program, and
 ~0.002 (i.e. none) spurious >=5-sigma.** Widened to the whole ATLAS program the first becomes tens.
 
 ## 3. Observed
 **For the resonance subset the observed side is now measured rather than anecdotal:**
 `REPORTED_EXCESSES.md` mines the abstracts of the 290 census papers and finds **6 reported local
-excesses >= 3 sigma** (every quoted global <= 2.1s), inside the **5 to 10** a background-only sweep
-expects -- 5.0 over the 46 axes of the model space, 10.4 over the census that produced those
+excesses >= 3 sigma** (every quoted global <= 2.1s), inside the **6 to 11** a background-only sweep
+expects -- 5.6 over the 56 axes of the model space, 10.6 over the census that produced those
 abstracts. Expected and observed agree with no adjustment of any kind.
 
 **Program-wide, take the number from the curated catalogue** rather than from a list of remembered
@@ -61,7 +61,7 @@ page gave 18 and 21 entries and 3.5 / 3.6 sigma for the largest, so quote it as 
 Scope differences to respect before comparing it with our numbers:
 
 - it mixes bump hunts with shape fits, SR counting and unconventional signatures, so it is not the
-  46-axis basis;
+  56-axis basis;
 - it lists **open** excesses only, so it is not the historical population that the "~tens of >=3
   sigma" row counts; roughly 8 of the ~20 ATLAS entries are at or above 3 sigma;
 - it reads the **paper bodies**, so it carries ATLAS resonance excesses >=3 sigma that our abstract
@@ -72,10 +72,10 @@ Scope differences to respect before comparing it with our numbers:
 exactly zero.
 
 ## 4. Verdict -- consistent with background
-| | expected (census, N=7,710) | observed |
+| | expected (census, N=7,875) | observed |
 |---|---:|---|
-| >=3s local | 10.4 | 6 in the abstracts, ~20 open in the WG catalogue, all faded  OK |
-| >=5s spurious | 0.0022 | 0  OK |
+| >=3s local | 10.6 | 6 in the abstracts, ~20 open in the WG catalogue, all faded  OK |
+| >=5s spurious | 0.0023 | 0  OK |
 
 ## 4b. What a local 5 sigma is worth
 Turning the same relation round, `Z_global = sqrt(Z_local^2 - 2 ln N)` prices a fully agnostic
@@ -83,7 +83,7 @@ find:
 
 | basis | N | a local 5s is globally |
 |---|---:|---|
-| the published record | 7,710 | **2.7 sigma** |
+| the published record | 7,875 | **2.7 sigma** |
 | the combinatorial scan, Run 2+3 | 2.0e5 | 0.8 sigma |
 | ... with the selection lenses | 3.6e5 | **nothing at all**: `25 - 2 ln N < 0` |
 

@@ -6,7 +6,7 @@ their arXiv references, are in `data/published_spectra.csv`. Scope matches the b
 for new states, so hadron-spectroscopy measurements are out even where they are bump hunts.
 
 This is the complement to `SEARCH_BUDGET.md`. That counts the spectra public BSM models motivate
-(46 canonical mass axes); this counts the searches that have actually been published
+(56 canonical mass axes); this counts the searches that have actually been published
 (86 entries over 290 papers). **The two use different bases and must not be
 summed**: the publication record separates entries that share a mass axis when they are different
 analyses (62 distinct bump observables appear across the 86 entries), while the
@@ -40,20 +40,20 @@ budget merges them onto one axis and counts resolution elements along it.
 
 These carry Run-1 or early-Run-2 sensitivity. What the budget says about them splits them in two.
 
-**12 of the 19 sit on a mass axis that is already counted in `N`, so revisiting one costs
+**14 of the 19 sit on a mass axis that is already counted in `N`, so revisiting one costs
 nothing in trials** -- the discovery bar for the re-run is the bar the program already pays, and the
-whole cost is analysis effort. The remaining 7 fall on no axis in the budget's 46, so re-running
+whole cost is analysis effort. The remaining 5 fall on no axis in the budget's 56, so re-running
 one extends the axis count rather than reusing it, and it is priced like any other new spectrum.
 
 | last published | spectrum | observable | counted axis |
 |--:|---|---|---|
 | 2012 | Diphoton, extra dimensions | `m_gamgam` | `m(gammagamma)` |
-| 2012 | Resonant top + jet | `m_tq` | **adds an axis** |
+| 2012 | Resonant top + jet | `m_tq` | `m(tj)` |
 | 2013 | Same-sign dimuon (strong gravity) | `m_mumu (SS)` | `m(mumu) SS` |
 | 2014 | Xb -> Upsilon pi pi | `m_Upsilon pipi` | **adds an axis** |
 | 2015 | Three photons | `m_3gamma` | **adds an axis** |
 | 2015 | Heavy Higgs -> ZZ / WW | `m_ZZ, m_WW` | `m(VV)` |
-| 2015 | Fourth-generation / heavy quark -> Wq, Zq | `m_Wq, m_Zq` | **adds an axis** |
+| 2015 | Fourth-generation / heavy quark -> Wq, Zq | `m_Wq, m_Zq` | `m(bZ)` |
 | 2015 | Wt (excited/single VLQ) | `m_Wt` | `m(tW)` |
 | 2015 | Heavy lepton -> Z + lepton | `m_Zl` | `m(eZ); m(muZ)` |
 | 2016 | Diboson combination | `m_VV` | `m(VV)` |

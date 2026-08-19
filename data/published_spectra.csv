@@ -49,9 +49,9 @@ Vector boson + X,High-pT Z + X resonances,m_Z+X,lepton,single/di-lepton,1,2022,2
 Top & heavy quarks,ttbar resonances,m_tt,mixed,single-lepton (l+jets); multi-jet (all-had),11,2012,2025,current,0.4-5.0 TeV,no,1205.5371 1207.2409 1211.2202 1305.2756 1505.07018 1707.06025 1804.10823 1902.10077 2005.05138 2404.18986 2512.17856,m(tt),400-5000
 Top & heavy quarks,Single VLQ: Wb / Ht / Zt / Hb,"m_Wb, m_Ht, m_Zt, m_Hb",mixed,single/di-lepton; some fully hadronic,11,2015,2026,current,,no,1503.05425 1602.05606 1602.06034 1812.07343 2201.07045 2305.03401 2308.02595 2409.20273 2506.15515 2605.28538 2607.28381,m(Wb); m(Ht); m(ttZ)/m(Zt),
 Top & heavy quarks,"tb resonances (W-prime, charged Higgs)",m_tb,mixed,single-lepton (l+jets); multi-jet (all-had),9,2012,2023,ageing,0.5-6 TeV,no,1205.1016 1408.0886 1410.4103 1512.03704 1801.07893 1807.10473 1808.03599 2102.10076 2308.08521,m(tb),500-6000
-Top & heavy quarks,"Fourth-generation / heavy quark -> Wq, Zq","m_Wq, m_Zq",lepton,single/di-lepton,8,2011,2015,stale,,no,1112.5755 1202.3076 1202.3389 1202.6540 1204.1265 1209.4186 1210.5468 1509.04261,-,
+Top & heavy quarks,"Fourth-generation / heavy quark -> Wq, Zq","m_Wq, m_Zq",lepton,single/di-lepton,8,2011,2015,stale,,no,1112.5755 1202.3076 1202.3389 1202.6540 1204.1265 1209.4186 1210.5468 1509.04261,m(bZ),
 Top & heavy quarks,Wt (excited/single VLQ),m_Wt,lepton,single-lepton,2,2013,2015,stale,,no,1301.1583 1510.02664,m(tW),
-Top & heavy quarks,Resonant top + jet,m_tq,lepton,single-lepton,1,2012,2012,stale,,no,1209.6593,-,
+Top & heavy quarks,Resonant top + jet,m_tq,lepton,single-lepton,1,2012,2012,stale,,no,1209.6593,m(tj),
 Top & heavy quarks,Top-philic resonances,m_tt+X,lepton,single-lepton,1,2023,2023,ageing,,no,2304.01678,m(tt),
 Top & heavy quarks,Dark mesons -> tb,m_tb,mixed,single-lepton; multi-jet (all-had),1,2024,2024,current,,no,2405.20061,m(tb),
 Higgs pairs & extended scalars,H -> aa (exotic Higgs decays),"m_aa, m_a",mixed,"single-mu / single-lep; also diphoton, b-jet, tau",12,2015,2026,current,15-60 GeV,no,1505.01609 1606.08391 1803.11145 1807.00539 2005.12236 2110.00313 2312.03306 2407.01335 2412.14046 2503.05463 2507.01165 2603.08323,m(bb); m(tautau),15-60
@@ -70,7 +70,7 @@ Higgs pairs & extended scalars,"t -> qX, X -> bb",m_bb,lepton,single-lepton,1,20
 Higgs pairs & extended scalars,HH + top quarks (ttHH),m_HH,mixed,single-lepton; dilepton(SS)/multilepton; diphoton,1,2026,2026,current,,yes,2603.13113,m(HH),
 "Leptoquarks, excited & heavy fermions",Leptoquark pair -> lepton + jet,m_lj,mixed,"single/di-lepton (eq, muq); tau_had (tauq)",9,2011,2022,ageing,,no,1104.4481 1112.4828 1203.3172 1508.04735 1605.06035 1902.00377 2006.05872 2010.02098 2210.04517,m(ej); m(muj); m(tauj),
 "Leptoquarks, excited & heavy fermions",Third-generation LQ -> b tau / t tau,"m_btau, m_ttau",mixed,single-lepton; ditau_had,7,2013,2026,current,1.5-3.0 TeV,no,1303.0526 1902.08103 2101.11582 2303.01294 2305.15962 2306.17642 2606.02067,m(taub),1500-3000
-"Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)","m_lj, m_ljj",lepton,di-lepton / single-lepton,5,2012,2023,ageing,,no,1201.3293 1308.1364 1601.05627 1906.03204 2303.09444,m(egamma); m(mugamma); m(ej); m(muj),
+"Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)","m_lj, m_ljj",lepton,di-lepton / single-lepton,5,2012,2023,ageing,,no,1201.3293 1308.1364 1601.05627 1906.03204 2303.09444,m(egamma); m(mugamma); m(ej); m(muj); m(ejj); m(taujj),
 "Leptoquarks, excited & heavy fermions",Heavy neutrino / right-handed W (lljj),"m_lljj, m_lj",lepton,di-lepton,5,2012,2023,ageing,,no,1203.5420 1506.06020 1809.11105 1904.12679 2304.09553,m(eejj); m(mumujj),
 "Leptoquarks, excited & heavy fermions",Quantum black holes -> lepton + jet,m_lj,lepton,single-lepton,3,2013,2026,current,,yes,1311.2006 2307.14967 2604.19495,m(ej); m(muj),
 "Leptoquarks, excited & heavy fermions",Resonant single leptoquark,m_lj,lepton,single-lepton,1,2025,2025,current,,yes,2507.03650,m(ej); m(muj),

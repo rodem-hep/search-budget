@@ -64,7 +64,7 @@ their arXiv references, are in `data/published_spectra.csv`. Scope matches the b
 for new states, so hadron-spectroscopy measurements are out even where they are bump hunts.
 
 This is the complement to `SEARCH_BUDGET.md`. That counts the spectra public BSM models motivate
-(46 canonical mass axes); this counts the searches that have actually been published
+(56 canonical mass axes); this counts the searches that have actually been published
 ({len(rows)} entries over {len(papers)} papers). **The two use different bases and must not be
 summed**: the publication record separates entries that share a mass axis when they are different
 analyses ({len(observables)} distinct bump observables appear across the {len(rows)} entries), while the
@@ -99,7 +99,7 @@ These carry Run-1 or early-Run-2 sensitivity. What the budget says about them sp
 
 **{len(on_axis)} of the {len(stale)} sit on a mass axis that is already counted in `N`, so revisiting one costs
 nothing in trials** -- the discovery bar for the re-run is the bar the program already pays, and the
-whole cost is analysis effort. The remaining {len(off_axis)} fall on no axis in the budget's 46, so re-running
+whole cost is analysis effort. The remaining {len(off_axis)} fall on no axis in the budget's 56, so re-running
 one extends the axis count rather than reusing it, and it is priced like any other new spectrum.
 
 | last published | spectrum | observable | counted axis |

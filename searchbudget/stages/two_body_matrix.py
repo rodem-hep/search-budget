@@ -26,8 +26,11 @@ PAIR = {
     "m(VV)": ("V", "V"), "m(Vh)": ("V", "H"), "m(HH)": ("H", "H"), "m(Ht)": ("H", "t"),
     "m(Wb)": ("V", "b"), "m(tW)": ("t", "V"), "m(ttZ)/m(Zt)": ("t", "V"),
     "m(eZ)": ("e", "V"), "m(muZ)": ("mu", "V"),
+    "m(bgamma)": ("b", "ga"), "m(tgamma)": ("t", "ga"), "m(taugamma)": ("tau", "ga"),
+    "m(bZ)": ("b", "V"), "m(tj)": ("t", "j"),
     "multilepton": None, "m(3j)": None, "m(multi)": None,
     "m(eejj)": None, "m(mumujj)": None,
+    "m(ejj)": None, "m(mujj)": None, "m(taujj)": None, "m(gammajj)": None, "m(tbj)": None,
     "mT(ev)": None, "mT(muv)": None, "mT(taunu)": None,
 }
 

@@ -58,7 +58,9 @@ Single VLQ: Wb / Ht / Zt / Hb,m(Wb),yes,2607.28381,model-independent
 Single VLQ: Wb / Ht / Zt / Hb,m(Ht),yes,2607.28381,model-independent
 Single VLQ: Wb / Ht / Zt / Hb,m(ttZ)/m(Zt),yes,2607.28381,model-independent
 "tb resonances (W-prime, charged Higgs)",m(tb),no,,
+"Fourth-generation / heavy quark -> Wq, Zq",m(bZ),no,,
 Wt (excited/single VLQ),m(tW),no,,
+Resonant top + jet,m(tj),no,,
 Top-philic resonances,m(tt),no,,
 Dark mesons -> tb,m(tb),no,,
 H -> aa (exotic Higgs decays),m(bb),yes,1807.00539 2412.14046,Model-independent; Model-independent
@@ -84,6 +86,8 @@ Third-generation LQ -> b tau / t tau,m(taub),no,,
 "Excited leptons (e*, mu*, tau*)",m(mugamma),no,,
 "Excited leptons (e*, mu*, tau*)",m(ej),no,,
 "Excited leptons (e*, mu*, tau*)",m(muj),no,,
+"Excited leptons (e*, mu*, tau*)",m(ejj),no,,
+"Excited leptons (e*, mu*, tau*)",m(taujj),no,,
 Heavy neutrino / right-handed W (lljj),m(eejj),no,,
 Heavy neutrino / right-handed W (lljj),m(mumujj),no,,
 Quantum black holes -> lepton + jet,m(ej),no,,

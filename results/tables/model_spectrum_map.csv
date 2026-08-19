@@ -1,45 +1,55 @@
 observable,ns_scan,n_model_classes,model_classes,n_selections,ns_x_selections,selections,published_search,in_combinatorial_scan
-m(gammagamma),401.7,5,ALP; KK graviton (Gstar); Large ED / UED / HEIDI; Randall-Sundrum / Radion; Vector-like confinement,2,803.5,spin-0 (ggF) + spin-2/VBF (converted/unconverted categories),yes,yes
-m(mumu) (Zd),359.8,2,Hidden Abelian Higgs (HAHM); N2HDM / 2HDM+S (h->aa),1,359.8,prompt muon LJ / 4mu scan,yes,yes
+m(gammagamma),401.7,6,ALP; KK graviton (Gstar); Large ED / UED / HEIDI; N2HDM / 2HDM+S (h->aa); Randall-Sundrum / Radion; Vector-like confinement,2,803.5,spin-0 (ggF) + spin-2/VBF (converted/unconverted categories),yes,yes
+m(mumu) (Zd),359.8,3,Dark Z (mass mixing); Hidden Abelian Higgs (HAHM); N2HDM / 2HDM+S (h->aa),1,359.8,prompt muon LJ / 4mu scan,yes,yes
 m(ee),265.1,7,KK graviton (Gstar); Large ED / UED / HEIDI; Leptophilic gauge boson; LRSM / Alt-LRSM; Minimal Z' / U(1); SILH / Little Higgs; Technicolor / TC2,1,265.1,"single dielectron scan (barrel/endcap are fit categories, combined)",yes,yes
-m(ee) (Zd),239.7,1,Hidden Abelian Higgs (HAHM),1,239.7,prompt e-LJ / 4e scan,yes,yes
+m(ee) (Zd),239.7,2,Dark Z (mass mixing); Hidden Abelian Higgs (HAHM),1,239.7,prompt e-LJ / 4e scan,yes,yes
 m(egamma),214.6,1,Excited lepton (l*),1,214.6,excited electron e*,yes,yes
 m(emu) LFV,146.1,4,Minimal Z' / U(1); Quantum black hole; Scalar leptoquark (S1); Vector leptoquark (U1),1,146.1,LFV e-mu,yes,yes
-m(ee) SS,124.8,2,Georgi-Machacek; Type-II seesaw,1,124.8,H++ same-sign ee,yes,yes
+m(ee) SS,124.8,3,Georgi-Machacek; Type-II seesaw; Zee-Babu,1,124.8,H++ same-sign ee,yes,yes
 m(Vgamma),110.2,3,ALP; Excited boson (W*/Z*); Singlet scalar / SM+Scalars,2,220.4,X->Zgamma: Z->ll and boosted Z->qq (+Wgamma),yes,yes
-m(ej),107.3,3,Leptoquark NLO (mix/nomix); Quantum black hole; Scalar leptoquark (S1),4,429.2,LQ pair -> eq: all four lepton-jet pairings scanned (2006.05872),yes,yes
+m(ej),107.3,4,Leptogluon (color-octet l); Leptoquark NLO (mix/nomix); Quantum black hole; Scalar leptoquark (S1),4,429.2,LQ pair -> eq: all four lepton-jet pairings scanned (2006.05872),yes,yes
 m(mugamma),107.3,1,Excited lepton (l*),1,107.3,excited muon mu*,yes,yes
-m(muj),80.5,3,Leptoquark NLO (mix/nomix); Quantum black hole; Scalar leptoquark (S1),4,321.9,LQ pair -> muq: all four lepton-jet pairings scanned (2006.05872),yes,yes
-m(eZ),79.9,1,RPV electroweakino (trilepton),1,79.9,trilepton e+Z resonance,yes,yes
-m(mumu),79.5,7,KK graviton (Gstar); Large ED / UED / HEIDI; Leptophilic gauge boson; LRSM / Alt-LRSM; Minimal Z' / U(1); SILH / Little Higgs; Technicolor / TC2,1,79.5,single dimuon scan (combined charge/eta categories),yes,yes
+m(muj),80.5,4,Leptogluon (color-octet l); Leptoquark NLO (mix/nomix); Quantum black hole; Scalar leptoquark (S1),4,321.9,LQ pair -> muq: all four lepton-jet pairings scanned (2006.05872),yes,yes
+m(eZ),79.9,4,Excited lepton (l*); RPV electroweakino (trilepton); Type-III seesaw; Vector-like lepton (VLL),1,79.9,trilepton e+Z resonance,yes,yes
+m(mumu),79.5,8,B-anomaly Z' (b-philic); KK graviton (Gstar); Large ED / UED / HEIDI; Leptophilic gauge boson; LRSM / Alt-LRSM; Minimal Z' / U(1); SILH / Little Higgs; Technicolor / TC2,1,79.5,single dimuon scan (combined charge/eta categories),yes,yes
 m(cb) dijet,78.2,1,2HDM (general/typeII/CPV),2,156.5,light H+->cb in tt: hadronic + semileptonic tag,no,yes
-m(emu) SS,74.9,2,Georgi-Machacek; Type-II seesaw,1,74.9,H++ same-sign e-mu,yes,yes
+m(emu) SS,74.9,3,Georgi-Machacek; Type-II seesaw; Zee-Babu,1,74.9,H++ same-sign e-mu,yes,yes
 m(jj),73.8,8,Coloron / Axigluon; Composite / NJL; Diquark / color-sextet; Excited quark (q*/b*); Minimal Z' / U(1); Simplified DM (dijet mediator); Vector-like confinement; W',2,147.6,low-mass (TLA/ISR) + high-mass inclusive dijet,yes,yes
 m(jgamma),66.0,2,Excited quark (q*/b*); Quantum black hole,1,66.0,q*->q gamma (single photon+jet SR),yes,yes
-m(muZ),59.9,1,RPV electroweakino (trilepton),1,59.9,trilepton mu+Z resonance,yes,yes
+m(bgamma),64.4,1,Excited quark (q*/b*),1,64.4,b-tagged photon+jet (no ATLAS search),no,yes
+m(ejj),63.6,3,Composite Majorana N; Excited lepton (l*); Excited neutrino (nu*),1,63.6,"e* -> eqq system (single SR, 1906.03204)",yes,yes
+m(muZ),59.9,4,Excited lepton (l*); RPV electroweakino (trilepton); Type-III seesaw; Vector-like lepton (VLL),1,59.9,trilepton mu+Z resonance,yes,yes
+m(gammajj),59.9,2,Technicolor / TC2; Warped KK cascade,1,59.9,photon + dijet (no search at any collider),no,yes
 m(eb),57.6,3,Leptoquark NLO (mix/nomix); Scalar leptoquark (S1); Stop/scharm (RPV),2,115.1,RPV stop -> b e + b-tagged LQ leg (both pairings),no,yes
 m(eejj),57.2,2,Heavy neutrino / HNL (prompt); LRSM / Alt-LRSM,1,57.2,W_R->eejj,yes,yes
-m(VV),56.7,12,Composite / NJL; Excited boson (W*/Z*); Georgi-Machacek; HeavyHiggs THDM; KK graviton (Gstar); Randall-Sundrum / Radion; SILH / Little Higgs; Singlet scalar / SM+Scalars; Technicolor / TC2; TRSM (singlet/triplet); Type-II seesaw; Vector triplet (HVT),9,510.2,"WW/WZ/ZZ x qqqq / lvqq / llqq / vvqq / lvlv, ggF+VBF",yes,yes
+m(VV),56.7,13,Composite / NJL; Excited boson (W*/Z*); Georgi-Machacek; HeavyHiggs THDM; KK graviton (Gstar); Randall-Sundrum / Radion; SILH / Little Higgs; Singlet scalar / SM+Scalars; Technicolor / TC2; TRSM (singlet/triplet); Type-II seesaw; Vector triplet (HVT); Warped KK cascade,9,510.2,"WW/WZ/ZZ x qqqq / lvqq / llqq / vvqq / lvlv, ggF+VBF",yes,yes
 m(bj),56.7,1,Excited quark (q*/b*),2,113.4,b* -> b g: b-tagged leading + subleading jet pairing,yes,yes
 m(Vh),53.6,2,2HDM (general/typeII/CPV); Vector triplet (HVT),6,321.9,Wh/Zh x 0/1/2-lepton x h->bb resolved/boosted,yes,yes
-m(mumu) SS,46.8,2,Georgi-Machacek; Type-II seesaw,1,46.8,H++ same-sign mu-mu,yes,yes
+m(mumu) SS,46.8,3,Georgi-Machacek; Type-II seesaw; Zee-Babu,1,46.8,H++ same-sign mu-mu,yes,yes
 m(mub),46.1,3,Leptoquark NLO (mix/nomix); Scalar leptoquark (S1); Stop/scharm (RPV),2,92.1,RPV stop -> b mu + b-tagged LQ leg (both pairings),no,yes
-multilepton,44.2,3,Heavy neutrino / HNL (prompt); Type-III seesaw; Vector-like lepton (VLL),4,176.6,3L / 4L signal regions by flavour & charge (axis deliberately unsplit),no,yes
-m(3j),43.9,2,MSSM/NMSSM/RPV SUSY; Sgluon,1,43.9,RPV/sgluon three-jet resonance (single SR),yes,yes
+m(bZ),46.1,1,Vector-like quark (VLQ),1,46.1,Z(ll) + b-tag (7/8 TeV VLQ b'/B only),yes,yes
+m(mujj),45.4,4,Composite Majorana N; Excited lepton (l*); Excited neutrino (nu*); RPV resonant slepton,1,45.4,mu + dijet (no ATLAS search),no,yes
+multilepton,44.2,4,Heavy neutrino / HNL (prompt); Leptophobic Z' (dark cascade); Type-III seesaw; Vector-like lepton (VLL),4,176.6,3L / 4L signal regions by flavour & charge (axis deliberately unsplit),no,yes
+m(3j),43.9,3,MSSM/NMSSM/RPV SUSY; Sgluon; Warped KK cascade,1,43.9,RPV/sgluon three-jet resonance (single SR),yes,yes
 m(tb),43.8,3,2HDM (general/typeII/CPV); Vector-like quark (VLQ); W',3,131.5,"W'/H+->tb: 0-lepton, 1-lepton x b-tag",yes,yes
 m(tautau),42.9,4,2HDM (general/typeII/CPV); MSSM/NMSSM/RPV SUSY; N2HDM / 2HDM+S (h->aa); Vector leptoquark (U1),3,128.6,"H/Z'->tautau: tau_e tau_h, tau_mu tau_h, tau_h tau_h",yes,yes
-m(mumujj),40.9,2,Heavy neutrino / HNL (prompt); LRSM / Alt-LRSM,1,40.9,W_R->mumujj,yes,yes
-m(bb),40.1,4,2HDM (general/typeII/CPV); Minimal Z' / U(1); MSSM/NMSSM/RPV SUSY; N2HDM / 2HDM+S (h->aa),3,120.3,h->aa->4b low-mass + A/Y->bb resolved + boosted,yes,yes
+m(mumujj),40.9,3,Heavy neutrino / HNL (prompt); LRSM / Alt-LRSM; RPV resonant slepton,1,40.9,W_R->mumujj,yes,yes
+m(taugamma),40.2,1,Excited lepton (l*),1,40.2,hadronic-tau + photon (no ATLAS search),no,yes
+m(bb),40.1,7,2HDM (general/typeII/CPV); B-anomaly Z' (b-philic); Color-octet scalar (MW); Minimal Z' / U(1); MSSM/NMSSM/RPV SUSY; N2HDM / 2HDM+S (h->aa); TRSM (singlet/triplet),3,120.3,h->aa->4b low-mass + A/Y->bb resolved + boosted,yes,yes
 m(HH),39.7,4,Higgs portal; Randall-Sundrum / Radion; Singlet scalar / SM+Scalars; TRSM (singlet/triplet),6,238.4,"bbbb resolved + boosted, bbtautau, bbgammagamma, bbVV, multilepton",yes,yes
 mT(ev),38.4,2,LRSM / Alt-LRSM; W',1,38.4,W'->e nu,yes,no
+m(tgamma),38.4,1,Excited top (t*),1,38.4,top + photon (no ATLAS search),no,yes
 m(tt),35.5,9,2HDM (general/typeII/CPV); Coloron / Axigluon; Diquark / color-sextet; HeavyHiggs THDM; KK gluon (RS); Minimal Z' / U(1); Sgluon; Top-philic; Toponium,4,142.1,"ttbar res: l+jets resolved, l+jets boosted, all-had, dilepton",yes,yes
 m(tauj),32.2,3,Leptoquark NLO (mix/nomix); Scalar leptoquark (S1); Vector leptoquark (U1),2,64.4,LQ->tau q: tau_had + tau_lep selections,yes,yes
 m(etau) LFV,28.3,4,Minimal Z' / U(1); Quantum black hole; Scalar leptoquark (S1); Vector leptoquark (U1),1,28.3,LFV e-tau (hadronic tau),yes,yes
 m(mutau) LFV,28.3,4,Minimal Z' / U(1); Quantum black hole; Scalar leptoquark (S1); Vector leptoquark (U1),1,28.3,LFV mu-tau (hadronic tau),yes,yes
+m(taujj),28.1,1,Excited lepton (l*),1,28.1,tau* -> tau qq contact-interaction SR (2303.09444),yes,yes
+m(tj),26.9,2,Excited top (t*); Flavoured W'/Z' (t-q),1,26.9,t(lep) + jet in ttbar+jet (7 TeV only),yes,yes
 mT(taunu),26.8,1,W',1,26.8,W'->tau nu (single hadronic-tau channel),yes,no
 mT(muv),25.6,2,LRSM / Alt-LRSM; W',1,25.6,W'->mu nu,yes,no
 m(tW),22.4,1,Excited quark (q*/b*),2,44.8,b*->tW: leptonic + hadronic top,yes,yes
 m(multi),20.9,2,Large ED / UED / HEIDI; Quantum black hole,1,20.9,QBH / multijet (single high-multiplicity SR),no,no
+m(tbj),20.1,1,MFV RPV gluino (tbs),1,20.1,hadronic t+b+jet (no mass scan anywhere),no,yes
 m(tt)/m(jj),20.1,2,Coloron / Axigluon; Stop/scharm (RPV),2,40.2,coloron pair -> tt or jj decay legs,no,yes
 m(taub),19.2,3,Leptoquark NLO (mix/nomix); Scalar leptoquark (S1); Vector leptoquark (U1),2,38.4,LQ3 -> tau b: tau_had + tau_lep,yes,yes
 m(ttZ)/m(Zt),17.3,1,Vector-like quark (VLQ),2,34.7,VLQ single/pair T->tZ selections,yes,yes

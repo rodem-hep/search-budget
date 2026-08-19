@@ -71,6 +71,16 @@ FLOOR = {
     "m(tW)":         (260, "m_t+m_W kin"),
     "m(Wb)":         (100, "m_W+b kin"),
     "m(Ht)":         (300, "m_h+m_t kin"),
+    "m(bgamma)":     (150, "photon + b-tagged jet"),
+    "m(tgamma)":     (250, "top tag + photon pT"),
+    "m(taugamma)":   (100, "hadronic-tau + photon trig"),
+    "m(ejj)":        (250, "electron + two jets kin"),
+    "m(mujj)":       (250, "muon + two jets kin"),
+    "m(taujj)":      (300, "hadronic-tau + two jets"),
+    "m(bZ)":         (100, "Z-peak + b-jet"),
+    "m(tj)":         (200, "m_t + jet kin"),
+    "m(gammajj)":    (200, "photon + dijet (ISR-style trigger)"),
+    "m(tbj)":        (250, "m_t + b + jet kin"),
 }
 
 def floor(obs, default=FLOOR_DEFAULT):
@@ -96,6 +106,9 @@ RESOLUTION = {
     "m(tautau)": 0.12, "mT(taunu)": 0.12, "multilepton": 0.12,
     "m(Vgamma)": 0.03,
     "m(tW)": 0.08, "m(Wb)": 0.08, "m(Ht)": 0.08,
+    "m(bgamma)": 0.05, "m(tgamma)": 0.06, "m(taugamma)": 0.08,
+    "m(ejj)": 0.05, "m(mujj)": 0.07, "m(taujj)": 0.10,
+    "m(bZ)": 0.05, "m(tj)": 0.08, "m(gammajj)": 0.05, "m(tbj)": 0.10,
 }
 
 RESOLUTION_SOURCE = {
@@ -161,6 +174,25 @@ SCAN = {
     "m(tW)":         (500, 3000, "excited b* -> tW"),
     "m(Wb)":         (800, 3000, "single VLQ T/Y -> Wb"),
     "m(Ht)":         (1000, 3000,"single VLQ T -> Ht"),
+    "m(bgamma)":     (200, 5000, "b* -> b gamma: no ATLAS search at any energy; the q*->q gamma "
+                                 "grid with a b-tag (CMS 2305.07998 scans to ~6 TeV)"),
+    "m(tgamma)":     (300, 3000, "excited top t* -> t gamma: no ATLAS search; spin-3/2 t* "
+                                 "pair-production grid (CMS 2602.20477)"),
+    "m(taugamma)":   (200, 5000, "tau* -> tau gamma: no ATLAS search at any energy; the e*/mu* "
+                                 "grid (CMS 2410.21137 scans 0.175-5 TeV)"),
+    "m(ejj)":        (250, 6000, "e*/nu* -> e qq: the e* system of the eejj search (1906.03204); "
+                                 "composite-N grid to 6 TeV"),
+    "m(mujj)":       (250, 6000, "mu*/nu* -> mu qq: no ATLAS search at any energy "
+                                 "(CMS 2001.04521 scans the mumujj system); grid to 6 TeV"),
+    "m(taujj)":      (300, 5000, "tau* -> tau qq via contact interaction (2303.09444)"),
+    "m(bZ)":         (200, 2000, "VLQ b'/B -> bZ(ll): 7 TeV pair scan (1204.1265), single+pair "
+                                 "at 8 TeV (1409.5500); no 13 TeV scan, grid to 2 TeV"),
+    "m(tj)":         (350, 3000, "W'/Z' -> t + jet (1209.6593, 7 TeV only); flavoured-mediator "
+                                 "grids (1102.0018)"),
+    "m(gammajj)":    (200, 4000, "warped KK cascade gamma + dijet (1612.00047) and LSTC "
+                                 "omega_T/a_T -> gamma pi_T (0706.2339): no search at any collider"),
+    "m(tbj)":        (400, 3000, "MFV RPV gluino -> tbs (1111.1239): counting limits only, "
+                                 "no mass scan anywhere"),
 }
 
 def scan_segments(obs):

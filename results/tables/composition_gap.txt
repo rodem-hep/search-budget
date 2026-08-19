@@ -1,23 +1,23 @@
 distinct reachable compositions : 82
-  with a published ATLAS bump hunt: 25
-  with NONE                       : 57
+  with a published ATLAS bump hunt: 26
+  with NONE                       : 56
 
 K : uncovered / total
   K=2 :   0 /  14
-  K=3 :  21 /  28
+  K=3 :  20 /  28
   K=4 :  36 /  40
 
 too thin to fit (no window with 25 elements of >=1 event): 790 histograms
 covered fraction  compositions / spectra / looks
   K=2 :  14/ 14 = 100%    479/ 479 = 100%    25398/ 25398 = 100%
-  K=3 :   7/ 28 =  25%     22/ 201 =  11%      860/  8280 =  10%
+  K=3 :   8/ 28 =  29%     45/ 201 =  22%     2009/  8280 =  24%
   K=4 :   4/ 40 =  10%     13/  32 =  41%      481/  1158 =  42%
-  all :  25/ 82 =  30%    514/ 712 =  72%    26740/ 34836 =  77%
+  all :  26/ 82 =  32%    537/ 712 =  75%    27889/ 34836 =  80%
 
 === K=2 compositions with NO published ATLAS bump hunt ===
 
 === K=3 uncovered (first 30) ===
-   mbb, mjb, mjj, ebb, ejb, ejj, emb, emj, jbZ, mbZ, mjZ, ebZ, ejZ, mmb, mmj, emm, eeb, eej, eem, bbb, jbb
+   mbb, mjb, mjj, ebb, ejb, emb, emj, jbZ, mbZ, mjZ, ebZ, ejZ, mmb, mmj, emm, eeb, eej, eem, bbb, jbb
 
 === K=4 uncovered ===
    bbbZ, jbbZ, jjjZ, mbbZ, mbbb, mjbZ, mjbb, mjjZ, mjjb, mjjj, mmbZ, mmbb, mmjZ, mmjb, ebbZ, ebbb, ejbZ, ejbb, ejjZ, ejjb, ejjj, embZ, embb, emjZ, emjb, emmZ, emmb, emmj, eebZ, eebb, eejZ, eejb, eemZ, eemb, eemj, eemm

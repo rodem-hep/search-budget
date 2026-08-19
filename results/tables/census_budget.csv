@@ -61,9 +61,9 @@ Top & heavy quarks,Single VLQ: Wb / Ht / Zt / Hb,current,m(Wb),800-3000,axis win
 Top & heavy quarks,Single VLQ: Wb / Ht / Zt / Hb,current,m(Ht),1000-3000,axis window,0.08,13.7
 Top & heavy quarks,Single VLQ: Wb / Ht / Zt / Hb,current,m(ttZ)/m(Zt),1000-4000,axis window,0.08,17.3
 Top & heavy quarks,"tb resonances (W-prime, charged Higgs)",ageing,m(tb),500-6000,census,0.08,31.1
-Top & heavy quarks,"Fourth-generation / heavy quark -> Wq, Zq",stale,-,,unpriced,0.06,0.0
+Top & heavy quarks,"Fourth-generation / heavy quark -> Wq, Zq",stale,m(bZ),200-2000,axis window,0.05,46.1
 Top & heavy quarks,Wt (excited/single VLQ),stale,m(tW),500-3000,axis window,0.08,22.4
-Top & heavy quarks,Resonant top + jet,stale,-,,unpriced,0.06,0.0
+Top & heavy quarks,Resonant top + jet,stale,m(tj),350-3000,axis window,0.08,26.9
 Top & heavy quarks,Top-philic resonances,ageing,m(tt),350-6000,axis window,0.08,35.5
 Top & heavy quarks,Dark mesons -> tb,current,m(tb),180-6000,axis window,0.08,43.8
 Higgs pairs & extended scalars,H -> aa (exotic Higgs decays),current,m(bb),15-60,census,0.1,13.9
@@ -90,6 +90,8 @@ Higgs pairs & extended scalars,HH + top quarks (ttHH),current,m(HH),250-6000,axi
 "Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)",ageing,m(mugamma),200-5000,axis window,0.03,107.3
 "Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)",ageing,m(ej),200-5000,axis window,0.03,107.3
 "Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)",ageing,m(muj),200-5000,axis window,0.04,80.5
+"Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)",ageing,m(ejj),250-6000,axis window,0.05,63.6
+"Leptoquarks, excited & heavy fermions","Excited leptons (e*, mu*, tau*)",ageing,m(taujj),300-5000,axis window,0.1,28.1
 "Leptoquarks, excited & heavy fermions",Heavy neutrino / right-handed W (lljj),ageing,m(eejj),400-7000,axis window,0.05,57.2
 "Leptoquarks, excited & heavy fermions",Heavy neutrino / right-handed W (lljj),ageing,m(mumujj),400-7000,axis window,0.07,40.9
 "Leptoquarks, excited & heavy fermions",Quantum black holes -> lepton + jet,current,m(ej),200-5000,axis window,0.03,107.3

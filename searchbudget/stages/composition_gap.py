@@ -6,7 +6,7 @@ from ..viz.labels import mathify
 
 ORDER = "emjbZ"
 GLYPH = {"e": "e", "m": r"\mu ", "j": "j", "b": "b", "Z": "Z"}
-EXPECTED = (82, 25, 57)
+EXPECTED = (82, 26, 56)
 
 
 def _covered():
@@ -44,6 +44,7 @@ def _covered():
     add("bjj", "m(t...) hadronic top leg within m(tt)/m(tb)")
     add("bbjj_tt", "m(tt) resolved")
     add("bj", "m(tb) W'->tb (b + hadronic leg)")
+    add("ejj", "m(ejj) e* -> eqq system in eejj, arXiv:1906.03204")
     return covered
 
 

@@ -8,13 +8,13 @@ from searchbudget.core import public_obs_map as models
 from searchbudget.core import yield_model as ym
 
 
-def test_the_catalogue_is_46_spectra():
-    assert len(catalogue.canonical_order()) == 46
-    assert len(catalogue.sorted_spectra()) == 46
+def test_the_catalogue_is_56_spectra():
+    assert len(catalogue.canonical_order()) == 56
+    assert len(catalogue.sorted_spectra()) == 56
 
 
-def test_event_selections_sum_to_94():
-    assert catalogue.n_channels(catalogue.canonical_order()) == 94
+def test_event_selections_sum_to_104():
+    assert catalogue.n_channels(catalogue.canonical_order()) == 104
 
 
 def test_scan_and_floor_cover_the_same_axes():

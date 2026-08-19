@@ -20,22 +20,22 @@ tau,tau,scanned,42.9,1,m(tautau)
 tau,j,scanned,32.2,1,m(tauj)
 tau,b,scanned,19.2,1,m(taub)
 tau,t,gap,30.7,0,
-tau,ga,gap,33.3,0,
+tau,ga,scanned,40.2,1,m(taugamma)
 tau,V,gap,32.9,0,
 tau,H,gap,29.6,0,
 j,j,scanned,73.8,1,m(jj)
 j,b,scanned,134.9,2,m(bj); m(cb) dijet
-j,t,gap,58.6,0,
+j,t,scanned,26.9,1,m(tj)
 j,ga,scanned,66.0,1,m(jgamma)
 j,V,gap,70.8,0,
 j,H,gap,58.2,0,
 b,b,scanned,40.1,1,m(bb)
 b,t,scanned,43.8,1,m(tb)
-b,ga,gap,47.3,0,
-b,V,scanned,16.5,1,m(Wb)
+b,ga,scanned,64.4,1,m(bgamma)
+b,V,scanned,62.6,2,m(Wb); m(bZ)
 b,H,gap,39.2,0,
 t,t,scanned,55.6,2,m(tt); m(tt)/m(jj)
-t,ga,gap,53.6,0,
+t,ga,scanned,38.4,1,m(tgamma)
 t,V,scanned,39.7,2,m(tW); m(ttZ)/m(Zt)
 t,H,scanned,13.7,1,m(Ht)
 ga,ga,scanned,401.7,1,m(gammagamma)
