@@ -1,8 +1,12 @@
+import re
+
 from .. import arxiv, io, paths
+from ..core.public_obs_map import LITERATURE
 from ..registry import stage
 
 META_COLS = ["arxiv", "title", "journal", "doi", "year"]
 ABSTRACT_COLS = ["arxiv", "abstract"]
+MODEL_COLS = ["arxiv", "title", "authors", "journal", "doi", "year"]
 
 
 def _ids():
@@ -52,3 +56,33 @@ def fetch_abstracts(options=None):
     cache = arxiv.harvest(ids, arxiv.cached(out), extract)
     io.write_dicts(out, [{k: cache[i][k] for k in ABSTRACT_COLS} for i in ids], ABSTRACT_COLS)
     print(f"wrote data/census_abstracts.csv ({len(ids)} abstracts)")
+
+
+@stage(
+    name="fetch-model-meta",
+    group="fetch",
+    summary="refresh the bibliographic details of the literature-sourced model papers",
+    outputs=["data/model_papers.csv"],
+    network=True,
+)
+def fetch_model_meta(options=None):
+    out = paths.data("model_papers.csv")
+    ids = []
+    for refs in LITERATURE.values():
+        for a in refs:
+            if a not in ids:
+                ids.append(a)
+
+    def extract(aid, entry):
+        names = re.findall(r"<name>(.*?)</name>", entry, re.S)
+        return {"arxiv": aid,
+                "title": arxiv.field(entry, "title"),
+                "authors": "; ".join(re.sub(r"\s+", " ", n).strip() for n in names),
+                "journal": arxiv.field(entry, "arxiv:journal_ref"),
+                "doi": arxiv.field(entry, "arxiv:doi"),
+                "year": arxiv.field(entry, "published")[:4]}
+
+    cache = arxiv.harvest(ids, arxiv.cached(out), extract)
+    io.write_dicts(out, [{k: cache[i][k] for k in MODEL_COLS} for i in ids], MODEL_COLS)
+    print(f"wrote data/model_papers.csv ({len(ids)} papers behind {len(LITERATURE)} "
+          f"literature-sourced model classes)")

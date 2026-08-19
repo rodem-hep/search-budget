@@ -28,11 +28,25 @@ Two rules decide what "distinct" means, and both are physical rather than bookke
 **Where the model catalogue comes from.** `public_obs_map.PUBLIC_OBS` collapses the public BSM
 model classes onto the spectra they populate. Its sources are the FeynRules/UFO model database,
 the published search record, and a sweep of the resonance-model literature beyond the database
-(documented with per-model references in `docs/GAP_MODELS.md`); the catalogue does not distinguish
-between them — a class found in the literature sweep enters exactly like one with a UFO. Axes no
+(documented with per-model evidence in `docs/GAP_MODELS.md`); a class found in the literature
+sweep enters exactly like one with a UFO, and the provenance is recorded rather than implied:
+`public_obs_map.LITERATURE` declares the defining arXiv ids of every class the database does not
+implement, `fetch-model-meta` pulls their bibliographic details into `data/model_papers.csv`, and
+`model-map` writes the per-class record (`model_classes.csv`) and the BibTeX the paper cites them
+with (`model_refs.bib`, keys `lit:<arxiv-id>`). Axes no
 published ATLAS search has scanned take their `SCAN` window from the closest published sibling
 grid or from the theory papers' own mass grids, with the source noted per axis, and are charged a
 single event selection in `NSEL` (the minimal scan) since no published selection exists to count.
+
+**The unscanned spectra, in the scan's units** (`unscanned_spectra.py`). "How many spectra do the
+models point at that ATLAS has never scanned" needs one unit to be comparable across bases, and the
+combinatorial scan's (category, mass-group) unit is the finest one every basis can be expressed in.
+Each unscanned budget axis is one spectrum, except the pair-produced `m(tt)/m(jj)` axis, which
+resolves into its per-category legs: `jj` in `4j`, `jj` in `2t2j`, `tt` in `2t2j` and `tt` in `4t`.
+The `jj` leg in `4j` is the one a published search covers (the paired-dijet search, charged to
+inclusive `m(jj)` in the census), which leaves **14 unscanned spectra**; each is flagged fittable
+or not against the wide enumeration (`m(multi)` has no fixed composition, the all-top `4t` leg
+fails the statistics requirement).
 
 With a constant fractional resolution `sigma_M = r·M`, the effective independent looks over a
 scanned window are the Gross-Vitells resolution elements

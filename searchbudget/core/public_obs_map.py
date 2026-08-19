@@ -65,6 +65,26 @@ PUBLIC_OBS = {
     "Zee-Babu":                      ["m(ee) SS", "m(emu) SS", "m(mumu) SS"],
 }
 
+# Classes with no implementation in the FeynRules/UFO model database: found in a sweep of the
+# resonance-model literature (docs/GAP_MODELS.md holds the evidence per model), each with the
+# arXiv ids of its defining theory papers. Every class absent here comes from the database
+# together with the published search record.
+LITERATURE = {
+    "Excited top (t*)":              ("1208.5811", "1110.1565"),
+    "Excited neutrino (nu*)":        ("hep-ph/0401066", "2606.24486"),
+    "Composite Majorana N":          ("1510.07988",),
+    "Leptogluon (color-octet l)":    ("1211.6394", "2212.06178"),
+    "Flavoured W'/Z' (t-q)":         ("1102.0018", "0907.4112"),
+    "Color-octet scalar (MW)":       ("hep-ph/0606172", "0710.3133"),
+    "B-anomaly Z' (b-philic)":       ("1809.01158", "1403.1269", "1707.07016"),
+    "Leptophobic Z' (dark cascade)": ("1111.0633",),
+    "Dark Z (mass mixing)":          ("1203.2947", "1412.0018"),
+    "Warped KK cascade":             ("1612.00047", "1711.09920"),
+    "MFV RPV gluino (tbs)":          ("1111.1239",),
+    "RPV resonant slepton":          ("hep-ph/0001224", "1201.5014"),
+    "Zee-Babu":                      ("1402.4491", "2206.14833"),
+}
+
 WIDTH = {
     "Hidden Abelian Higgs (HAHM)":   ("narrow",    "Gamma/M ~ eps^2, <<1e-3"),
     "N2HDM / 2HDM+S (h->aa)":        ("narrow",    "light a, <<1%"),
@@ -217,6 +237,8 @@ assert not _unknown, f"observable with no SCAN window: {sorted(_unknown)}"
 
 assert set(WIDTH) == set(PUBLIC_OBS), \
     f"WIDTH and PUBLIC_OBS disagree: {sorted(set(WIDTH) ^ set(PUBLIC_OBS))}"
+assert set(LITERATURE) <= set(PUBLIC_OBS), \
+    f"LITERATURE names an unknown class: {sorted(set(LITERATURE) - set(PUBLIC_OBS))}"
 assert set(NONPEAK_ON) <= set(PUBLIC_OBS), f"NONPEAK_ON has no model: {sorted(NONPEAK_ON)}"
 _stray = {(m, o) for m, os_ in NONPEAK_ON.items() for o in os_ if o not in PUBLIC_OBS[m]}
 assert not _stray, f"NONPEAK_ON names an axis the model does not populate: {sorted(_stray)}"

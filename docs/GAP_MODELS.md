@@ -12,8 +12,10 @@ Candidates from the model families already in `public_obs_map.py` are included o
 resonant axis is new; they are marked "(new signature of a mapped family)".
 
 All of the candidates below have since been folded into the model catalogue
-(`public_obs_map.PUBLIC_OBS`/`WIDTH`, with the new axes in `bump_observables`), indistinguishable
-from the classes that were already there; this file remains as the per-model evidence record.
+(`public_obs_map.PUBLIC_OBS`/`WIDTH`, with the new axes in `bump_observables`); this file remains
+as the per-model evidence record. The defining references the paper cites for each
+literature-sourced class are declared in `public_obs_map.LITERATURE`, their metadata fetched by
+`fetch-model-meta`, and the per-class provenance written to `results/tables/model_classes.csv`.
 
 ## A. New axes — no ATLAS scan at any energy
 

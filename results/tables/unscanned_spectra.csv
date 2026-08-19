@@ -1,0 +1,16 @@
+spectrum,budget_axis,status,covered_by,fittable_in_scan,n_model_classes
+m(eb),m(eb),unscanned,,yes,3
+m(cb) dijet,m(cb) dijet,unscanned,,yes,1
+m(mub),m(mub),unscanned,,yes,3
+m(bgamma),m(bgamma),unscanned,,yes,1
+m(gammajj),m(gammajj),unscanned,,yes,2
+m(tgamma),m(tgamma),unscanned,,yes,1
+m(multi),m(multi),unscanned,,no,2
+multilepton,multilepton,unscanned,,yes,4
+m(taugamma),m(taugamma),unscanned,,yes,1
+m(mujj),m(mujj),unscanned,,yes,4
+m(jj) pair-leg in 4j,m(tt)/m(jj),scanned,Pair-produced dijet resonances (4 jets),yes,2
+m(jj) pair-leg in 2t2j,m(tt)/m(jj),unscanned,,yes,2
+m(tt) pair-leg in 2t2j,m(tt)/m(jj),unscanned,,yes,2
+m(tt) pair-leg in 4t,m(tt)/m(jj),unscanned,,no,2
+m(tbj),m(tbj),unscanned,,yes,1

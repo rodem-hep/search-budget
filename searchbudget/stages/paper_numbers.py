@@ -15,7 +15,8 @@ from ..registry import stage
     needs=["tables/search_budget.csv", "tables/search_budget_selections.csv",
            "tables/published_census.csv", "tables/census_budget.csv",
            "tables/scan_summary.csv", "tables/lens_scan.csv", "tables/priority_scan.csv",
-           "tables/model_independence.csv",
+           "tables/model_independence.csv", "tables/unscanned_spectra.csv",
+           "tables/model_classes.csv",
            "tables/budget_uncertainty.csv", "tables/two_body_matrix.csv",
            "tables/ab_split_scan.csv", "tables/ab_split_toys.csv",
            "tables/ab_guard_toys.csv", "tables/estimator_defects.csv",
@@ -44,6 +45,8 @@ def main(options=None):
     toys = load("ab_split_toys.csv")
     guard = load("ab_guard_toys.csv")
     mi_rows = load("model_independence.csv")
+    gap_rows = load("unscanned_spectra.csv")
+    classes = load("model_classes.csv")
 
     ns = {r["observable"]: float(r["ns_scan"]) for r in budget}
     N_model = sum(ns.values())
@@ -182,6 +185,16 @@ def main(options=None):
          ", ".join(f"`{r['observable']}` ({r['n_models_public']})" for r in
                    sorted(budget, key=lambda r: -int(r["n_models_public"]))[:3]),
          "`model_spectrum_map.csv`"),
+        ("where the model classes come from",
+         f"{sum(1 for r in classes if r['source'] == 'FeynRules/UFO database')} from the "
+         f"FeynRules/UFO database, "
+         f"{sum(1 for r in classes if r['source'] == 'literature sweep')} from the literature "
+         "sweep, referenced class by class", "`model_classes.csv`"),
+        ("model-motivated spectra with no ATLAS scan",
+         f"**{sum(1 for r in gap_rows if r['status'] == 'unscanned')}** in the scan's "
+         f"(category, mass-group) units, the pair-produced axis resolved into its legs; "
+         f"{sum(1 for r in gap_rows if r['status'] == 'unscanned' and r['fittable_in_scan'] == 'yes')} "
+         "of them fittable", "`unscanned_spectra.csv`"),
     ))
 
     exp3, exp5 = N_census * p1(3.0), N_census * p1(5.0)

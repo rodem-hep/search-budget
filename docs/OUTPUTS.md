@@ -12,11 +12,12 @@ declarations rather than from prose, with `search-budget graph`.
 "hand-written" means a report authored against the generated tables, not a program output — edit it
 directly; nothing regenerates it.
 
-Three files under `data/` are inputs rather than outputs, and are committed: `published_spectra.csv`
-(the census, curated by hand), `census_papers.csv` (its bibliographic details) and
-`census_abstracts.csv` (the paper abstracts). The latter two are refreshed from the arXiv API by
-`fetch-census-meta` and `fetch-census-abstracts`, the only stages that need the network and
-the only ones outside `make all`.
+Four files under `data/` are inputs rather than outputs, and are committed: `published_spectra.csv`
+(the census, curated by hand), `census_papers.csv` (its bibliographic details),
+`census_abstracts.csv` (the paper abstracts) and `model_papers.csv` (the bibliographic details of
+the literature-sourced model classes' theory papers, ids declared in `public_obs_map.LITERATURE`).
+The last three are refreshed from the arXiv API by `fetch-census-meta`, `fetch-census-abstracts`
+and `fetch-model-meta`, the only stages that need the network and the only ones outside `make all`.
 
 ## Reports — `results/overviews/`
 
@@ -49,6 +50,8 @@ the only ones outside `make all`.
 | `scaled_scan.csv`, `priority_scan.csv`, `lens_scan.csv`, `scan_summary.csv`, `scaled_scan.txt` | `scaled-scan` — the ten-object scan with MET in the masses: one row per variant, per composition what the trials budget keeps or drops, per (dataset, selection lens) how many views it could reach, its efficiency, how many survive the statistics requirement and what they cost, one summary row per dataset (`scan_summary.csv`: combinations, categories, fittable spectra, tiers, motivated share, lens totals, the yield-anchor variations), and the report |
 | `two_body_matrix.csv` | `two-body-matrix` — every pair of grid objects: scanned or not, and the looks it costs either way |
 | `model_spectrum_map.csv` | `model-map` — per spectrum: `n_s`, the model classes pointing at it, the event-selection multiplicity and what those selections are, whether a published ATLAS search already scans the axis, and whether the combinatorial scan can form it |
+| `model_classes.csv` | `model-map` — one row per model class: whether it comes from the FeynRules/UFO database or the literature sweep, its defining arXiv references, and the spectra it points at |
+| `unscanned_spectra.csv` | `unscanned-spectra` — the model-motivated spectra no published ATLAS search scans, in the scan's (category, mass-group) units: the pair-produced axis resolved into its per-category legs, each flagged fittable or not |
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh-fdr-ab` (the `.npz` is the Monte Carlo cache) |
 | `bh_zcut_per_pe.csv` | `bh-zcut` |
 | `bh_outliers_scan.npz` | `bh-fdr-outliers` (Monte Carlo cache) |
@@ -70,7 +73,8 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 | `census_appendix.tex` | `census-bib` — the census spectrum by spectrum, citing every paper behind each |
 | `two_body_matrix.tex` | `two-body-matrix` — the two-body object grid priced in trials (a costed version of arXiv:1907.06659 Table 14); a bare `tabular`, so the consuming document supplies the float and caption |
 | `uncertainty_table.tex` | `budget-uncertainty` — the uncertainty budget as a bare `tabular` (needs `booktabs` and `array` in the consuming document) |
-| `model_map_appendix.tex` | `model-map` — one row per spectrum: the model classes behind it, and the event selections that make the inclusive spectra into 94 channels |
+| `model_map_appendix.tex` | `model-map` — one row per spectrum: the model classes behind it (literature-sourced classes cited), and the event selections that make the inclusive spectra into 104 channels |
+| `model_refs.bib` | `model-map` — a BibTeX entry per theory paper behind the literature-sourced model classes, keyed `lit:<arxiv-id>` |
 
 ## Figures — `results/plots/`
 

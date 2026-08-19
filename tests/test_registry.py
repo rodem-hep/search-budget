@@ -47,7 +47,8 @@ def test_network_stages_are_outside_the_default_run():
     default = {s.name for s in registry.all_stages(network=False)}
     assert "fetch-census-meta" not in default
     assert "fetch-census-abstracts" not in default
-    assert len(default) == len(STAGES) - 2
+    assert "fetch-model-meta" not in default
+    assert len(default) == len(STAGES) - 3
 
 
 @pytest.mark.parametrize("name", sorted(STAGES))
