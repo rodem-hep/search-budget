@@ -1,6 +1,8 @@
-# Plotting and Monte-Carlo dependencies. The budget itself (search_budget.py,
-# combinatorial_budget.py, scaled_scan.py, composition_gap.py) is pure standard library and needs
-# none of these; the tables and reports it writes are exact under any python3.
+# Plotting and Monte-Carlo dependencies. The budget itself is pure standard library and needs none
+# of these: the `budget`, `census` and `scan` stage groups (search_budget.py, combinatorial_budget.py,
+# scaled_scan.py, budget_uncertainty.py, composition_gap.py and the census stages) run under any
+# python3, and the tables and reports they write are exact under any version. Only the figures and
+# the Monte Carlo of the `ab` and `stats` groups need what follows.
 #
 # The committed figures were produced with python 3.11.8, numpy 1.26.4, scipy 1.10.1 and
 # matplotlib 3.6.3. The Monte Carlo is seeded, so the numbers reproduce across versions; the PNGs

@@ -18,19 +18,19 @@ The trials count on every basis, narrowest first. Rows are counted differently a
 
 | what | the number | computed by | the list behind it |
 |---|---|---|---|
-| spectra the public model space populates | **46** | [`search_budget.py`](scripts/search_budget.py) | [`search_budget.csv`](results/tables/search_budget.csv), one row per spectrum with its window and source |
-| the trials factor and the discovery bar | `N ≈ 3.7k` → `Z_local = 6.44 +0.18/−0.16`, or `6.6k` → `6.53` at published event-selection granularity | [`search_budget.py`](scripts/search_budget.py) | [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) |
-| what that bar is uncertain by | every declared input varied over its own range: **`+0.18/−0.16` σ** on the model space, `+0.23/−0.31` on the combinatorial scan, but only `+0.12/−0.23` on the difference between them | [`budget_uncertainty.py`](scripts/budget_uncertainty.py) | [`BUDGET_UNCERTAINTY.md`](results/overviews/BUDGET_UNCERTAINTY.md), source by source |
-| a fully combinatorial scan, Run 2+3 | every mass built from ≤4 of ten object types: **4438** fittable spectra of 21644, `N = 2.0e5` → `Z_local = 7.03 +0.23/−0.31` | [`scaled_scan.py`](scripts/scaled_scan.py) | [`scaled_scan.txt`](results/tables/scaled_scan.txt), the closing per-dataset block |
-| … with one event-level selection at a time | four selection lenses, never combined: **8211** histograms, `N = 3.6e5` → `Z_local = 7.11 +0.24/−0.32` | [`scaled_scan.py`](scripts/scaled_scan.py) | [`lens_scan.csv`](results/tables/lens_scan.csv), per lens and per dataset |
+| spectra the public model space populates | **46** | [`search_budget.py`](searchbudget/stages/search_budget.py) | [`search_budget.csv`](results/tables/search_budget.csv), one row per spectrum with its window and source |
+| the trials factor and the discovery bar | `N ≈ 3.7k` → `Z_local = 6.44 +0.18/−0.16`, or `6.6k` → `6.53` at published event-selection granularity | [`search_budget.py`](searchbudget/stages/search_budget.py) | [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md) |
+| what that bar is uncertain by | every declared input varied over its own range: **`+0.18/−0.16` σ** on the model space, `+0.23/−0.31` on the combinatorial scan, but only `+0.12/−0.23` on the difference between them | [`budget_uncertainty.py`](searchbudget/stages/budget_uncertainty.py) | [`BUDGET_UNCERTAINTY.md`](results/overviews/BUDGET_UNCERTAINTY.md), source by source |
+| a fully combinatorial scan, Run 2+3 | every mass built from ≤4 of ten object types: **4438** fittable spectra of 21644, `N = 2.0e5` → `Z_local = 7.03 +0.23/−0.31` | [`scaled_scan.py`](searchbudget/stages/scaled_scan.py) | [`scaled_scan.txt`](results/tables/scaled_scan.txt), the closing per-dataset block |
+| … with one event-level selection at a time | four selection lenses, never combined: **8211** histograms, `N = 3.6e5` → `Z_local = 7.11 +0.24/−0.32` | [`scaled_scan.py`](searchbudget/stages/scaled_scan.py) | [`lens_scan.csv`](results/tables/lens_scan.csv), per lens and per dataset |
 | the same program, as the literature counts it | `N ~ 5e4` quasi-independent tests over all ATLAS searches, signal regions included — a broader object than these mass scans, quoted only as an order-of-magnitude check | — | [`EXCESS_COUNTING.md`](results/overviews/EXCESS_COUNTING.md), where the anchor and its sources are set out |
-| how much of that scan theory motivates | **2411 of 4438** spectra (54%) sit on a model-motivated mass axis, over 37 of the 258 fittable object compositions | [`scaled_scan.py`](scripts/scaled_scan.py) | [`priority_scan.csv`](results/tables/priority_scan.csv), per composition |
-| the published record | **86** catalogued spectra over **290** ATLAS papers; 19 not revisited since before 2019, of which 12 sit on an axis already counted | [`published_census.py`](scripts/published_census.py) | [`published_spectra.csv`](data/published_spectra.csv), one row per spectrum with its arXiv references |
-| what the published record costs | the same census priced in trials: **`N = 7.7k` → `Z_local = 6.55`** over the 100 charged (search, axis) pairs those 86 searches make, or `N = 3.7k` → `6.44` counting each axis once over the union of its published ranges — the model side, reached from the publication record instead | [`census_budget.py`](scripts/census_budget.py) | [`CENSUS_BUDGET.md`](results/overviews/CENSUS_BUDGET.md), per published search and per axis |
-| observed against expected excesses | the published 3σ and 5σ count is what `N` predicts, with no adjustment | [`excess_counting.py`](scripts/excess_counting.py) | [`REPORTED_EXCESSES.md`](results/overviews/REPORTED_EXCESSES.md) |
-| two-stage A/B unblinding | costs about 0.5σ in reach, buys a trials factor you can count exactly | [`ab_split_budget.py`](scripts/ab_split_budget.py) | [`ab_split_scan.csv`](results/tables/ab_split_scan.csv), the design priced on each basis; [`TWO_STAGE_UNBLINDING.md`](results/overviews/TWO_STAGE_UNBLINDING.md) |
-| what an imperfect estimator costs | a published scanner mis-estimates 1e-5 to 1e-4 of its looks, **78–310×** the Gaussian tail, against a break-even of **14×** for the split; **51 ± 7 %** of its spurious flags are coherent | [`estimator_defects.py`](scripts/estimator_defects.py) | [`ESTIMATOR_DEFECTS.md`](results/overviews/ESTIMATOR_DEFECTS.md) |
-| selection rules under an imperfect estimator | a fixed threshold beats both argmax and Benjamini-Hochberg, by more as the estimator degrades | [`bh_fdr_outliers.py`](scripts/bh_fdr_outliers.py) | [`MAX_OF_GAUSSIANS.md`](results/overviews/MAX_OF_GAUSSIANS.md) |
+| how much of that scan theory motivates | **2411 of 4438** spectra (54%) sit on a model-motivated mass axis, over 37 of the 258 fittable object compositions | [`scaled_scan.py`](searchbudget/stages/scaled_scan.py) | [`priority_scan.csv`](results/tables/priority_scan.csv), per composition |
+| the published record | **86** catalogued spectra over **290** ATLAS papers; 19 not revisited since before 2019, of which 12 sit on an axis already counted | [`published_census.py`](searchbudget/stages/published_census.py) | [`published_spectra.csv`](data/published_spectra.csv), one row per spectrum with its arXiv references |
+| what the published record costs | the same census priced in trials: **`N = 7.7k` → `Z_local = 6.55`** over the 100 charged (search, axis) pairs those 86 searches make, or `N = 3.7k` → `6.44` counting each axis once over the union of its published ranges — the model side, reached from the publication record instead | [`census_budget.py`](searchbudget/stages/census_budget.py) | [`CENSUS_BUDGET.md`](results/overviews/CENSUS_BUDGET.md), per published search and per axis |
+| observed against expected excesses | the published 3σ and 5σ count is what `N` predicts, with no adjustment | [`excess_counting.py`](searchbudget/stages/excess_counting.py) | [`REPORTED_EXCESSES.md`](results/overviews/REPORTED_EXCESSES.md) |
+| two-stage A/B unblinding | costs about 0.5σ in reach, buys a trials factor you can count exactly | [`ab_split_budget.py`](searchbudget/stages/ab_split_budget.py) | [`ab_split_scan.csv`](results/tables/ab_split_scan.csv), the design priced on each basis; [`TWO_STAGE_UNBLINDING.md`](results/overviews/TWO_STAGE_UNBLINDING.md) |
+| what an imperfect estimator costs | a published scanner mis-estimates 1e-5 to 1e-4 of its looks, **78–310×** the Gaussian tail, against a break-even of **14×** for the split; **51 ± 7 %** of its spurious flags are coherent | [`estimator_defects.py`](searchbudget/stages/estimator_defects.py) | [`ESTIMATOR_DEFECTS.md`](results/overviews/ESTIMATOR_DEFECTS.md) |
+| selection rules under an imperfect estimator | a fixed threshold beats both argmax and Benjamini-Hochberg, by more as the estimator degrades | [`bh_fdr_outliers.py`](searchbudget/stages/bh_fdr_outliers.py) | [`MAX_OF_GAUSSIANS.md`](results/overviews/MAX_OF_GAUSSIANS.md) |
 
 A factor 47 in `N` separates the published record from a combinatorial scan with its selection
 lenses, and moves the bar by 0.56σ, because `N` enters only through its logarithm. That is the point
@@ -41,29 +41,50 @@ what the last two rows are about.
 ## Reproducing it
 
 ```bash
-pip install -r requirements.txt        # numpy / scipy / matplotlib
+pip install -r requirements.txt        # numpy / scipy / matplotlib, for the figures only
 make all                               # every table, report, figure and the block below
-make help                              # the individual stages
+make help                              # the stage groups, and what each one covers
 ```
 
+Everything is one package, `searchbudget`, driven by one command. `make` is a thin wrapper over that
+command and `pip install -e .` puts it on the path as `search-budget`, but neither is required:
+`python -m searchbudget` works from a clone with nothing installed.
+
+```bash
+python -m searchbudget list               # every stage, its group, and which are out of date
+python -m searchbudget graph              # what each stage reads and what it writes
+python -m searchbudget run budget         # a whole group ...
+python -m searchbudget run census-budget  # ... or one stage, with whatever it depends on
+python -m searchbudget run --all -j 4     # everything, four stages at a time
+python -m searchbudget check              # the registry, and that every declared output exists
+```
+
+Every stage declares the files it reads and the files it writes, so the dependency graph lives in
+the code instead of being restated in a build file. `run` puts the stages you asked for in
+dependency order, pulls in whatever they need, and skips any whose outputs are already newer than
+every source feeding them — the declared inputs, the upstream tables, and the package modules that
+stage imports. `--force` rebuilds regardless, `-n` prints the plan and stops, `-j` runs independent
+stages concurrently, and each stage runs in its own process, so nothing one stage leaves behind can
+reach the next.
+
 A full rebuild is byte-identical, figures included, so `git status` stays clean afterwards and
-anything that does differ is a real change. The Monte Carlo is seeded and cached in
-`results/tables/*.npz` (pass `--refit` to redo it), and the figures reproduce exactly under the
-library versions recorded in `requirements.txt`. Targets are file-level, so a rerun redoes only what
-has gone stale. The three hand-written reports in `results/overviews/` are the only files under
-`results/` that no script produces, and [`docs/OUTPUTS.md`](docs/OUTPUTS.md) marks them; the
-number block below this section is generated into this README as well, so it cannot fall behind the
-tables.
+anything that does differ is a real change; `make test` asserts exactly that for the stages that
+need no dependencies, alongside the registry and the definitions (`pip install -e ".[dev]"` for
+pytest). The Monte Carlo is seeded and cached in `results/tables/*.npz` (pass
+`--refit` to redo it), and the figures reproduce exactly under the library versions recorded in
+`requirements.txt`. The three hand-written reports in `results/overviews/` are the only files under
+`results/` that no stage produces, and [`docs/OUTPUTS.md`](docs/OUTPUTS.md) marks them; the number
+block below this section is generated into this README as well, so it cannot fall behind the tables.
 
-The budget itself, `search_budget.py`, `combinatorial_budget.py`, `scaled_scan.py`,
-`budget_uncertainty.py` and `composition_gap.py`, is pure standard library and runs under any
-`python3`; only the figures and the Monte Carlo need the dependencies.
+The budget itself — the `budget`, `census` and `scan` groups — is pure standard library and runs
+under any `python3`; only the figures and the Monte Carlo of the `ab` and `stats` groups need the
+dependencies.
 
-Two scripts are outside `make all` because they need the network: `fetch_census_meta.py` and
-`fetch_census_abstracts.py` refresh the bibliographic details and abstracts of the census papers
-from the arXiv API. Their output is committed, so everything else, including the generated
-bibliography, builds offline. Run them only after adding an arXiv ID to `published_spectra.csv`,
-and they will fetch just the new one.
+Two stages sit outside `run --all` because they need the network: `fetch-census-meta` and
+`fetch-census-abstracts` refresh the bibliographic details and abstracts of the census papers from
+the arXiv API. Their output is committed, so everything else, including the generated bibliography,
+builds offline. Run them only after adding an arXiv ID to `published_spectra.csv`, and they will
+fetch just the new one.
 
 ## Every number in the paper
 
@@ -223,7 +244,7 @@ Calibrated object by object on the Run-2 anchor (`yield_model.py`, run it for th
 | `X` | 0.003 | `mT(ev)` | 0.100 | 18.0 | 1,619 GeV |
 | `Z` | 1e-05 | -- | -- | -- | -- |
 
-Every row above is written by [`paper_numbers.py`](scripts/paper_numbers.py) from the committed tables, so `make all` keeps it and the paper in step; nothing here is typed by hand.
+Every row above is written by [`paper_numbers.py`](searchbudget/stages/paper_numbers.py) from the committed tables, so `make all` keeps it and the paper in step; nothing here is typed by hand.
 
 <!-- paper-numbers:end -->
 
@@ -267,15 +288,17 @@ search demonstrates its own feasibility. Run the module for its calibration tabl
 
 ## Where the definitions live
 
-`scripts/bump_observables.py`, `scripts/public_obs_map.py`, `scripts/yield_model.py` and
-`scripts/scan_alphabet.py` hold every definition the numbers rest on: the fractional resolution and analysable mass floor of each
-spectrum, its published scan window together with the source that window came from, the map from
-public model classes to the spectra they populate, how many event selections each published search
-family scans on a given axis, and the yield model behind the statistics requirement. They also
-settle the cases where two labels describe the same mass axis, so `m(HH) 4b` counts as one more
-event selection of `m(HH)` rather than as a second spectrum.
+`searchbudget/core/` holds every definition the numbers rest on: `bump_observables.py` the
+fractional resolution, analysable mass floor and published scan window of each spectrum together
+with the source that window came from; `public_obs_map.py` the map from public model classes to the
+spectra they populate and how many event selections each published search family scans on a given
+axis; `yield_model.py` the yield model behind the statistics requirement; `scan_alphabet.py` and
+`combinatorial_budget.py` the ten object types of the hypothetical scan and the enumeration over
+them. They also settle the cases where two labels describe the same mass axis, so `m(HH) 4b` counts
+as one more event selection of `m(HH)` rather than as a second spectrum. `lee.py` and
+`catalogue.py` hold the arithmetic and the canonical spectrum ordering every stage shares.
 
-Everything else imports them. If you need a window or a resolution, take it from there rather than
+Every stage imports them. If you need a window or a resolution, take it from there rather than
 writing it down again locally, because a second copy of a number will eventually disagree with the
 first. The modules check themselves when imported, so an incomplete channel fails loudly instead of
 quietly dropping out of a table.
@@ -283,19 +306,35 @@ quietly dropping out of a table.
 ## What is here
 
 ```
-├── Makefile                 one entry point for every step  (make help)
-├── scripts/                 one concern per file; the three modules above own the definitions
+├── Makefile                 a wrapper over the CLI, for the usual entry points  (make help)
+├── pyproject.toml           `pip install -e .` -> the `search-budget` command
+├── searchbudget/            the package: one stage per concern, one place per definition
+│   ├── cli.py               list / run / graph / check / clean
+│   ├── registry.py          what a stage is, and what each one declares it reads and writes
+│   ├── runner.py            the dependency order, what is stale, and running it
+│   ├── deps.py              the package modules each stage imports, for staleness
+│   ├── paths.py io.py       every path and every read and write in the repository
+│   ├── arxiv.py             the arXiv API client the two fetch stages share
+│   ├── core/                the definitions the numbers rest on, and the shared arithmetic
+│   ├── stats/               machinery shared by the toy studies: FDR, defects, toy spectra
+│   ├── viz/                 the shared palette, axis style and observable labels
+│   └── stages/              one module per stage; nothing else writes to results/
+├── tests/                   the registry, the definitions, and a byte-identical rebuild
 ├── data/                    the only hand-curated input: the ATLAS publication record, with the
 │                            bibliographic details and abstracts fetched for it
 ├── results/                 written by `make all`
 │   ├── tables/              machine-readable tables, and the cached Monte Carlo (.npz)
 │   ├── plots/               figures; plots/max_of_gaussians/ is the selection-rule study
 │   ├── tex/                 LaTeX fragments for a consuming document to \input
-│   └── overviews/           the written reports: five generated, three authored by hand
+│   └── overviews/           the written reports: seven generated, three authored by hand
 └── docs/
     ├── METHOD_NOTES.md      the counting conventions and why each one is what it is
-    └── OUTPUTS.md           every output file, and the script that writes it
+    └── OUTPUTS.md           every output file, and the stage that writes it
 ```
+
+Adding a step means adding one module under `searchbudget/stages/` with a `@stage(...)` declaring
+its group, its inputs and its outputs; the CLI, the dependency order, the staleness check and the
+tests pick it up with nothing else to edit.
 
 The seven generated reports are [`SEARCH_BUDGET.md`](results/overviews/SEARCH_BUDGET.md), the budget
 with its full per-spectrum table; [`BUDGET_UNCERTAINTY.md`](results/overviews/BUDGET_UNCERTAINTY.md),

@@ -919,9 +919,9 @@ so they reproduce bit-for-bit:
 
 | Script | What it does |
 |---|---|
-| `scripts/max_of_gaussians_plots.py` | Parts I–III: the six figures above and the §5 validation table (moments, KS tests) |
-| `scripts/bh_fdr_ab.py` | the $q$ scan: null fake budget, signal efficiency, power, the ROC. Writes `results/tables/bh_fdr_scan.csv` and the three BH figures. MC is cached in `results/tables/bh_fdr_mc.npz`; pass `--refit` to redo it |
-| `scripts/bh_zcut.py` | the per-PE realized cut of §14. Writes `results/tables/bh_zcut_per_pe.csv` and [`bh_zcut.png`](../plots/max_of_gaussians/bh_zcut.png) |
+| `searchbudget/stages/max_of_gaussians.py` | Parts I–III: the six figures above and the §5 validation table (moments, KS tests) |
+| `searchbudget/stages/bh_fdr_ab.py` | the $q$ scan: null fake budget, signal efficiency, power, the ROC. Writes `results/tables/bh_fdr_scan.csv` and the three BH figures. MC is cached in `results/tables/bh_fdr_mc.npz`; pass `--refit` to redo it |
+| `searchbudget/stages/bh_zcut.py` | the per-PE realized cut of §14. Writes `results/tables/bh_zcut_per_pe.csv` and [`bh_zcut.png`](../plots/max_of_gaussians/bh_zcut.png) |
 
 **Part IV is Monte Carlo** — $K(q)$ is data-adaptive, so there is no closed form. Both BH scripts use
 one trick worth knowing: BH depends on the p-vector only through its smallest few order

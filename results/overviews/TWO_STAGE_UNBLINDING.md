@@ -42,9 +42,9 @@ mis-estimates 10⁻⁵–10⁻⁴ of its looks, **78–310×** the Gaussian tail
 the split's break-even sits at **14×** (`ESTIMATOR_DEFECTS.md`, section 2b here). At that measured
 rate the split is not a concession to auditability — it is the more sensitive procedure outright.
 
-Numbers: `scripts/ab_split_budget.py` → `results/plots/ab_split_reach.png` and
+Numbers: `searchbudget/stages/ab_split_budget.py` → `results/plots/ab_split_reach.png` and
 `ab_split_crossover.png` (reach vs N: no crossover at any trials count — section 2b); toy Monte
-Carlo validation: `scripts/ab_split_toys.py` → `results/plots/ab_toys_*.png`
+Carlo validation: `searchbudget/stages/ab_split_toys.py` → `results/plots/ab_toys_*.png`
 (all public-information-only; budget N from `SEARCH_BUDGET.md`).
 
 ## 1. The logic, step by step
@@ -421,7 +421,7 @@ against the **6.29** bar, so **zero false claims**, the same verdict as on the n
    (k_obs vs k_bkg) — an anomalous *number* of selections is itself a (weak) signal, and a
    normal number is a powerful background-only validation.
 
-## 5. Toy validation (`scripts/ab_split_toys.py`)
+## 5. Toy validation (`searchbudget/stages/ab_split_toys.py`)
 
 The whole search program is modelled as its N = 6,597 effective independent looks (iid standard
 normals under background-only), split per look into independent halves
@@ -468,8 +468,8 @@ of a published one puts the required conservatism 6–22× past the break-even �
 combinatorial scan the split is *also* the more sensitive procedure, and the half-sigma is not a
 price but a saving (`ESTIMATOR_DEFECTS.md`).
 
-Sources: reach analytics `scripts/ab_split_budget.py` (+ plot
-`results/plots/ab_split_reach.png`); toys `scripts/ab_split_toys.py`; trials budget
+Sources: reach analytics `searchbudget/stages/ab_split_budget.py` (+ plot
+`results/plots/ab_split_reach.png`); toys `searchbudget/stages/ab_split_toys.py`; trials budget
 `SEARCH_BUDGET.md` / `SEARCH_BUDGET_SELECTIONS.md`; expected 3σ population
 `EXCESS_COUNTING.md`; Gross & Vitells, arXiv:1005.1891 (single-stage LEE); the "selective
 inference / data splitting" literature (e.g. Cox 1975) for why B-only inference after

@@ -150,7 +150,7 @@ fewer events in each, which is the `r/R_REF`.
 hadronic object costs its mistag rate and a lepton or genuine MET costs the price of an electroweak
 process against QCD. The factors (`j` 1, `b` 0.1, `V`/`t` 0.02, `H` 0.01, `γ` 4e-3, `τ_h` 3.5e-3,
 `e`/`μ`/MET 3e-3, leptonic `Z` 1e-5) are set so the model reproduces the published symmetric channel
-of each type to an order of magnitude: run `python3 scripts/yield_model.py` for that table.
+of each type to an order of magnitude: run `python3 -m searchbudget.core.yield_model` for that table.
 
 Because `n(m)` falls, the populated part of a window is a prefix of it, so the requirement acts by
 **truncating each window at the one-event mass** and dropping the spectrum when fewer than 25 elements
@@ -424,7 +424,7 @@ ordering of the three rules is set by whether a rule is rank-based or absolute, 
 depend on the defect magnitude; the size of the gaps does.
 
 Monte Carlo in this repository is seeded explicitly, so the figures and the quoted validation
-numbers are reproducible bit-for-bit. `scripts/plot_style.py` holds the shared palette; import it
-rather than redefining colours per figure. `scripts/obs_labels.py` does the same for the observable
+numbers are reproducible bit-for-bit. `searchbudget/viz/style.py` holds the shared palette; import it
+rather than redefining colours per figure. `searchbudget/viz/labels.py` does the same for the observable
 labels, so a figure axis and an appendix row spell a spectrum the same way; it is standard library
 only, so the document generators can use it without matplotlib installed.

@@ -7,7 +7,7 @@
 which is exactly what background-only + the look-elsewhere effect predicts. The observed rate is
 consistent with pure statistics; nothing anomalous, and no fake discovery.
 
-Script: `scripts/excess_counting.py` -> `results/plots/excess_counting.png`.
+Script: `searchbudget/stages/excess_counting.py` -> `results/plots/excess_counting.png`.
 
 ## 1. Trials factor N (independent looks)
 The relevant number is the count of quasi-independent statistical tests (mass-resolution elements +

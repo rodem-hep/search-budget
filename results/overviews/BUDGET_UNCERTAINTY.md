@@ -1,9 +1,9 @@
 # The uncertainty budget
 
 What the two counted bases are uncertain by, source by source. Written by
-`scripts/budget_uncertainty.py`, which varies each declared input over the range below and
-**recomputes**: a resolution change moves both the looks a spectrum carries and, for a hypothetical
-one, whether it can be fitted at all.
+`searchbudget/stages/budget_uncertainty.py`, which varies each declared input over the range
+below and **recomputes**: a resolution change moves both the looks a spectrum carries and, for a
+hypothetical one, whether it can be fitted at all.
 
 | basis | spectra | N_trials | Z_local(5s global) | band |
 |---|--:|--:|--:|---|
@@ -118,6 +118,7 @@ The shape of the hypothetical scan is a design choice in the same sense: ten obj
 four per mass, one selection lens at a time. It fixes what is being priced rather than carrying an
 error, and `results/tables/scaled_scan.csv` prices the variants side by side.
 
-Source: `scripts/budget_uncertainty.py` -> `results/tables/budget_uncertainty.csv`,
+Source: `searchbudget/stages/budget_uncertainty.py` ->
+`results/tables/budget_uncertainty.csv`,
 `results/tex/uncertainty_table.tex`. The bases themselves: `results/overviews/SEARCH_BUDGET.md`,
 `results/tables/scaled_scan.txt`.

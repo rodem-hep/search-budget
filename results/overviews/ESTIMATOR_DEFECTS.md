@@ -5,8 +5,8 @@ be looked up. A network-driven scan offers neither, and it adds a failure the Ga
 does not cover: the significance estimator is itself imperfect. For one such estimator the failure
 rate has been measured and published, so the size of the problem is not a guess.
 
-Source: BumpNet, JHEP 02 (2025) 122, arXiv:2501.05603. Written by `scripts/estimator_defects.py`; the two-stage numbers it compares
-against come from `ab_split_scan.csv` (`scripts/ab_split_budget.py`).
+Source: BumpNet, JHEP 02 (2025) 122, arXiv:2501.05603. Written by `searchbudget/stages/estimator_defects.py`; the two-stage numbers it compares
+against come from `ab_split_scan.csv` (`searchbudget/stages/ab_split_budget.py`).
 
 ## The measured rate
 
@@ -30,7 +30,7 @@ set holds 6.0e+05 to 2.4e+06 looks, for which the Gaussian expectation at 5 sigm
 one to two orders of magnitude above the statistical one. It is a **lower bound** on the fraction
 `eps` of looks whose significance is simply wrong, since only mis-estimates that reach 5 sigma are
 counted; at the 3 sigma level where candidates are selected, `eps` may well reach 1e-3. Those are
-the two values the selection-rule study runs its GLITCH rows at (`scripts/bh_fdr_outliers.py`,
+the two values the selection-rule study runs its GLITCH rows at (`searchbudget/stages/bh_fdr_outliers.py`,
 `selection_rules.csv`): `eps = 1e-4` is the rate measured here at the 5 sigma flag level and
 `eps = 1e-3` the value it plausibly reaches where candidates are actually selected, so the pair spans
 the measured regime rather than being chosen for convenience.

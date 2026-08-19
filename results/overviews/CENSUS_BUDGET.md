@@ -237,6 +237,6 @@ so the agreement says the program scans almost exactly the axes the models motiv
 - Everything the model-side budget assumes about resolution elements, correlations and the
   narrow-resonance approximation applies unchanged; see `SEARCH_BUDGET.md`.
 
-Source: `scripts/census_budget.py` from `data/published_spectra.csv` ->
+Source: `searchbudget/stages/census_budget.py` from `data/published_spectra.csv` ->
 `results/tables/census_budget.csv`. The census itself: `results/overviews/PUBLISHED_CENSUS.md`.
 The model-side budget: `results/overviews/SEARCH_BUDGET.md`.
