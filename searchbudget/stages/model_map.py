@@ -56,7 +56,9 @@ def main(options=None):
         "m(jgamma)":     r"$q^* \to q\gamma$ (single photon+jet SR)",
         "m(tt)":         r"$t\bar t$ resonance: $\ell$+jets resolved, $\ell$+jets boosted, "
                          r"all-hadronic, dilepton",
-        "m(tt)/m(jj)":   r"coloron pair $\to tt$ or $jj$ decay legs",
+        "m(tt)/m(jj)":   r"coloron pair $\to tt$ or $jj$ decay legs; the scan targets the leg mass "
+                         r"as $m(jj)$ in the $4j$ and $2t2j$ categories and as $m(tt)$ in $2t2j$ "
+                         r"(the all-top pair category is too thin to fit)",
         "m(tb)":         r"$W'/H^+ \to tb$: 0-lepton, 1-lepton $\times$ $b$-tag",
         "m(VV)":         r"$WW/WZ/ZZ$ $\times$ $qqqq$ / $\ell\nu qq$ / $\ell\ell qq$ / "
                          r"$\nu\nu qq$ / $\ell\nu\ell\nu$, ggF+VBF",
