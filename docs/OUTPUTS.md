@@ -43,11 +43,12 @@ the only ones outside `make all`.
 | `combinatorial_budget.csv` | `combinatorial-budget` — 1094 (category, mass-group) rows, with the window truncated at its one-event mass and `n_s = 0` where the histogram cannot be fitted |
 | `published_census.csv` | `published-census` |
 | `census_budget.csv` | `census-budget` — one row per (published search, axis): the range it scanned, where that range came from, `r` and `n_s` |
+| `model_independence.csv` | `model-independence` — one row per charged (search, axis) pair: whether any of the search's papers states a model-independent result in its abstract, with the arXiv ids and matched phrases as evidence |
 | `reported_excesses.csv` | `reported-excesses` — per paper: largest quoted local/global significance and the abstract sentence behind it |
 | `composition_gap.txt` | `composition-gap` (also writes the LaTeX fragment below) |
 | `scaled_scan.csv`, `priority_scan.csv`, `lens_scan.csv`, `scan_summary.csv`, `scaled_scan.txt` | `scaled-scan` — the ten-object scan with MET in the masses: one row per variant, per composition what the trials budget keeps or drops, per (dataset, selection lens) how many views it could reach, its efficiency, how many survive the statistics requirement and what they cost, one summary row per dataset (`scan_summary.csv`: combinations, categories, fittable spectra, tiers, motivated share, lens totals, the yield-anchor variations), and the report |
 | `two_body_matrix.csv` | `two-body-matrix` — every pair of grid objects: scanned or not, and the looks it costs either way |
-| `model_spectrum_map.csv` | `model-map` — per spectrum: `n_s`, the model classes pointing at it, the event-selection multiplicity and what those selections are |
+| `model_spectrum_map.csv` | `model-map` — per spectrum: `n_s`, the model classes pointing at it, the event-selection multiplicity and what those selections are, whether a published ATLAS search already scans the axis, and whether the combinatorial scan can form it |
 | `bh_fdr_scan.csv`, `bh_fdr_mc.npz` | `bh-fdr-ab` (the `.npz` is the Monte Carlo cache) |
 | `bh_zcut_per_pe.csv` | `bh-zcut` |
 | `bh_outliers_scan.npz` | `bh-fdr-outliers` (Monte Carlo cache) |

@@ -15,6 +15,7 @@ from ..registry import stage
     needs=["tables/search_budget.csv", "tables/search_budget_selections.csv",
            "tables/published_census.csv", "tables/census_budget.csv",
            "tables/scan_summary.csv", "tables/lens_scan.csv", "tables/priority_scan.csv",
+           "tables/model_independence.csv",
            "tables/budget_uncertainty.csv", "tables/two_body_matrix.csv",
            "tables/ab_split_scan.csv", "tables/ab_split_toys.csv",
            "tables/ab_guard_toys.csv", "tables/estimator_defects.csv",
@@ -42,6 +43,7 @@ def main(options=None):
     rules = load("selection_rules.csv")
     toys = load("ab_split_toys.csv")
     guard = load("ab_guard_toys.csv")
+    mi_rows = load("model_independence.csv")
 
     ns = {r["observable"]: float(r["ns_scan"]) for r in budget}
     N_model = sum(ns.values())
@@ -198,6 +200,11 @@ def main(options=None):
          f"{abs(N_union-N_model)/N_model:.1%} of the model space", "`census_budget.csv`"),
         ("recency", f"{stale} of the {len(entries)} have no paper since 2019, {run3} carry a "
          "published Run-3 result", "`published_census.csv`"),
+        ("model independence",
+         f"**{sum(1 for r in mi_rows if r['model_independent'] == 'yes')}** of the "
+         f"{len(mi_rows)} charged pairs carry a model-independent result, from "
+         f"{len({r['spectrum'] for r in mi_rows if r['model_independent'] == 'yes'})} of the "
+         f"{len(carry)} searches", "`model_independence.csv`"),
         ("excesses a background-only sweep expects",
          f"{exp3:.0f} local ≥3σ and {exp5:.4f} spurious ≥5σ over the census",
          "`REPORTED_EXCESSES.md`, `EXCESS_COUNTING.md`"),

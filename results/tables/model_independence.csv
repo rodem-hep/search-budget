@@ -1,0 +1,101 @@
+spectrum,budget_axis,model_independent,evidence_arxiv,evidence_phrase
+"Dijet (inclusive, high mass)",m(jj),yes,1103.3864 1512.01530 1703.09127 1910.08447 2005.02983,Gaussian signal; model-agnostic; Model-independent; Model-independent; anomaly detection
+Photon + jet,m(jgamma),yes,1112.3580 1309.3230 1512.05910 1709.10440,model-independent; model-independent; generic Gaussian; generic Gaussian
+"Dijet (low mass, trigger-level)",m(jj),yes,1804.03496 2606.03222,Gaussian-shaped; generic Gaussian
+Dijet + ISR photon/jet,m(jj),yes,1901.10917 2403.08547,generic Gaussian; Gaussian-shaped
+"Dijet, b-tagged",m(bb),yes,1603.08791 1805.09299,Gaussian signal; Gaussian-shaped
+"Dijet, b-tagged",m(bj),yes,1603.08791 1805.09299,Gaussian signal; Gaussian-shaped
+Pair-produced dijet resonances (4 jets),m(jj),no,,
+Three-jet / multijet (3-quark res.),m(3j),no,,
+Z + light hadronic resonance (H decay),-,no,,
+Dijet + isolated lepton,m(jj),yes,2002.11325,generic Gaussian
+Dijet from dark quarks,m(jj),no,,
+Boosted light hadronic res. + photon,-,no,,
+Diphoton (high mass),m(gammagamma),no,,
+Diphoton (low mass / boosted),m(gammagamma),yes,2407.07546,model-independent
+"Diphoton, extra dimensions",m(gammagamma),no,,
+Photon-jets (collimated gamma pairs),-,no,,
+Diphoton + forward protons (ALP),m(gammagamma),no,,
+H -> Za -> ll gamgam,-,no,,
+Ditau,m(tautau),yes,2409.20381 2607.28484,model-independent; model independent
+"Dilepton (ee/mumu, high mass)",m(ee),yes,2105.13847,model-independent
+"Dilepton (ee/mumu, high mass)",m(mumu),yes,2105.13847,model-independent
+Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau),m(emu) LFV,no,,
+Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau),m(etau) LFV,no,,
+Lepton-flavour-violating dilepton (e-mu/e-tau/mu-tau),m(mutau) LFV,no,,
+Four leptons / 4mu,m(ee) (Zd),yes,1802.03388,model-independent
+Four leptons / 4mu,m(mumu) (Zd),yes,1802.03388,model-independent
+Lepton + MET (W-prime),mT(ev),yes,1906.05609,Model-independent
+Lepton + MET (W-prime),mT(muv),yes,1906.05609,Model-independent
+LFV Z decays,-,no,,
+Dimuon (low / intermediate mass),m(mumu),yes,2601.21361,model-independent
+SFOS dilepton + MET (edge),m(ee),no,,
+SFOS dilepton + MET (edge),m(mumu),no,,
+Same-sign dimuon (strong gravity),m(mumu) SS,no,,
+Collimated / displaced lepton pairs,m(ee) (Zd),yes,2305.02005,model-independent
+Collimated / displaced lepton pairs,m(mumu) (Zd),yes,2305.02005,model-independent
+Tau + MET,mT(taunu),yes,1801.06992 2402.16576,model-independent; model-independent
+Trilepton resonance,m(eZ),yes,2011.10543,model-independent
+Trilepton resonance,m(muZ),yes,2011.10543,model-independent
+Periodic signals in dielectron/diphoton,m(ee),yes,2305.10894,Model-independent
+Periodic signals in dielectron/diphoton,m(gammagamma),yes,2305.10894,Model-independent
+LFV tau -> 3 mu,-,no,,
+"ZZ/ZW -> llqq, vvqq, 4l",m(VV),no,,
+WZ/WW fully leptonic,m(VV),no,,
+WW/WZ semileptonic (lvqq),m(VV),no,,
+Heavy Higgs -> ZZ / WW,m(VV),no,,
+Diboson fully hadronic (boson-tagged jets),m(VV),no,,
+Diboson combination,m(VV),no,,
+WW -> e-mu,m(VV),no,,
+"VH (llbb, lvbb, vvbb)",m(Vh),no,,
+Z-gamma,m(Vgamma),no,,
+"V-gamma, hadronic V",m(Vgamma),no,,
+H -> Z gamma,-,no,,
+VH fully hadronic,m(Vh),no,,
+Higgs + photon,-,no,,
+ttbar resonances,m(tt),no,,
+Single VLQ: Wb / Ht / Zt / Hb,m(Wb),yes,2607.28381,model-independent
+Single VLQ: Wb / Ht / Zt / Hb,m(Ht),yes,2607.28381,model-independent
+Single VLQ: Wb / Ht / Zt / Hb,m(ttZ)/m(Zt),yes,2607.28381,model-independent
+"tb resonances (W-prime, charged Higgs)",m(tb),no,,
+Wt (excited/single VLQ),m(tW),no,,
+Top-philic resonances,m(tt),no,,
+Dark mesons -> tb,m(tb),no,,
+H -> aa (exotic Higgs decays),m(bb),yes,1807.00539 2412.14046,Model-independent; Model-independent
+H -> aa (exotic Higgs decays),m(tautau),yes,1807.00539 2412.14046,Model-independent; Model-independent
+HH -> bbbb,m(HH),no,,
+X -> S H (scalar + Higgs),m(HH),no,,
+A -> ZH,m(Vh),no,,
+HH -> bb gamgam,m(HH),no,,
+HH -> bbWW / WWWW / gamgamWW,m(HH),no,,
+HH -> bb tautau,m(HH),no,,
+X -> H Y (anomaly detection / XH),m(HH),yes,2306.03637,anomaly detection
+Charged Higgs -> WZ / WH,m(VV),no,,
+Charged Higgs -> WZ / WH,m(Vh),no,,
+bbA -> bbbb (b-associated),m(bb),no,,
+HH + vector boson,m(HH),no,,
+"t -> qX, X -> bb",m(bb),no,,
+HH + top quarks (ttHH),m(HH),no,,
+Leptoquark pair -> lepton + jet,m(ej),no,,
+Leptoquark pair -> lepton + jet,m(muj),no,,
+Leptoquark pair -> lepton + jet,m(tauj),no,,
+Third-generation LQ -> b tau / t tau,m(taub),no,,
+"Excited leptons (e*, mu*, tau*)",m(egamma),no,,
+"Excited leptons (e*, mu*, tau*)",m(mugamma),no,,
+"Excited leptons (e*, mu*, tau*)",m(ej),no,,
+"Excited leptons (e*, mu*, tau*)",m(muj),no,,
+Heavy neutrino / right-handed W (lljj),m(eejj),no,,
+Heavy neutrino / right-handed W (lljj),m(mumujj),no,,
+Quantum black holes -> lepton + jet,m(ej),no,,
+Quantum black holes -> lepton + jet,m(muj),no,,
+Resonant single leptoquark,m(ej),no,,
+Resonant single leptoquark,m(muj),no,,
+Heavy lepton -> Z + lepton,m(eZ),no,,
+Heavy lepton -> Z + lepton,m(muZ),no,,
+Quarkonium + photon (exclusive H/Z decays),-,no,,
+Doubly charged Higgs (same-sign ll / WW),m(ee) SS,no,,
+Doubly charged Higgs (same-sign ll / WW),m(emu) SS,no,,
+Doubly charged Higgs (same-sign ll / WW),m(mumu) SS,no,,
+Heavy neutral lepton (displaced/prompt mass),-,no,,
+Dark photon in rare Z decays,m(ee) (Zd),no,,
+Dark photon in rare Z decays,m(mumu) (Zd),no,,

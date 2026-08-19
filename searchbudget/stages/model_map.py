@@ -4,6 +4,7 @@ from ..core.catalogue import canonical_order, models_by_spectrum
 from ..core.public_obs_map import NSEL, NSEL_DEFAULT, PUBLIC_OBS, nsel
 from ..registry import stage
 from ..viz.labels import mathify, textsafe
+from .scaled_scan import MOTIVATED
 
 
 def _tex(s):
@@ -17,6 +18,7 @@ def _tex(s):
     group="budget",
     summary="per spectrum: the model classes behind it and the event selections counted",
     outputs=["tex/model_map_appendix.tex", "tables/model_spectrum_map.csv"],
+    needs=["tables/census_budget.csv"],
 )
 def main(options=None):
     SEL_TEX = {
@@ -81,6 +83,17 @@ def main(options=None):
     if len(ranked) != 46:
         raise SystemExit(f"{len(ranked)} spectra carry a model, expected 46")
 
+    published = {r["budget_axis"] for r in io.read_rows(paths.table("census_budget.csv"))
+                 if r["budget_axis"] != "-" and float(r["n_s"]) > 0}
+    n_published = sum(1 for o in ranked if o in published)
+    if published - set(ranked):
+        raise SystemExit(f"census axes outside the 46: {sorted(published - set(ranked))}")
+
+    if set(MOTIVATED) != set(ranked):
+        raise SystemExit("the scan's MOTIVATED map and the catalogue disagree on the 46 axes: "
+                         f"{sorted(set(MOTIVATED) ^ set(ranked))}")
+    in_scan = {o for o in ranked if MOTIVATED[o]}
+
     rows = [(o, ns_scan(o), sorted(by_obs[o], key=lambda m: (m.lower(), m))) for o in ranked]
 
     pairs = sum(len(ms) for _, _, ms in rows)
@@ -126,38 +139,47 @@ independent scan over-counts the trials, which is why that level is an upper bra
 count rather than a replacement for it.
 
 \\begingroup\\small\\setlength{{\\tabcolsep}}{{4pt}}
-\\begin{{longtable}}{{@{{}}>{{\\raggedright\\arraybackslash}}p{{0.145\\textwidth}}rr%
->{{\\raggedright\\arraybackslash}}p{{0.375\\textwidth}}%
->{{\\raggedright\\arraybackslash}}p{{0.305\\textwidth}}@{{}}}}
+\\begin{{longtable}}{{@{{}}>{{\\raggedright\\arraybackslash}}p{{0.145\\textwidth}}rrcc%
+>{{\\raggedright\\arraybackslash}}p{{0.325\\textwidth}}%
+>{{\\raggedright\\arraybackslash}}p{{0.28\\textwidth}}@{{}}}}
 \\caption{{The {len(rows)} spectra of the budget, in the order of Figure~\\ref{{fig:budget}}: the public
 model classes predicting a resonance in each, and the published event selections counted against
-it.}}\\label{{tab:modelmap}}\\\\
+it. The pub.\\ column marks the {n_published} axes at least one published ATLAS search already scans
+(Appendix~\\ref{{app:census}}); the scan column marks the {len(in_scan)} the combinatorial catalogue of
+Section~\\ref{{sec:scaled}} can form, the other {len(rows) - len(in_scan)} needing missing energy in
+the mass or, for $m(\\mathrm{{multi}})$, having no fixed object composition.}}\\label{{tab:modelmap}}\\\\
 \\toprule
-spectrum & $n_s$ & $c_s$ & public model classes & event selections \\\\
+spectrum & $n_s$ & $c_s$ & pub. & scan & public model classes & event selections \\\\
 \\midrule
 \\endfirsthead
 \\caption[]{{\\emph{{continued.}}}}\\\\
 \\toprule
-spectrum & $n_s$ & $c_s$ & public model classes & event selections \\\\
+spectrum & $n_s$ & $c_s$ & pub. & scan & public model classes & event selections \\\\
 \\midrule
 \\endhead
 \\midrule
-\\multicolumn{{2}}{{@{{}}l}}{{total}} & {n_sel} & & \\\\
+\\multicolumn{{2}}{{@{{}}l}}{{total}} & {n_sel} & & & & \\\\
 \\bottomrule
 \\endlastfoot
 """)
         for o, ns, ms in rows:
-            f.write(f"{mathify(o)} & {ns:.0f} & {nsel(o)} & {', '.join(_tex(m) for m in ms)} "
-                    f"& {SEL_TEX[o]} \\\\\n")
+            f.write(f"{mathify(o)} & {ns:.0f} & {nsel(o)} "
+                    f"& {'yes' if o in published else '--'} "
+                    f"& {'yes' if o in in_scan else '--'} "
+                    f"& {', '.join(_tex(m) for m in ms)} & {SEL_TEX[o]} \\\\\n")
         f.write("\\end{longtable}\n\\endgroup\n")
 
     io.write_rows(paths.table("model_spectrum_map.csv"),
                   ["observable", "ns_scan", "n_model_classes", "model_classes",
-                   "n_selections", "ns_x_selections", "selections"],
+                   "n_selections", "ns_x_selections", "selections",
+                   "published_search", "in_combinatorial_scan"],
                   [[o, f"{ns:.1f}", len(ms), "; ".join(ms),
-                    nsel(o), f"{nsel(o) * ns:.1f}", NSEL[o][1]] for o, ns, ms in rows])
+                    nsel(o), f"{nsel(o) * ns:.1f}", NSEL[o][1],
+                    "yes" if o in published else "no",
+                    "yes" if o in in_scan else "no"] for o, ns, ms in rows])
 
     print(f"wrote results/tex/model_map_appendix.tex ({len(rows)} spectra, "
           f"{len(PUBLIC_OBS)} model classes, {pairs} pairs; "
-          f"{n_sel} event selections, N = {big_n:,.0f})")
+          f"{n_sel} event selections, N = {big_n:,.0f}; "
+          f"{n_published} axes published, {len(in_scan)} in the combinatorial scan)")
     print(f"wrote results/tables/model_spectrum_map.csv")

@@ -330,6 +330,14 @@ axis are priced at `RES_DEFAULT`, and the 12 that carry neither an axis nor a ra
 multi-spectrum anomaly-detection scans and the displaced programs, whose trials belong in the
 combinatorial count instead) stay unpriced, so `N` is a lower bound by that much.
 
+**Model independence** (`model_independence.py`). Each of the 100 charged (search, axis) pairs is
+classified by the papers' own abstracts: a pair counts as model independent when any of its search's
+papers states a model-independent result there — a generic Gaussian-shape limit, a model-agnostic or
+anomaly-detection scan, or a cross-section limit the search itself declares model independent. The
+matched arXiv id and phrase are written next to every `yes`, so the classification is checkable row
+by row; abstracts that set only benchmark limits without saying so are counted as model dependent,
+which makes the split conservative in the model-independent direction.
+
 ## Uncertainties
 
 `budget_uncertainty.py` is the one place that says how well any of this is known. It moves each
