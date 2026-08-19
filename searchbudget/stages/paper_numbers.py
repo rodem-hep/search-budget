@@ -124,7 +124,7 @@ def main(options=None):
          f"{n_sel_channels} channels, `N = {N_sel:,.0f}` → `{z5(N_sel):.2f}`",
          "`search_budget_selections.csv`"),
         ("the published ATLAS program",
-         f"{len(entries)} searches over {len(priced)} charged (search, axis) pairs, "
+         f"{len(priced)} charged (search, axis) pairs, "
          f"`N = {N_census:,.0f}` → `{z5(N_census):.2f}`", "`census_budget.csv`"),
         ("a fully combinatorial scan, Run 2+3",
          f"{int(r23['fittable_spectra']):,} fittable spectra, `N = {N_scan:,.0f}` → "
