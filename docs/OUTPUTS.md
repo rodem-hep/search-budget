@@ -75,7 +75,8 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 | `census_appendix.tex` | `census-bib` — the census spectrum by spectrum, citing every paper behind each |
 | `two_body_matrix.tex` | `two-body-matrix` — the two-body object grid priced in trials (a costed version of arXiv:1907.06659 Table 14); a bare `tabular`, so the consuming document supplies the float and caption |
 | `uncertainty_table.tex` | `budget-uncertainty` — the uncertainty budget as a bare `tabular` (needs `booktabs` and `array` in the consuming document) |
-| `model_map_appendix.tex` | `model-map` — one row per spectrum: the model classes behind it (literature-sourced classes cited), and the event selections that make the inclusive spectra into 104 channels |
+| `new_spectra.tex` | `unscanned-spectra` — the spectra of the combinatorial scan a public model predicts and no published ATLAS search scans, grouped by budget axis; a bare `tabular`, so the consuming document supplies the float and caption |
+| `model_map_appendix.tex` | `model-map` — one row per spectrum: the model classes behind it (literature-sourced classes cited), and the event selections that make the inclusive spectra into 111 channels |
 | `model_refs.bib` | `model-map` — a BibTeX entry per theory paper behind the literature-sourced model classes, keyed `lit:<arxiv-id>` |
 
 ## Figures — `results/plots/`

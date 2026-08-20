@@ -65,7 +65,7 @@ Quote differences rather than bars wherever the argument allows it.
   reading. Drawing each channel's `r` independently at the same factor per sigma leaves
   N = 4,726 to 6,234 (16-84%, median 5,391), a band of
   +0.02/-0.02 sigma about that median rather than
-  +0.11/-0.11: the errors average down over 56 spectra, so the
+  +0.11/-0.11: the errors average down over 63 spectra, so the
   correlated factor two is the pessimistic end of the range and not a 1 sigma. The median sits above
   the nominal count because 1/r is convex, which is a property of the log-normal draw rather than a
   statement about the resolutions.

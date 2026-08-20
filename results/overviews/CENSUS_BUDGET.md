@@ -7,7 +7,7 @@ the same rule, `n_s = (1/r) ln(M_hi/M_lo)`, `Z_local = sqrt(25 + 2 ln N)`.
 
 ## Method
 Every census entry carries the canonical budget axis it scans (`budget_axis`; several when the
-entry scans several; `-` when it falls on none of the 56) and the range it scanned (`scan_GeV`,
+entry scans several; `-` when it falls on none of the 63) and the range it scanned (`scan_GeV`,
 transcribed from the published range the census records). The resolution `r` is that axis' -- the
 budget's one physics input, unchanged here; an entry on no axis is priced at the default
 `r = 0.06`. **Where the census does not record a range, the axis' own published window is the
@@ -47,14 +47,14 @@ no single axis to scan (the anomaly-detection and generic multi-body entries, wh
 "many").
 
 The 64 distinct bump observables the census scans are therefore
-44 of the 63 budget axes, 10 scanned axes outside the 56, and
+44 of the 63 budget axes, 10 scanned axes outside them, and
 10 carrying nothing chargeable.
 
 **Why the union basis lands on the model space.** Counting each axis once gives 3,837
 against the model space's 4,319, a gap of 11.2% -- closer than
 it has any right to be, because two omissions cancel. The union misses the 19 model
 axes with no published search, worth 737 looks on the
-model side, and it adds 10 scanned axes outside the 56, worth 251. Charging
+model side, and it adds 10 scanned axes outside the 63, worth 251. Charging
 neither leaves 3,586 against 3,582
 on the same 44 axes. The robust statement is the ten-percent one, and it is not a
 tautology: the model space takes its windows from published searches but its axes from the models,

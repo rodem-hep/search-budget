@@ -30,10 +30,10 @@ def test_declared_outputs_are_committed(name):
 
 def test_the_headline_numbers_are_what_the_paper_quotes():
     rows = io.read_rows(paths.table("search_budget.csv"))
-    assert len(rows) == 56
+    assert len(rows) == 63
     N = sum(float(r["ns_scan"]) for r in rows)
-    assert round(N) == 4118
-    assert sum(int(r["n_event_selections"]) for r in rows) == 104
+    assert round(N) == 4319
+    assert sum(int(r["n_event_selections"]) for r in rows) == 111
 
     scan = {r["dataset"]: r for r in io.read_rows(paths.table("scan_summary.csv"))}
     run23 = scan["Run 2+3, ~400 fb-1"]
@@ -53,14 +53,14 @@ def test_the_uncertainty_total_is_quoted_on_every_basis():
     total = rows[("total", "total")]
     assert total["dZ_model_space"] == "+0.183/-0.162"
     assert total["dZ_combinatorial_scan"] == "+0.231/-0.308"
-    assert total["dZ_difference"] == "+0.123/-0.231"
+    assert total["dZ_difference"] == "+0.123/-0.230"
 
 
 def test_the_readme_block_is_generated_not_typed():
     text = open(paths.README).read()
     start = text.index("<!-- paper-numbers:start -->")
     block = text[start:text.index("<!-- paper-numbers:end -->")]
-    assert "N = 4,118" in block
+    assert "N = 4,319" in block
     assert "searchbudget/stages/paper_numbers.py" in block
 
 

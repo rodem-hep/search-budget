@@ -331,7 +331,7 @@ uncovered list is a lower bound on the gap.
 ### The publication census is a different base
 
 `published_census.py` counts from the other end: not the spectra models motivate, but the searches
-ATLAS has actually published. **Its 86 entries and the budget's 56 spectra must never be summed**, and
+ATLAS has actually published. **Its 86 entries and the budget's 63 spectra must never be summed**, and
 a raw entry count is not a trials factor: the publication record keeps two analyses on a shared mass
 axis as separate entries when they are separate papers, so the 86 entries carry only 64 distinct
 observables, while the budget merges everything onto one axis and counts resolution elements along it.
@@ -388,9 +388,9 @@ Three rules keep the accounting honest.
 * **Correlated sources cancel in differences.** Every input except the yield model enters both counted
   bases the same way, so the report carries a third column, the shift in the *difference* between
   them, computed variation by variation. The bars are known to `+0.18/-0.16` (model space) and
-  `+0.23/-0.31` (scan); the 0.59σ gap between them to `+0.12/-0.23`, and that residual is the yield
+  `+0.23/-0.31` (scan); the 0.57σ gap between them to `+0.12/-0.23`, and that residual is the yield
   model, which the model space never uses. Quote differences, not bars, wherever the argument allows.
-* **Conventions are not uncertainties.** Granularity (56 spectra vs 104 channels), the dataset the
+* **Conventions are not uncertainties.** Granularity (63 spectra vs 111 channels), the dataset the
   yields are priced on, the lens layer, and the shape of the hypothetical scan change *what* is
   counted. They are reported as alternatives and never added to the band. The published-program row is
   a literature count, so its band is the literature range `1e4` to `1e5`.

@@ -12,7 +12,7 @@ states, which leaves out hadron-spectroscopy measurements even where they are bu
 spectrum.
 
 **This is a different base from the trials budget and must not be added to it.** The budget counts
-56 canonical mass axes that public BSM models motivate; this counts what has been published, which
+63 canonical mass axes that public BSM models motivate; this counts what has been published, which
 separates analyses that share an axis. See `docs/METHOD_NOTES.md`.
 
 Titles, journal references and DOIs are as recorded on arXiv (277 of 290 have a journal

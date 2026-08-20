@@ -125,10 +125,10 @@ def main(options=None):
                  if r["budget_axis"] != "-" and float(r["n_s"]) > 0}
     n_published = sum(1 for o in ranked if o in published)
     if published - set(ranked):
-        raise SystemExit(f"census axes outside the 56: {sorted(published - set(ranked))}")
+        raise SystemExit(f"census axes outside the catalogue: {sorted(published - set(ranked))}")
 
     if set(MOTIVATED) != set(ranked):
-        raise SystemExit("the scan's MOTIVATED map and the catalogue disagree on the 56 axes: "
+        raise SystemExit("the scan's MOTIVATED map and the catalogue disagree on the axis set: "
                          f"{sorted(set(MOTIVATED) ^ set(ranked))}")
     in_scan = {o for o in ranked if MOTIVATED[o]}
 

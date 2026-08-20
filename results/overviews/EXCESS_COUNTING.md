@@ -46,7 +46,7 @@ Expected count = `N * p`:
 **For the resonance subset the observed side is now measured rather than anecdotal:**
 `REPORTED_EXCESSES.md` mines the abstracts of the 290 census papers and finds **6 reported local
 excesses >= 3 sigma** (every quoted global <= 2.1s), inside the **6 to 11** a background-only sweep
-expects -- 5.6 over the 56 axes of the model space, 10.6 over the census that produced those
+expects -- 5.8 over the 63 axes of the model space, 10.6 over the census that produced those
 abstracts. Expected and observed agree with no adjustment of any kind.
 
 **Program-wide, take the number from the curated catalogue** rather than from a list of remembered
@@ -61,7 +61,7 @@ page gave 18 and 21 entries and 3.5 / 3.6 sigma for the largest, so quote it as 
 Scope differences to respect before comparing it with our numbers:
 
 - it mixes bump hunts with shape fits, SR counting and unconventional signatures, so it is not the
-  56-axis basis;
+  63-axis basis;
 - it lists **open** excesses only, so it is not the historical population that the "~tens of >=3
   sigma" row counts; roughly 8 of the ~20 ATLAS entries are at or above 3 sigma;
 - it reads the **paper bodies**, so it carries ATLAS resonance excesses >=3 sigma that our abstract

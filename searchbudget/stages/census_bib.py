@@ -2,6 +2,7 @@ import collections
 import re
 
 from .. import io, paths
+from ..core.bump_observables import SCAN
 from ..registry import stage
 
 ENTITIES = {"&gt;": ">", "&lt;": "<", "&amp;": "&", "&quot;": '"', "&apos;": "'"}
@@ -29,6 +30,7 @@ TEXNAME = {"&": r"\&"}
 def main(options=None):
     rows = io.read_rows(paths.data("published_spectra.csv"))
     papers = {r["arxiv"]: r for r in io.read_rows(paths.data("census_papers.csv"))}
+    n_axes = len(SCAN)
 
     ids = [a for r in rows for a in r["arxiv"].split()]
     missing = sorted(set(ids) - set(papers))
@@ -176,7 +178,7 @@ states, which leaves out hadron-spectroscopy measurements even where they are bu
 spectrum.
 
 **This is a different base from the trials budget and must not be added to it.** The budget counts
-56 canonical mass axes that public BSM models motivate; this counts what has been published, which
+{n_axes} canonical mass axes that public BSM models motivate; this counts what has been published, which
 separates analyses that share an axis. See `docs/METHOD_NOTES.md`.
 
 Titles, journal references and DOIs are as recorded on arXiv ({nj} of {len(set(ids))} have a journal

@@ -8,13 +8,13 @@ from searchbudget.core import public_obs_map as models
 from searchbudget.core import yield_model as ym
 
 
-def test_the_catalogue_is_56_spectra():
-    assert len(catalogue.canonical_order()) == 56
-    assert len(catalogue.sorted_spectra()) == 56
+def test_the_catalogue_is_63_spectra():
+    assert len(catalogue.canonical_order()) == 63
+    assert len(catalogue.sorted_spectra()) == 63
 
 
-def test_event_selections_sum_to_104():
-    assert catalogue.n_channels(catalogue.canonical_order()) == 104
+def test_event_selections_sum_to_111():
+    assert catalogue.n_channels(catalogue.canonical_order()) == 111
 
 
 def test_scan_and_floor_cover_the_same_axes():
@@ -40,7 +40,7 @@ def test_the_bar_grows_with_the_trials_factor():
 
 def test_a_local_five_sigma_is_worth_less_globally():
     assert lee.z_global(1.0) == pytest.approx(5.0)
-    assert lee.z_global(7710.0) < 3.0
+    assert lee.z_global(7875.0) < 3.0
     assert lee.z_global(1e6) is None
 
 
