@@ -1,5 +1,8 @@
 # The search budget of the BSM resonance program
 
+Corresponding arxiv note: https://arxiv.org/abs/2608.19764
+The code is co-authored by Claude Code Opus 5.
+
 A bump hunt scans many mass points, and every additional spectrum anyone scans is another place
 where a fluctuation can turn up. This repository works out how large that penalty is for the BSM
 resonance program taken as a whole: how many independent bump hunts the published model space
