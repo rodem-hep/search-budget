@@ -111,3 +111,5 @@ Generated for a consuming document to `\input`, the same way `results/plots/` is
 | `plot_style.py` | the shared palette and axis style of the statistics figures |
 | `obs_labels.py` | the observable keys rendered as physics, shared by the figures and the LaTeX tables (standard library only) |
 | `paper-numbers` | no table of its own: it collects every number the paper quotes from the tables above and writes them into `README.md` (standard library only) |
+
+| `inverse_lee.csv`, `tex/inverse_lee_table.tex`, `plots/inverse_lee/inverse_lee.png` | `inverse-lee` — the global significance of a local 5σ on each basis: Eq. (1) inverted, with its log term kept, the exact `1-(1-p)^N`, and brute-force toys of N independent Gaussians (paper Appendix C, Table `tab:inverse`) |

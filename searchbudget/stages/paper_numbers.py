@@ -240,7 +240,7 @@ def main(options=None):
          "`REPORTED_EXCESSES.md`, `EXCESS_COUNTING.md`"),
         ("what a local 5σ is worth globally",
          f"{zg(N_census):.1f}σ over the published record, {zg(N_scan):.1f}σ over the combinatorial "
-         f"scan, nothing at all over the lensed scan", "derived"),
+         f"scan, {zg(N_lens):.1f}σ over the lensed scan (exact, not Eq. (1) inverted)", "`inverse_lee.csv`"),
     ))
 
     blocks.append("### The combinatorial scan (Section 5)\n\n" + rows(

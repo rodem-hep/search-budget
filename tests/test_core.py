@@ -40,8 +40,9 @@ def test_the_bar_grows_with_the_trials_factor():
 
 def test_a_local_five_sigma_is_worth_less_globally():
     assert lee.z_global(1.0) == pytest.approx(5.0)
-    assert lee.z_global(7875.0) < 3.0
-    assert lee.z_global(1e6) is None
+    assert lee.z_global(7875.0) == pytest.approx(2.84, abs=0.01)
+    assert lee.z_global(3.63e5) == pytest.approx(1.29, abs=0.01)
+    assert lee.z_global(1e7) is None
 
 
 def test_the_closed_form_tracks_the_exact_tail_solution():

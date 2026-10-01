@@ -19,9 +19,13 @@ def z_local(N):
     return z_local_for_global5(N)
 
 
-def z_global(N, zglob=Z_GLOBAL):
-    x = zglob * zglob - 2.0 * math.log(N)
-    return math.sqrt(x) if x > 0 else None
+def z_global(N, zloc=Z_GLOBAL):
+    """Global significance of a local zloc over N independent looks, from the exact
+    p_global = 1 - (1 - p_local)^N. Not Eq. (1) inverted, which drops 2 ln(Z_glob/Z_loc)
+    and fails once Z_glob is well below Z_loc (inverse-lee stage). None once p_global >= 1/2."""
+    from scipy.stats import norm
+    p = -math.expm1(N * math.log1p(-p1(zloc)))
+    return float(norm.isf(p)) if p < 0.5 else None
 
 
 def claim_bar(k, widen=1.0, zglob=Z_GLOBAL):

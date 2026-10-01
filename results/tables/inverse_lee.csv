@@ -1,0 +1,5 @@
+basis,N,toys,z_closed_form,z_log_term_kept,z_exact,p_exact,z_toys,z_toys_err,p_toys,toys_above
+"model space, inclusive",4319,1000000,2.874,3.042,3.026,0.001237,3.030,0.009,0.001221,1221
+published ATLAS program,7875,500000,2.657,2.859,2.840,0.002255,2.853,0.010,0.002164,1082
+combinatorial scan,201000,20000,0.760,1.666,1.589,0.05599,1.582,0.014,0.0568,1136
+"combinatorial scan, lensed",363000,10000,0.000,1.396,1.288,0.09882,1.267,0.017,0.1025,1025
